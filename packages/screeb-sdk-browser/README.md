@@ -13,11 +13,18 @@
 </p>
 
 <p align="center">
-<a href="https://github.com/ScreebApp/sdk-js/actions/workflows/node.js.yml" alt="ci">
-  <img alt="ci" src="https://github.com/ScreebApp/sdk-js/actions/workflows/node.js.yml/badge.svg">
-</a>
-<img alt="version" src="https://img.shields.io/npm/v/@screeb/sdk-browser.svg" />
-<img alt="minzipped size" src="https://badgen.net/bundlephobia/minzip/@screeb/sdk-browser">
+  <a href="https://github.com/ScreebApp/sdk-js/actions/workflows/node.js.yml" alt="ci">
+    <img alt="ci" src="https://github.com/ScreebApp/sdk-js/actions/workflows/node.js.yml/badge.svg">
+  </a>
+  <a href="https://www.npmjs.com/package/@screeb/sdk-browser" alt="version">
+    <img alt="version" src="https://img.shields.io/npm/v/@screeb/sdk-browser.svg" />
+  </a>
+  <a href="https://bundlephobia.com/package/@screeb/sdk-browser" alt="min size">
+    <img alt="min size" src="https://img.shields.io/bundlephobia/min/@screeb/sdk-browser">
+  </a>
+  <a href="https://bundlephobia.com/package/@screeb/sdk-browser" alt="minzipped size">
+    <img alt="minzipped size" src="https://img.shields.io/bundlephobia/minzip/@screeb/sdk-browser">
+  </a>
 <img alt="downloads" src="https://badgen.net/npm/dw/@screeb/sdk-browser" />
 </p>
 
