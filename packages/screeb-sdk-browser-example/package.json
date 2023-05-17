@@ -1,6 +1,6 @@
 {
   "name": "@screeb/sdk-browser-example",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": true,
   "description": "Screeb's example app for browser sdk.",
   "homepage": "https://screeb.app",
@@ -24,7 +24,7 @@
     "start": "sirv public --no-clear"
   },
   "dependencies": {
-    "@screeb/sdk-browser": "^0.1.4",
+    "@screeb/sdk-browser": "^0.1.5",
     "sirv-cli": "^2.0.2"
   },
   "devDependencies": {

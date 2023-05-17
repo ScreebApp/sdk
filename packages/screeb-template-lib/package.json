@@ -1,6 +1,6 @@
 {
   "name": "@screeb/template-lib",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "description": "Screeb's template for a front-end lib.",
   "homepage": "https://screeb.app",
