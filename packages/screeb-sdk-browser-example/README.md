@@ -1,4 +1,4 @@
-# `@screeb/sdk-example`
+# `@screeb/sdk-browser-example`
 
 Screeb's example app for browser sdk.
 

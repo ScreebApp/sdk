@@ -20,7 +20,7 @@ This is a monorepo with multiple packages leveraging [`lerna`](https://github.co
 
 - [@screeb/eslint-config](packages/screeb-eslint-config/README.md) - Screeb's eslint config for frontend app.
 - [@screeb/sdk-browser](packages/screeb-sdk-browser/README.md) - Screeb's browser sdk.
-- [@screeb/sdk-example](packages/screeb-sdk-browser-example/README.md) - Screeb's example app for browser sdk.
+- [@screeb/sdk-browser-example](packages/screeb-sdk-browser-example/README.md) - Screeb's example app for browser sdk.
 - [@screeb/template-lib](packages/screeb-template-lib/README.md) - Screeb's template for a front-end lib.
 - [@screeb/typescript-config](packages/screeb-typescript-config/README.md) - Screeb's typescript configs for frontend app.
 
