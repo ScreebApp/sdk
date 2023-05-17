@@ -1,6 +1,6 @@
 {
   "name": "@screeb/sdk-browser",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Screeb's browser sdk.",
   "keywords": [
     "product discovery",
