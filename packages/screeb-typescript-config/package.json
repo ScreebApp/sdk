@@ -1,12 +1,22 @@
 {
   "name": "@screeb/typescript-config",
   "version": "0.1.2",
-  "author": "Screeb's frontend team",
-  "description": "Screeb's typescript configs for frontend app.",
   "private": true,
+  "description": "Screeb's typescript configs for frontend app.",
+  "homepage": "https://screeb.app",
+  "bugs": {
+    "url": "https://github.com/ScreebApp/sdk-js/issues",
+    "email": "suuport@screeb.app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ScreebApp/sdk-js.git",
+    "directory": "packages/screeb-typescript-config"
+  },
   "license": "MIT",
-  "type": "module",
+  "author": "Screeb's frontend team",
   "sideEffects": false,
+  "type": "module",
   "dependencies": {
     "@rollup/plugin-typescript": "^11.1.0"
   }

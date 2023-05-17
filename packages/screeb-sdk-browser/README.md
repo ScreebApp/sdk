@@ -1,16 +1,26 @@
-# `@screeb/sdk-browser`
-
 <p align="center">
-  <img width="600" height="200" src="./readme/screeb-logo.svg">
+  <a href="https://screeb.app" alt="Intercom">
+    <img src="https://raw.githubusercontent.com/ScreebApp/sdk-js/master/packages/screeb-sdk-browser/readme/screeb-logo.svg?token=GHSAT0AAAAAAB2OOPMGT2QD5TL3IRJN3CKCZDEYHJA" alt="Logo" height="120px" style="margin-top: 20px;"/>
+  </a>
+</p>
+<h1 align="center">@screeb/sdk-browser</h1>
+<p align="center">
+  Screeb's browser sdk.
+
+  <b>Continuous Product Discovery, Without the Time Sink.</b>
+
+  <a href="https://screeb.app" alt="Intercom">Screeb</a> is the only Continuous Product Discovery platform that lets you analyse users' behaviour, ask in-app questions, recruit people for interviews and analyse data in a blink with AI.
 </p>
 
-**Continuous Product Discovery, Without the Time Sink.**
+<p align="center">
+<a href="https://github.com/ScreebApp/sdk-js/actions/workflows/node.js.yml" alt="ci">
+  <img alt="ci" src="https://github.com/ScreebApp/sdk-js/actions/workflows/node.js.yml/badge.svg">
+</a>
+<img alt="version" src="https://img.shields.io/npm/v/@screeb/sdk-browser.svg" />
+<img alt="minzipped size" src="https://badgen.net/bundlephobia/minzip/@screeb/sdk-browser">
+<img alt="downloads" src="https://badgen.net/npm/dw/@screeb/sdk-browser" />
+</p>
 
-**Screeb** is the only Continuous Product Discovery platform that lets you analyse users' behaviour, ask in-app questions, recruit people for interviews and analyse data in a blink with AI.
-
----
-
-For more information, visit [our homepage](https://screeb.app/).
 
 ## Installation
 
@@ -45,4 +55,4 @@ All third party contributors acknowledge that any contributions they provide wil
 
 ## License
 
-Released under [MIT License](../../LICENSE).
+Released under [MIT License](https://github.com/ScreebApp/sdk-js/blob/master/LICENSE).

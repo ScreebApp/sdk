@@ -1,12 +1,22 @@
 {
   "name": "@screeb/eslint-config",
   "version": "0.1.2",
-  "author": "Screeb's frontend team",
-  "description": "Screeb's eslint config for frontend app.",
   "private": true,
+  "description": "Screeb's eslint config for frontend app.",
+  "homepage": "https://screeb.app",
+  "bugs": {
+    "url": "https://github.com/ScreebApp/sdk-js/issues",
+    "email": "suuport@screeb.app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ScreebApp/sdk-js.git",
+    "directory": "packages/screeb-eslint-config"
+  },
   "license": "MIT",
-  "main": "src/index.js",
+  "author": "Screeb's frontend team",
   "sideEffects": false,
+  "main": "src/index.js",
   "dependencies": {
     "@typescript-eslint/parser": "^5.59.2",
     "eslint": "^8.39.0",
