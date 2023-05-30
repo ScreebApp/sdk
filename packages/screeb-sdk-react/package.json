@@ -1,6 +1,6 @@
 {
   "name": "@screeb/sdk-react",
-  "version": "0.1.6",
+  "version": "0.1.0",
   "description": "Screeb's browser sdk, optimized for React.",
   "keywords": [
     "product discovery",
@@ -46,9 +46,9 @@
     "test": "echo '@TODO'"
   },
   "devDependencies": {
-    "@screeb/eslint-config": "^0.1.2",
+    "@screeb/eslint-config": "^0.1.4",
     "@screeb/sdk-browser": "^0.1.6",
-    "@screeb/typescript-config": "^0.1.2",
+    "@screeb/typescript-config": "^0.1.4",
     "@types/jest": "^29.5.1",
     "@types/node": "^18.11.19",
     "@types/react": "^18.0.20",
@@ -71,7 +71,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@screeb/sdk-browser": "^0.1.6"
+    "@screeb/sdk-browser": "^0.1.7"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
