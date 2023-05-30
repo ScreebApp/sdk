@@ -8,6 +8,7 @@
 
 - [PropertyRecord](README.md#propertyrecord)
 - [PropertyType](README.md#propertytype)
+- [ScreebIdentityGetReturn](README.md#screebidentitygetreturn)
 - [ScreebObject](README.md#screebobject)
 - [ScreebOptions](README.md#screeboptions)
 
@@ -52,9 +53,31 @@ This is property types that are supported by Screeb.
 
 ___
 
+### ScreebIdentityGetReturn
+
+Ƭ **ScreebIdentityGetReturn**: `Object`
+
+This is the object returned by the function `identityGet()`.
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `anonymous_id` | `string` | Anonymous id given to each user |
+| `channel_id` | `string` | The current channel id with which the tag was initialized |
+| `is_ready` | `boolean` | `true` if the tag us loaded, initialized and ready to rock |
+| `session_end` | `string` | The current user session end time |
+| `session_id` | `string` | The current user session id |
+| `session_start` | `string` | The current user session start time |
+| `user_id` | `string` | The authenticated id assigned to the user. |
+
+___
+
 ### ScreebObject
 
 Ƭ **ScreebObject**: `ScreebFunction` & { `q?`: `unknown`[][]  }
+
+This is the Screeb object publicly exposed in browser `window`.
 
 ___
 
@@ -209,7 +232,7 @@ ___
 
 ### identityGet
 
-▸ **identityGet**(): `Promise`<`ScreebIdentityGetReturn`\>
+▸ **identityGet**(): `Promise`<[`ScreebIdentityGetReturn`](README.md#screebidentitygetreturn)\>
 
 Retrieves the current user identity.
 
@@ -232,7 +255,7 @@ console.log(await Screeb.identityGet());
 
 #### Returns
 
-`Promise`<`ScreebIdentityGetReturn`\>
+`Promise`<[`ScreebIdentityGetReturn`](README.md#screebidentitygetreturn)\>
 
 ___
 

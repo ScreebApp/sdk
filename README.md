@@ -19,10 +19,12 @@ Here is the guide to set everything up before contributing.
 This is a monorepo with multiple packages leveraging [`lerna`](https://github.com/lerna/lerna):
 
 - [@screeb/eslint-config](packages/screeb-eslint-config/README.md) - Screeb's eslint config for frontend app.
+- [@screeb/template-lib](packages/screeb-template-lib/README.md) - Screeb's template for a front-end lib.
+- [@screeb/typescript-config](packages/screeb-typescript-config/README.md) - Screeb's typescript configs for frontend 
 - [@screeb/sdk-browser](packages/screeb-sdk-browser/README.md) - Screeb's browser sdk.
 - [@screeb/sdk-browser-example](packages/screeb-sdk-browser-example/README.md) - Screeb's example app for browser sdk.
-- [@screeb/template-lib](packages/screeb-template-lib/README.md) - Screeb's template for a front-end lib.
-- [@screeb/typescript-config](packages/screeb-typescript-config/README.md) - Screeb's typescript configs for frontend app.
+- [@screeb/sdk-react](packages/screeb-sdk-react/README.md) - Screeb's browser sdk, optimized for React.
+- [@screeb/sdk-react-example](packages/screeb-sdk-react-example/README.md) - Screeb's example app for react sdk.app.
 
 ### Getting set up
 

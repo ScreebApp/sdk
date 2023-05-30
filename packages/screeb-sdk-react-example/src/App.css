@@ -1,0 +1,55 @@
+img {
+  margin-top: 1em;
+  max-width: 100px;
+}
+
+main {
+  color: #303140;
+  text-align: center;
+  padding: 1em;
+  max-width: 240px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 4em;
+  font-weight: 500;
+  font-family: Rubik;
+  margin-block-start: 0.2em;
+  margin-block-end: 0.2em;
+}
+
+h2 {
+  font-size: 1.2em;
+  font-weight: 500;
+  font-family: Rubik;
+}
+
+em {
+  font-style: normal;
+  color: #5e21f1;
+  font-weight: 700;
+}
+
+a {
+  font-weight: 700;
+  color: #5e21f1;
+}
+
+@media (min-width: 640px) {
+  main {
+    max-width: none;
+  }
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header span {
+  margin: 16px;
+  font-size: 48px;
+  font-weight: 600;
+}

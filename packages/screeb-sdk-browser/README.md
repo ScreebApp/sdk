@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://screeb.app" alt="Intercom">
+  <a href="https://screeb.app" alt="Screeb">
     <img src="https://raw.githubusercontent.com/ScreebApp/sdk-js/master/packages/screeb-sdk-browser/readme/screeb-logo.svg?token=GHSAT0AAAAAAB2OOPMGT2QD5TL3IRJN3CKCZDEYHJA" alt="Logo" height="120px" style="margin-top: 20px;"/>
   </a>
 </p>
@@ -9,7 +9,7 @@
 
   <b>Continuous Product Discovery, Without the Time Sink.</b>
 
-  <a href="https://screeb.app" alt="Intercom">Screeb</a> is the only Continuous Product Discovery platform that lets you analyse users' behaviour, ask in-app questions, recruit people for interviews and analyse data in a blink with AI.
+  <a href="https://screeb.app" alt="Screeb">Screeb</a> is the only Continuous Product Discovery platform that lets you analyse users' behaviour, ask in-app questions, recruit people for interviews and analyse data in a blink with AI.
 </p>
 
 <p align="center">

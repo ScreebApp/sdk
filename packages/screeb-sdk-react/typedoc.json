@@ -1,0 +1,9 @@
+{
+  "out": "./docs",
+  "name": "@screeb/sdk-react",
+  "theme": "markdown",
+  "readme": "none",
+  "tsconfig": "./tsconfig.json",
+  "plugin": ["typedoc-plugin-markdown"],
+  "disableSources": true
+}

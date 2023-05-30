@@ -17,14 +17,42 @@ export type ScreebOptions = {
 // eslint-disable-next-line no-unused-vars
 type ScreebFunction = (..._: unknown[]) => void | Promise<unknown>;
 
+/** This is the Screeb object publicly exposed in browser `window`. */
 export type ScreebObject = ScreebFunction & { q?: unknown[][] };
 
+/** This is the object returned by the function `identityGet()`. */
+export type ScreebIdentityGetReturn = {
+  /** Anonymous id given to each user */
+  anonymous_id: string;
+  /** The authenticated id assigned to the user. */
+  user_id: string;
+  /** The current user session id */
+  session_id: string;
+  /** The current user session start time */
+  session_start: string;
+  /** The current user session end time */
+  session_end: string;
+  /** The current channel id with which the tag was initialized */
+  channel_id: string;
+  /** `true` if the tag us loaded, initialized and ready to rock */
+  is_ready: boolean;
+};
+
 declare const window: Window & { $screeb?: ScreebObject };
-declare const $screeb: ScreebObject;
 
 const SCREEB_TAG_ENDPOINT = "https://t.screeb.app/tag.js";
 
 let _window = window;
+
+const callScreebCommand: ScreebFunction = (...args) => {
+  if (_window.$screeb) {
+    return _window.$screeb.apply(_window.$screeb, args);
+  }
+
+  return Promise.reject(
+    "[Screeb] Screeb.load() must be called before any other function."
+  );
+};
 
 /**
  * Appends Screeb tag into your dom.
@@ -108,7 +136,7 @@ export const init = (
     };
   }
 
-  return $screeb("init", websiteId, identityObject);
+  return callScreebCommand("init", websiteId, identityObject);
 };
 
 /**
@@ -123,7 +151,8 @@ export const init = (
  * console.log(Screeb.isLoaded()); // true
  * ```
  */
-export const isLoaded = () => $screeb && typeof $screeb === "function";
+export const isLoaded = () =>
+  Boolean(_window.$screeb) && typeof _window.$screeb === "function";
 
 /**
  * Shutdowns current Screeb session.
@@ -135,7 +164,7 @@ export const isLoaded = () => $screeb && typeof $screeb === "function";
  * Screeb.close();
  * ```
  */
-export const close = () => $screeb("close");
+export const close = () => callScreebCommand("close");
 
 /**
  * Prints the actual state information of Screeb tag.
@@ -164,7 +193,7 @@ export const close = () => $screeb("close");
  * // **************************************************************
  * ```
  */
-export const debug = () => $screeb("debug");
+export const debug = () => callScreebCommand("debug");
 
 /**
  * Tracks a user event.
@@ -200,7 +229,7 @@ export const debug = () => $screeb("debug");
 export const eventTrack = (
   eventName: string,
   eventProperties?: PropertyRecord
-) => $screeb("event.track", eventName, eventProperties);
+) => callScreebCommand("event.track", eventName, eventProperties);
 
 /**
  * Change the current user identity.
@@ -231,17 +260,7 @@ export const eventTrack = (
  * ```
  */
 export const identity = (userId: string, userProperties?: PropertyRecord) =>
-  $screeb("identity", userId, userProperties);
-
-type ScreebIdentityGetReturn = {
-  anonymous_id: string;
-  user_id: string;
-  session_id: string;
-  session_start: string;
-  session_end: string;
-  channel_id: string;
-  is_ready: boolean;
-};
+  callScreebCommand("identity", userId, userProperties);
 
 /**
  * Retrieves the current user identity.
@@ -263,7 +282,7 @@ type ScreebIdentityGetReturn = {
  * ```
  */
 export const identityGet = (): Promise<ScreebIdentityGetReturn> =>
-  $screeb("identity.get") as Promise<ScreebIdentityGetReturn>;
+  callScreebCommand("identity.get") as Promise<ScreebIdentityGetReturn>;
 
 /**
  * Assigns the current user to a group.
@@ -299,7 +318,13 @@ export const identityGroupAssign = (
   groupName: string,
   groupType?: string,
   groupProperties?: PropertyRecord
-) => $screeb("identity.group.assign", groupType, groupName, groupProperties);
+) =>
+  callScreebCommand(
+    "identity.group.assign",
+    groupType,
+    groupName,
+    groupProperties
+  );
 
 /**
  * Unassigns the current user to a group.
@@ -315,7 +340,7 @@ export const identityGroupAssign = (
  * ```
  */
 export const identityGroupUnassign = (groupName: string, groupType?: string) =>
-  $screeb("identity.group.unassign", groupType, groupName);
+  callScreebCommand("identity.group.unassign", groupType, groupName);
 
 /**
  * Adds properties to the current user identity.
@@ -353,7 +378,7 @@ export const identityGroupUnassign = (groupName: string, groupType?: string) =>
  * ```
  */
 export const identityProperties = (userProperties: PropertyRecord) =>
-  $screeb("identity.properties", userProperties);
+  callScreebCommand("identity.properties", userProperties);
 
 /**
  * Resets the current user identity.
@@ -366,7 +391,7 @@ export const identityProperties = (userProperties: PropertyRecord) =>
  * Screeb.identityReset();
  * ```
  */
-export const identityReset = () => $screeb("identity.reset");
+export const identityReset = () => callScreebCommand("identity.reset");
 
 /**
  * Interrupts a running survey.
@@ -378,7 +403,7 @@ export const identityReset = () => $screeb("identity.reset");
  * Screeb.surveyClose();
  * ```
  */
-export const surveyClose = () => $screeb("survey.close");
+export const surveyClose = () => callScreebCommand("survey.close");
 
 /**
  * Starts a survey by its ID.
@@ -402,7 +427,7 @@ export const surveyStart = (
   allowMultipleResponses = true,
   hiddenFields: PropertyRecord = {}
 ) =>
-  $screeb("survey.start", surveyId, {
+  callScreebCommand("survey.start", surveyId, {
     allow_multiple_responses: allowMultipleResponses,
     hidden_fields: hiddenFields,
   });
@@ -417,7 +442,7 @@ export const surveyStart = (
  * Screeb.targetingCheck();
  * ```
  */
-export const targetingCheck = () => $screeb("targeting.check");
+export const targetingCheck = () => callScreebCommand("targeting.check");
 
 /**
  * Prints the current state of the targeting engine.
@@ -443,4 +468,4 @@ export const targetingCheck = () => $screeb("targeting.check");
  * //   - Rule of type "Capping per respondent display count": false 🔴
  * ```
  */
-export const targetingDebug = () => $screeb("targeting.debug");
+export const targetingDebug = () => callScreebCommand("targeting.debug");

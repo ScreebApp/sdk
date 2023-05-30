@@ -7,7 +7,9 @@ module.exports = {
             "screeb-typescript-config",
             "screeb-template-lib",
             "screeb-sdk-browser",
-            "screeb-sdk-browser-example"
+            "screeb-sdk-browser-example",
+            "screeb-sdk-react",
+            "screeb-sdk-react-example"
         ]],
         "scope-empty": [2, "never"],
         "scope-min-length": [2, "always", 1],
