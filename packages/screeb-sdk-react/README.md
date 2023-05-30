@@ -73,9 +73,9 @@ const HomePage = () => {
 
   const onButtonClicked = React.useCallback(
     () => eventTrack(
-			"screeb-sdk-react-example started",
-			{ test: 123 }
-		);
+      "screeb-sdk-react-example started",
+      { test: 123 }
+    );
   );
 
   return (
