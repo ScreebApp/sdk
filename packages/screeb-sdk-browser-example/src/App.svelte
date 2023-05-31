@@ -3,31 +3,30 @@
 	import { onMount } from "svelte";
 
 	onMount(async () => {
-		await Screeb.load();
-		console.log("screeb loaded");
-		await Screeb.init(
-			"0e2b609a-8dce-4695-a80f-966fbfa87a88",
-			"dev@screeb.app",
-			{
-				firstname: "John",
-				lastname: "Smith",
-				last_seen_at: new Date(),
-				authenticated: true,
-				org_size: 20,
-			}
-		);
+	  await Screeb.load();
+	  // eslint-disable-next-line no-console
+	  console.log("screeb loaded");
+	  await Screeb.init("0e2b609a-8dce-4695-a80f-966fbfa87a88", "dev@screeb.app", {
+	    authenticated: true,
+	    firstname: "John",
+	    last_seen_at: new Date(),
+	    lastname: "Smith",
+	    org_size: 20,
+	  });
 
-		console.log(await Screeb.debug());
+	  // eslint-disable-next-line no-console
+	  console.log(await Screeb.debug());
 
-		await Screeb.eventTrack("screeb-sdk-browser-example started", {
-			test: 123,
-		});
-		await Screeb.identityProperties({ hello: "I'm a dev." });
-		await Screeb.identityGroupAssign("cohort", "Screeb Developers");
+	  await Screeb.eventTrack("screeb-sdk-browser-example started", {
+	    test: 123,
+	  });
+	  await Screeb.identityProperties({ hello: "I'm a dev." });
+	  await Screeb.identityGroupAssign("cohort", "Screeb Developers");
 
-		setTimeout(async () => {
-			console.log(await Screeb.identityGet());
-		}, 200);
+	  setTimeout(async () => {
+	    // eslint-disable-next-line no-console
+	    console.log(await Screeb.identityGet());
+	  }, 200);
 	});
 </script>
 

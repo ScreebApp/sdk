@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "@screeb/eslint-config"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.svelte"],
+      "processor": "svelte3/svelte3"
+    }
+  ],
+  "plugins": ["import", "svelte3"]
+}
