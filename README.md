@@ -24,7 +24,9 @@ This is a monorepo with multiple packages leveraging [`lerna`](https://github.co
 - [@screeb/sdk-browser](packages/screeb-sdk-browser/README.md) - Screeb's browser sdk.
 - [@screeb/sdk-browser-example](packages/screeb-sdk-browser-example/README.md) - Screeb's example app for browser sdk.
 - [@screeb/sdk-react](packages/screeb-sdk-react/README.md) - Screeb's browser sdk, optimized for React.
-- [@screeb/sdk-react-example](packages/screeb-sdk-react-example/README.md) - Screeb's example app for react sdk.app.
+- [@screeb/sdk-react-example](packages/screeb-sdk-react-example/README.md) - Screeb's example app for react sdk.
+- [@screeb/sdk-angular](packages/screeb-sdk-angular/README.md) - Screeb's browser sdk, optimized for Angular.
+- [@screeb/sdk-angular-example](packages/screeb-sdk-angular-example/README.md) - Screeb's example app for angular sdk.
 
 ### Getting set up
 
