@@ -3,7 +3,6 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "start": "lerna run start",
     "build": "lerna run build",
     "build:doc": "lerna run --parallel build:doc",
     "build:watch": "lerna run --parallel build -- --watch",
@@ -13,6 +12,7 @@
     "lint:fix": "lerna run --parallel lint -- --fix",
     "prepare": "lerna bootstrap && npm run build && husky install",
     "publish": "npm run version && lerna publish --no-private",
+    "start": "lerna run start",
     "test": "lerna run --parallel test",
     "upgrade:all": "npm-upgrade && lerna exec --concurrency 1 npm-upgrade",
     "preversion": "npm run clean && npm run lint && npm run build && npm run test",
