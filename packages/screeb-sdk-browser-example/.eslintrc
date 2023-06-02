@@ -8,5 +8,6 @@
       "processor": "svelte3/svelte3"
     }
   ],
-  "plugins": ["import", "svelte3"]
+  "plugins": ["svelte3"],
+  "rules": {"semi": 0}
 }

@@ -1,0 +1,12 @@
+{
+  "extends": "./node_modules/@screeb/typescript-config/src/tsconfig.json",
+  "include": ["src"],
+  "exclude": ["dist", "**/*.test.ts"],
+  "compilerOptions": {
+    "outDir": "dist/es",
+    "declaration": true,
+    "declarationDir": ".",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}

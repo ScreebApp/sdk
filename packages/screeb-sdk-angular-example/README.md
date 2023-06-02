@@ -1,6 +1,6 @@
-# `@screeb/sdk-browser-example`
+# `@screeb/sdk-angular-example`
 
-Screeb's example app for browser sdk.
+Screeb's example app for Angular sdk.
 
 ## Get started
 

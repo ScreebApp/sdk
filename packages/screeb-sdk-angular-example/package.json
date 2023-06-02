@@ -1,8 +1,8 @@
 {
-  "name": "@screeb/sdk-browser-example",
-  "version": "0.1.7",
+  "name": "@screeb/sdk-angular-example",
+  "version": "0.1.0",
   "private": true,
-  "description": "Screeb's example app for browser sdk.",
+  "description": "Screeb's example app for Angular sdk.",
   "homepage": "https://screeb.app",
   "bugs": {
     "url": "https://github.com/ScreebApp/sdk-js/issues",
@@ -11,35 +11,36 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/ScreebApp/sdk-js.git",
-    "directory": "packages/screeb-sdk-browser-example"
+    "directory": "packages/screeb-sdk-angular-example"
   },
   "license": "MIT",
   "author": "Screeb's frontend team",
   "type": "module",
   "scripts": {
-    "build": "vite build",
+    "build": "tsc && vite build",
     "clean": "rm -Rf dist",
     "lint": "eslint .",
     "start": "vite"
   },
   "dependencies": {
-    "@screeb/sdk-browser": "^0.1.7"
+    "@angular/common": "^16.0.3",
+    "@angular/compiler": "^16.0.3",
+    "@angular/core": "^16.0.3",
+    "@angular/platform-browser": "^16.0.3",
+    "@angular/router": "^16.0.3",
+    "@screeb/sdk-angular": "^0.1.0",
+    "rxjs": "^7.8.1",
+    "zone.js": "^0.13.0"
   },
   "devDependencies": {
     "@screeb/eslint-config": "^0.1.4",
-    "@sveltejs/vite-plugin-svelte": "^2.0.4",
-    "@tsconfig/svelte": "^4.0.1",
     "@typescript-eslint/eslint-plugin": "^5.59.6",
     "eslint": "^8.41.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jest": "^27.2.1",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-svelte3": "^4.0.0",
     "jest": "^29.5.0",
-    "svelte": "^3.58.0",
-    "svelte-check": "^3.3.1",
-    "tslib": "^2.5.0",
     "typescript": "^5.0.2",
     "vite": "^4.3.9"
   }

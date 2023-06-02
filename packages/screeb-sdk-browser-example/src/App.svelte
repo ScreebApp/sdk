@@ -1,37 +1,38 @@
 <script lang="ts">
 	import * as Screeb from "@screeb/sdk-browser";
-	import { onMount } from "svelte";
+	import { onMount } from "svelte"
+	import screebLogo from "./assets/screeb.png"
 
 	onMount(async () => {
-	  await Screeb.load();
+	  await Screeb.load()
 	  // eslint-disable-next-line no-console
-	  console.log("screeb loaded");
+	  console.log("screeb loaded")
 	  await Screeb.init("0e2b609a-8dce-4695-a80f-966fbfa87a88", "dev@screeb.app", {
 	    authenticated: true,
 	    firstname: "John",
 	    last_seen_at: new Date(),
 	    lastname: "Smith",
 	    org_size: 20,
-	  });
-
-	  // eslint-disable-next-line no-console
-	  console.log(await Screeb.debug());
+	  })
+	
+  // eslint-disable-next-line no-console
+	  console.log(await Screeb.debug())
 
 	  await Screeb.eventTrack("screeb-sdk-browser-example started", {
 	    test: 123,
-	  });
-	  await Screeb.identityProperties({ hello: "I'm a dev." });
-	  await Screeb.identityGroupAssign("cohort", "Screeb Developers");
+	  })
+	  await Screeb.identityProperties({ hello: "I'm a dev." })
+	  await Screeb.identityGroupAssign("cohort", "Screeb Developers")
 
 	  setTimeout(async () => {
 	    // eslint-disable-next-line no-console
-	    console.log(await Screeb.identityGet());
-	  }, 200);
-	});
+	    console.log(await Screeb.identityGet())
+	  }, 200)
+	})
 </script>
 
 <main>
-	<img src="favicon.png" alt="This is the Screeb.app logo" />
+	<img src={screebLogo} alt="This is the Screeb.app logo" />
 	<h1>Hello <em>you</em>!</h1>
 
 	<h2>Welcome aboard!</h2>
