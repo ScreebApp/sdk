@@ -1,6 +1,6 @@
 {
   "extends": "./node_modules/@screeb/typescript-config/src/tsconfig.json",
-  "include": ["src", "src/provider.test.tsx"],
+  "include": ["src"],
   "exclude": ["dist", "**/*.test.ts"],
   "compilerOptions": {
     "outDir": "dist/es",

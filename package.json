@@ -3,6 +3,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "start": "lerna run start",
     "build": "lerna run build",
     "build:doc": "lerna run --parallel build:doc",
     "build:watch": "lerna run --parallel build -- --watch",

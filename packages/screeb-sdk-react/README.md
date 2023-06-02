@@ -86,6 +86,8 @@ const HomePage = () => {
 };
 ```
 
+For a working example, see our [Screeb Angular SDK example app](https://github.com/ScreebApp/sdk-js/tree/master/packages/screeb-sdk-react-example).
+
 For a more advanced usage and a complete API documentation, see [documentation generated from source files](https://github.com/ScreebApp/sdk-js/tree/master/packages/screeb-sdk-react/docs).
 
 For further information, see [our developper documentation](https://github.com/ScreebApp/developers).
