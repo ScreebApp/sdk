@@ -38,9 +38,9 @@ This is used to initialize Screeb at the top of your Angular application
 ```ts
 ScreebModule.forRoot({
   autoInit: true,
-  "<your-website-id>",
-  "<your-user-id>",
-  {
+  websiteId: "<your-website-id>",
+  userId: "<your-user-id>",
+  userProperties: {
     firstname: '<user-firstname>',
     lastname: '<user-lastname>',
     plan: '<user-plan>',
