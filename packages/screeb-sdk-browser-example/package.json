@@ -1,6 +1,6 @@
 {
   "name": "@screeb/sdk-browser-example",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "private": true,
   "description": "Screeb's example app for browser sdk.",
   "homepage": "https://screeb.app",
