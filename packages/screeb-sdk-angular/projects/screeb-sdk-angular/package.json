@@ -1,0 +1,12 @@
+{
+  "name": "screeb-sdk-angular",
+  "version": "0.0.0",
+  "peerDependencies": {
+    "@angular/common": ">=10",
+    "@angular/core": ">=10"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

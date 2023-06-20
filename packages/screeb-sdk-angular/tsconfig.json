@@ -1,12 +1,38 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
-  "extends": "./node_modules/@screeb/typescript-config/src/tsconfig.json",
-  "include": ["src"],
-  "exclude": ["dist", "**/*.test.ts"],
+  "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "dist/es",
-    "declaration": true,
-    "declarationDir": ".",
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "paths": {
+      "screeb-sdk-angular": [
+        "dist/screeb-sdk-angular"
+      ]
+    },
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "useDefineForClassFields": false,
+    "lib": [
+      "ES2022",
+      "dom"
+    ]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
   }
 }

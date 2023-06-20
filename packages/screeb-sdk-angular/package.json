@@ -24,24 +24,26 @@
   "license": "MIT",
   "author": "Screeb's frontend team",
   "sideEffects": false,
-  "type": "module",
+  "module": "dist/screeb-sdk-angular/fesm2022/screeb-sdk-angular.mjs",
+  "typings": "dist/screeb-sdk-angular/index.d.ts",
   "exports": {
-    "./package.json": "./package.json",
     ".": {
-      "import": "./dist/es/index.js"
+      "types": "./dist/screeb-sdk-angular/index.d.ts",
+      "esm2022": "./dist/screeb-sdk-angular/esm2022/screeb-sdk-angular.mjs",
+      "esm": "./dist/screeb-sdk-angular/esm2022/screeb-sdk-angular.mjs",
+      "default": "./dist/screeb-sdk-angular/fesm2022/screeb-sdk-angular.mjs"
     }
   },
-  "module": "dist/es/index.js",
-  "types": "dist/es/index.d.ts",
   "files": [
     "dist",
     "docs",
     "README.md"
   ],
   "scripts": {
-    "build": "rollup -c ./node_modules/@screeb/typescript-config/src/rollup.config.js",
-    "build:doc": "typedoc src/index.ts",
-    "clean": "rm -Rf dist",
+    "ng": "ng",
+    "build": "ng build",
+    "build:watch": "ng build --watch --configuration development",
+    "build:doc": "typedoc projects/screeb-sdk-angular/src/public-api.ts",
     "lint": "eslint .",
     "test": "echo '@TODO'"
   },
@@ -49,24 +51,40 @@
     "@screeb/sdk-browser": "^0.1.8"
   },
   "devDependencies": {
-    "@angular/common": "^16.0.3",
-    "@angular/core": "^16.0.3",
+    "@angular-devkit/build-angular": "^16.0.5",
+    "@angular/animations": "^16.0.0",
+    "@angular/cli": "~16.0.4",
+    "@angular/common": "^16.0.0",
+    "@angular/compiler": "^16.0.0",
+    "@angular/compiler-cli": "^16.0.0",
+    "@angular/core": "^16.0.0",
+    "@angular/forms": "^16.0.0",
+    "@angular/platform-browser": "^16.0.0",
+    "@angular/platform-browser-dynamic": "^16.0.0",
+    "@angular/router": "^16.0.0",
     "@screeb/eslint-config": "^0.1.5",
-    "@screeb/sdk-browser": "^0.1.6",
-    "@screeb/typescript-config": "^0.1.5",
-    "@types/jest": "^29.5.1",
-    "@types/node": "^18.11.19",
+    "@types/jasmine": "~4.3.0",
     "@typescript-eslint/eslint-plugin": "^5.59.6",
     "eslint": "^8.41.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jest": "^27.2.1",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-prettier": "^4.2.1",
+    "jasmine-core": "~4.6.0",
     "jest": "^29.5.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.0.0",
+    "ng-packagr": "^16.0.0",
     "prettier": "^2.8.8",
-    "rollup": "^3.23.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
     "typedoc": "^0.24.7",
-    "typedoc-plugin-markdown": "^3.15.3"
+    "typedoc-plugin-markdown": "^3.15.3",
+    "typescript": "~5.0.2",
+    "zone.js": "~0.13.0"
   },
   "peerDependencies": {
     "@angular/common": ">=10",
