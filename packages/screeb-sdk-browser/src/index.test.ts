@@ -37,11 +37,16 @@ describe("Screeb", () => {
       Screeb.init("website-uuid", "user-uuid", { test: 123 });
 
       expect(window.$screeb?.q).toEqual([
-        [
-          "init",
-          "website-uuid",
-          { identity: { id: "user-uuid", properties: { test: 123 } } },
-        ],
+        {
+          args: [
+            "init",
+            "website-uuid",
+            { identity: { id: "user-uuid", properties: { test: 123 } } },
+          ],
+          ko: expect.any(Function),
+          ok: expect.any(Function),
+          v: 1,
+        },
       ]);
     });
   });

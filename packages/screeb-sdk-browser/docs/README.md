@@ -75,7 +75,7 @@ ___
 
 ### ScreebObject
 
-Ƭ **ScreebObject**: `ScreebFunction` & { `q?`: `unknown`[][]  }
+Ƭ **ScreebObject**: `ScreebFunction` & { `q?`: { `args`: `unknown`[] ; `ko`: (`reason?`: `unknown`) => `void` ; `ok`: (`value?`: `unknown`) => `void` ; `v`: `number`  }[]  }
 
 This is the Screeb object publicly exposed in browser `window`.
 
