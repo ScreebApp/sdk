@@ -18,7 +18,16 @@ export type ScreebOptions = {
 type ScreebFunction = (..._: unknown[]) => void | Promise<unknown>;
 
 /** This is the Screeb object publicly exposed in browser `window`. */
-export type ScreebObject = ScreebFunction & { q?: unknown[][] };
+export type ScreebObject = ScreebFunction & {
+  q?: {
+    args: unknown[];
+    // eslint-disable-next-line no-unused-vars
+    ko: (reason?: unknown) => void;
+    // eslint-disable-next-line no-unused-vars
+    ok: (value?: unknown) => void;
+    v: number;
+  }[];
+};
 
 /** This is the object returned by the function `identityGet()`. */
 export type ScreebIdentityGetReturn = {
@@ -83,9 +92,17 @@ export const load = (options: ScreebOptions = {}) =>
     _window.$screeb =
       _window.$screeb ??
       function (...args) {
-        if (_window.$screeb) {
-          (_window.$screeb.q = _window.$screeb.q ?? []).push(args);
-        }
+        return new Promise((a, b) => {
+          if (_window.$screeb) {
+            return (_window.$screeb.q = _window.$screeb.q ?? []).push({
+              args,
+              ko: b,
+              ok: a,
+              v: 1,
+            });
+          }
+          return 0;
+        });
       };
 
     _window.document.head.appendChild(scriptElement);
