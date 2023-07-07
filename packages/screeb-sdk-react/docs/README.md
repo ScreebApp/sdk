@@ -472,6 +472,7 @@ Properties of Screeb provider
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
+| `hooks?` | `GlobalHooks` | Hooks to define callback for various event |
 | `userId?` | `string` | The unique identifier of your user. |
 | `userProperties?` | `PropertyRecord` | The properties of your user. |
 | `websiteId` | `string` | Your website/channel id. |

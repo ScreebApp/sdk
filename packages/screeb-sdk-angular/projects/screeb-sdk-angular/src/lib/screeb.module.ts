@@ -22,7 +22,12 @@ export class ScreebModule {
    *     plan: '<user-plan>',
    *     last_seen_at: new Date(),
    *     authenticated: true
-   *   }
+   *   },
+   *   {
+   *     onReady: (payload) => {
+   *        console.log("SDK is ready", payload);
+   *     },
+   *   },
    * })
    * ```
    */
@@ -42,7 +47,12 @@ export class ScreebModule {
     }
 
     if ((config.autoInit ?? false) && config.websiteId) {
-      screeb.init(config.websiteId, config.userId, config.userProperties);
+      screeb.init(
+        config.websiteId,
+        config.userId,
+        config.userProperties,
+        config.hooks
+      );
     }
   }
 }

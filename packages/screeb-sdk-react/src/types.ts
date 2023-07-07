@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import {
+  GlobalHooks,
   PropertyRecord,
   ScreebIdentityGetReturn,
   ScreebOptions,
@@ -13,6 +14,8 @@ export type ScreebProps = {
   userId?: string;
   /** The properties of your user. */
   userProperties?: PropertyRecord;
+  /** Hooks to define callback for various event */
+  hooks?: GlobalHooks;
 };
 
 /**

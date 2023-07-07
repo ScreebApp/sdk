@@ -14,6 +14,7 @@ export const ScreebProvider: React.FC<
   websiteId,
   userId,
   userProperties,
+  hooks,
   children,
   shouldLoad = !isSSR,
   autoInit = false,
@@ -140,13 +141,14 @@ export const ScreebProvider: React.FC<
     async (
       websiteId: string,
       userId?: string,
-      userProperties?: Screeb.PropertyRecord
+      userProperties?: Screeb.PropertyRecord,
+      hooks?: Screeb.GlobalHooks
     ) => {
       await ensureScreeb(
         "init",
         () => {
           if (!isInitialized) {
-            Screeb.init(websiteId, userId, userProperties);
+            Screeb.init(websiteId, userId, userProperties, hooks);
 
             isInitialized = true;
           }
@@ -166,7 +168,7 @@ export const ScreebProvider: React.FC<
 
         if (autoInit) {
           if (websiteId) {
-            await init(websiteId, userId, userProperties);
+            await init(websiteId, userId, userProperties, hooks);
           } else {
             logger.log(
               "warn",
@@ -188,10 +190,16 @@ export const ScreebProvider: React.FC<
     async (
       surveyId: string,
       allowMultipleResponses: boolean,
-      hiddenFields: Screeb.PropertyRecord
+      hiddenFields: Screeb.PropertyRecord,
+      hooks?: Screeb.SurveyHooks
     ) =>
       await ensureScreeb("surveyStart", () =>
-        Screeb.surveyStart(surveyId, allowMultipleResponses, hiddenFields)
+        Screeb.surveyStart(
+          surveyId,
+          allowMultipleResponses,
+          hiddenFields,
+          hooks
+        )
       ),
     []
   );

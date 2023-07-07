@@ -6,6 +6,298 @@ export type PropertyRecord = {
   [key: string]: PropertyType | PropertyType[];
 };
 
+/**
+ * Action
+ */
+export type ResponseQuestionActionButton = {
+  id: string;
+  type: "button";
+  payload: {
+    emoji: string;
+    label: string;
+    url?: string;
+  };
+};
+
+export type ResponseQuestionActionLink = {
+  id: string;
+  type: "link";
+  payload: {
+    emoji: string;
+    label: string;
+    link: string;
+  };
+};
+
+export type ResponseQuestionActionScoring = {
+  id: string;
+  type: "scoring";
+  payload: {
+    emoji: string;
+    value: number;
+  };
+};
+
+export type ResponseQuestionActionInputValidation = "text" | "email";
+
+export type ResponseQuestionActionInput = {
+  id: string;
+  type: "text_input";
+  payload: {
+    validation: ResponseQuestionActionInputValidation;
+  };
+};
+
+export type ResponseQuestionActionRange = {
+  id: string;
+  type: "number_input";
+  payload: {
+    validation: "min_max";
+    min: number;
+    max: number;
+    emoji: string;
+  };
+};
+
+/**
+ * CTA
+ */
+export type ResponseQuestionCTANone = {
+  type: "none";
+};
+
+export type ResponseQuestionCTAChoices = {
+  type: "multiple_choice" | "pmf" | "link";
+  choices: ResponseQuestionActionButton[];
+};
+
+export type ResponseQuestionCTAScores = {
+  type: "scoring" | "nps" | "ces" | "csat";
+  scores: ResponseQuestionActionScoring[];
+};
+
+export type ResponseQuestionCTAInput = {
+  type: "input";
+  input: ResponseQuestionActionInput;
+};
+
+export type ResponseQuestionCTARange = {
+  type: "range";
+  range: ResponseQuestionActionRange;
+};
+
+export type ResponseQuestionCTAAppStoreRating = {
+  type: "appstore_rating";
+};
+
+export type ResponseQuestionCTA =
+  | ResponseQuestionCTANone
+  | ResponseQuestionCTAChoices
+  | ResponseQuestionCTAScores
+  | ResponseQuestionCTAInput
+  | ResponseQuestionCTARange
+  | ResponseQuestionCTAAppStoreRating;
+
+/**
+ * Answer
+ */
+export type ResponseAnswerValue =
+  | ResponseAnswerValueNone
+  | ResponseAnswerValueString
+  | ResponseAnswerValueNumber
+  | ResponseAnswerValueBoolean
+  | ResponseAnswerValueTime;
+
+export type ResponseAnswerValueNone = ResponseAnswerValueAbstract & {
+  type: "none";
+};
+
+export type ResponseAnswerValueString = ResponseAnswerValueAbstract & {
+  type: "string";
+  value_string: string;
+};
+
+export type ResponseAnswerValueNumber = ResponseAnswerValueAbstract & {
+  type: "number";
+  value_number: number;
+};
+
+export type ResponseAnswerValueBoolean = ResponseAnswerValueAbstract & {
+  type: "boolean";
+  value_boolean: boolean;
+};
+
+export type ResponseAnswerValueTime = ResponseAnswerValueAbstract & {
+  type: "time";
+  value_time: Date;
+};
+
+type ResponseAnswerValueAbstract = {
+  action_id: string;
+};
+
+export type ResponseAnswer = {
+  id: string;
+  question_id: string;
+  values: ResponseAnswerValue[];
+  created_at: Date;
+};
+
+export type ResponseQuestionActionSkip = {
+  id: string;
+  type: "skip";
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  payload: any;
+};
+
+/**
+ * Messages
+ */
+export type ResponseQuestionMessageText = {
+  type: "text";
+  text: string;
+};
+
+export type ResponseQuestionMessage = {
+  id: string;
+} & ResponseQuestionMessageText;
+
+export type ResponseQuestion = {
+  id: string;
+  messages: ResponseQuestionMessage[];
+  call_to_action: ResponseQuestionCTA;
+  skip_action?: ResponseQuestionActionSkip;
+  ends: boolean;
+};
+
+export type QuestionAnswerPair = {
+  question: ResponseQuestion;
+  answer?: ResponseAnswer;
+};
+
+export type ResponseStatus = "started" | "ended" | "closed" | "interrupted";
+
+/**
+ * Hooks
+ */
+export type HookType =
+  | "onSurveyShowed"
+  | "onSurveyStarted"
+  | "onQuestionReplied"
+  | "onSurveyCompleted"
+  | "onSurveyHidden";
+
+export type ResponseHookSurveyShowed = {
+  survey: {
+    id: string;
+    survey_position: number;
+    survey_size: number;
+    survey_format: "conversationnal" | "cards" | undefined;
+  };
+  response: {
+    id: string;
+  };
+  user: {
+    anonymous_id: string;
+    user_id: string;
+  };
+  items: QuestionAnswerPair[];
+};
+
+export type ResponseHookSDKReady = {
+  user: {
+    anonymous_id: string;
+    user_id: string;
+  };
+};
+
+export type ResponseHookSurveyStarted = {
+  survey: {
+    id: string;
+    survey_position: number;
+    survey_size: number;
+    survey_format: "conversationnal" | "cards" | undefined;
+  };
+  response: {
+    id: string;
+  };
+  user: {
+    anonymous_id: string;
+    user_id: string;
+  };
+};
+
+export type ResponseHookSurveyHidden = {
+  survey: {
+    id: string;
+    survey_position: number;
+    survey_size: number;
+    survey_format: "conversationnal" | "cards" | undefined;
+  };
+  response: {
+    id: string;
+    hide_reason: ResponseStatus;
+  };
+  user: {
+    anonymous_id: string;
+    user_id: string;
+  };
+  items: QuestionAnswerPair[];
+};
+
+export type ResponseHookSurveyReplied = {
+  survey: {
+    id: string;
+    survey_position: number;
+    survey_size: number;
+    survey_format: "conversationnal" | "cards" | undefined;
+  };
+  response: {
+    id: string;
+    status: ResponseStatus;
+  };
+  user: {
+    anonymous_id: string;
+    user_id: string;
+  };
+  items: QuestionAnswerPair[];
+};
+
+export type ResponseHookSurveyCompleted = {
+  survey: {
+    id: string;
+    survey_position: number;
+    survey_size: number;
+    survey_format: "conversationnal" | "cards" | undefined;
+  };
+  response: {
+    id: string;
+  };
+  user: {
+    anonymous_id: string;
+    user_id: string;
+  };
+  items: QuestionAnswerPair[];
+};
+
+export type ResponseHook = {
+  onReady: ResponseHookSDKReady;
+  onSurveyShowed: ResponseHookSurveyShowed;
+  onSurveyStarted: ResponseHookSurveyStarted;
+  onQuestionReplied: ResponseHookSurveyReplied;
+  onSurveyCompleted: ResponseHookSurveyCompleted;
+  onSurveyHidden: ResponseHookSurveyHidden;
+};
+
+export type GlobalHooks = {
+  // eslint-disable-next-line no-unused-vars
+  [key in HookType | "onReady"]?: (payload: ResponseHook[key]) => void;
+};
+export type SurveyHooks = {
+  // eslint-disable-next-line no-unused-vars
+  [key in HookType]?: (payload: ResponseHook[key]) => void;
+};
+
 /** This is the Screeb tag options object. */
 export type ScreebOptions = {
   /** If you're running Screeb tag in an iframe, please set the inner window here. */
@@ -119,6 +411,8 @@ export const load = (options: ScreebOptions = {}) =>
  *   - No more than 1000 attributes
  *   - Supported types for values: string, number, boolean and Date
  * ```
+ * @param hooks Hooks to be called when SDK is ready or a survey is showed, started, completed, hidden
+ * or when a question is replied.
  *
  * @example
  * ```ts
@@ -133,19 +427,26 @@ export const load = (options: ScreebOptions = {}) =>
  *     plan: '<user-plan>',
  *     last_seen_at: new Date(),
  *     authenticated: true
- *   }
+ *   },
+ *   {
+ *     onReady: (payload) => {
+ *        console.log("SDK is ready", payload);
+ *     },
+ *   },
  * );
  * ```
  */
 export const init = (
   websiteId: string,
   userId?: string,
-  userProperties?: PropertyRecord
+  userProperties?: PropertyRecord,
+  hooks?: GlobalHooks
 ) => {
   let identityObject;
 
   if (userId || userProperties) {
     identityObject = {
+      hooks: hooks,
       identity: {
         id: userId,
         properties: userProperties,
@@ -435,18 +736,25 @@ export const surveyClose = () => callScreebCommand("survey.close");
  *   {
  *     color: "green",
  *     article_id: 42
- *   }
+ *   },
+ *   {
+ *     onSurveyShowed: (payload) => {
+ *        console.log("Survey showed", payload);
+ *     },
+ *   },
  * );
  * ```
  */
 export const surveyStart = (
   surveyId: string,
   allowMultipleResponses = true,
-  hiddenFields: PropertyRecord = {}
+  hiddenFields: PropertyRecord = {},
+  hooks: SurveyHooks | undefined = undefined
 ) =>
   callScreebCommand("survey.start", surveyId, {
     allow_multiple_responses: allowMultipleResponses,
     hidden_fields: hiddenFields,
+    hooks: hooks,
   });
 
 /**

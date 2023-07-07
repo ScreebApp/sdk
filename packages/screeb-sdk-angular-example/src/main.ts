@@ -17,6 +17,12 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(
       ScreebModule.forRoot({
         autoInit: true,
+        hooks: {
+          onReady: (payload) => {
+            // eslint-disable-next-line no-console
+            console.log("SDK is ready", payload);
+          },
+        },
         userId: "dev@screeb.app",
         userProperties: {
           authenticated: true,
