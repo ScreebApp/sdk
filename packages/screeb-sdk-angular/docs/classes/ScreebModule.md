@@ -20,10 +20,10 @@
 
 #### Parameters
 
-| Name     | Type                              |
-| :------- | :-------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `config` | [`ScreebConfig`](ScreebConfig.md) |
-| `screeb` | [`Screeb`](Screeb.md)             |
+| `screeb` | [`Screeb`](Screeb.md) |
 
 ## Methods
 
@@ -57,8 +57,8 @@ ScreebModule.forRoot({
 
 #### Parameters
 
-| Name     | Type                              | Description                                 |
-| :------- | :-------------------------------- | :------------------------------------------ |
+| Name | Type | Description |
+| :------ | :------ | :------ |
 | `config` | [`ScreebConfig`](ScreebConfig.md) | Configuration to pass to Screeb browser SDK |
 
 #### Returns

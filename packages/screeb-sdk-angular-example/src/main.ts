@@ -18,7 +18,7 @@ bootstrapApplication(AppComponent, {
       ScreebModule.forRoot({
         autoInit: true,
         hooks: {
-          onReady: (payload) => {
+          onReady: (payload: any) => {
             // eslint-disable-next-line no-console
             console.log("SDK is ready", payload);
           },

@@ -40,8 +40,8 @@
 
 #### Parameters
 
-| Name     | Type                              |
-| :------- | :-------------------------------- |
+| Name | Type |
+| :------ | :------ |
 | `config` | [`ScreebConfig`](ScreebConfig.md) |
 
 ## Properties
@@ -117,10 +117,10 @@ ___
 
 #### Parameters
 
-| Name           | Type      | Default value |
-| :------------- | :-------- | :------------ |
-| `functionName` | `string`  | `undefined`   |
-| `onlyLoaded`   | `boolean` | `false`       |
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `functionName` | `string` | `undefined` |
+| `onlyLoaded` | `boolean` | `false` |
 
 #### Returns
 
@@ -155,9 +155,9 @@ this.screeb.eventTrack(
 
 #### Parameters
 
-| Name               | Type             | Description                                                                                                                                                                                               |
-| :----------------- | :--------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `eventName`        | `string`         | The event name.                                                                                                                                                                                           |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `eventName` | `string` | The event name. |
 | `eventProperties?` | `PropertyRecord` | The properties of your event. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
 
 #### Returns
@@ -190,9 +190,9 @@ this.screeb.identity(
 
 #### Parameters
 
-| Name              | Type             | Description                                                                                                                                                                                              |
-| :---------------- | :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `userId`          | `string`         | The unique identifier of your user.                                                                                                                                                                      |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `userId` | `string` | The unique identifier of your user. |
 | `userProperties?` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
 
 #### Returns
@@ -212,13 +212,13 @@ Retrieves the current user identity.
 ```ts
 console.log(await this.screeb.identityGet());
 // {
+//   channel_id: "<UUID>",
 //   anonymous_id: "<UUID>",
 //   user_id: "<UUID>",
+//   is_ready: true,
 //   session_id: "<UUID>",
 //   session_start: "2023-05-04T16:30:15.882Z",
 //   session_end: "2023-05-04T17:02:09.087Z",
-//   channel_id: "<UUID>",
-//   is_ready: true,
 // }
 ```
 
@@ -253,10 +253,10 @@ this.screeb.identityGroupAssign(
 
 #### Parameters
 
-| Name               | Type             | Description                                                                                                                                                                                                    |
-| :----------------- | :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `groupName`        | `string`         |                                                                                                                                                                                                                |
-| `groupType?`       | `string`         |                                                                                                                                                                                                                |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `groupName` | `string` |  |
+| `groupType?` | `string` |  |
 | `groupProperties?` | `PropertyRecord` | The properties of your user group. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
 
 #### Returns
@@ -279,9 +279,9 @@ this.screeb.identityGroupUnassign('company', 'Apple');
 
 #### Parameters
 
-| Name         | Type     | Description                  |
-| :----------- | :------- | :--------------------------- |
-| `groupName`  | `string` | The name of your user group. |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `groupName` | `string` | The name of your user group. |
 | `groupType?` | `string` | The type of your user group. |
 
 #### Returns
@@ -322,8 +322,8 @@ this.screeb.identityProperties(
 
 #### Parameters
 
-| Name             | Type             | Description                                                                                                                                                                                              |
-| :--------------- | :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name | Type | Description |
+| :------ | :------ | :------ |
 | `userProperties` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
 
 #### Returns
@@ -380,12 +380,12 @@ this.screeb.init(
 
 #### Parameters
 
-| Name              | Type             | Description                                                                                                                                                                                             |
-| :---------------- | :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `websiteId`       | `string`         | Your website/channel id.                                                                                                                                                                                |
-| `userId?`         | `string`         | The unique identifier of your user.                                                                                                                                                                     |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `websiteId` | `string` | Your website/channel id. |
+| `userId?` | `string` | The unique identifier of your user. |
 | `userProperties?` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date ``` |
-| `hooks?`          | `GlobalHooks`    | -                                                                                                                                                                                                       |
+| `hooks?` | `GlobalHooks` | - |
 
 #### Returns
 
@@ -455,12 +455,12 @@ this.screeb.surveyStart(
 
 #### Parameters
 
-| Name                     | Type             |
-| :----------------------- | :--------------- |
-| `surveyId`               | `string`         |
-| `allowMultipleResponses` | `boolean`        |
-| `hiddenFields`           | `PropertyRecord` |
-| `hooks?`                 | `SurveyHooks`    |
+| Name | Type |
+| :------ | :------ |
+| `surveyId` | `string` |
+| `allowMultipleResponses` | `boolean` |
+| `hiddenFields` | `PropertyRecord` |
+| `hooks?` | `SurveyHooks` |
 
 #### Returns
 
