@@ -371,7 +371,8 @@ this.screeb.init(
     authenticated: true
   },
   {
-    onReady: (payload) => {
+    "version": "1.0.0",
+    "onReady": (payload) => {
        console.log("SDK is ready", payload);
     },
   },
@@ -385,7 +386,7 @@ this.screeb.init(
 | `websiteId` | `string` | Your website/channel id. |
 | `userId?` | `string` | The unique identifier of your user. |
 | `userProperties?` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date ``` |
-| `hooks?` | `GlobalHooks` | - |
+| `hooks?` | `Hooks` | - |
 
 #### Returns
 
@@ -446,7 +447,8 @@ this.screeb.surveyStart(
     article_id: 42
   },
   {
-    onSurveyShowed: (payload) => {
+    "version": "1.0.0",
+    "onSurveyShowed": (payload) => {
        console.log("Survey showed", payload);
     },
   },
@@ -460,7 +462,7 @@ this.screeb.surveyStart(
 | `surveyId` | `string` |
 | `allowMultipleResponses` | `boolean` |
 | `hiddenFields` | `PropertyRecord` |
-| `hooks?` | `SurveyHooks` |
+| `hooks?` | `Hooks` |
 
 #### Returns
 

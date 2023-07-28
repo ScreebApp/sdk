@@ -9,20 +9,9 @@ export type PropertyRecord = {
 /**
  * Hooks
  */
-export type HookType =
-  | "onSurveyShowed"
-  | "onSurveyStarted"
-  | "onQuestionReplied"
-  | "onSurveyCompleted"
-  | "onSurveyHidden";
-
-export type GlobalHooks = {
-  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any
-  [key in HookType | "onReady"]?: (payload: any) => void;
-};
-export type SurveyHooks = {
-  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any
-  [key in HookType]?: (payload: any) => void;
+export type Hooks = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 };
 
 /** This is the Screeb tag options object. */
@@ -156,7 +145,8 @@ export const load = (options: ScreebOptions = {}) =>
  *     authenticated: true
  *   },
  *   {
- *     onReady: (payload) => {
+ *     "version": "1.0.0",
+ *     "onReady": (payload) => {
  *        console.log("SDK is ready", payload);
  *     },
  *   },
@@ -167,7 +157,7 @@ export const init = (
   websiteId: string,
   userId?: string,
   userProperties?: PropertyRecord,
-  hooks?: GlobalHooks
+  hooks?: Hooks
 ) => {
   let identityObject;
 
@@ -465,7 +455,8 @@ export const surveyClose = () => callScreebCommand("survey.close");
  *     article_id: 42
  *   },
  *   {
- *     onSurveyShowed: (payload) => {
+ *     "version": "1.0.0",
+ *     "onSurveyShowed": (payload) => {
  *        console.log("Survey showed", payload);
  *     },
  *   },
@@ -476,7 +467,7 @@ export const surveyStart = (
   surveyId: string,
   allowMultipleResponses = true,
   hiddenFields: PropertyRecord = {},
-  hooks?: SurveyHooks
+  hooks?: Hooks
 ) =>
   callScreebCommand("survey.start", surveyId, {
     allow_multiple_responses: allowMultipleResponses,

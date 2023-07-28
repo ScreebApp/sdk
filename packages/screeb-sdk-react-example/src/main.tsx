@@ -24,6 +24,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           // eslint-disable-next-line no-console
           console.log("onReady", payload);
         },
+        version: "1.0.0",
       }}
     >
       <App />

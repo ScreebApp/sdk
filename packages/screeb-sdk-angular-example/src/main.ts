@@ -18,10 +18,12 @@ bootstrapApplication(AppComponent, {
       ScreebModule.forRoot({
         autoInit: true,
         hooks: {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onReady: (payload: any) => {
             // eslint-disable-next-line no-console
             console.log("SDK is ready", payload);
           },
+          version: "1.0.0",
         },
         userId: "dev@screeb.app",
         userProperties: {

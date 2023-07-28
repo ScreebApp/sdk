@@ -311,7 +311,8 @@ export class Screeb {
    *     article_id: 42
    *   },
    *   {
-   *     onSurveyShowed: (payload) => {
+   *     "version": "1.0.0",
+   *     "onSurveyShowed": (payload) => {
    *        console.log("Survey showed", payload);
    *     },
    *   },
@@ -322,7 +323,7 @@ export class Screeb {
     surveyId: string,
     allowMultipleResponses: boolean,
     hiddenFields: _Screeb.PropertyRecord,
-    hooks?: _Screeb.SurveyHooks
+    hooks?: _Screeb.Hooks
   ) {
     await this.ensureScreeb("surveyStart");
 
@@ -401,7 +402,8 @@ export class Screeb {
    *     authenticated: true
    *   },
    *   {
-   *     onReady: (payload) => {
+   *     "version": "1.0.0",
+   *     "onReady": (payload) => {
    *        console.log("SDK is ready", payload);
    *     },
    *   },
@@ -412,7 +414,7 @@ export class Screeb {
     websiteId: string,
     userId?: string,
     userProperties?: _Screeb.PropertyRecord,
-    hooks?: _Screeb.GlobalHooks
+    hooks?: _Screeb.Hooks
   ) {
     await this.ensureScreeb("init", true);
 

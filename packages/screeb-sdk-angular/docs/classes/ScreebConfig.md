@@ -42,7 +42,7 @@ ___
 
 ### hooks
 
-• `Optional` **hooks**: `GlobalHooks`
+• `Optional` **hooks**: `Hooks`
 
 Hooks to define callback for various event
 

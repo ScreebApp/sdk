@@ -6,14 +6,12 @@
 
 ### Type Aliases
 
-- [GlobalHooks](README.md#globalhooks)
-- [HookType](README.md#hooktype)
+- [Hooks](README.md#hooks)
 - [PropertyRecord](README.md#propertyrecord)
 - [PropertyType](README.md#propertytype)
 - [ScreebIdentityGetReturn](README.md#screebidentitygetreturn)
 - [ScreebObject](README.md#screebobject)
 - [ScreebOptions](README.md#screeboptions)
-- [SurveyHooks](README.md#surveyhooks)
 
 ### Functions
 
@@ -36,17 +34,15 @@
 
 ## Type Aliases
 
-### GlobalHooks
+### Hooks
 
-Ƭ **GlobalHooks**: { [key in HookType \| "onReady"]?: Function }
-
-___
-
-### HookType
-
-Ƭ **HookType**: ``"onSurveyShowed"`` \| ``"onSurveyStarted"`` \| ``"onQuestionReplied"`` \| ``"onSurveyCompleted"`` \| ``"onSurveyHidden"``
+Ƭ **Hooks**: `Object`
 
 Hooks
+
+#### Index signature
+
+▪ [key: `string`]: `any`
 
 ___
 
@@ -110,12 +106,6 @@ This is the Screeb tag options object.
 | :------ | :------ | :------ |
 | `screebEndpoint?` | `string` | Please don't do this. |
 | `window?` | `Window` | If you're running Screeb tag in an iframe, please set the inner window here. |
-
-___
-
-### SurveyHooks
-
-Ƭ **SurveyHooks**: { [key in HookType]?: Function }
 
 ## Functions
 
@@ -435,7 +425,8 @@ Screeb.init(
     authenticated: true
   },
   {
-    onReady: (payload) => {
+    "version": "1.0.0",
+    "onReady": (payload) => {
        console.log("SDK is ready", payload);
     },
   },
@@ -449,7 +440,7 @@ Screeb.init(
 | `websiteId` | `string` | Your website/channel id. |
 | `userId?` | `string` | The unique identifier of your user. |
 | `userProperties?` | [`PropertyRecord`](README.md#propertyrecord) | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date ``` |
-| `hooks?` | [`GlobalHooks`](README.md#globalhooks) | Hooks to be called when SDK is ready or a survey is showed, started, completed, hidden or when a question is replied. |
+| `hooks?` | [`Hooks`](README.md#hooks) | Hooks to be called when SDK is ready or a survey is showed, started, completed, hidden or when a question is replied. |
 
 #### Returns
 
@@ -544,7 +535,8 @@ Screeb.surveyStart(
     article_id: 42
   },
   {
-    onSurveyShowed: (payload) => {
+    "version": "1.0.0",
+    "onSurveyShowed": (payload) => {
        console.log("Survey showed", payload);
     },
   },
@@ -558,7 +550,7 @@ Screeb.surveyStart(
 | `surveyId` | `string` | `undefined` |
 | `allowMultipleResponses` | `boolean` | `true` |
 | `hiddenFields` | [`PropertyRecord`](README.md#propertyrecord) | `{}` |
-| `hooks?` | [`SurveyHooks`](README.md#surveyhooks) | `undefined` |
+| `hooks?` | [`Hooks`](README.md#hooks) | `undefined` |
 
 #### Returns
 

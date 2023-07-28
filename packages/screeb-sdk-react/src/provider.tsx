@@ -142,7 +142,7 @@ export const ScreebProvider: React.FC<
       websiteId: string,
       userId?: string,
       userProperties?: Screeb.PropertyRecord,
-      hooks?: Screeb.GlobalHooks
+      hooks?: Screeb.Hooks
     ) => {
       await ensureScreeb(
         "init",
@@ -191,7 +191,7 @@ export const ScreebProvider: React.FC<
       surveyId: string,
       allowMultipleResponses: boolean,
       hiddenFields: Screeb.PropertyRecord,
-      hooks?: Screeb.SurveyHooks
+      hooks?: Screeb.Hooks
     ) =>
       await ensureScreeb("surveyStart", () =>
         Screeb.surveyStart(

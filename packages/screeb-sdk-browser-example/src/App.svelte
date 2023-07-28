@@ -22,6 +22,7 @@
           // eslint-disable-next-line no-console
           console.log("screeb ready", e)
         },
+        version: "1.0.0",
       }
     )
 
