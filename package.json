@@ -2,15 +2,18 @@
   "name": "root",
   "private": true,
   "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "build": "lerna run build",
     "build:doc": "lerna run --parallel build:doc",
     "build:watch": "lerna run --parallel build -- --watch",
-    "clean": "lerna run --parallel clean",
+    "clean": "lerna clean && lerna run --parallel clean",
     "lint": "lerna run --parallel lint",
     "lint:commit": "commitlint --verbose --edit",
     "lint:fix": "lerna run --parallel lint -- --fix",
-    "prepare": "lerna bootstrap && npm run build && husky install",
+    "prepare": "npm run build && husky install",
     "publish": "npm run version && lerna publish --no-private",
     "start": "lerna run start",
     "test": "lerna run --parallel test",
@@ -20,14 +23,14 @@
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
-    "@commitlint/cli": "^17.6.3",
-    "@commitlint/config-conventional": "^17.6.3",
-    "@tsconfig/svelte": "^4.0.1",
+    "@commitlint/cli": "^17.7.2",
+    "@commitlint/config-conventional": "^17.7.0",
+    "@tsconfig/svelte": "^5.0.2",
     "husky": "^8.0.3",
-    "lerna": "^6.6.2",
-    "svelte-check": "^3.3.2",
-    "svelte-preprocess": "^5.0.3",
-    "typescript": "^5.0.4"
+    "lerna": "^7.3.1",
+    "svelte-check": "^3.5.2",
+    "svelte-preprocess": "^5.0.4",
+    "typescript": "^5.2.2"
   },
   "engines": {
     "node": "^18.12"

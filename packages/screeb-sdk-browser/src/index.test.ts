@@ -29,6 +29,7 @@ describe("Screeb", () => {
 
       expect(window.$screeb).toBeInstanceOf(Function);
     });
+
     it("should enqueue commands", () => {
       Screeb.load({ screebEndpoint: "https://t.not-screeb.app/custom-tag.js" });
 
@@ -43,7 +44,11 @@ describe("Screeb", () => {
             "website-uuid",
             { identity: { id: "user-uuid", properties: { test: 123 } } },
           ],
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           ko: expect.any(Function),
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           ok: expect.any(Function),
           v: 1,
         },

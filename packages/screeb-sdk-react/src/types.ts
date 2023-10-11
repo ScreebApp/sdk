@@ -92,7 +92,7 @@ export type DebugFunction = () => Promise<unknown>;
  */
 export type EventTrackFunction = (
   eventName: string,
-  eventProperties?: PropertyRecord
+  eventProperties?: PropertyRecord,
 ) => Promise<unknown>;
 
 /**
@@ -125,7 +125,7 @@ export type EventTrackFunction = (
  */
 export type IdentityFunction = (
   userId: string,
-  userProperties?: PropertyRecord
+  userProperties?: PropertyRecord,
 ) => Promise<unknown>;
 
 /**
@@ -182,7 +182,7 @@ export type IdentityGetFunction = () => Promise<ScreebIdentityGetReturn>;
 export type IdentityGroupAssignFunction = (
   groupName: string,
   groupType?: string,
-  groupProperties?: PropertyRecord
+  groupProperties?: PropertyRecord,
 ) => Promise<unknown>;
 
 /**
@@ -200,7 +200,7 @@ export type IdentityGroupAssignFunction = (
  */
 export type IdentityGroupUnassignFunction = (
   groupName: string,
-  groupType?: string
+  groupType?: string,
 ) => Promise<unknown>;
 
 /**
@@ -239,7 +239,7 @@ export type IdentityGroupUnassignFunction = (
  * ```
  */
 export type IdentityPropertiesFunction = (
-  userProperties: PropertyRecord
+  userProperties: PropertyRecord,
 ) => Promise<unknown>;
 
 /**
@@ -287,7 +287,7 @@ export type IdentityResetFunction = () => Promise<unknown>;
 export type InitFunction = (
   websiteId: string,
   userId?: string,
-  userProperties?: PropertyRecord
+  userProperties?: PropertyRecord,
 ) => Promise<void>;
 
 /**
@@ -338,7 +338,7 @@ export type SurveyCloseFunction = () => Promise<unknown>;
 export type SurveyStartFunction = (
   surveyId: string,
   allowMultipleResponses: boolean,
-  hiddenFields: PropertyRecord
+  hiddenFields: PropertyRecord,
 ) => Promise<unknown>;
 
 /**

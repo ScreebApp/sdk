@@ -75,7 +75,7 @@ export type HookOnSurveyShowed = (
       id: string;
       items: ResponseItem[];
     };
-  }
+  },
 ) => void;
 
 export type HookOnSurveyStarted = (
@@ -84,7 +84,7 @@ export type HookOnSurveyStarted = (
     response: {
       id: string;
     };
-  }
+  },
 ) => void;
 
 export type HookOnQuestionReplied = (
@@ -97,7 +97,7 @@ export type HookOnQuestionReplied = (
       answer: ResponseItemAnswer;
       items: ResponseItem[];
     };
-  }
+  },
 ) => void;
 
 export type HookOnSurveyCompleted = (
@@ -107,7 +107,7 @@ export type HookOnSurveyCompleted = (
       id: string;
       items: ResponseItem[];
     };
-  }
+  },
 ) => void;
 
 export type HookOnSurveyHidden = (
@@ -118,5 +118,5 @@ export type HookOnSurveyHidden = (
       items: ResponseItem[];
       hide_reason: ResponseStatus;
     };
-  }
+  },
 ) => void;

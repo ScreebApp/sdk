@@ -19,7 +19,7 @@ In your `tsconfig.json`:
 ```json
 {
   // Mandatory
-  "extends": "./node_modules/@screeb/typescript-config/src/tsconfig.json",
+  "extends": "@screeb/typescript-config/src/tsconfig.json",
 
   // Recommended
   "include": ["src"],
@@ -42,7 +42,7 @@ In your `package.json`:
 
   // Mandatory
   "scripts": {
-    "build": "rollup -c ./node_modules/@screeb/typescript-config/src/rollup.config.js",
+    "build": "rollup -c ../../node_modules/@screeb/typescript-config/src/rollup.config.js",
     // [..]
   },
 

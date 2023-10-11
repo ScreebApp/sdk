@@ -33,6 +33,16 @@
 
 This is used to initialize Screeb at the top of your Angular application
 
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `config` | [`ScreebConfig`](ScreebConfig.md) | Configuration to pass to Screeb browser SDK |
+
+#### Returns
+
+`ModuleWithProviders`<[`ScreebModule`](ScreebModule.md)\>
+
 **`Example`**
 
 ```ts
@@ -53,13 +63,3 @@ ScreebModule.forRoot({
   },
 })
 ```
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `config` | [`ScreebConfig`](ScreebConfig.md) | Configuration to pass to Screeb browser SDK |
-
-#### Returns
-
-`ModuleWithProviders`<[`ScreebModule`](ScreebModule.md)\>
