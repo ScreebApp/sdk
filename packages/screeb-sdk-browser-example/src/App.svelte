@@ -18,9 +18,9 @@
         org_size: 20,
       },
       {
-        onReady: (e) => {
+        onReady: (payload) => {
           // eslint-disable-next-line no-console
-          console.log("screeb ready", e)
+          console.log("onReady", payload)
         },
         version: "1.0.0",
       }

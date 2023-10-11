@@ -19,9 +19,9 @@ bootstrapApplication(AppComponent, {
         autoInit: true,
         hooks: {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          onReady: (payload: any) => {
+          onReady: (payload) => {
             // eslint-disable-next-line no-console
-            console.log("SDK is ready", payload);
+            console.log("onReady", payload);
           },
           version: "1.0.0",
         },

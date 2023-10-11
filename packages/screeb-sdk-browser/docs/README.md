@@ -9,6 +9,7 @@
 - [Hooks](README.md#hooks)
 - [PropertyRecord](README.md#propertyrecord)
 - [PropertyType](README.md#propertytype)
+- [ScreebFunction](README.md#screebfunction)
 - [ScreebIdentityGetReturn](README.md#screebidentitygetreturn)
 - [ScreebObject](README.md#screebobject)
 - [ScreebOptions](README.md#screeboptions)
@@ -38,11 +39,19 @@
 
 Ƭ **Hooks**: `Object`
 
-Hooks
+This is the Screeb tag hooks object.
 
-#### Index signature
+#### Type declaration
 
-▪ [key: `string`]: `any`
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `onQuestionReplied?` | `HookOnQuestionReplied` | This hook is triggered when a question is answered |
+| `onReady?` | `HookOnReady` | This hook is triggered when Screeb SD is loaded, initialized and ready to rock |
+| `onSurveyCompleted?` | `HookOnSurveyCompleted` | This hook is triggered when a survey is completed |
+| `onSurveyHidden?` | `HookOnSurveyHidden` | This hook is triggered when a survey is hidden |
+| `onSurveyShowed?` | `HookOnSurveyShowed` | This hook is triggered when a survey is displayed on screen (also triggered when page is reloaded) |
+| `onSurveyStarted?` | `HookOnSurveyStarted` | This hook is triggered when a survey is started |
+| `version` | `string` | This defines the version of hooks and their data |
 
 ___
 
@@ -66,6 +75,26 @@ This is property types that are supported by Screeb.
 
 ___
 
+### ScreebFunction
+
+Ƭ **ScreebFunction**: (...`_`: `unknown`[]) => `void` \| `Promise`<`unknown`\>
+
+#### Type declaration
+
+▸ (`..._`): `void` \| `Promise`<`unknown`\>
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `..._` | `unknown`[] |
+
+##### Returns
+
+`void` \| `Promise`<`unknown`\>
+
+___
+
 ### ScreebIdentityGetReturn
 
 Ƭ **ScreebIdentityGetReturn**: `Object`
@@ -78,7 +107,7 @@ This is the object returned by the function `identityGet()`.
 | :------ | :------ | :------ |
 | `anonymous_id` | `string` | Anonymous id given to each user |
 | `channel_id` | `string` | The current channel id with which the tag was initialized |
-| `is_ready` | `boolean` | `true` if the tag us loaded, initialized and ready to rock |
+| `is_ready` | `boolean` | `true` if the tag is loaded, initialized and ready to rock |
 | `session_end` | `string` | The current user session end time |
 | `session_id` | `string` | The current user session id |
 | `session_start` | `string` | The current user session start time |
@@ -88,7 +117,7 @@ ___
 
 ### ScreebObject
 
-Ƭ **ScreebObject**: `ScreebFunction` & { `q?`: { `args`: `unknown`[] ; `ko`: (`reason?`: `unknown`) => `void` ; `ok`: (`value?`: `unknown`) => `void` ; `v`: `number`  }[]  }
+Ƭ **ScreebObject**: [`ScreebFunction`](README.md#screebfunction) & { `q?`: { `args`: `unknown`[] ; `ko`: (`reason?`: `unknown`) => `void` ; `ok`: (`value?`: `unknown`) => `void` ; `v`: `number`  }[]  }
 
 This is the Screeb object publicly exposed in browser `window`.
 
@@ -425,10 +454,8 @@ Screeb.init(
     authenticated: true
   },
   {
-    "version": "1.0.0",
-    "onReady": (payload) => {
-       console.log("SDK is ready", payload);
-    },
+    version: "1.0.0",
+    onReady: (payload) =>  console.log("Screeb SDK is ready!", payload),
   },
 );
 ```
@@ -535,10 +562,8 @@ Screeb.surveyStart(
     article_id: 42
   },
   {
-    "version": "1.0.0",
-    "onSurveyShowed": (payload) => {
-       console.log("Survey showed", payload);
-    },
+    version: "1.0.0",
+    onSurveyShowed: (payload) => console.log("Survey showed", payload),
   },
 );
 ```

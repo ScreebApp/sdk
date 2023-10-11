@@ -311,10 +311,8 @@ export class Screeb {
    *     article_id: 42
    *   },
    *   {
-   *     "version": "1.0.0",
-   *     "onSurveyShowed": (payload) => {
-   *        console.log("Survey showed", payload);
-   *     },
+   *     version: "1.0.0",
+   *     onSurveyShowed: (payload) => console.log("Survey showed", payload),
    *   },
    * );
    * ```
@@ -402,10 +400,8 @@ export class Screeb {
    *     authenticated: true
    *   },
    *   {
-   *     "version": "1.0.0",
-   *     "onReady": (payload) => {
-   *        console.log("SDK is ready", payload);
-   *     },
+   *     version: "1.0.0",
+   *     onReady: (payload) => console.log("Screeb SDK is ready!", payload),
    *   },
    * );
    * ```

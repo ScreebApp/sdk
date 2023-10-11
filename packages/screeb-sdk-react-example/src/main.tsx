@@ -19,8 +19,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         org_size: 20,
       }}
       hooks={{
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        onReady: (payload: any) => {
+        onReady: (payload) => {
           // eslint-disable-next-line no-console
           console.log("onReady", payload);
         },

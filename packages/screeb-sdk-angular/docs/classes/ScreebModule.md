@@ -48,10 +48,8 @@ ScreebModule.forRoot({
     authenticated: true
   },
   {
-    "version": "1.0.0",
-    "onReady": (payload) => {
-       console.log("SDK is ready", payload);
-    },
+    version: "1.0.0",
+    onReady: (payload) => console.log("Screeb SDK is ready!", payload),
   },
 })
 ```

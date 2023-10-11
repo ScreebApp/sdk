@@ -1,59 +1,13 @@
-/** This is property types that are supported by Screeb. */
-export type PropertyType = number | boolean | string | Date | PropertyRecord;
+import {
+  Hooks,
+  PropertyRecord,
+  ScreebFunction,
+  ScreebIdentityGetReturn,
+  ScreebObject,
+  ScreebOptions,
+} from "./types";
 
-/** This is a property object that are supported by Screeb. */
-export type PropertyRecord = {
-  [key: string]: PropertyType | PropertyType[];
-};
-
-/**
- * Hooks
- */
-export type Hooks = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
-};
-
-/** This is the Screeb tag options object. */
-export type ScreebOptions = {
-  /** If you're running Screeb tag in an iframe, please set the inner window here. */
-  window?: Window;
-  /** Please don't do this. */
-  screebEndpoint?: string;
-};
-
-// eslint-disable-next-line no-unused-vars
-type ScreebFunction = (..._: unknown[]) => void | Promise<unknown>;
-
-/** This is the Screeb object publicly exposed in browser `window`. */
-export type ScreebObject = ScreebFunction & {
-  q?: {
-    args: unknown[];
-    // eslint-disable-next-line no-unused-vars
-    ko: (reason?: unknown) => void;
-    // eslint-disable-next-line no-unused-vars
-    ok: (value?: unknown) => void;
-    v: number;
-  }[];
-};
-
-/** This is the object returned by the function `identityGet()`. */
-export type ScreebIdentityGetReturn = {
-  /** Anonymous id given to each user */
-  anonymous_id: string;
-  /** The authenticated id assigned to the user. */
-  user_id: string;
-  /** The current user session id */
-  session_id: string;
-  /** The current user session start time */
-  session_start: string;
-  /** The current user session end time */
-  session_end: string;
-  /** The current channel id with which the tag was initialized */
-  channel_id: string;
-  /** `true` if the tag us loaded, initialized and ready to rock */
-  is_ready: boolean;
-};
+export * from "./types";
 
 declare const window: Window & { $screeb?: ScreebObject };
 
@@ -145,10 +99,8 @@ export const load = (options: ScreebOptions = {}) =>
  *     authenticated: true
  *   },
  *   {
- *     "version": "1.0.0",
- *     "onReady": (payload) => {
- *        console.log("SDK is ready", payload);
- *     },
+ *     version: "1.0.0",
+ *     onReady: (payload) =>  console.log("Screeb SDK is ready!", payload),
  *   },
  * );
  * ```
@@ -455,10 +407,8 @@ export const surveyClose = () => callScreebCommand("survey.close");
  *     article_id: 42
  *   },
  *   {
- *     "version": "1.0.0",
- *     "onSurveyShowed": (payload) => {
- *        console.log("Survey showed", payload);
- *     },
+ *     version: "1.0.0",
+ *     onSurveyShowed: (payload) => console.log("Survey showed", payload),
  *   },
  * );
  * ```
