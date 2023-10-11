@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { PropertyRecord, ScreebOptions } from "@screeb/sdk-browser";
+import { Hooks, PropertyRecord, ScreebOptions } from "@screeb/sdk-browser";
 
 /** Configuration of Screeb module */
 @Injectable({ providedIn: "root" })
@@ -10,6 +10,8 @@ export class ScreebConfig {
   userId?: string;
   /** The properties of your user. */
   userProperties?: PropertyRecord;
+  /** Hooks to define callback for various event */
+  hooks?: Hooks;
   /**
    * Indicates if Screeb should be automatically loaded.
    * This will ping to the Screeb servers.

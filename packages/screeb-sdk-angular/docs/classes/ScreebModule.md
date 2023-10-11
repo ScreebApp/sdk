@@ -46,7 +46,11 @@ ScreebModule.forRoot({
     plan: '<user-plan>',
     last_seen_at: new Date(),
     authenticated: true
-  }
+  },
+  {
+    version: "1.0.0",
+    onReady: (payload) => console.log("Screeb SDK is ready!", payload),
+  },
 })
 ```
 

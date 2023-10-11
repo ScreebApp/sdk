@@ -212,13 +212,13 @@ Retrieves the current user identity.
 ```ts
 console.log(await this.screeb.identityGet());
 // {
+//   channel_id: "<UUID>",
 //   anonymous_id: "<UUID>",
 //   user_id: "<UUID>",
+//   is_ready: true,
 //   session_id: "<UUID>",
 //   session_start: "2023-05-04T16:30:15.882Z",
 //   session_end: "2023-05-04T17:02:09.087Z",
-//   channel_id: "<UUID>",
-//   is_ready: true,
 // }
 ```
 
@@ -353,7 +353,7 @@ ___
 
 ### init
 
-▸ **init**(`websiteId`, `userId?`, `userProperties?`): `Promise`<`unknown`\>
+▸ **init**(`websiteId`, `userId?`, `userProperties?`, `hooks?`): `Promise`<`unknown`\>
 
 Initializes Screeb tag.
 
@@ -369,7 +369,11 @@ this.screeb.init(
     plan: '<user-plan>',
     last_seen_at: new Date(),
     authenticated: true
-  }
+  },
+  {
+    version: "1.0.0",
+    onReady: (payload) => console.log("Screeb SDK is ready!", payload),
+  },
 );
 ```
 
@@ -380,6 +384,7 @@ this.screeb.init(
 | `websiteId` | `string` | Your website/channel id. |
 | `userId?` | `string` | The unique identifier of your user. |
 | `userProperties?` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date ``` |
+| `hooks?` | `Hooks` | - |
 
 #### Returns
 
@@ -425,7 +430,7 @@ ___
 
 ### surveyStart
 
-▸ **surveyStart**(`surveyId`, `allowMultipleResponses`, `hiddenFields`): `Promise`<`unknown`\>
+▸ **surveyStart**(`surveyId`, `allowMultipleResponses`, `hiddenFields`, `hooks?`): `Promise`<`unknown`\>
 
 Starts a survey by its ID.
 
@@ -438,7 +443,11 @@ this.screeb.surveyStart(
   {
     color: "green",
     article_id: 42
-  }
+  },
+  {
+    version: "1.0.0",
+    onSurveyShowed: (payload) => console.log("Survey showed", payload),
+  },
 );
 ```
 
@@ -449,6 +458,7 @@ this.screeb.surveyStart(
 | `surveyId` | `string` |
 | `allowMultipleResponses` | `boolean` |
 | `hiddenFields` | `PropertyRecord` |
+| `hooks?` | `Hooks` |
 
 #### Returns
 

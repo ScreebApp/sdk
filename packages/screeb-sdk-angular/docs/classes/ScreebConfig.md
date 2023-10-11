@@ -13,6 +13,7 @@ Configuration of Screeb module
 ### Properties
 
 - [autoInit](ScreebConfig.md#autoinit)
+- [hooks](ScreebConfig.md#hooks)
 - [options](ScreebConfig.md#options)
 - [shouldLoad](ScreebConfig.md#shouldload)
 - [userId](ScreebConfig.md#userid)
@@ -36,6 +37,14 @@ Indicates if Screeb should be automatically initialized.
 **`Remarks`**
 
 if `true`, 'init' does not need to be called manually
+
+___
+
+### hooks
+
+• `Optional` **hooks**: `Hooks`
+
+Hooks to define callback for various event
 
 ___
 
