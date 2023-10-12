@@ -1,6 +1,6 @@
 {
   "name": "@screeb/sdk-browser-example",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "private": true,
   "description": "Screeb's example app for browser sdk.",
   "homepage": "https://screeb.app",
@@ -23,10 +23,10 @@
     "start": "vite"
   },
   "dependencies": {
-    "@screeb/sdk-browser": "^0.1.9"
+    "@screeb/sdk-browser": "^0.1.10"
   },
   "devDependencies": {
-    "@screeb/eslint-config": "^0.1.5",
+    "@screeb/eslint-config": "^0.1.6",
     "@sveltejs/vite-plugin-svelte": "^2.4.6",
     "@tsconfig/svelte": "^5.0.2",
     "@typescript-eslint/eslint-plugin": "^6.7.5",

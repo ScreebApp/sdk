@@ -1,6 +1,6 @@
 {
   "name": "@screeb/sdk-angular-example",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "description": "Screeb's example app for Angular sdk.",
   "homepage": "https://screeb.app",
@@ -28,12 +28,12 @@
     "@angular/core": "^16.2.8",
     "@angular/platform-browser": "^16.2.8",
     "@angular/router": "^16.2.8",
-    "@screeb/sdk-angular": "^0.1.3",
+    "@screeb/sdk-angular": "^0.1.4",
     "rxjs": "^7.8.1",
     "zone.js": "^0.14.0"
   },
   "devDependencies": {
-    "@screeb/eslint-config": "^0.1.5",
+    "@screeb/eslint-config": "^0.1.6",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "eslint": "^8.51.0",
     "eslint-plugin-import": "^2.28.1",

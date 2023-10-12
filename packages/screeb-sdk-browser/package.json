@@ -1,6 +1,6 @@
 {
   "name": "@screeb/sdk-browser",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Screeb's browser sdk.",
   "keywords": [
     "product discovery",
@@ -46,8 +46,8 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@screeb/eslint-config": "^0.1.5",
-    "@screeb/typescript-config": "^0.1.5",
+    "@screeb/eslint-config": "^0.1.6",
+    "@screeb/typescript-config": "^0.1.6",
     "@types/jest": "^29.5.5",
     "@types/node": "^20.8.4",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
