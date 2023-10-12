@@ -9,7 +9,7 @@
     "build": "lerna run build",
     "build:doc": "lerna run --parallel build:doc",
     "build:watch": "lerna run --parallel build -- --watch",
-    "clean": "lerna clean && lerna run --parallel clean",
+    "clean": "lerna clean -y && lerna run --parallel clean",
     "lint": "lerna run --parallel lint",
     "lint:commit": "commitlint --verbose --edit",
     "lint:fix": "lerna run --parallel lint -- --fix",
@@ -18,7 +18,7 @@
     "start": "lerna run start",
     "test": "lerna run --parallel test",
     "upgrade:all": "npm-upgrade && lerna exec --concurrency 1 npm-upgrade",
-    "preversion": "npm run clean && npm run lint && npm run build && npm run test",
+    "preversion": "npm run clean && npm i && npm run lint && npm run build && npm run test",
     "version": "lerna version",
     "postversion": "git push && git push --tags"
   },
