@@ -2,12 +2,14 @@
   "extends": [
     "@screeb/eslint-config"
   ],
-  "overrides": [
-    {
-      "files": ["**/*.svelte"],
-      "processor": "svelte3/svelte3"
-    }
-  ],
-  "plugins": ["svelte3"],
+  "parserOptions": {
+       "project": ["tsconfig.json"],
+      "extraFileExtensions": [".svelte"],
+      "tsconfigRootDir": "./"
+  },
+  "overrides": [],
+  "settings": {
+    "svelte/typescript": true
+  },
   "rules": {"semi": 0}
 }

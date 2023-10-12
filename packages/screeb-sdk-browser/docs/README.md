@@ -144,6 +144,10 @@ This is the Screeb tag options object.
 
 Shutdowns current Screeb session.
 
+#### Returns
+
+`void` \| `Promise`<`unknown`\>
+
 **`Example`**
 
 ```ts
@@ -152,10 +156,6 @@ import * as Screeb from "@screeb/sdk-browser";
 Screeb.close();
 ```
 
-#### Returns
-
-`void` \| `Promise`<`unknown`\>
-
 ___
 
 ### debug
@@ -163,6 +163,10 @@ ___
 ▸ **debug**(): `void` \| `Promise`<`unknown`\>
 
 Prints the actual state information of Screeb tag.
+
+#### Returns
+
+`void` \| `Promise`<`unknown`\>
 
 **`Example`**
 
@@ -189,10 +193,6 @@ Screeb.debug();
 // **************************************************************
 ```
 
-#### Returns
-
-`void` \| `Promise`<`unknown`\>
-
 ___
 
 ### eventTrack
@@ -200,6 +200,17 @@ ___
 ▸ **eventTrack**(`eventName`, `eventProperties?`): `void` \| `Promise`<`unknown`\>
 
 Tracks a user event.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `eventName` | `string` | The event name. |
+| `eventProperties?` | [`PropertyRecord`](README.md#propertyrecord) | The properties of your event. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
+
+#### Returns
+
+`void` \| `Promise`<`unknown`\>
 
 **`Example`**
 
@@ -222,17 +233,6 @@ Screeb.eventTrack(
 );
 ```
 
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `eventName` | `string` | The event name. |
-| `eventProperties?` | [`PropertyRecord`](README.md#propertyrecord) | The properties of your event. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
-
-#### Returns
-
-`void` \| `Promise`<`unknown`\>
-
 ___
 
 ### identity
@@ -241,6 +241,17 @@ ___
 
 Change the current user identity.
 Warning: Running surveys will be closed.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `userId` | `string` | The unique identifier of your user. |
+| `userProperties?` | [`PropertyRecord`](README.md#propertyrecord) | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
+
+#### Returns
+
+`void` \| `Promise`<`unknown`\>
 
 **`Example`**
 
@@ -259,17 +270,6 @@ Screeb.identity(
 );
 ```
 
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `userId` | `string` | The unique identifier of your user. |
-| `userProperties?` | [`PropertyRecord`](README.md#propertyrecord) | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
-
-#### Returns
-
-`void` \| `Promise`<`unknown`\>
-
 ___
 
 ### identityGet
@@ -277,6 +277,10 @@ ___
 ▸ **identityGet**(): `Promise`<[`ScreebIdentityGetReturn`](README.md#screebidentitygetreturn)\>
 
 Retrieves the current user identity.
+
+#### Returns
+
+`Promise`<[`ScreebIdentityGetReturn`](README.md#screebidentitygetreturn)\>
 
 **`Example`**
 
@@ -295,10 +299,6 @@ console.log(await Screeb.identityGet());
 // }
 ```
 
-#### Returns
-
-`Promise`<[`ScreebIdentityGetReturn`](README.md#screebidentitygetreturn)\>
-
 ___
 
 ### identityGroupAssign
@@ -306,6 +306,18 @@ ___
 ▸ **identityGroupAssign**(`groupName`, `groupType?`, `groupProperties?`): `void` \| `Promise`<`unknown`\>
 
 Assigns the current user to a group.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `groupName` | `string` |  |
+| `groupType?` | `string` |  |
+| `groupProperties?` | [`PropertyRecord`](README.md#propertyrecord) | The properties of your user group. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
+
+#### Returns
+
+`void` \| `Promise`<`unknown`\>
 
 **`Example`**
 
@@ -326,18 +338,6 @@ Screeb.identityGroupAssign(
 );
 ```
 
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `groupName` | `string` |  |
-| `groupType?` | `string` |  |
-| `groupProperties?` | [`PropertyRecord`](README.md#propertyrecord) | The properties of your user group. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
-
-#### Returns
-
-`void` \| `Promise`<`unknown`\>
-
 ___
 
 ### identityGroupUnassign
@@ -345,14 +345,6 @@ ___
 ▸ **identityGroupUnassign**(`groupName`, `groupType?`): `void` \| `Promise`<`unknown`\>
 
 Unassigns the current user to a group.
-
-**`Example`**
-
-```ts
-import * as Screeb from "@screeb/sdk-browser";
-
-Screeb.identityGroupUnassign('company', 'Apple');
-```
 
 #### Parameters
 
@@ -365,6 +357,14 @@ Screeb.identityGroupUnassign('company', 'Apple');
 
 `void` \| `Promise`<`unknown`\>
 
+**`Example`**
+
+```ts
+import * as Screeb from "@screeb/sdk-browser";
+
+Screeb.identityGroupUnassign('company', 'Apple');
+```
+
 ___
 
 ### identityProperties
@@ -372,6 +372,16 @@ ___
 ▸ **identityProperties**(`userProperties`): `void` \| `Promise`<`unknown`\>
 
 Adds properties to the current user identity.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `userProperties` | [`PropertyRecord`](README.md#propertyrecord) | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
+
+#### Returns
+
+`void` \| `Promise`<`unknown`\>
 
 **`Example`**
 
@@ -399,16 +409,6 @@ Screeb.identityProperties(
 );
 ```
 
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `userProperties` | [`PropertyRecord`](README.md#propertyrecord) | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
-
-#### Returns
-
-`void` \| `Promise`<`unknown`\>
-
 ___
 
 ### identityReset
@@ -418,6 +418,10 @@ ___
 Resets the current user identity.
 Warning: This command must be called only once, since it creates a new identity on Screeb side.
 
+#### Returns
+
+`void` \| `Promise`<`unknown`\>
+
 **`Example`**
 
 ```ts
@@ -426,10 +430,6 @@ import * as Screeb from "@screeb/sdk-browser";
 Screeb.identityReset();
 ```
 
-#### Returns
-
-`void` \| `Promise`<`unknown`\>
-
 ___
 
 ### init
@@ -437,6 +437,19 @@ ___
 ▸ **init**(`websiteId`, `userId?`, `userProperties?`, `hooks?`): `void` \| `Promise`<`unknown`\>
 
 Initializes Screeb tag.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `websiteId` | `string` | Your website/channel id. |
+| `userId?` | `string` | The unique identifier of your user. |
+| `userProperties?` | [`PropertyRecord`](README.md#propertyrecord) | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date ``` |
+| `hooks?` | [`Hooks`](README.md#hooks) | Hooks to be called when SDK is ready or a survey is showed, started, completed, hidden or when a question is replied. |
+
+#### Returns
+
+`void` \| `Promise`<`unknown`\>
 
 **`Example`**
 
@@ -460,19 +473,6 @@ Screeb.init(
 );
 ```
 
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `websiteId` | `string` | Your website/channel id. |
-| `userId?` | `string` | The unique identifier of your user. |
-| `userProperties?` | [`PropertyRecord`](README.md#propertyrecord) | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date ``` |
-| `hooks?` | [`Hooks`](README.md#hooks) | Hooks to be called when SDK is ready or a survey is showed, started, completed, hidden or when a question is replied. |
-
-#### Returns
-
-`void` \| `Promise`<`unknown`\>
-
 ___
 
 ### isLoaded
@@ -480,6 +480,10 @@ ___
 ▸ **isLoaded**(): `boolean`
 
 Checks if Screeb tag has been loaded.
+
+#### Returns
+
+`boolean`
 
 **`Example`**
 
@@ -491,10 +495,6 @@ Screeb.load();
 console.log(Screeb.isLoaded()); // true
 ```
 
-#### Returns
-
-`boolean`
-
 ___
 
 ### load
@@ -502,14 +502,6 @@ ___
 ▸ **load**(`options?`): `Promise`<`undefined`\>
 
 Appends Screeb tag into your dom.
-
-**`Example`**
-
-```ts
-import * as Screeb from "@screeb/sdk-browser";
-
-Screeb.load();
-```
 
 #### Parameters
 
@@ -521,6 +513,14 @@ Screeb.load();
 
 `Promise`<`undefined`\>
 
+**`Example`**
+
+```ts
+import * as Screeb from "@screeb/sdk-browser";
+
+Screeb.load();
+```
+
 ___
 
 ### surveyClose
@@ -528,6 +528,10 @@ ___
 ▸ **surveyClose**(): `void` \| `Promise`<`unknown`\>
 
 Interrupts a running survey.
+
+#### Returns
+
+`void` \| `Promise`<`unknown`\>
 
 **`Example`**
 
@@ -537,10 +541,6 @@ import * as Screeb from "@screeb/sdk-browser";
 Screeb.surveyClose();
 ```
 
-#### Returns
-
-`void` \| `Promise`<`unknown`\>
-
 ___
 
 ### surveyStart
@@ -548,6 +548,19 @@ ___
 ▸ **surveyStart**(`surveyId`, `allowMultipleResponses?`, `hiddenFields?`, `hooks?`): `void` \| `Promise`<`unknown`\>
 
 Starts a survey by its ID.
+
+#### Parameters
+
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `surveyId` | `string` | `undefined` |
+| `allowMultipleResponses` | `boolean` | `true` |
+| `hiddenFields` | [`PropertyRecord`](README.md#propertyrecord) | `{}` |
+| `hooks?` | [`Hooks`](README.md#hooks) | `undefined` |
+
+#### Returns
+
+`void` \| `Promise`<`unknown`\>
 
 **`Example`**
 
@@ -568,19 +581,6 @@ Screeb.surveyStart(
 );
 ```
 
-#### Parameters
-
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `surveyId` | `string` | `undefined` |
-| `allowMultipleResponses` | `boolean` | `true` |
-| `hiddenFields` | [`PropertyRecord`](README.md#propertyrecord) | `{}` |
-| `hooks?` | [`Hooks`](README.md#hooks) | `undefined` |
-
-#### Returns
-
-`void` \| `Promise`<`unknown`\>
-
 ___
 
 ### targetingCheck
@@ -588,6 +588,10 @@ ___
 ▸ **targetingCheck**(): `void` \| `Promise`<`unknown`\>
 
 Forces a targeting check.
+
+#### Returns
+
+`void` \| `Promise`<`unknown`\>
 
 **`Example`**
 
@@ -597,10 +601,6 @@ import * as Screeb from "@screeb/sdk-browser";
 Screeb.targetingCheck();
 ```
 
-#### Returns
-
-`void` \| `Promise`<`unknown`\>
-
 ___
 
 ### targetingDebug
@@ -608,6 +608,10 @@ ___
 ▸ **targetingDebug**(): `void` \| `Promise`<`unknown`\>
 
 Prints the current state of the targeting engine.
+
+#### Returns
+
+`void` \| `Promise`<`unknown`\>
 
 **`Example`**
 
@@ -630,7 +634,3 @@ console.log(await Screeb.targetingDebug());
 //   - Rule of type "User event count": false 🔴
 //   - Rule of type "Capping per respondent display count": false 🔴
 ```
-
-#### Returns
-
-`void` \| `Promise`<`unknown`\>

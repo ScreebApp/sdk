@@ -28,5 +28,5 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     >
       <App />
     </ScreebProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

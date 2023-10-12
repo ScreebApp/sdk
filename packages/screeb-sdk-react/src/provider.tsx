@@ -25,7 +25,7 @@ export const ScreebProvider: React.FC<
 
   // Allow data-x attributes, see https://github.com/devrnt/react-use-screeb/issues/478
   const invalidPropKeys = Object.keys(rest).filter(
-    (key) => !key.startsWith("data-")
+    (key) => !key.startsWith("data-"),
   );
 
   if (invalidPropKeys.length > 0) {
@@ -34,7 +34,7 @@ export const ScreebProvider: React.FC<
       [
         "some invalid props were passed to ScreebProvider. ",
         `Please check following props: ${invalidPropKeys.join(", ")}.`,
-      ].join("")
+      ].join(""),
     );
   }
 
@@ -43,7 +43,7 @@ export const ScreebProvider: React.FC<
     async function <T extends (...args: unknown[]) => ReturnType<T>>(
       functionName: string,
       callback: T,
-      onlyLoaded = false
+      onlyLoaded = false,
     ): Promise<ReturnType<T>> {
       if (!Screeb.isLoaded() && !shouldLoad) {
         const message =
@@ -66,7 +66,7 @@ export const ScreebProvider: React.FC<
       }
       return Promise.resolve(callback());
     },
-    [shouldLoad]
+    [shouldLoad],
   );
 
   const close = React.useCallback(async () => {
@@ -79,62 +79,62 @@ export const ScreebProvider: React.FC<
 
   const debug = React.useCallback(
     async () => await ensureScreeb("debug", () => Screeb.debug()),
-    []
+    [],
   );
 
   const eventTrack = React.useCallback(
     async (eventName: string, eventProperties?: Screeb.PropertyRecord) =>
       await ensureScreeb("eventTrack", () =>
-        Screeb.eventTrack(eventName, eventProperties)
+        Screeb.eventTrack(eventName, eventProperties),
       ),
-    []
+    [],
   );
 
   const identity = React.useCallback(
     async (userId: string, userProperties?: Screeb.PropertyRecord) =>
       await ensureScreeb("identity", () =>
-        Screeb.identity(userId, userProperties)
+        Screeb.identity(userId, userProperties),
       ),
-    []
+    [],
   );
 
   const identityGet = React.useCallback(
     async () => await ensureScreeb("identityGet", () => Screeb.identityGet()),
-    []
+    [],
   );
 
   const identityGroupAssign = React.useCallback(
     async (
       groupName: string,
       groupType?: string,
-      groupProperties?: Screeb.PropertyRecord
+      groupProperties?: Screeb.PropertyRecord,
     ) =>
       await ensureScreeb("identityGroupAssign", () =>
-        Screeb.identityGroupAssign(groupName, groupType, groupProperties)
+        Screeb.identityGroupAssign(groupName, groupType, groupProperties),
       ),
-    []
+    [],
   );
 
   const identityGroupUnassign = React.useCallback(
     async (groupName: string, groupType?: string) =>
       await ensureScreeb("identityGroupUnassign", () =>
-        Screeb.identityGroupUnassign(groupName, groupType)
+        Screeb.identityGroupUnassign(groupName, groupType),
       ),
-    []
+    [],
   );
 
   const identityProperties = React.useCallback(
     async (userProperties: Screeb.PropertyRecord) =>
       await ensureScreeb("identityProperties", () =>
-        Screeb.identityProperties(userProperties)
+        Screeb.identityProperties(userProperties),
       ),
-    []
+    [],
   );
 
   const identityReset = React.useCallback(
     async () =>
       await ensureScreeb("identityReset", () => Screeb.identityReset()),
-    []
+    [],
   );
 
   const init = React.useCallback(
@@ -142,7 +142,7 @@ export const ScreebProvider: React.FC<
       websiteId: string,
       userId?: string,
       userProperties?: Screeb.PropertyRecord,
-      hooks?: Screeb.Hooks
+      hooks?: Screeb.Hooks,
     ) => {
       await ensureScreeb(
         "init",
@@ -153,10 +153,10 @@ export const ScreebProvider: React.FC<
             isInitialized = true;
           }
         },
-        true
+        true,
       );
     },
-    [ensureScreeb, websiteId, shouldLoad]
+    [ensureScreeb, websiteId, shouldLoad],
   );
 
   const load = React.useCallback(
@@ -172,18 +172,18 @@ export const ScreebProvider: React.FC<
           } else {
             logger.log(
               "warn",
-              "autoInit is set to true, but no websiteId have been provided."
+              "autoInit is set to true, but no websiteId have been provided.",
             );
           }
         }
       }
     },
-    [isLoaded.current, autoInit]
+    [isLoaded.current, autoInit],
   );
 
   const surveyClose = React.useCallback(
     async () => await ensureScreeb("surveyClose", () => Screeb.surveyClose()),
-    []
+    [],
   );
 
   const surveyStart = React.useCallback(
@@ -191,29 +191,29 @@ export const ScreebProvider: React.FC<
       surveyId: string,
       allowMultipleResponses: boolean,
       hiddenFields: Screeb.PropertyRecord,
-      hooks?: Screeb.Hooks
+      hooks?: Screeb.Hooks,
     ) =>
       await ensureScreeb("surveyStart", () =>
         Screeb.surveyStart(
           surveyId,
           allowMultipleResponses,
           hiddenFields,
-          hooks
-        )
+          hooks,
+        ),
       ),
-    []
+    [],
   );
 
   const targetingCheck = React.useCallback(
     async () =>
       await ensureScreeb("targetingCheck", () => Screeb.targetingCheck()),
-    []
+    [],
   );
 
   const targetingDebug = React.useCallback(
     async () =>
       await ensureScreeb("targetingDebug", () => Screeb.targetingDebug()),
-    []
+    [],
   );
 
   const providerValue = React.useMemo<ScreebContextValues>(
@@ -250,7 +250,7 @@ export const ScreebProvider: React.FC<
       surveyStart,
       targetingCheck,
       targetingDebug,
-    ]
+    ],
   );
 
   if (!isSSR && shouldLoad) {

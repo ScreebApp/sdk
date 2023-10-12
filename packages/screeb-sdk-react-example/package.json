@@ -18,7 +18,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc && vite build",
-    "clean": "rm -Rf dist",
+    "clean": "rm -Rf dist && rm -Rf .swc",
     "lint": "eslint .",
     "start": "vite"
   },
@@ -29,18 +29,18 @@
   },
   "devDependencies": {
     "@screeb/eslint-config": "^0.1.5",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
-    "@typescript-eslint/eslint-plugin": "^5.59.6",
-    "@typescript-eslint/parser": "^5.57.1",
-    "@vitejs/plugin-react-swc": "^3.0.0",
-    "eslint": "^8.41.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jest": "^27.2.1",
+    "@types/react": "^18.2.28",
+    "@types/react-dom": "^18.2.13",
+    "@typescript-eslint/eslint-plugin": "^6.7.5",
+    "@typescript-eslint/parser": "^6.7.5",
+    "@vitejs/plugin-react-swc": "^3.4.0",
+    "eslint": "^8.51.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-jest": "^27.4.2",
     "eslint-plugin-jsx-a11y": "^6.7.1",
-    "eslint-plugin-prettier": "^4.2.1",
-    "jest": "^29.5.0",
-    "typescript": "^5.0.2",
-    "vite": "^4.3.2"
+    "eslint-plugin-prettier": "^5.0.1",
+    "jest": "^29.7.0",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.11"
   }
 }

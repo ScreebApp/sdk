@@ -1,5 +1,5 @@
 {
-  "extends": "./node_modules/@screeb/typescript-config/src/tsconfig.json",
+  "extends": "@screeb/typescript-config/src/tsconfig.json",
   "include": ["src"],
   "exclude": ["dist", "**/*.test.ts"],
   "compilerOptions": {

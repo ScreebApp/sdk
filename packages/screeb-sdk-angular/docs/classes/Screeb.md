@@ -64,15 +64,15 @@ ___
 
 Shutdowns current Screeb session.
 
+#### Returns
+
+`Promise`<`unknown`\>
+
 **`Example`**
 
 ```ts
 this.screeb.close();
 ```
-
-#### Returns
-
-`Promise`<`unknown`\>
 
 ___
 
@@ -81,6 +81,10 @@ ___
 ▸ **debug**(): `Promise`<`unknown`\>
 
 Prints the actual state information of Screeb tag.
+
+#### Returns
+
+`Promise`<`unknown`\>
 
 **`Example`**
 
@@ -104,10 +108,6 @@ this.screeb.debug();
 // Detected timezone: -120
 // **************************************************************
 ```
-
-#### Returns
-
-`Promise`<`unknown`\>
 
 ___
 
@@ -134,6 +134,17 @@ ___
 
 Tracks a user event.
 
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `eventName` | `string` | The event name. |
+| `eventProperties?` | `PropertyRecord` | The properties of your event. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
+
+#### Returns
+
+`Promise`<`unknown`\>
+
 **`Example`**
 
 ```ts
@@ -153,17 +164,6 @@ this.screeb.eventTrack(
 );
 ```
 
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `eventName` | `string` | The event name. |
-| `eventProperties?` | `PropertyRecord` | The properties of your event. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
-
-#### Returns
-
-`Promise`<`unknown`\>
-
 ___
 
 ### identity
@@ -172,6 +172,17 @@ ___
 
 Change the current user identity.
 Warning: Running surveys will be closed.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `userId` | `string` | The unique identifier of your user. |
+| `userProperties?` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
+
+#### Returns
+
+`Promise`<`unknown`\>
 
 **`Example`**
 
@@ -188,17 +199,6 @@ this.screeb.identity(
 );
 ```
 
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `userId` | `string` | The unique identifier of your user. |
-| `userProperties?` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
-
-#### Returns
-
-`Promise`<`unknown`\>
-
 ___
 
 ### identityGet
@@ -206,6 +206,10 @@ ___
 ▸ **identityGet**(): `Promise`<`ScreebIdentityGetReturn`\>
 
 Retrieves the current user identity.
+
+#### Returns
+
+`Promise`<`ScreebIdentityGetReturn`\>
 
 **`Example`**
 
@@ -222,10 +226,6 @@ console.log(await this.screeb.identityGet());
 // }
 ```
 
-#### Returns
-
-`Promise`<`ScreebIdentityGetReturn`\>
-
 ___
 
 ### identityGroupAssign
@@ -233,6 +233,18 @@ ___
 ▸ **identityGroupAssign**(`groupName`, `groupType?`, `groupProperties?`): `Promise`<`unknown`\>
 
 Assigns the current user to a group.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `groupName` | `string` |  |
+| `groupType?` | `string` |  |
+| `groupProperties?` | `PropertyRecord` | The properties of your user group. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
+
+#### Returns
+
+`Promise`<`unknown`\>
 
 **`Example`**
 
@@ -251,18 +263,6 @@ this.screeb.identityGroupAssign(
 );
 ```
 
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `groupName` | `string` |  |
-| `groupType?` | `string` |  |
-| `groupProperties?` | `PropertyRecord` | The properties of your user group. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
-
-#### Returns
-
-`Promise`<`unknown`\>
-
 ___
 
 ### identityGroupUnassign
@@ -270,12 +270,6 @@ ___
 ▸ **identityGroupUnassign**(`groupName`, `groupType?`): `Promise`<`unknown`\>
 
 Unassigns the current user to a group.
-
-**`Example`**
-
-```ts
-this.screeb.identityGroupUnassign('company', 'Apple');
-```
 
 #### Parameters
 
@@ -288,6 +282,12 @@ this.screeb.identityGroupUnassign('company', 'Apple');
 
 `Promise`<`unknown`\>
 
+**`Example`**
+
+```ts
+this.screeb.identityGroupUnassign('company', 'Apple');
+```
+
 ___
 
 ### identityProperties
@@ -295,6 +295,16 @@ ___
 ▸ **identityProperties**(`userProperties`): `Promise`<`unknown`\>
 
 Adds properties to the current user identity.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `userProperties` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
+
+#### Returns
+
+`Promise`<`unknown`\>
 
 **`Example`**
 
@@ -320,16 +330,6 @@ this.screeb.identityProperties(
 );
 ```
 
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `userProperties` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
-
-#### Returns
-
-`Promise`<`unknown`\>
-
 ___
 
 ### identityReset
@@ -339,15 +339,15 @@ ___
 Resets the current user identity.
 Warning: This command must be called only once, since it creates a new identity on Screeb side.
 
+#### Returns
+
+`Promise`<`unknown`\>
+
 **`Example`**
 
 ```ts
 this.screeb.identityReset();
 ```
-
-#### Returns
-
-`Promise`<`unknown`\>
 
 ___
 
@@ -356,6 +356,19 @@ ___
 ▸ **init**(`websiteId`, `userId?`, `userProperties?`, `hooks?`): `Promise`<`unknown`\>
 
 Initializes Screeb tag.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `websiteId` | `string` | Your website/channel id. |
+| `userId?` | `string` | The unique identifier of your user. |
+| `userProperties?` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date ``` |
+| `hooks?` | `Hooks` | - |
+
+#### Returns
+
+`Promise`<`unknown`\>
 
 **`Example`**
 
@@ -377,19 +390,6 @@ this.screeb.init(
 );
 ```
 
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `websiteId` | `string` | Your website/channel id. |
-| `userId?` | `string` | The unique identifier of your user. |
-| `userProperties?` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date ``` |
-| `hooks?` | `Hooks` | - |
-
-#### Returns
-
-`Promise`<`unknown`\>
-
 ___
 
 ### load
@@ -398,15 +398,15 @@ ___
 
 Appends Screeb tag into your dom.
 
+#### Returns
+
+`Promise`<`undefined`\>
+
 **`Example`**
 
 ```ts
 this.screeb.load();
 ```
-
-#### Returns
-
-`Promise`<`undefined`\>
 
 ___
 
@@ -416,15 +416,15 @@ ___
 
 Interrupts a running survey.
 
+#### Returns
+
+`Promise`<`unknown`\>
+
 **`Example`**
 
 ```ts
 this.screeb.surveyClose();
 ```
-
-#### Returns
-
-`Promise`<`unknown`\>
 
 ___
 
@@ -433,6 +433,19 @@ ___
 ▸ **surveyStart**(`surveyId`, `allowMultipleResponses`, `hiddenFields`, `hooks?`): `Promise`<`unknown`\>
 
 Starts a survey by its ID.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `surveyId` | `string` |
+| `allowMultipleResponses` | `boolean` |
+| `hiddenFields` | `PropertyRecord` |
+| `hooks?` | `Hooks` |
+
+#### Returns
+
+`Promise`<`unknown`\>
 
 **`Example`**
 
@@ -451,19 +464,6 @@ this.screeb.surveyStart(
 );
 ```
 
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `surveyId` | `string` |
-| `allowMultipleResponses` | `boolean` |
-| `hiddenFields` | `PropertyRecord` |
-| `hooks?` | `Hooks` |
-
-#### Returns
-
-`Promise`<`unknown`\>
-
 ___
 
 ### targetingCheck
@@ -472,15 +472,15 @@ ___
 
 Forces a targeting check.
 
+#### Returns
+
+`Promise`<`unknown`\>
+
 **`Example`**
 
 ```ts
 this.screeb.targetingCheck();
 ```
-
-#### Returns
-
-`Promise`<`unknown`\>
 
 ___
 
@@ -489,6 +489,10 @@ ___
 ▸ **targetingDebug**(): `Promise`<`unknown`\>
 
 Prints the current state of the targeting engine.
+
+#### Returns
+
+`Promise`<`unknown`\>
 
 **`Example`**
 
@@ -509,7 +513,3 @@ console.log(await this.screeb.targetingDebug());
 //   - Rule of type "User event count": false 🔴
 //   - Rule of type "Capping per respondent display count": false 🔴
 ```
-
-#### Returns
-
-`Promise`<`unknown`\>

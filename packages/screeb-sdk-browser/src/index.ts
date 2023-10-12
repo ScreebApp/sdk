@@ -21,7 +21,7 @@ const callScreebCommand: ScreebFunction = (...args) => {
   }
 
   return Promise.reject(
-    "[Screeb] Screeb.load() must be called before any other function."
+    "[Screeb] Screeb.load() must be called before any other function.",
   );
 };
 
@@ -109,7 +109,7 @@ export const init = (
   websiteId: string,
   userId?: string,
   userProperties?: PropertyRecord,
-  hooks?: Hooks
+  hooks?: Hooks,
 ) => {
   let identityObject;
 
@@ -215,7 +215,7 @@ export const debug = () => callScreebCommand("debug");
  */
 export const eventTrack = (
   eventName: string,
-  eventProperties?: PropertyRecord
+  eventProperties?: PropertyRecord,
 ) => callScreebCommand("event.track", eventName, eventProperties);
 
 /**
@@ -304,13 +304,13 @@ export const identityGet = (): Promise<ScreebIdentityGetReturn> =>
 export const identityGroupAssign = (
   groupName: string,
   groupType?: string,
-  groupProperties?: PropertyRecord
+  groupProperties?: PropertyRecord,
 ) =>
   callScreebCommand(
     "identity.group.assign",
     groupType,
     groupName,
-    groupProperties
+    groupProperties,
   );
 
 /**
@@ -417,7 +417,7 @@ export const surveyStart = (
   surveyId: string,
   allowMultipleResponses = true,
   hiddenFields: PropertyRecord = {},
-  hooks?: Hooks
+  hooks?: Hooks,
 ) =>
   callScreebCommand("survey.start", surveyId, {
     allow_multiple_responses: allowMultipleResponses,

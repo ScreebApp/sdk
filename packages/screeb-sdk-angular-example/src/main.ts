@@ -34,7 +34,7 @@ bootstrapApplication(AppComponent, {
           org_size: 20,
         },
         websiteId: "0e2b609a-8dce-4695-a80f-966fbfa87a88",
-      })
+      }),
     ),
   ],
 });
