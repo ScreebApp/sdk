@@ -1,6 +1,6 @@
 {
   "name": "@screeb/sdk-react",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Screeb's browser sdk, optimized for React.",
   "keywords": [
     "product discovery",
@@ -46,7 +46,7 @@
     "test": "echo '@TODO'"
   },
   "dependencies": {
-    "@screeb/sdk-browser": "^0.1.10"
+    "@screeb/sdk-browser": "^0.1.11"
   },
   "devDependencies": {
     "@screeb/eslint-config": "^0.1.6",
