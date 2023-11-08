@@ -13,10 +13,10 @@ declare const window: Window & { $screeb?: ScreebObject };
 
 const SCREEB_TAG_ENDPOINT = "https://t.screeb.app/tag.js";
 
-let _window = window;
+let _window = typeof window === "undefined" ? undefined : window;
 
 const callScreebCommand: ScreebFunction = (...args) => {
-  if (_window.$screeb) {
+  if (_window?.$screeb) {
     return _window.$screeb.apply(_window.$screeb, args);
   }
 
@@ -55,7 +55,7 @@ export const load = (options: ScreebOptions = {}) =>
       _window.$screeb ??
       function (...args) {
         return new Promise((a, b) => {
-          if (_window.$screeb) {
+          if (_window?.$screeb) {
             return (_window.$screeb.q = _window.$screeb.q ?? []).push({
               args,
               ko: b,
@@ -139,7 +139,7 @@ export const init = (
  * ```
  */
 export const isLoaded = () =>
-  Boolean(_window.$screeb) && typeof _window.$screeb === "function";
+  _window?.$screeb && typeof _window.$screeb === "function";
 
 /**
  * Shutdowns current Screeb session.

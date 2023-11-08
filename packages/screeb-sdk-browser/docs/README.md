@@ -477,13 +477,13 @@ ___
 
 ### isLoaded
 
-▸ **isLoaded**(): `boolean`
+▸ **isLoaded**(): `undefined` \| `boolean`
 
 Checks if Screeb tag has been loaded.
 
 #### Returns
 
-`boolean`
+`undefined` \| `boolean`
 
 **`Example`**
 
