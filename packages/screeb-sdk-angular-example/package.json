@@ -1,6 +1,6 @@
 {
   "name": "@screeb/sdk-angular-example",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "private": true,
   "description": "Screeb's example app for Angular sdk.",
   "homepage": "https://screeb.app",
