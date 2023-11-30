@@ -268,8 +268,8 @@ export const useScreebContext = () => {
   const context = React.useContext(ScreebContext);
 
   if (context === undefined) {
-    // eslint-disable-next-line quotes
-    throw new Error('"useScreeb" must be used within `ScreebProvider`.');
+    // eslint-disable-next-line no-console
+    console.warn("`useScreeb` must be used within `ScreebProvider`.");
   }
 
   return context as ScreebContextValues;
