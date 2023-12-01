@@ -1,6 +1,6 @@
 {
   "name": "@screeb/sdk-angular",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Screeb's browser sdk, optimized for Angular.",
   "keywords": [
     "product discovery",
@@ -49,7 +49,7 @@
     "test": "echo '@TODO'"
   },
   "dependencies": {
-    "@screeb/sdk-browser": "^0.1.13"
+    "@screeb/sdk-browser": "^0.1.14"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.2.6",
