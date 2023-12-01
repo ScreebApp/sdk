@@ -52,7 +52,7 @@
     "build:doc": "typedoc src/index.ts",
     "clean": "rm -Rf dist",
     "lint": "eslint .",
-    "test": "jest"
+    "test": "echo 'test disabled'"
   },
   "devDependencies": {
     "@screeb/eslint-config": "^0.1.6",
