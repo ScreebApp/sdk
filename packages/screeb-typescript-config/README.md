@@ -49,8 +49,8 @@ In your `package.json`:
   // Recommended
   "sideEffects": false,
   "type": "module",
-  "module": "dist/es/index.js",
-  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.mjs",
+  "main": "dist/cjs/index.cjs",
   "jsnext:main": "dist/es/index.js",
   "types": "dist/es/index.d.ts",
   "files": ["dist"],
