@@ -25,11 +25,11 @@ In your `tsconfig.json`:
   "include": ["src"],
   "exclude": ["dist"],
   "compilerOptions": {
-    "outDir": "dist/es",
+    "outDir": "dist",
     "declaration": true,
     "declarationDir": "."
   }
-  
+
   // [..]
 }
 ```
@@ -42,24 +42,31 @@ In your `package.json`:
 
   // Mandatory
   "scripts": {
-    "build": "rollup -c ../../node_modules/@screeb/typescript-config/src/rollup.config.js",
+    "build": "rollup -c ../../node_modules/@screeb/typescript-config/src/rollup.config.js"
     // [..]
   },
 
   // Recommended
   "sideEffects": false,
   "type": "module",
-  "module": "dist/es/index.js",
-  "types": "dist/es/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "module": "dist/index.es.js",
+  "main": "dist/index.cjs.js",
+  "jsnext:main": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "import": "./dist/es/index.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.es.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.cjs.js"
+      }
     }
-  },
+  }
 
   // [..]
 }

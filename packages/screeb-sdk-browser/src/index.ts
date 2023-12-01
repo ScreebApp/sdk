@@ -8,6 +8,7 @@ import {
 } from "./types";
 
 export * from "./types";
+export * from "./hooks.types";
 
 declare const window: Window & { $screeb?: ScreebObject };
 

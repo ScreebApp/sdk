@@ -6,13 +6,31 @@
 
 ### Type Aliases
 
+- [Channel](README.md#channel)
+- [ChannelType](README.md#channeltype)
+- [HookCommonProperties](README.md#hookcommonproperties)
+- [HookOnQuestionReplied](README.md#hookonquestionreplied)
+- [HookOnReady](README.md#hookonready)
+- [HookOnSurveyCompleted](README.md#hookonsurveycompleted)
+- [HookOnSurveyHidden](README.md#hookonsurveyhidden)
+- [HookOnSurveyShowed](README.md#hookonsurveyshowed)
+- [HookOnSurveyStarted](README.md#hookonsurveystarted)
 - [Hooks](README.md#hooks)
 - [PropertyRecord](README.md#propertyrecord)
 - [PropertyType](README.md#propertytype)
+- [ResponseItem](README.md#responseitem)
+- [ResponseItemAnswer](README.md#responseitemanswer)
+- [ResponseItemQuestion](README.md#responseitemquestion)
+- [ResponseStatus](README.md#responsestatus)
 - [ScreebFunction](README.md#screebfunction)
 - [ScreebIdentityGetReturn](README.md#screebidentitygetreturn)
 - [ScreebObject](README.md#screebobject)
 - [ScreebOptions](README.md#screeboptions)
+- [Survey](README.md#survey)
+- [SurveyFormat](README.md#surveyformat)
+- [SurveyPosition](README.md#surveyposition)
+- [SurveySize](README.md#surveysize)
+- [User](README.md#user)
 
 ### Functions
 
@@ -35,6 +53,161 @@
 
 ## Type Aliases
 
+### Channel
+
+Ƭ **Channel**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `id` | `string` |
+| `type` | [`ChannelType`](README.md#channeltype) |
+
+___
+
+### ChannelType
+
+Ƭ **ChannelType**: ``"widget"`` \| ``"ios"`` \| ``"android"``
+
+___
+
+### HookCommonProperties
+
+Ƭ **HookCommonProperties**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `channel` | [`Channel`](README.md#channel) |
+| `survey` | [`Survey`](README.md#survey) |
+| `user` | [`User`](README.md#user) |
+
+___
+
+### HookOnQuestionReplied
+
+Ƭ **HookOnQuestionReplied**: (`data`: [`HookCommonProperties`](README.md#hookcommonproperties) & { `response`: { `answer`: [`ResponseItemAnswer`](README.md#responseitemanswer) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[] ; `question`: [`ResponseItemQuestion`](README.md#responseitemquestion) ; `status`: ``null``  }  }) => `void`
+
+#### Type declaration
+
+▸ (`data`): `void`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `data` | [`HookCommonProperties`](README.md#hookcommonproperties) & { `response`: { `answer`: [`ResponseItemAnswer`](README.md#responseitemanswer) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[] ; `question`: [`ResponseItemQuestion`](README.md#responseitemquestion) ; `status`: ``null``  }  } |
+
+##### Returns
+
+`void`
+
+___
+
+### HookOnReady
+
+Ƭ **HookOnReady**: (`data`: { `channel`: [`Channel`](README.md#channel) ; `user`: [`User`](README.md#user)  }) => `void`
+
+#### Type declaration
+
+▸ (`data`): `void`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `data` | `Object` |
+| `data.channel` | [`Channel`](README.md#channel) |
+| `data.user` | [`User`](README.md#user) |
+
+##### Returns
+
+`void`
+
+___
+
+### HookOnSurveyCompleted
+
+Ƭ **HookOnSurveyCompleted**: (`data`: [`HookCommonProperties`](README.md#hookcommonproperties) & { `response`: { `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  }) => `void`
+
+#### Type declaration
+
+▸ (`data`): `void`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `data` | [`HookCommonProperties`](README.md#hookcommonproperties) & { `response`: { `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  } |
+
+##### Returns
+
+`void`
+
+___
+
+### HookOnSurveyHidden
+
+Ƭ **HookOnSurveyHidden**: (`data`: [`HookCommonProperties`](README.md#hookcommonproperties) & { `response`: { `hide_reason`: [`ResponseStatus`](README.md#responsestatus) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  }) => `void`
+
+#### Type declaration
+
+▸ (`data`): `void`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `data` | [`HookCommonProperties`](README.md#hookcommonproperties) & { `response`: { `hide_reason`: [`ResponseStatus`](README.md#responsestatus) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  } |
+
+##### Returns
+
+`void`
+
+___
+
+### HookOnSurveyShowed
+
+Ƭ **HookOnSurveyShowed**: (`data`: [`HookCommonProperties`](README.md#hookcommonproperties) & { `response`: { `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  }) => `void`
+
+#### Type declaration
+
+▸ (`data`): `void`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `data` | [`HookCommonProperties`](README.md#hookcommonproperties) & { `response`: { `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  } |
+
+##### Returns
+
+`void`
+
+___
+
+### HookOnSurveyStarted
+
+Ƭ **HookOnSurveyStarted**: (`data`: [`HookCommonProperties`](README.md#hookcommonproperties) & { `response`: { `id`: `string`  }  }) => `void`
+
+#### Type declaration
+
+▸ (`data`): `void`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `data` | [`HookCommonProperties`](README.md#hookcommonproperties) & { `response`: { `id`: `string`  }  } |
+
+##### Returns
+
+`void`
+
+___
+
 ### Hooks
 
 Ƭ **Hooks**: `Object`
@@ -45,12 +218,12 @@ This is the Screeb tag hooks object.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `onQuestionReplied?` | `HookOnQuestionReplied` | This hook is triggered when a question is answered |
-| `onReady?` | `HookOnReady` | This hook is triggered when Screeb SD is loaded, initialized and ready to rock |
-| `onSurveyCompleted?` | `HookOnSurveyCompleted` | This hook is triggered when a survey is completed |
-| `onSurveyHidden?` | `HookOnSurveyHidden` | This hook is triggered when a survey is hidden |
-| `onSurveyShowed?` | `HookOnSurveyShowed` | This hook is triggered when a survey is displayed on screen (also triggered when page is reloaded) |
-| `onSurveyStarted?` | `HookOnSurveyStarted` | This hook is triggered when a survey is started |
+| `onQuestionReplied?` | [`HookOnQuestionReplied`](README.md#hookonquestionreplied) | This hook is triggered when a question is answered |
+| `onReady?` | [`HookOnReady`](README.md#hookonready) | This hook is triggered when Screeb SD is loaded, initialized and ready to rock |
+| `onSurveyCompleted?` | [`HookOnSurveyCompleted`](README.md#hookonsurveycompleted) | This hook is triggered when a survey is completed |
+| `onSurveyHidden?` | [`HookOnSurveyHidden`](README.md#hookonsurveyhidden) | This hook is triggered when a survey is hidden |
+| `onSurveyShowed?` | [`HookOnSurveyShowed`](README.md#hookonsurveyshowed) | This hook is triggered when a survey is displayed on screen (also triggered when page is reloaded) |
+| `onSurveyStarted?` | [`HookOnSurveyStarted`](README.md#hookonsurveystarted) | This hook is triggered when a survey is started |
 | `version` | `string` | This defines the version of hooks and their data |
 
 ___
@@ -72,6 +245,53 @@ ___
 Ƭ **PropertyType**: `number` \| `boolean` \| `string` \| `Date` \| [`PropertyRecord`](README.md#propertyrecord)
 
 This is property types that are supported by Screeb.
+
+___
+
+### ResponseItem
+
+Ƭ **ResponseItem**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `answer` | [`ResponseItemAnswer`](README.md#responseitemanswer) |
+| `question` | [`ResponseItemQuestion`](README.md#responseitemquestion) |
+
+___
+
+### ResponseItemAnswer
+
+Ƭ **ResponseItemAnswer**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `fields?` | { `boolean?`: `boolean` ; `number?`: `number` ; `text?`: `string` ; `time?`: `string` ; `type`: ``"string"`` \| ``"number"`` \| ``"boolean"`` \| ``"none"`` \| ``"time"`` \| ``"file"``  }[] |
+| `replied_at?` | `string` |
+
+___
+
+### ResponseItemQuestion
+
+Ƭ **ResponseItemQuestion**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `id` | `string` |
+| `title` | `string` |
+| `type` | ``"text"`` \| ``"video"`` |
+| `url?` | `string` |
+
+___
+
+### ResponseStatus
+
+Ƭ **ResponseStatus**: ``"displayed"`` \| ``"started"`` \| ``"ended"`` \| ``"closed"`` \| ``"interrupted"``
 
 ___
 
@@ -135,6 +355,52 @@ This is the Screeb tag options object.
 | :------ | :------ | :------ |
 | `screebEndpoint?` | `string` | Please don't do this. |
 | `window?` | `Window` | If you're running Screeb tag in an iframe, please set the inner window here. |
+
+___
+
+### Survey
+
+Ƭ **Survey**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `id` | `string` |
+| `survey_format` | [`SurveyFormat`](README.md#surveyformat) |
+| `survey_position` | [`SurveyPosition`](README.md#surveyposition) |
+| `survey_size` | ``100`` |
+
+___
+
+### SurveyFormat
+
+Ƭ **SurveyFormat**: ``"conversationnal"`` \| ``"cards"``
+
+___
+
+### SurveyPosition
+
+Ƭ **SurveyPosition**: ``"center-left"`` \| ``"center-center"`` \| ``"center-right"`` \| ``"bottom-left"`` \| ``"bottom-center"`` \| ``"bottom-right"``
+
+___
+
+### SurveySize
+
+Ƭ **SurveySize**: ``25`` \| ``50`` \| ``75`` \| ``100`` \| ``125`` \| ``150``
+
+___
+
+### User
+
+Ƭ **User**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `anonymous_id` | `string` |
+| `userId?` | `string` |
 
 ## Functions
 

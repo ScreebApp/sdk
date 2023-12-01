@@ -14,7 +14,7 @@
         "forceConsistentCasingInFileNames": true,
         "noFallthroughCasesInSwitch": true,
         "module": "esnext",
-        "moduleResolution": "node",
+        "moduleResolution": "bundler",
         "resolveJsonModule": true,
         "isolatedModules": true,
         "noEmit": true,
@@ -26,6 +26,10 @@
         "noImplicitOverride": true,
         "strictNullChecks": true,
         "strictPropertyInitialization": true,
-        "noUnusedParameters": true
-    }
+        "noUnusedParameters": true,
+        "declaration": true,
+        "declarationDir": "."
+    },
+    "include": ["."],
+    "exclude": ["dist", "**/*.test.ts"],
 }

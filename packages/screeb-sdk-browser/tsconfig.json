@@ -3,7 +3,7 @@
   "include": ["src"],
   "exclude": ["dist", "**/*.test.ts"],
   "compilerOptions": {
-    "outDir": "dist/es",
+    "outDir": "dist",
     "declaration": true,
     "declarationDir": "."
   }
