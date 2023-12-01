@@ -1,6 +1,6 @@
 {
   "name": "@screeb/sdk-angular-example",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "private": true,
   "description": "Screeb's example app for Angular sdk.",
   "homepage": "https://screeb.app",
@@ -28,7 +28,7 @@
     "@angular/core": "^16.2.8",
     "@angular/platform-browser": "^16.2.8",
     "@angular/router": "^16.2.8",
-    "@screeb/sdk-angular": "^0.1.6",
+    "@screeb/sdk-angular": "^0.1.7",
     "rxjs": "^7.8.1",
     "zone.js": "^0.14.0"
   },
