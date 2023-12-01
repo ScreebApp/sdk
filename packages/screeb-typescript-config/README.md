@@ -49,21 +49,21 @@ In your `package.json`:
   // Recommended
   "sideEffects": false,
   "type": "module",
-  "module": "dist/index.es.js",
-  "main": "dist/index.cjs.js",
-  "jsnext:main": "dist/index.es.js",
-  "types": "dist/index.d.ts",
+  "module": "dist/es/index.js",
+  "main": "dist/cjs/index.js",
+  "jsnext:main": "dist/es/index.js",
+  "types": "dist/es/index.d.ts",
   "files": ["dist"],
   "exports": {
     "./package.json": "./package.json",
     ".": {
       "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.es.js"
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
       },
       "require": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.cjs.js"
+        "types": "./dist/es/index.d.ts",
+        "default": "./dist/es/index.js"
       }
     }
   }
