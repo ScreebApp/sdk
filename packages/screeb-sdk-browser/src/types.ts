@@ -19,6 +19,12 @@ export type PropertyRecord = {
 export type ScreebOptions = {
   /** If you're running Screeb tag in an iframe, please set the inner window here. */
   window?: Window;
+
+  /** SDK name (eg: sdk-browser, sdk-react, sdk-angular, etc...) */
+  sdkName?: string;
+  /** SDK version (eg: 1.2.3) */
+  sdkVersion?: string;
+
   /** Please don't do this. */
   screebEndpoint?: string;
 };

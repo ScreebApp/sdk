@@ -7,6 +7,7 @@ import {
   ScreebOptions,
 } from "./types";
 
+import { version } from "../package.json";
 export * from "./types";
 export * from "./hooks.types";
 
@@ -69,6 +70,12 @@ export const load = (options: ScreebOptions = {}) =>
       };
 
     _window.document.head.appendChild(scriptElement);
+
+    const context = {
+      secondary_sdk_name: options.sdkName ?? "sdk-browser",
+      secondary_sdk_version: options.sdkVersion ?? version,
+    };
+    callScreebCommand("client.internal.web", context);
   });
 
 /**
