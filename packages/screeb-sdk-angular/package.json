@@ -41,7 +41,7 @@
   ],
   "scripts": {
     "ng": "ng",
-    "build": "npm run replace-version && ng build",
+    "build": "npm run replace-version && ng build && git checkout -f projects/screeb-sdk-angular/src/lib/constants.ts",
     "build:watch": "ng build --watch --configuration development",
     "build:doc": "typedoc projects/screeb-sdk-angular/src/public-api.ts",
     "clean": "rm -Rf dist",
