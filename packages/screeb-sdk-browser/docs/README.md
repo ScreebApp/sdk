@@ -354,6 +354,8 @@ This is the Screeb tag options object.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `screebEndpoint?` | `string` | Please don't do this. |
+| `sdkName?` | `string` | SDK name (eg: sdk-browser, sdk-react, sdk-angular, etc...) |
+| `sdkVersion?` | `string` | SDK version (eg: 1.2.3) |
 | `window?` | `Window` | If you're running Screeb tag in an iframe, please set the inner window here. |
 
 ___

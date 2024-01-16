@@ -13,6 +13,7 @@ export * from "./hooks.types";
 declare const window: Window & { $screeb?: ScreebObject };
 
 const SCREEB_TAG_ENDPOINT = "https://t.screeb.app/tag.js";
+const CONSTANTS = { version: "0.0.0-dev" };
 
 let _window = typeof window === "undefined" ? undefined : window;
 
@@ -69,6 +70,13 @@ export const load = (options: ScreebOptions = {}) =>
       };
 
     _window.document.head.appendChild(scriptElement);
+
+    const context = {
+      secondary_sdk_name: options.sdkName ?? "sdk-browser",
+      secondary_sdk_version: options.sdkVersion ?? CONSTANTS.version,
+    };
+
+    callScreebCommand("client.internal.web", context);
   });
 
 /**
