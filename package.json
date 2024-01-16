@@ -19,7 +19,7 @@
     "test": "lerna run --parallel test",
     "upgrade:all": "npm-upgrade && lerna exec --concurrency 1 npm-upgrade",
     "preversion": "npm run clean && npm i && npm run lint && npm run build && npm run test",
-    "version": "lerna version",
+    "version": "lerna version && npm run build",
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
