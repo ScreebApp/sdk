@@ -6,6 +6,8 @@ import * as logger from "./logger";
 import { ScreebContextValues, ScreebProviderProps } from "./types";
 import { isSSR } from "./utils";
 
+export const CONSTANTS = { version: "0.0.0-dev" };
+
 let isInitialized = false;
 
 export const ScreebProvider: React.FC<
@@ -162,7 +164,11 @@ export const ScreebProvider: React.FC<
   const load = React.useCallback(
     async (options?: Screeb.ScreebOptions) => {
       if (!isLoaded.current) {
-        Screeb.load(options);
+        Screeb.load({
+          sdkName: "sdk-react",
+          sdkVersion: CONSTANTS.version,
+          ...options,
+        });
 
         isLoaded.current = true;
 

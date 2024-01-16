@@ -41,12 +41,13 @@
   ],
   "scripts": {
     "ng": "ng",
-    "build": "ng build",
+    "build": "npm run replace-version && ng build",
     "build:watch": "ng build --watch --configuration development",
     "build:doc": "typedoc projects/screeb-sdk-angular/src/public-api.ts",
     "clean": "rm -Rf dist",
     "lint": "eslint .",
-    "test": "echo '@TODO'"
+    "test": "echo '@TODO'",
+    "replace-version": "replace-in-files --string='0.0.0-dev' --replacement=$npm_package_version projects/screeb-sdk-angular/src/lib/constants.ts"
   },
   "dependencies": {
     "@screeb/sdk-browser": "^0.1.14"
@@ -80,6 +81,7 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^16.2.3",
     "prettier": "^3.0.3",
+    "replace-in-files-cli": "^2.2.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.6.2",
     "typedoc": "^0.25.2",

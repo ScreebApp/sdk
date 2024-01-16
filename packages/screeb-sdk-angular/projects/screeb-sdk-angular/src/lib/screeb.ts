@@ -1,6 +1,7 @@
 import { Inject, Injectable } from "@angular/core";
 import * as _Screeb from "@screeb/sdk-browser";
 
+import CONSTANTS from "./constants";
 import * as logger from "./logger";
 import { ScreebConfig } from "./screeb-config";
 
@@ -431,7 +432,11 @@ export class Screeb {
    * this.screeb.load();
    * ```
    */
-  public async load() {
-    return _Screeb.load();
+  public async load(options?: _Screeb.ScreebOptions) {
+    return _Screeb.load({
+      sdkName: "sdk-angular",
+      sdkVersion: CONSTANTS.version,
+      ...options,
+    });
   }
 }

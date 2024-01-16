@@ -394,9 +394,15 @@ ___
 
 ### load
 
-▸ **load**(): `Promise`<`undefined`\>
+▸ **load**(`options?`): `Promise`<`undefined`\>
 
 Appends Screeb tag into your dom.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `options?` | `ScreebOptions` | Screeb module options. |
 
 #### Returns
 
