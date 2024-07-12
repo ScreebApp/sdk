@@ -27,6 +27,9 @@ export type ScreebOptions = {
 
   /** Please don't do this. */
   screebEndpoint?: string;
+
+  /** @hidden Use a specific platform */
+  platform?: string;
 };
 
 // eslint-disable-next-line no-unused-vars

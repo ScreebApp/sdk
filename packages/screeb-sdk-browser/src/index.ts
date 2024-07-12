@@ -10,7 +10,10 @@ import {
 export * from "./types";
 export * from "./hooks.types";
 
-declare const window: Window & { $screeb?: ScreebObject };
+declare const window: Window & {
+  $screeb?: ScreebObject;
+  ScreebConfig?: { platform: string };
+};
 
 const SCREEB_TAG_ENDPOINT = "https://t.screeb.app/tag.js";
 const CONSTANTS = { version: "0.0.0-dev" };
@@ -52,6 +55,10 @@ export const load = (options: ScreebOptions = {}) =>
 
     scriptElement.addEventListener("load", () => resolve(undefined));
     scriptElement.addEventListener("error", reject);
+
+    if (options.platform) {
+      _window["ScreebConfig"] = { platform: options.platform };
+    }
 
     _window.$screeb =
       _window.$screeb ??
