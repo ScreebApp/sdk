@@ -34,17 +34,9 @@
 
 ### CloseFunction
 
-Ƭ **CloseFunction**: () => `Promise`<`void`\>
-
-#### Type declaration
-
-▸ (): `Promise`<`void`\>
+Ƭ **CloseFunction**: () => `Promise`\<`void`\>
 
 Shutdowns current Screeb session.
-
-##### Returns
-
-`Promise`<`void`\>
 
 **`Example`**
 
@@ -54,21 +46,21 @@ const { close } = useScreeb();
 close();
 ```
 
+#### Type declaration
+
+▸ (): `Promise`\<`void`\>
+
+##### Returns
+
+`Promise`\<`void`\>
+
 ___
 
 ### DebugFunction
 
-Ƭ **DebugFunction**: () => `Promise`<`unknown`\>
-
-#### Type declaration
-
-▸ (): `Promise`<`unknown`\>
+Ƭ **DebugFunction**: () => `Promise`\<`unknown`\>
 
 Prints the actual state information of Screeb tag.
-
-##### Returns
-
-`Promise`<`unknown`\>
 
 **`Example`**
 
@@ -95,28 +87,21 @@ debug();
 // **************************************************************
 ```
 
+#### Type declaration
+
+▸ (): `Promise`\<`unknown`\>
+
+##### Returns
+
+`Promise`\<`unknown`\>
+
 ___
 
 ### EventTrackFunction
 
-Ƭ **EventTrackFunction**: (`eventName`: `string`, `eventProperties?`: `PropertyRecord`) => `Promise`<`unknown`\>
-
-#### Type declaration
-
-▸ (`eventName`, `eventProperties?`): `Promise`<`unknown`\>
+Ƭ **EventTrackFunction**: (`eventName`: `string`, `eventProperties?`: `PropertyRecord`) => `Promise`\<`unknown`\>
 
 Tracks a user event.
-
-##### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `eventName` | `string` | The event name. |
-| `eventProperties?` | `PropertyRecord` | The properties of your event. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
-
-##### Returns
-
-`Promise`<`unknown`\>
 
 **`Example`**
 
@@ -139,29 +124,29 @@ eventTrack(
 );
 ```
 
-___
-
-### IdentityFunction
-
-Ƭ **IdentityFunction**: (`userId`: `string`, `userProperties?`: `PropertyRecord`) => `Promise`<`unknown`\>
-
 #### Type declaration
 
-▸ (`userId`, `userProperties?`): `Promise`<`unknown`\>
-
-Change the current user identity.
-Warning: Running surveys will be closed.
+▸ (`eventName`, `eventProperties?`): `Promise`\<`unknown`\>
 
 ##### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `userId` | `string` | The unique identifier of your user. |
-| `userProperties?` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
+| `eventName` | `string` | The event name. |
+| `eventProperties?` | `PropertyRecord` | The properties of your event. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
 
 ##### Returns
 
-`Promise`<`unknown`\>
+`Promise`\<`unknown`\>
+
+___
+
+### IdentityFunction
+
+Ƭ **IdentityFunction**: (`userId`: `string`, `userProperties?`: `PropertyRecord`) => `Promise`\<`unknown`\>
+
+Change the current user identity.
+Warning: Running surveys will be closed.
 
 **`Example`**
 
@@ -180,21 +165,28 @@ identity(
 );
 ```
 
+#### Type declaration
+
+▸ (`userId`, `userProperties?`): `Promise`\<`unknown`\>
+
+##### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `userId` | `string` | The unique identifier of your user. |
+| `userProperties?` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
+
+##### Returns
+
+`Promise`\<`unknown`\>
+
 ___
 
 ### IdentityGetFunction
 
-Ƭ **IdentityGetFunction**: () => `Promise`<`ScreebIdentityGetReturn`\>
-
-#### Type declaration
-
-▸ (): `Promise`<`ScreebIdentityGetReturn`\>
+Ƭ **IdentityGetFunction**: () => `Promise`\<`ScreebIdentityGetReturn`\>
 
 Retrieves the current user identity.
-
-##### Returns
-
-`Promise`<`ScreebIdentityGetReturn`\>
 
 **`Example`**
 
@@ -213,29 +205,21 @@ console.log(await identityGet());
 // }
 ```
 
+#### Type declaration
+
+▸ (): `Promise`\<`ScreebIdentityGetReturn`\>
+
+##### Returns
+
+`Promise`\<`ScreebIdentityGetReturn`\>
+
 ___
 
 ### IdentityGroupAssignFunction
 
-Ƭ **IdentityGroupAssignFunction**: (`groupName`: `string`, `groupType?`: `string`, `groupProperties?`: `PropertyRecord`) => `Promise`<`unknown`\>
-
-#### Type declaration
-
-▸ (`groupName`, `groupType?`, `groupProperties?`): `Promise`<`unknown`\>
+Ƭ **IdentityGroupAssignFunction**: (`groupName`: `string`, `groupType?`: `string`, `groupProperties?`: `PropertyRecord`) => `Promise`\<`unknown`\>
 
 Assigns the current user to a group.
-
-##### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `groupName` | `string` |  |
-| `groupType?` | `string` |  |
-| `groupProperties?` | `PropertyRecord` | The properties of your user group. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
-
-##### Returns
-
-`Promise`<`unknown`\>
 
 **`Example`**
 
@@ -256,17 +240,41 @@ identityGroupAssign(
 );
 ```
 
+#### Type declaration
+
+▸ (`groupName`, `groupType?`, `groupProperties?`): `Promise`\<`unknown`\>
+
+##### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `groupName` | `string` |  |
+| `groupType?` | `string` |  |
+| `groupProperties?` | `PropertyRecord` | The properties of your user group. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
+
+##### Returns
+
+`Promise`\<`unknown`\>
+
 ___
 
 ### IdentityGroupUnassignFunction
 
-Ƭ **IdentityGroupUnassignFunction**: (`groupName`: `string`, `groupType?`: `string`) => `Promise`<`unknown`\>
+Ƭ **IdentityGroupUnassignFunction**: (`groupName`: `string`, `groupType?`: `string`) => `Promise`\<`unknown`\>
+
+Unassigns the current user to a group.
+
+**`Example`**
+
+```ts
+const { identityGroupUnassign } = useScreeb();
+
+identityGroupUnassign('company', 'Apple');
+```
 
 #### Type declaration
 
-▸ (`groupName`, `groupType?`): `Promise`<`unknown`\>
-
-Unassigns the current user to a group.
+▸ (`groupName`, `groupType?`): `Promise`\<`unknown`\>
 
 ##### Parameters
 
@@ -277,37 +285,15 @@ Unassigns the current user to a group.
 
 ##### Returns
 
-`Promise`<`unknown`\>
-
-**`Example`**
-
-```ts
-const { identityGroupUnassign } = useScreeb();
-
-identityGroupUnassign('company', 'Apple');
-```
+`Promise`\<`unknown`\>
 
 ___
 
 ### IdentityPropertiesFunction
 
-Ƭ **IdentityPropertiesFunction**: (`userProperties`: `PropertyRecord`) => `Promise`<`unknown`\>
-
-#### Type declaration
-
-▸ (`userProperties`): `Promise`<`unknown`\>
+Ƭ **IdentityPropertiesFunction**: (`userProperties`: `PropertyRecord`) => `Promise`\<`unknown`\>
 
 Adds properties to the current user identity.
-
-##### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `userProperties` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
-
-##### Returns
-
-`Promise`<`unknown`\>
 
 **`Example`**
 
@@ -335,22 +321,28 @@ identityProperties(
 );
 ```
 
+#### Type declaration
+
+▸ (`userProperties`): `Promise`\<`unknown`\>
+
+##### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `userProperties` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date. ``` |
+
+##### Returns
+
+`Promise`\<`unknown`\>
+
 ___
 
 ### IdentityResetFunction
 
-Ƭ **IdentityResetFunction**: () => `Promise`<`unknown`\>
-
-#### Type declaration
-
-▸ (): `Promise`<`unknown`\>
+Ƭ **IdentityResetFunction**: () => `Promise`\<`unknown`\>
 
 Resets the current user identity.
 Warning: This command must be called only once, since it creates a new identity on Screeb side.
-
-##### Returns
-
-`Promise`<`unknown`\>
 
 **`Example`**
 
@@ -360,29 +352,21 @@ const { identityReset } = useScreeb();
 identityReset();
 ```
 
+#### Type declaration
+
+▸ (): `Promise`\<`unknown`\>
+
+##### Returns
+
+`Promise`\<`unknown`\>
+
 ___
 
 ### InitFunction
 
-Ƭ **InitFunction**: (`websiteId`: `string`, `userId?`: `string`, `userProperties?`: `PropertyRecord`) => `Promise`<`void`\>
-
-#### Type declaration
-
-▸ (`websiteId`, `userId?`, `userProperties?`): `Promise`<`void`\>
+Ƭ **InitFunction**: (`websiteId`: `string`, `userId?`: `string`, `userProperties?`: `PropertyRecord`, `hooks?`: `Hooks`, `language?`: `string`) => `Promise`\<`void`\>
 
 Initializes Screeb tag.
-
-##### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `websiteId` | `string` | Your website/channel id. |
-| `userId?` | `string` | The unique identifier of your user. |
-| `userProperties?` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date ``` |
-
-##### Returns
-
-`Promise`<`void`\>
 
 **`Example`**
 
@@ -398,21 +382,48 @@ init(
     plan: '<user-plan>',
     last_seen_at: new Date(),
     authenticated: true
-  }
+  },
+  "en"
 );
 ```
+
+#### Type declaration
+
+▸ (`websiteId`, `userId?`, `userProperties?`, `hooks?`, `language?`): `Promise`\<`void`\>
+
+##### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `websiteId` | `string` | Your website/channel id. |
+| `userId?` | `string` | The unique identifier of your user. |
+| `userProperties?` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date ``` |
+| `hooks?` | `Hooks` | - |
+| `language?` | `string` | Force a specific language for the tag. eg: 'en'. default: browser language. |
+
+##### Returns
+
+`Promise`\<`void`\>
 
 ___
 
 ### LoadFunction
 
-Ƭ **LoadFunction**: (`options?`: `ScreebOptions`) => `Promise`<`void`\>
+Ƭ **LoadFunction**: (`options?`: `ScreebOptions`) => `Promise`\<`void`\>
+
+Appends Screeb tag into your dom.
+
+**`Example`**
+
+```ts
+const { load } = useScreeb();
+
+load();
+```
 
 #### Type declaration
 
-▸ (`options?`): `Promise`<`void`\>
-
-Appends Screeb tag into your dom.
+▸ (`options?`): `Promise`\<`void`\>
 
 ##### Parameters
 
@@ -422,15 +433,7 @@ Appends Screeb tag into your dom.
 
 ##### Returns
 
-`Promise`<`void`\>
-
-**`Example`**
-
-```ts
-const { load } = useScreeb();
-
-load();
-```
+`Promise`\<`void`\>
 
 ___
 
@@ -473,6 +476,7 @@ Properties of Screeb provider
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `hooks?` | `Hooks` | Hooks to define callback for various event |
+| `language?` | `string` | The language you want to force |
 | `userId?` | `string` | The unique identifier of your user. |
 | `userProperties?` | `PropertyRecord` | The properties of your user. |
 | `websiteId` | `string` | Your website/channel id. |
@@ -481,7 +485,7 @@ ___
 
 ### ScreebProviderProps
 
-Ƭ **ScreebProviderProps**: { `autoInit?`: `boolean` ; `options?`: `ScreebOptions` ; `shouldLoad?`: `boolean`  } & `Partial`<[`ScreebProps`](README.md#screebprops)\>
+Ƭ **ScreebProviderProps**: \{ `autoInit?`: `boolean` ; `options?`: `ScreebOptions` ; `shouldLoad?`: `boolean`  } & `Partial`\<[`ScreebProps`](README.md#screebprops)\>
 
 Properties of Screeb provider
 
@@ -489,17 +493,9 @@ ___
 
 ### SurveyCloseFunction
 
-Ƭ **SurveyCloseFunction**: () => `Promise`<`unknown`\>
-
-#### Type declaration
-
-▸ (): `Promise`<`unknown`\>
+Ƭ **SurveyCloseFunction**: () => `Promise`\<`unknown`\>
 
 Interrupts a running survey.
-
-##### Returns
-
-`Promise`<`unknown`\>
 
 **`Example`**
 
@@ -509,29 +505,21 @@ const { surveyClose } = useScreeb();
 surveyClose();
 ```
 
+#### Type declaration
+
+▸ (): `Promise`\<`unknown`\>
+
+##### Returns
+
+`Promise`\<`unknown`\>
+
 ___
 
 ### SurveyStartFunction
 
-Ƭ **SurveyStartFunction**: (`surveyId`: `string`, `allowMultipleResponses`: `boolean`, `hiddenFields`: `PropertyRecord`) => `Promise`<`unknown`\>
-
-#### Type declaration
-
-▸ (`surveyId`, `allowMultipleResponses`, `hiddenFields`): `Promise`<`unknown`\>
+Ƭ **SurveyStartFunction**: (`surveyId`: `string`, `allowMultipleResponses`: `boolean`, `hiddenFields`: `PropertyRecord`, `hooks`: `Hooks`, `language`: `string`) => `Promise`\<`unknown`\>
 
 Starts a survey by its ID.
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `surveyId` | `string` |
-| `allowMultipleResponses` | `boolean` |
-| `hiddenFields` | `PropertyRecord` |
-
-##### Returns
-
-`Promise`<`unknown`\>
 
 **`Example`**
 
@@ -548,21 +536,31 @@ surveyStart(
 );
 ```
 
+#### Type declaration
+
+▸ (`surveyId`, `allowMultipleResponses`, `hiddenFields`, `hooks`, `language`): `Promise`\<`unknown`\>
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `surveyId` | `string` |
+| `allowMultipleResponses` | `boolean` |
+| `hiddenFields` | `PropertyRecord` |
+| `hooks` | `Hooks` |
+| `language` | `string` |
+
+##### Returns
+
+`Promise`\<`unknown`\>
+
 ___
 
 ### TargetingCheckFunction
 
-Ƭ **TargetingCheckFunction**: () => `Promise`<`unknown`\>
-
-#### Type declaration
-
-▸ (): `Promise`<`unknown`\>
+Ƭ **TargetingCheckFunction**: () => `Promise`\<`unknown`\>
 
 Forces a targeting check.
-
-##### Returns
-
-`Promise`<`unknown`\>
 
 **`Example`**
 
@@ -572,21 +570,21 @@ const { targetingCheck } = useScreeb();
 targetingCheck();
 ```
 
+#### Type declaration
+
+▸ (): `Promise`\<`unknown`\>
+
+##### Returns
+
+`Promise`\<`unknown`\>
+
 ___
 
 ### TargetingDebugFunction
 
-Ƭ **TargetingDebugFunction**: () => `Promise`<`unknown`\>
-
-#### Type declaration
-
-▸ (): `Promise`<`unknown`\>
+Ƭ **TargetingDebugFunction**: () => `Promise`\<`unknown`\>
 
 Prints the current state of the targeting engine.
-
-##### Returns
-
-`Promise`<`unknown`\>
 
 **`Example`**
 
@@ -610,18 +608,26 @@ console.log(await targetingDebug());
 //   - Rule of type "Capping per respondent display count": false 🔴
 ```
 
+#### Type declaration
+
+▸ (): `Promise`\<`unknown`\>
+
+##### Returns
+
+`Promise`\<`unknown`\>
+
 ## Functions
 
 ### ScreebProvider
 
-▸ **ScreebProvider**(`props`, `context?`): `ReactNode`
+▸ **ScreebProvider**(`props`, `deprecatedLegacyContext?`): `ReactNode`
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `props` | `PropsWithChildren`<[`ScreebProviderProps`](README.md#screebproviderprops)\> |
-| `context?` | `any` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `props` | `PropsWithChildren`\<[`ScreebProviderProps`](README.md#screebproviderprops)\> | - |
+| `deprecatedLegacyContext?` | `any` | **`Deprecated`** **`See`** [React Docs](https://legacy.reactjs.org/docs/legacy-context.html#referencing-context-in-lifecycle-methods) |
 
 #### Returns
 

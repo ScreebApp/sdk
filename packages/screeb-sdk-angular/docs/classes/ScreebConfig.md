@@ -24,7 +24,11 @@ Configuration of Screeb module
 
 ### constructor
 
-• **new ScreebConfig**()
+• **new ScreebConfig**(): [`ScreebConfig`](ScreebConfig.md)
+
+#### Returns
+
+[`ScreebConfig`](ScreebConfig.md)
 
 ## Properties
 

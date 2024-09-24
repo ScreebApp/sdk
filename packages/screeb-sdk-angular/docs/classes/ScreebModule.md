@@ -16,7 +16,7 @@
 
 ### constructor
 
-• **new ScreebModule**(`config`, `screeb`)
+• **new ScreebModule**(`config`, `screeb`): [`ScreebModule`](ScreebModule.md)
 
 #### Parameters
 
@@ -25,11 +25,15 @@
 | `config` | [`ScreebConfig`](ScreebConfig.md) |
 | `screeb` | [`Screeb`](Screeb.md) |
 
+#### Returns
+
+[`ScreebModule`](ScreebModule.md)
+
 ## Methods
 
 ### forRoot
 
-▸ `Static` **forRoot**(`config`): `ModuleWithProviders`<[`ScreebModule`](ScreebModule.md)\>
+▸ **forRoot**(`config`): `ModuleWithProviders`\<[`ScreebModule`](ScreebModule.md)\>
 
 This is used to initialize Screeb at the top of your Angular application
 
@@ -41,7 +45,7 @@ This is used to initialize Screeb at the top of your Angular application
 
 #### Returns
 
-`ModuleWithProviders`<[`ScreebModule`](ScreebModule.md)\>
+`ModuleWithProviders`\<[`ScreebModule`](ScreebModule.md)\>
 
 **`Example`**
 

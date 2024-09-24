@@ -16,6 +16,8 @@ export type ScreebProps = {
   userProperties?: PropertyRecord;
   /** Hooks to define callback for various event */
   hooks?: Hooks;
+  /** The language you want to force */
+  language?: string;
 };
 
 /**
@@ -266,6 +268,7 @@ export type IdentityResetFunction = () => Promise<unknown>;
  *   - No more than 1000 attributes
  *   - Supported types for values: string, number, boolean and Date
  * ```
+ * @param language Force a specific language for the tag. eg: 'en'. default: browser language.
  *
  * @example
  * ```ts
@@ -280,7 +283,8 @@ export type IdentityResetFunction = () => Promise<unknown>;
  *     plan: '<user-plan>',
  *     last_seen_at: new Date(),
  *     authenticated: true
- *   }
+ *   },
+ *   "en"
  * );
  * ```
  */
@@ -288,6 +292,8 @@ export type InitFunction = (
   websiteId: string,
   userId?: string,
   userProperties?: PropertyRecord,
+  hooks?: Hooks,
+  language?: string,
 ) => Promise<void>;
 
 /**
@@ -339,6 +345,8 @@ export type SurveyStartFunction = (
   surveyId: string,
   allowMultipleResponses: boolean,
   hiddenFields: PropertyRecord,
+  hooks: Hooks,
+  language: string,
 ) => Promise<unknown>;
 
 /**

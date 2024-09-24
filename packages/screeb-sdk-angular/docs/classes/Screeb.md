@@ -36,13 +36,17 @@
 
 ### constructor
 
-• **new Screeb**(`config`)
+• **new Screeb**(`config`): [`Screeb`](Screeb.md)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `config` | [`ScreebConfig`](ScreebConfig.md) |
+
+#### Returns
+
+[`Screeb`](Screeb.md)
 
 ## Properties
 
@@ -60,13 +64,13 @@ ___
 
 ### close
 
-▸ **close**(): `Promise`<`unknown`\>
+▸ **close**(): `Promise`\<`unknown`\>
 
 Shutdowns current Screeb session.
 
 #### Returns
 
-`Promise`<`unknown`\>
+`Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -78,13 +82,13 @@ ___
 
 ### debug
 
-▸ **debug**(): `Promise`<`unknown`\>
+▸ **debug**(): `Promise`\<`unknown`\>
 
 Prints the actual state information of Screeb tag.
 
 #### Returns
 
-`Promise`<`unknown`\>
+`Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -113,7 +117,7 @@ ___
 
 ### ensureScreeb
 
-▸ `Private` **ensureScreeb**(`functionName`, `onlyLoaded?`): `Promise`<`void`\>
+▸ **ensureScreeb**(`functionName`, `onlyLoaded?`): `Promise`\<`void`\>
 
 #### Parameters
 
@@ -124,13 +128,13 @@ ___
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`\<`void`\>
 
 ___
 
 ### eventTrack
 
-▸ **eventTrack**(`eventName`, `eventProperties?`): `Promise`<`unknown`\>
+▸ **eventTrack**(`eventName`, `eventProperties?`): `Promise`\<`unknown`\>
 
 Tracks a user event.
 
@@ -143,7 +147,7 @@ Tracks a user event.
 
 #### Returns
 
-`Promise`<`unknown`\>
+`Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -168,7 +172,7 @@ ___
 
 ### identity
 
-▸ **identity**(`userId`, `userProperties?`): `Promise`<`unknown`\>
+▸ **identity**(`userId`, `userProperties?`): `Promise`\<`unknown`\>
 
 Change the current user identity.
 Warning: Running surveys will be closed.
@@ -182,7 +186,7 @@ Warning: Running surveys will be closed.
 
 #### Returns
 
-`Promise`<`unknown`\>
+`Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -203,13 +207,13 @@ ___
 
 ### identityGet
 
-▸ **identityGet**(): `Promise`<`ScreebIdentityGetReturn`\>
+▸ **identityGet**(): `Promise`\<`ScreebIdentityGetReturn`\>
 
 Retrieves the current user identity.
 
 #### Returns
 
-`Promise`<`ScreebIdentityGetReturn`\>
+`Promise`\<`ScreebIdentityGetReturn`\>
 
 **`Example`**
 
@@ -230,7 +234,7 @@ ___
 
 ### identityGroupAssign
 
-▸ **identityGroupAssign**(`groupName`, `groupType?`, `groupProperties?`): `Promise`<`unknown`\>
+▸ **identityGroupAssign**(`groupName`, `groupType?`, `groupProperties?`): `Promise`\<`unknown`\>
 
 Assigns the current user to a group.
 
@@ -244,7 +248,7 @@ Assigns the current user to a group.
 
 #### Returns
 
-`Promise`<`unknown`\>
+`Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -267,7 +271,7 @@ ___
 
 ### identityGroupUnassign
 
-▸ **identityGroupUnassign**(`groupName`, `groupType?`): `Promise`<`unknown`\>
+▸ **identityGroupUnassign**(`groupName`, `groupType?`): `Promise`\<`unknown`\>
 
 Unassigns the current user to a group.
 
@@ -280,7 +284,7 @@ Unassigns the current user to a group.
 
 #### Returns
 
-`Promise`<`unknown`\>
+`Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -292,7 +296,7 @@ ___
 
 ### identityProperties
 
-▸ **identityProperties**(`userProperties`): `Promise`<`unknown`\>
+▸ **identityProperties**(`userProperties`): `Promise`\<`unknown`\>
 
 Adds properties to the current user identity.
 
@@ -304,7 +308,7 @@ Adds properties to the current user identity.
 
 #### Returns
 
-`Promise`<`unknown`\>
+`Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -334,14 +338,14 @@ ___
 
 ### identityReset
 
-▸ **identityReset**(): `Promise`<`unknown`\>
+▸ **identityReset**(): `Promise`\<`unknown`\>
 
 Resets the current user identity.
 Warning: This command must be called only once, since it creates a new identity on Screeb side.
 
 #### Returns
 
-`Promise`<`unknown`\>
+`Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -353,7 +357,7 @@ ___
 
 ### init
 
-▸ **init**(`websiteId`, `userId?`, `userProperties?`, `hooks?`): `Promise`<`unknown`\>
+▸ **init**(`websiteId`, `userId?`, `userProperties?`, `hooks?`, `language?`): `Promise`\<`unknown`\>
 
 Initializes Screeb tag.
 
@@ -365,10 +369,11 @@ Initializes Screeb tag.
 | `userId?` | `string` | The unique identifier of your user. |
 | `userProperties?` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date ``` |
 | `hooks?` | `Hooks` | - |
+| `language?` | `string` | Force a specific language for the tag. eg: 'en'. default: browser language. |
 
 #### Returns
 
-`Promise`<`unknown`\>
+`Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -387,6 +392,7 @@ this.screeb.init(
     version: "1.0.0",
     onReady: (payload) => console.log("Screeb SDK is ready!", payload),
   },
+  "en"
 );
 ```
 
@@ -394,7 +400,7 @@ ___
 
 ### load
 
-▸ **load**(`options?`): `Promise`<`undefined`\>
+▸ **load**(`options?`): `Promise`\<`undefined`\>
 
 Appends Screeb tag into your dom.
 
@@ -406,7 +412,7 @@ Appends Screeb tag into your dom.
 
 #### Returns
 
-`Promise`<`undefined`\>
+`Promise`\<`undefined`\>
 
 **`Example`**
 
@@ -418,13 +424,13 @@ ___
 
 ### surveyClose
 
-▸ **surveyClose**(): `Promise`<`unknown`\>
+▸ **surveyClose**(): `Promise`\<`unknown`\>
 
 Interrupts a running survey.
 
 #### Returns
 
-`Promise`<`unknown`\>
+`Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -436,7 +442,7 @@ ___
 
 ### surveyStart
 
-▸ **surveyStart**(`surveyId`, `allowMultipleResponses`, `hiddenFields`, `hooks?`): `Promise`<`unknown`\>
+▸ **surveyStart**(`surveyId`, `allowMultipleResponses`, `hiddenFields`, `hooks?`, `language?`): `Promise`\<`unknown`\>
 
 Starts a survey by its ID.
 
@@ -448,10 +454,11 @@ Starts a survey by its ID.
 | `allowMultipleResponses` | `boolean` |
 | `hiddenFields` | `PropertyRecord` |
 | `hooks?` | `Hooks` |
+| `language?` | `string` |
 
 #### Returns
 
-`Promise`<`unknown`\>
+`Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -467,6 +474,7 @@ this.screeb.surveyStart(
     version: "1.0.0",
     onSurveyShowed: (payload) => console.log("Survey showed", payload),
   },
+  "en"
 );
 ```
 
@@ -474,13 +482,13 @@ ___
 
 ### targetingCheck
 
-▸ **targetingCheck**(): `Promise`<`unknown`\>
+▸ **targetingCheck**(): `Promise`\<`unknown`\>
 
 Forces a targeting check.
 
 #### Returns
 
-`Promise`<`unknown`\>
+`Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -492,13 +500,13 @@ ___
 
 ### targetingDebug
 
-▸ **targetingDebug**(): `Promise`<`unknown`\>
+▸ **targetingDebug**(): `Promise`\<`unknown`\>
 
 Prints the current state of the targeting engine.
 
 #### Returns
 
-`Promise`<`unknown`\>
+`Promise`\<`unknown`\>
 
 **`Example`**
 

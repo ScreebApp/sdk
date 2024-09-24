@@ -88,7 +88,7 @@ ___
 
 ### HookOnQuestionReplied
 
-Ƭ **HookOnQuestionReplied**: (`data`: [`HookCommonProperties`](README.md#hookcommonproperties) & { `response`: { `answer`: [`ResponseItemAnswer`](README.md#responseitemanswer) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[] ; `question`: [`ResponseItemQuestion`](README.md#responseitemquestion) ; `status`: ``null``  }  }) => `void`
+Ƭ **HookOnQuestionReplied**: (`data`: [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `response`: \{ `answer`: [`ResponseItemAnswer`](README.md#responseitemanswer) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[] ; `question`: [`ResponseItemQuestion`](README.md#responseitemquestion) ; `status`: ``null``  }  }) => `void`
 
 #### Type declaration
 
@@ -98,7 +98,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `data` | [`HookCommonProperties`](README.md#hookcommonproperties) & { `response`: { `answer`: [`ResponseItemAnswer`](README.md#responseitemanswer) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[] ; `question`: [`ResponseItemQuestion`](README.md#responseitemquestion) ; `status`: ``null``  }  } |
+| `data` | [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `response`: \{ `answer`: [`ResponseItemAnswer`](README.md#responseitemanswer) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[] ; `question`: [`ResponseItemQuestion`](README.md#responseitemquestion) ; `status`: ``null``  }  } |
 
 ##### Returns
 
@@ -108,7 +108,7 @@ ___
 
 ### HookOnReady
 
-Ƭ **HookOnReady**: (`data`: { `channel`: [`Channel`](README.md#channel) ; `user`: [`User`](README.md#user)  }) => `void`
+Ƭ **HookOnReady**: (`data`: \{ `channel`: [`Channel`](README.md#channel) ; `user`: [`User`](README.md#user)  }) => `void`
 
 #### Type declaration
 
@@ -130,7 +130,7 @@ ___
 
 ### HookOnSurveyCompleted
 
-Ƭ **HookOnSurveyCompleted**: (`data`: [`HookCommonProperties`](README.md#hookcommonproperties) & { `response`: { `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  }) => `void`
+Ƭ **HookOnSurveyCompleted**: (`data`: [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `response`: \{ `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  }) => `void`
 
 #### Type declaration
 
@@ -140,7 +140,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `data` | [`HookCommonProperties`](README.md#hookcommonproperties) & { `response`: { `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  } |
+| `data` | [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `response`: \{ `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  } |
 
 ##### Returns
 
@@ -150,7 +150,7 @@ ___
 
 ### HookOnSurveyHidden
 
-Ƭ **HookOnSurveyHidden**: (`data`: [`HookCommonProperties`](README.md#hookcommonproperties) & { `response`: { `hide_reason`: [`ResponseStatus`](README.md#responsestatus) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  }) => `void`
+Ƭ **HookOnSurveyHidden**: (`data`: [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `response`: \{ `hide_reason`: [`ResponseStatus`](README.md#responsestatus) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  }) => `void`
 
 #### Type declaration
 
@@ -160,7 +160,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `data` | [`HookCommonProperties`](README.md#hookcommonproperties) & { `response`: { `hide_reason`: [`ResponseStatus`](README.md#responsestatus) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  } |
+| `data` | [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `response`: \{ `hide_reason`: [`ResponseStatus`](README.md#responsestatus) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  } |
 
 ##### Returns
 
@@ -170,7 +170,7 @@ ___
 
 ### HookOnSurveyShowed
 
-Ƭ **HookOnSurveyShowed**: (`data`: [`HookCommonProperties`](README.md#hookcommonproperties) & { `response`: { `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  }) => `void`
+Ƭ **HookOnSurveyShowed**: (`data`: [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `response`: \{ `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  }) => `void`
 
 #### Type declaration
 
@@ -180,7 +180,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `data` | [`HookCommonProperties`](README.md#hookcommonproperties) & { `response`: { `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  } |
+| `data` | [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `response`: \{ `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  } |
 
 ##### Returns
 
@@ -190,7 +190,7 @@ ___
 
 ### HookOnSurveyStarted
 
-Ƭ **HookOnSurveyStarted**: (`data`: [`HookCommonProperties`](README.md#hookcommonproperties) & { `response`: { `id`: `string`  }  }) => `void`
+Ƭ **HookOnSurveyStarted**: (`data`: [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `response`: \{ `id`: `string`  }  }) => `void`
 
 #### Type declaration
 
@@ -200,7 +200,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `data` | [`HookCommonProperties`](README.md#hookcommonproperties) & { `response`: { `id`: `string`  }  } |
+| `data` | [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `response`: \{ `id`: `string`  }  } |
 
 ##### Returns
 
@@ -269,7 +269,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `fields?` | { `boolean?`: `boolean` ; `number?`: `number` ; `text?`: `string` ; `time?`: `string` ; `type`: ``"string"`` \| ``"number"`` \| ``"boolean"`` \| ``"none"`` \| ``"time"`` \| ``"file"``  }[] |
+| `fields?` | \{ `boolean?`: `boolean` ; `number?`: `number` ; `text?`: `string` ; `time?`: `string` ; `type`: ``"string"`` \| ``"number"`` \| ``"boolean"`` \| ``"none"`` \| ``"time"`` \| ``"file"``  }[] |
 | `replied_at?` | `string` |
 
 ___
@@ -297,11 +297,11 @@ ___
 
 ### ScreebFunction
 
-Ƭ **ScreebFunction**: (...`_`: `unknown`[]) => `void` \| `Promise`<`unknown`\>
+Ƭ **ScreebFunction**: (...`_`: `unknown`[]) => `void` \| `Promise`\<`unknown`\>
 
 #### Type declaration
 
-▸ (`..._`): `void` \| `Promise`<`unknown`\>
+▸ (`..._`): `void` \| `Promise`\<`unknown`\>
 
 ##### Parameters
 
@@ -311,7 +311,7 @@ ___
 
 ##### Returns
 
-`void` \| `Promise`<`unknown`\>
+`void` \| `Promise`\<`unknown`\>
 
 ___
 
@@ -337,7 +337,7 @@ ___
 
 ### ScreebObject
 
-Ƭ **ScreebObject**: [`ScreebFunction`](README.md#screebfunction) & { `q?`: { `args`: `unknown`[] ; `ko`: (`reason?`: `unknown`) => `void` ; `ok`: (`value?`: `unknown`) => `void` ; `v`: `number`  }[]  }
+Ƭ **ScreebObject**: [`ScreebFunction`](README.md#screebfunction) & \{ `q?`: \{ `args`: `unknown`[] ; `ko`: (`reason?`: `unknown`) => `void` ; `ok`: (`value?`: `unknown`) => `void` ; `v`: `number`  }[]  }
 
 This is the Screeb object publicly exposed in browser `window`.
 
@@ -408,13 +408,13 @@ ___
 
 ### close
 
-▸ **close**(): `void` \| `Promise`<`unknown`\>
+▸ **close**(): `void` \| `Promise`\<`unknown`\>
 
 Shutdowns current Screeb session.
 
 #### Returns
 
-`void` \| `Promise`<`unknown`\>
+`void` \| `Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -428,13 +428,13 @@ ___
 
 ### debug
 
-▸ **debug**(): `void` \| `Promise`<`unknown`\>
+▸ **debug**(): `void` \| `Promise`\<`unknown`\>
 
 Prints the actual state information of Screeb tag.
 
 #### Returns
 
-`void` \| `Promise`<`unknown`\>
+`void` \| `Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -465,7 +465,7 @@ ___
 
 ### eventTrack
 
-▸ **eventTrack**(`eventName`, `eventProperties?`): `void` \| `Promise`<`unknown`\>
+▸ **eventTrack**(`eventName`, `eventProperties?`): `void` \| `Promise`\<`unknown`\>
 
 Tracks a user event.
 
@@ -478,7 +478,7 @@ Tracks a user event.
 
 #### Returns
 
-`void` \| `Promise`<`unknown`\>
+`void` \| `Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -505,7 +505,7 @@ ___
 
 ### identity
 
-▸ **identity**(`userId`, `userProperties?`): `void` \| `Promise`<`unknown`\>
+▸ **identity**(`userId`, `userProperties?`): `void` \| `Promise`\<`unknown`\>
 
 Change the current user identity.
 Warning: Running surveys will be closed.
@@ -519,7 +519,7 @@ Warning: Running surveys will be closed.
 
 #### Returns
 
-`void` \| `Promise`<`unknown`\>
+`void` \| `Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -542,13 +542,13 @@ ___
 
 ### identityGet
 
-▸ **identityGet**(): `Promise`<[`ScreebIdentityGetReturn`](README.md#screebidentitygetreturn)\>
+▸ **identityGet**(): `Promise`\<[`ScreebIdentityGetReturn`](README.md#screebidentitygetreturn)\>
 
 Retrieves the current user identity.
 
 #### Returns
 
-`Promise`<[`ScreebIdentityGetReturn`](README.md#screebidentitygetreturn)\>
+`Promise`\<[`ScreebIdentityGetReturn`](README.md#screebidentitygetreturn)\>
 
 **`Example`**
 
@@ -571,7 +571,7 @@ ___
 
 ### identityGroupAssign
 
-▸ **identityGroupAssign**(`groupName`, `groupType?`, `groupProperties?`): `void` \| `Promise`<`unknown`\>
+▸ **identityGroupAssign**(`groupName`, `groupType?`, `groupProperties?`): `void` \| `Promise`\<`unknown`\>
 
 Assigns the current user to a group.
 
@@ -585,7 +585,7 @@ Assigns the current user to a group.
 
 #### Returns
 
-`void` \| `Promise`<`unknown`\>
+`void` \| `Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -610,7 +610,7 @@ ___
 
 ### identityGroupUnassign
 
-▸ **identityGroupUnassign**(`groupName`, `groupType?`): `void` \| `Promise`<`unknown`\>
+▸ **identityGroupUnassign**(`groupName`, `groupType?`): `void` \| `Promise`\<`unknown`\>
 
 Unassigns the current user to a group.
 
@@ -623,7 +623,7 @@ Unassigns the current user to a group.
 
 #### Returns
 
-`void` \| `Promise`<`unknown`\>
+`void` \| `Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -637,7 +637,7 @@ ___
 
 ### identityProperties
 
-▸ **identityProperties**(`userProperties`): `void` \| `Promise`<`unknown`\>
+▸ **identityProperties**(`userProperties`): `void` \| `Promise`\<`unknown`\>
 
 Adds properties to the current user identity.
 
@@ -649,7 +649,7 @@ Adds properties to the current user identity.
 
 #### Returns
 
-`void` \| `Promise`<`unknown`\>
+`void` \| `Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -681,14 +681,14 @@ ___
 
 ### identityReset
 
-▸ **identityReset**(): `void` \| `Promise`<`unknown`\>
+▸ **identityReset**(): `void` \| `Promise`\<`unknown`\>
 
 Resets the current user identity.
 Warning: This command must be called only once, since it creates a new identity on Screeb side.
 
 #### Returns
 
-`void` \| `Promise`<`unknown`\>
+`void` \| `Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -702,7 +702,7 @@ ___
 
 ### init
 
-▸ **init**(`websiteId`, `userId?`, `userProperties?`, `hooks?`): `void` \| `Promise`<`unknown`\>
+▸ **init**(`websiteId`, `userId?`, `userProperties?`, `hooks?`, `language?`): `void` \| `Promise`\<`unknown`\>
 
 Initializes Screeb tag.
 
@@ -714,10 +714,11 @@ Initializes Screeb tag.
 | `userId?` | `string` | The unique identifier of your user. |
 | `userProperties?` | [`PropertyRecord`](README.md#propertyrecord) | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date ``` |
 | `hooks?` | [`Hooks`](README.md#hooks) | Hooks to be called when SDK is ready or a survey is showed, started, completed, hidden or when a question is replied. |
+| `language?` | `string` | Force a specific language for the tag. eg: 'en'. default: browser language. |
 
 #### Returns
 
-`void` \| `Promise`<`unknown`\>
+`void` \| `Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -738,6 +739,7 @@ Screeb.init(
     version: "1.0.0",
     onReady: (payload) =>  console.log("Screeb SDK is ready!", payload),
   },
+  "en"
 );
 ```
 
@@ -767,7 +769,7 @@ ___
 
 ### load
 
-▸ **load**(`options?`): `Promise`<`undefined`\>
+▸ **load**(`options?`): `Promise`\<`undefined`\>
 
 Appends Screeb tag into your dom.
 
@@ -779,7 +781,7 @@ Appends Screeb tag into your dom.
 
 #### Returns
 
-`Promise`<`undefined`\>
+`Promise`\<`undefined`\>
 
 **`Example`**
 
@@ -793,13 +795,13 @@ ___
 
 ### surveyClose
 
-▸ **surveyClose**(): `void` \| `Promise`<`unknown`\>
+▸ **surveyClose**(): `void` \| `Promise`\<`unknown`\>
 
 Interrupts a running survey.
 
 #### Returns
 
-`void` \| `Promise`<`unknown`\>
+`void` \| `Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -813,7 +815,7 @@ ___
 
 ### surveyStart
 
-▸ **surveyStart**(`surveyId`, `allowMultipleResponses?`, `hiddenFields?`, `hooks?`): `void` \| `Promise`<`unknown`\>
+▸ **surveyStart**(`surveyId`, `allowMultipleResponses?`, `hiddenFields?`, `hooks?`, `language?`): `void` \| `Promise`\<`unknown`\>
 
 Starts a survey by its ID.
 
@@ -825,10 +827,11 @@ Starts a survey by its ID.
 | `allowMultipleResponses` | `boolean` | `true` |
 | `hiddenFields` | [`PropertyRecord`](README.md#propertyrecord) | `{}` |
 | `hooks?` | [`Hooks`](README.md#hooks) | `undefined` |
+| `language?` | `string` | `undefined` |
 
 #### Returns
 
-`void` \| `Promise`<`unknown`\>
+`void` \| `Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -846,6 +849,7 @@ Screeb.surveyStart(
     version: "1.0.0",
     onSurveyShowed: (payload) => console.log("Survey showed", payload),
   },
+  "en"
 );
 ```
 
@@ -853,13 +857,13 @@ ___
 
 ### targetingCheck
 
-▸ **targetingCheck**(): `void` \| `Promise`<`unknown`\>
+▸ **targetingCheck**(): `void` \| `Promise`\<`unknown`\>
 
 Forces a targeting check.
 
 #### Returns
 
-`void` \| `Promise`<`unknown`\>
+`void` \| `Promise`\<`unknown`\>
 
 **`Example`**
 
@@ -873,13 +877,13 @@ ___
 
 ### targetingDebug
 
-▸ **targetingDebug**(): `void` \| `Promise`<`unknown`\>
+▸ **targetingDebug**(): `void` \| `Promise`\<`unknown`\>
 
 Prints the current state of the targeting engine.
 
 #### Returns
 
-`void` \| `Promise`<`unknown`\>
+`void` \| `Promise`\<`unknown`\>
 
 **`Example`**
 

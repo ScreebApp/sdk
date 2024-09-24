@@ -315,6 +315,7 @@ export class Screeb {
    *     version: "1.0.0",
    *     onSurveyShowed: (payload) => console.log("Survey showed", payload),
    *   },
+   *   "en"
    * );
    * ```
    */
@@ -322,7 +323,8 @@ export class Screeb {
     surveyId: string,
     allowMultipleResponses: boolean,
     hiddenFields: _Screeb.PropertyRecord,
-    hooks?: _Screeb.Hooks
+    hooks?: _Screeb.Hooks,
+    language?: string
   ) {
     await this.ensureScreeb("surveyStart");
 
@@ -330,7 +332,8 @@ export class Screeb {
       surveyId,
       allowMultipleResponses,
       hiddenFields,
-      hooks
+      hooks,
+      language
     );
   }
 
@@ -387,6 +390,7 @@ export class Screeb {
    *   - No more than 1000 attributes
    *   - Supported types for values: string, number, boolean and Date
    * ```
+   * @param language Force a specific language for the tag. eg: 'en'. default: browser language.
    *
    * @example
    * ```ts
@@ -404,6 +408,7 @@ export class Screeb {
    *     version: "1.0.0",
    *     onReady: (payload) => console.log("Screeb SDK is ready!", payload),
    *   },
+   *   "en"
    * );
    * ```
    */
@@ -411,13 +416,20 @@ export class Screeb {
     websiteId: string,
     userId?: string,
     userProperties?: _Screeb.PropertyRecord,
-    hooks?: _Screeb.Hooks
+    hooks?: _Screeb.Hooks,
+    language?: string
   ) {
     await this.ensureScreeb("init", true);
 
     this.isInitialized = true;
 
-    return await _Screeb.init(websiteId, userId, userProperties, hooks);
+    return await _Screeb.init(
+      websiteId,
+      userId,
+      userProperties,
+      hooks,
+      language
+    );
   }
 
   /**
