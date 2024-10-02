@@ -345,8 +345,8 @@ export type SurveyStartFunction = (
   surveyId: string,
   allowMultipleResponses: boolean,
   hiddenFields: PropertyRecord,
-  hooks: Hooks,
-  language: string,
+  hooks?: Hooks,
+  language?: string,
 ) => Promise<unknown>;
 
 /**

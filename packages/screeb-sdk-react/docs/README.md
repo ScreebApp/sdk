@@ -517,7 +517,7 @@ ___
 
 ### SurveyStartFunction
 
-Ƭ **SurveyStartFunction**: (`surveyId`: `string`, `allowMultipleResponses`: `boolean`, `hiddenFields`: `PropertyRecord`, `hooks`: `Hooks`, `language`: `string`) => `Promise`\<`unknown`\>
+Ƭ **SurveyStartFunction**: (`surveyId`: `string`, `allowMultipleResponses`: `boolean`, `hiddenFields`: `PropertyRecord`, `hooks?`: `Hooks`, `language?`: `string`) => `Promise`\<`unknown`\>
 
 Starts a survey by its ID.
 
@@ -538,7 +538,7 @@ surveyStart(
 
 #### Type declaration
 
-▸ (`surveyId`, `allowMultipleResponses`, `hiddenFields`, `hooks`, `language`): `Promise`\<`unknown`\>
+▸ (`surveyId`, `allowMultipleResponses`, `hiddenFields`, `hooks?`, `language?`): `Promise`\<`unknown`\>
 
 ##### Parameters
 
@@ -547,8 +547,8 @@ surveyStart(
 | `surveyId` | `string` |
 | `allowMultipleResponses` | `boolean` |
 | `hiddenFields` | `PropertyRecord` |
-| `hooks` | `Hooks` |
-| `language` | `string` |
+| `hooks?` | `Hooks` |
+| `language?` | `string` |
 
 ##### Returns
 
