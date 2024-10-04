@@ -524,6 +524,8 @@ Screeb context API
 | `identityReset` | [`IdentityResetFunction`](README.md#identityresetfunction) |
 | `init` | [`InitFunction`](README.md#initfunction) |
 | `load` | [`LoadFunction`](README.md#loadfunction) |
+| `messageClose` | [`MessageCloseFunction`](README.md#messageclosefunction) |
+| `messageStart` | [`MessageStartFunction`](README.md#messagestartfunction) |
 | `surveyClose` | [`SurveyCloseFunction`](README.md#surveyclosefunction) |
 | `surveyStart` | [`SurveyStartFunction`](README.md#surveystartfunction) |
 | `targetingCheck` | [`TargetingCheckFunction`](README.md#targetingcheckfunction) |

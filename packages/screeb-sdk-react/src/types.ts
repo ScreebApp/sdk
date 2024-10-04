@@ -438,6 +438,8 @@ export type ScreebContextValues = {
   load: LoadFunction;
   surveyClose: SurveyCloseFunction;
   surveyStart: SurveyStartFunction;
+  messageClose: MessageCloseFunction;
+  messageStart: MessageStartFunction;
   targetingCheck: TargetingCheckFunction;
   targetingDebug: TargetingDebugFunction;
 };
