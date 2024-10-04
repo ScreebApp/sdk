@@ -350,6 +350,42 @@ export type SurveyStartFunction = (
 ) => Promise<unknown>;
 
 /**
+ * Interrupts a running message.
+ *
+ * @example
+ * ```ts
+ * const { messageClose } = useScreeb();
+ *
+ * messageClose();
+ * ```
+ */
+export type MessageCloseFunction = () => Promise<unknown>;
+
+/**
+ * Starts a message by its ID.
+ *
+ * @example
+ * ```ts
+ * const { messageStart } = useScreeb();
+ *
+ * messageStart(
+ *   '<UUID>',
+ *   false,
+ *   {
+ *     color: "green",
+ *     article_id: 42
+ *   }
+ * );
+ * ```
+ */
+export type MessageStartFunction = (
+  messageId: string,
+  hiddenFields: PropertyRecord,
+  hooks?: Hooks,
+  language?: string,
+) => Promise<unknown>;
+
+/**
  * Forces a targeting check.
  *
  * @example

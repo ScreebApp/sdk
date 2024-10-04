@@ -46,6 +46,8 @@
 - [init](README.md#init)
 - [isLoaded](README.md#isloaded)
 - [load](README.md#load)
+- [messageClose](README.md#messageclose)
+- [messageStart](README.md#messagestart)
 - [surveyClose](README.md#surveyclose)
 - [surveyStart](README.md#surveystart)
 - [targetingCheck](README.md#targetingcheck)
@@ -789,6 +791,67 @@ Appends Screeb tag into your dom.
 import * as Screeb from "@screeb/sdk-browser";
 
 Screeb.load();
+```
+
+___
+
+### messageClose
+
+▸ **messageClose**(): `void` \| `Promise`\<`unknown`\>
+
+Interrupts a running message.
+
+#### Returns
+
+`void` \| `Promise`\<`unknown`\>
+
+**`Example`**
+
+```ts
+import * as Screeb from "@screeb/sdk-browser";
+
+Screeb.messageClose();
+```
+
+___
+
+### messageStart
+
+▸ **messageStart**(`messageId`, `hiddenFields?`, `hooks?`, `language?`): `void` \| `Promise`\<`unknown`\>
+
+Starts a message by its ID.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `messageId` | `string` |
+| `hiddenFields` | [`PropertyRecord`](README.md#propertyrecord) |
+| `hooks?` | [`Hooks`](README.md#hooks) |
+| `language?` | `string` |
+
+#### Returns
+
+`void` \| `Promise`\<`unknown`\>
+
+**`Example`**
+
+```ts
+import * as Screeb from "@screeb/sdk-browser";
+
+Screeb.messageStart(
+  '<UUID>',
+  false,
+  {
+    color: "green",
+    article_id: 42
+  },
+  {
+    version: "1.0.0",
+    onMessageShowed: (payload) => console.log("Message showed", payload),
+  },
+  "en"
+);
 ```
 
 ___

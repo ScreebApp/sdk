@@ -338,6 +338,51 @@ export class Screeb {
   }
 
   /**
+   * Interrupts a running message.
+   *
+   * @example
+   * ```ts
+   * this.screeb.messageClose();
+   * ```
+   */
+  public async messageClose() {
+    await this.ensureScreeb("messageClose");
+
+    return _Screeb.messageClose();
+  }
+
+  /**
+   * Starts a message by its ID.
+   *
+   * @example
+   * ```ts
+   * this.screeb.messageStart(
+   *   '<UUID>',
+   *   false,
+   *   {
+   *     color: "green",
+   *     article_id: 42
+   *   },
+   *   {
+   *     version: "1.0.0",
+   *     onMessageShowed: (payload) => console.log("Message showed", payload),
+   *   },
+   *   "en"
+   * );
+   * ```
+   */
+  public async messageStart(
+    messageId: string,
+    hiddenFields: _Screeb.PropertyRecord,
+    hooks?: _Screeb.Hooks,
+    language?: string
+  ) {
+    await this.ensureScreeb("messageStart");
+
+    return _Screeb.messageStart(messageId, hiddenFields, hooks, language);
+  }
+
+  /**
    * Forces a targeting check.
    *
    * @example

@@ -214,6 +214,24 @@ export const ScreebProvider: React.FC<
     [],
   );
 
+  const messageClose = React.useCallback(
+    async () => await ensureScreeb("messageClose", () => Screeb.messageClose()),
+    [],
+  );
+
+  const messageStart = React.useCallback(
+    async (
+      messageId: string,
+      hiddenFields: Screeb.PropertyRecord,
+      hooks?: Screeb.Hooks,
+      language?: string,
+    ) =>
+      await ensureScreeb("messageStart", () =>
+        Screeb.messageStart(messageId, hiddenFields, hooks, language),
+      ),
+    [],
+  );
+
   const targetingCheck = React.useCallback(
     async () =>
       await ensureScreeb("targetingCheck", () => Screeb.targetingCheck()),
@@ -241,6 +259,8 @@ export const ScreebProvider: React.FC<
       load,
       surveyClose,
       surveyStart,
+      messageClose,
+      messageStart,
       targetingCheck,
       targetingDebug,
     }),
@@ -258,6 +278,8 @@ export const ScreebProvider: React.FC<
       load,
       surveyClose,
       surveyStart,
+      messageClose,
+      messageStart,
       targetingCheck,
       targetingDebug,
     ],

@@ -17,6 +17,8 @@
 - [IdentityResetFunction](README.md#identityresetfunction)
 - [InitFunction](README.md#initfunction)
 - [LoadFunction](README.md#loadfunction)
+- [MessageCloseFunction](README.md#messageclosefunction)
+- [MessageStartFunction](README.md#messagestartfunction)
 - [ScreebContextValues](README.md#screebcontextvalues)
 - [ScreebProps](README.md#screebprops)
 - [ScreebProviderProps](README.md#screebproviderprops)
@@ -434,6 +436,70 @@ load();
 ##### Returns
 
 `Promise`\<`void`\>
+
+___
+
+### MessageCloseFunction
+
+Ƭ **MessageCloseFunction**: () => `Promise`\<`unknown`\>
+
+Interrupts a running message.
+
+**`Example`**
+
+```ts
+const { messageClose } = useScreeb();
+
+messageClose();
+```
+
+#### Type declaration
+
+▸ (): `Promise`\<`unknown`\>
+
+##### Returns
+
+`Promise`\<`unknown`\>
+
+___
+
+### MessageStartFunction
+
+Ƭ **MessageStartFunction**: (`messageId`: `string`, `hiddenFields`: `PropertyRecord`, `hooks?`: `Hooks`, `language?`: `string`) => `Promise`\<`unknown`\>
+
+Starts a message by its ID.
+
+**`Example`**
+
+```ts
+const { messageStart } = useScreeb();
+
+messageStart(
+  '<UUID>',
+  false,
+  {
+    color: "green",
+    article_id: 42
+  }
+);
+```
+
+#### Type declaration
+
+▸ (`messageId`, `hiddenFields`, `hooks?`, `language?`): `Promise`\<`unknown`\>
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `messageId` | `string` |
+| `hiddenFields` | `PropertyRecord` |
+| `hooks?` | `Hooks` |
+| `language?` | `string` |
+
+##### Returns
+
+`Promise`\<`unknown`\>
 
 ___
 

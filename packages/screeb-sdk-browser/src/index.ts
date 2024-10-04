@@ -459,6 +459,52 @@ export const surveyStart = (
   });
 
 /**
+ * Interrupts a running message.
+ *
+ * @example
+ * ```ts
+ * import * as Screeb from "@screeb/sdk-browser";
+ *
+ * Screeb.messageClose();
+ * ```
+ */
+export const messageClose = () => callScreebCommand("message.close");
+
+/**
+ * Starts a message by its ID.
+ *
+ * @example
+ * ```ts
+ * import * as Screeb from "@screeb/sdk-browser";
+ *
+ * Screeb.messageStart(
+ *   '<UUID>',
+ *   false,
+ *   {
+ *     color: "green",
+ *     article_id: 42
+ *   },
+ *   {
+ *     version: "1.0.0",
+ *     onMessageShowed: (payload) => console.log("Message showed", payload),
+ *   },
+ *   "en"
+ * );
+ * ```
+ */
+export const messageStart = (
+  messageId: string,
+  hiddenFields: PropertyRecord = {},
+  hooks?: Hooks,
+  language?: string,
+) =>
+  callScreebCommand("message.start", messageId, {
+    language: language,
+    hidden_fields: hiddenFields,
+    hooks: hooks,
+  });
+
+/**
  * Forces a targeting check.
  *
  * @example

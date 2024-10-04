@@ -27,6 +27,8 @@
 - [identityReset](Screeb.md#identityreset)
 - [init](Screeb.md#init)
 - [load](Screeb.md#load)
+- [messageClose](Screeb.md#messageclose)
+- [messageStart](Screeb.md#messagestart)
 - [surveyClose](Screeb.md#surveyclose)
 - [surveyStart](Screeb.md#surveystart)
 - [targetingCheck](Screeb.md#targetingcheck)
@@ -418,6 +420,63 @@ Appends Screeb tag into your dom.
 
 ```ts
 this.screeb.load();
+```
+
+___
+
+### messageClose
+
+▸ **messageClose**(): `Promise`\<`unknown`\>
+
+Interrupts a running message.
+
+#### Returns
+
+`Promise`\<`unknown`\>
+
+**`Example`**
+
+```ts
+this.screeb.messageClose();
+```
+
+___
+
+### messageStart
+
+▸ **messageStart**(`messageId`, `hiddenFields`, `hooks?`, `language?`): `Promise`\<`unknown`\>
+
+Starts a message by its ID.
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `messageId` | `string` |
+| `hiddenFields` | `PropertyRecord` |
+| `hooks?` | `Hooks` |
+| `language?` | `string` |
+
+#### Returns
+
+`Promise`\<`unknown`\>
+
+**`Example`**
+
+```ts
+this.screeb.messageStart(
+  '<UUID>',
+  false,
+  {
+    color: "green",
+    article_id: 42
+  },
+  {
+    version: "1.0.0",
+    onMessageShowed: (payload) => console.log("Message showed", payload),
+  },
+  "en"
+);
 ```
 
 ___
