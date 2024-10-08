@@ -585,7 +585,7 @@ ___
 
 ### SurveyStartFunction
 
-Ƭ **SurveyStartFunction**: (`surveyId`: `string`, `allowMultipleResponses`: `boolean`, `hiddenFields`: `PropertyRecord`, `hooks?`: `Hooks`, `language?`: `string`) => `Promise`\<`unknown`\>
+Ƭ **SurveyStartFunction**: (`surveyId`: `string`, `distributionId`: `string`, `allowMultipleResponses`: `boolean`, `hiddenFields`: `PropertyRecord`, `hooks?`: `Hooks`, `language?`: `string`) => `Promise`\<`unknown`\>
 
 Starts a survey by its ID.
 
@@ -595,6 +595,7 @@ Starts a survey by its ID.
 const { surveyStart } = useScreeb();
 
 surveyStart(
+  '<UUID>',
   '<UUID>',
   false,
   {
@@ -606,13 +607,14 @@ surveyStart(
 
 #### Type declaration
 
-▸ (`surveyId`, `allowMultipleResponses`, `hiddenFields`, `hooks?`, `language?`): `Promise`\<`unknown`\>
+▸ (`surveyId`, `distributionId`, `allowMultipleResponses`, `hiddenFields`, `hooks?`, `language?`): `Promise`\<`unknown`\>
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `surveyId` | `string` |
+| `distributionId` | `string` |
 | `allowMultipleResponses` | `boolean` |
 | `hiddenFields` | `PropertyRecord` |
 | `hooks?` | `Hooks` |

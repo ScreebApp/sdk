@@ -333,6 +333,7 @@ export type SurveyCloseFunction = () => Promise<unknown>;
  *
  * surveyStart(
  *   '<UUID>',
+ *   '<UUID>',
  *   false,
  *   {
  *     color: "green",
@@ -343,6 +344,7 @@ export type SurveyCloseFunction = () => Promise<unknown>;
  */
 export type SurveyStartFunction = (
   surveyId: string,
+  distributionId: string,
   allowMultipleResponses: boolean,
   hiddenFields: PropertyRecord,
   hooks?: Hooks,

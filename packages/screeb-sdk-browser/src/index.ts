@@ -431,6 +431,7 @@ export const surveyClose = () => callScreebCommand("survey.close");
  *
  * Screeb.surveyStart(
  *   '<UUID>',
+ *   '<UUID>',
  *   false,
  *   {
  *     color: "green",
@@ -446,12 +447,14 @@ export const surveyClose = () => callScreebCommand("survey.close");
  */
 export const surveyStart = (
   surveyId: string,
+  distributionId: string,
   allowMultipleResponses = true,
   hiddenFields: PropertyRecord = {},
   hooks?: Hooks,
   language?: string,
 ) =>
   callScreebCommand("survey.start", surveyId, {
+    distribution_id: distributionId,
     allow_multiple_responses: allowMultipleResponses,
     language: language,
     hidden_fields: hiddenFields,

@@ -501,7 +501,7 @@ ___
 
 ### surveyStart
 
-▸ **surveyStart**(`surveyId`, `allowMultipleResponses`, `hiddenFields`, `hooks?`, `language?`): `Promise`\<`unknown`\>
+▸ **surveyStart**(`surveyId`, `distributionId`, `allowMultipleResponses`, `hiddenFields`, `hooks?`, `language?`): `Promise`\<`unknown`\>
 
 Starts a survey by its ID.
 
@@ -510,6 +510,7 @@ Starts a survey by its ID.
 | Name | Type |
 | :------ | :------ |
 | `surveyId` | `string` |
+| `distributionId` | `string` |
 | `allowMultipleResponses` | `boolean` |
 | `hiddenFields` | `PropertyRecord` |
 | `hooks?` | `Hooks` |
@@ -523,6 +524,7 @@ Starts a survey by its ID.
 
 ```ts
 this.screeb.surveyStart(
+  '<UUID>',
   '<UUID>',
   false,
   {

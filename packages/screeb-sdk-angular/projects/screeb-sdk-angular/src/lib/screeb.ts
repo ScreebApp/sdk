@@ -306,6 +306,7 @@ export class Screeb {
    * ```ts
    * this.screeb.surveyStart(
    *   '<UUID>',
+   *   '<UUID>',
    *   false,
    *   {
    *     color: "green",
@@ -321,6 +322,7 @@ export class Screeb {
    */
   public async surveyStart(
     surveyId: string,
+    distributionId: string,
     allowMultipleResponses: boolean,
     hiddenFields: _Screeb.PropertyRecord,
     hooks?: _Screeb.Hooks,
@@ -330,6 +332,7 @@ export class Screeb {
 
     return _Screeb.surveyStart(
       surveyId,
+      distributionId,
       allowMultipleResponses,
       hiddenFields,
       hooks,
