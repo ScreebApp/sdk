@@ -366,7 +366,7 @@ ___
 
 ### InitFunction
 
-Ƭ **InitFunction**: (`websiteId`: `string`, `userId?`: `string`, `userProperties?`: `PropertyRecord`, `hooks?`: `Hooks`, `language?`: `string`) => `Promise`\<`void`\>
+Ƭ **InitFunction**: (`websiteId`: `string`, `userId?`: `string`, `userProperties?`: `PropertyRecord`, `hooks?`: `HooksInit`, `language?`: `string`) => `Promise`\<`void`\>
 
 Initializes Screeb tag.
 
@@ -400,7 +400,7 @@ init(
 | `websiteId` | `string` | Your website/channel id. |
 | `userId?` | `string` | The unique identifier of your user. |
 | `userProperties?` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date ``` |
-| `hooks?` | `Hooks` | - |
+| `hooks?` | `HooksInit` | - |
 | `language?` | `string` | Force a specific language for the tag. eg: 'en'. default: browser language. |
 
 ##### Returns
@@ -465,7 +465,7 @@ ___
 
 ### MessageStartFunction
 
-Ƭ **MessageStartFunction**: (`messageId`: `string`, `hiddenFields`: `PropertyRecord`, `hooks?`: `Hooks`, `language?`: `string`) => `Promise`\<`unknown`\>
+Ƭ **MessageStartFunction**: (`messageId`: `string`, `hiddenFields`: `PropertyRecord`, `hooks?`: `HooksMessageStart`, `language?`: `string`) => `Promise`\<`unknown`\>
 
 Starts a message by its ID.
 
@@ -494,7 +494,7 @@ messageStart(
 | :------ | :------ |
 | `messageId` | `string` |
 | `hiddenFields` | `PropertyRecord` |
-| `hooks?` | `Hooks` |
+| `hooks?` | `HooksMessageStart` |
 | `language?` | `string` |
 
 ##### Returns
@@ -543,7 +543,7 @@ Properties of Screeb provider
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `hooks?` | `Hooks` | Hooks to define callback for various event |
+| `hooks?` | `HooksInit` | Hooks to define callback for various event |
 | `language?` | `string` | The language you want to force |
 | `userId?` | `string` | The unique identifier of your user. |
 | `userProperties?` | `PropertyRecord` | The properties of your user. |
@@ -585,7 +585,7 @@ ___
 
 ### SurveyStartFunction
 
-Ƭ **SurveyStartFunction**: (`surveyId`: `string`, `distributionId`: `string`, `allowMultipleResponses`: `boolean`, `hiddenFields`: `PropertyRecord`, `hooks?`: `Hooks`, `language?`: `string`) => `Promise`\<`unknown`\>
+Ƭ **SurveyStartFunction**: (`surveyId`: `string`, `distributionId`: `string`, `allowMultipleResponses`: `boolean`, `hiddenFields`: `PropertyRecord`, `hooks?`: `HooksSurveyStart`, `language?`: `string`) => `Promise`\<`unknown`\>
 
 Starts a survey by its ID.
 
@@ -617,7 +617,7 @@ surveyStart(
 | `distributionId` | `string` |
 | `allowMultipleResponses` | `boolean` |
 | `hiddenFields` | `PropertyRecord` |
-| `hooks?` | `Hooks` |
+| `hooks?` | `HooksSurveyStart` |
 | `language?` | `string` |
 
 ##### Returns

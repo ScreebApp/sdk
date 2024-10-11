@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import {
-  Hooks,
+  HooksInit,
+  HooksMessageStart,
+  HooksSurveyStart,
   PropertyRecord,
   ScreebIdentityGetReturn,
   ScreebOptions,
@@ -15,7 +17,7 @@ export type ScreebProps = {
   /** The properties of your user. */
   userProperties?: PropertyRecord;
   /** Hooks to define callback for various event */
-  hooks?: Hooks;
+  hooks?: HooksInit;
   /** The language you want to force */
   language?: string;
 };
@@ -292,7 +294,7 @@ export type InitFunction = (
   websiteId: string,
   userId?: string,
   userProperties?: PropertyRecord,
-  hooks?: Hooks,
+  hooks?: HooksInit,
   language?: string,
 ) => Promise<void>;
 
@@ -347,7 +349,7 @@ export type SurveyStartFunction = (
   distributionId: string,
   allowMultipleResponses: boolean,
   hiddenFields: PropertyRecord,
-  hooks?: Hooks,
+  hooks?: HooksSurveyStart,
   language?: string,
 ) => Promise<unknown>;
 
@@ -383,7 +385,7 @@ export type MessageCloseFunction = () => Promise<unknown>;
 export type MessageStartFunction = (
   messageId: string,
   hiddenFields: PropertyRecord,
-  hooks?: Hooks,
+  hooks?: HooksMessageStart,
   language?: string,
 ) => Promise<unknown>;
 

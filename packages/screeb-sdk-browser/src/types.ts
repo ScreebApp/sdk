@@ -1,12 +1,3 @@
-import {
-  HookOnQuestionReplied,
-  HookOnReady,
-  HookOnSurveyCompleted,
-  HookOnSurveyHidden,
-  HookOnSurveyShowed,
-  HookOnSurveyStarted,
-} from "./hooks.types";
-
 /** This is property types that are supported by Screeb. */
 export type PropertyType = number | boolean | string | Date | PropertyRecord;
 
@@ -63,23 +54,4 @@ export type ScreebIdentityGetReturn = {
   channel_id: string;
   /** `true` if the tag is loaded, initialized and ready to rock */
   is_ready: boolean;
-};
-
-/** This is the Screeb tag hooks object. */
-export type Hooks = {
-  /** This defines the version of hooks and their data */
-  version: string;
-
-  /** This hook is triggered when Screeb SD is loaded, initialized and ready to rock */
-  onReady?: HookOnReady;
-  /** This hook is triggered when a survey is displayed on screen (also triggered when page is reloaded) */
-  onSurveyShowed?: HookOnSurveyShowed;
-  /** This hook is triggered when a survey is started */
-  onSurveyStarted?: HookOnSurveyStarted;
-  /** This hook is triggered when a question is answered */
-  onQuestionReplied?: HookOnQuestionReplied;
-  /** This hook is triggered when a survey is completed */
-  onSurveyCompleted?: HookOnSurveyCompleted;
-  /** This hook is triggered when a survey is hidden */
-  onSurveyHidden?: HookOnSurveyHidden;
 };

@@ -46,7 +46,7 @@ ___
 
 ### hooks
 
-• `Optional` **hooks**: `Hooks`
+• `Optional` **hooks**: `HooksInit`
 
 Hooks to define callback for various event
 

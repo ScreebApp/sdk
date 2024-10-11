@@ -9,13 +9,24 @@
 - [Channel](README.md#channel)
 - [ChannelType](README.md#channeltype)
 - [HookCommonProperties](README.md#hookcommonproperties)
+- [HookCommonPropertiesMessage](README.md#hookcommonpropertiesmessage)
+- [HookCommonPropertiesSurvey](README.md#hookcommonpropertiessurvey)
+- [HookOnMessageCompleted](README.md#hookonmessagecompleted)
+- [HookOnMessageDisplayAllowed](README.md#hookonmessagedisplayallowed)
+- [HookOnMessageHidden](README.md#hookonmessagehidden)
+- [HookOnMessageShowed](README.md#hookonmessageshowed)
+- [HookOnMessageStarted](README.md#hookonmessagestarted)
 - [HookOnQuestionReplied](README.md#hookonquestionreplied)
 - [HookOnReady](README.md#hookonready)
 - [HookOnSurveyCompleted](README.md#hookonsurveycompleted)
+- [HookOnSurveyDisplayAllowed](README.md#hookonsurveydisplayallowed)
 - [HookOnSurveyHidden](README.md#hookonsurveyhidden)
 - [HookOnSurveyShowed](README.md#hookonsurveyshowed)
 - [HookOnSurveyStarted](README.md#hookonsurveystarted)
-- [Hooks](README.md#hooks)
+- [HooksInit](README.md#hooksinit)
+- [HooksMessageStart](README.md#hooksmessagestart)
+- [HooksSurveyStart](README.md#hookssurveystart)
+- [Message](README.md#message)
 - [PropertyRecord](README.md#propertyrecord)
 - [PropertyType](README.md#propertytype)
 - [ResponseItem](README.md#responseitem)
@@ -83,14 +94,25 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `channel` | [`Channel`](README.md#channel) |
-| `survey` | [`Survey`](README.md#survey) |
 | `user` | [`User`](README.md#user) |
 
 ___
 
-### HookOnQuestionReplied
+### HookCommonPropertiesMessage
 
-Ƭ **HookOnQuestionReplied**: (`data`: [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `response`: \{ `answer`: [`ResponseItemAnswer`](README.md#responseitemanswer) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[] ; `question`: [`ResponseItemQuestion`](README.md#responseitemquestion) ; `status`: ``null``  }  }) => `void`
+Ƭ **HookCommonPropertiesMessage**: [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `message`: [`Message`](README.md#message)  }
+
+___
+
+### HookCommonPropertiesSurvey
+
+Ƭ **HookCommonPropertiesSurvey**: [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `survey`: [`Survey`](README.md#survey)  }
+
+___
+
+### HookOnMessageCompleted
+
+Ƭ **HookOnMessageCompleted**: (`data`: [`HookCommonPropertiesMessage`](README.md#hookcommonpropertiesmessage) & \{ `response`: \{ `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  }) => `void`
 
 #### Type declaration
 
@@ -100,7 +122,107 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `data` | [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `response`: \{ `answer`: [`ResponseItemAnswer`](README.md#responseitemanswer) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[] ; `question`: [`ResponseItemQuestion`](README.md#responseitemquestion) ; `status`: ``null``  }  } |
+| `data` | [`HookCommonPropertiesMessage`](README.md#hookcommonpropertiesmessage) & \{ `response`: \{ `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  } |
+
+##### Returns
+
+`void`
+
+___
+
+### HookOnMessageDisplayAllowed
+
+Ƭ **HookOnMessageDisplayAllowed**: (`data`: [`HookCommonPropertiesSurvey`](README.md#hookcommonpropertiessurvey)) => `boolean`
+
+#### Type declaration
+
+▸ (`data`): `boolean`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `data` | [`HookCommonPropertiesSurvey`](README.md#hookcommonpropertiessurvey) |
+
+##### Returns
+
+`boolean`
+
+___
+
+### HookOnMessageHidden
+
+Ƭ **HookOnMessageHidden**: (`data`: [`HookCommonPropertiesMessage`](README.md#hookcommonpropertiesmessage) & \{ `response`: \{ `hide_reason`: [`ResponseStatus`](README.md#responsestatus) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  }) => `void`
+
+#### Type declaration
+
+▸ (`data`): `void`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `data` | [`HookCommonPropertiesMessage`](README.md#hookcommonpropertiesmessage) & \{ `response`: \{ `hide_reason`: [`ResponseStatus`](README.md#responsestatus) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  } |
+
+##### Returns
+
+`void`
+
+___
+
+### HookOnMessageShowed
+
+Ƭ **HookOnMessageShowed**: (`data`: [`HookCommonPropertiesMessage`](README.md#hookcommonpropertiesmessage) & \{ `response`: \{ `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  }) => `void`
+
+#### Type declaration
+
+▸ (`data`): `void`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `data` | [`HookCommonPropertiesMessage`](README.md#hookcommonpropertiesmessage) & \{ `response`: \{ `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  } |
+
+##### Returns
+
+`void`
+
+___
+
+### HookOnMessageStarted
+
+Ƭ **HookOnMessageStarted**: (`data`: [`HookCommonPropertiesMessage`](README.md#hookcommonpropertiesmessage) & \{ `response`: \{ `id`: `string`  }  }) => `void`
+
+#### Type declaration
+
+▸ (`data`): `void`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `data` | [`HookCommonPropertiesMessage`](README.md#hookcommonpropertiesmessage) & \{ `response`: \{ `id`: `string`  }  } |
+
+##### Returns
+
+`void`
+
+___
+
+### HookOnQuestionReplied
+
+Ƭ **HookOnQuestionReplied**: (`data`: [`HookCommonPropertiesSurvey`](README.md#hookcommonpropertiessurvey) & \{ `response`: \{ `answer`: [`ResponseItemAnswer`](README.md#responseitemanswer) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[] ; `question`: [`ResponseItemQuestion`](README.md#responseitemquestion) ; `status`: ``null``  }  }) => `void`
+
+#### Type declaration
+
+▸ (`data`): `void`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `data` | [`HookCommonPropertiesSurvey`](README.md#hookcommonpropertiessurvey) & \{ `response`: \{ `answer`: [`ResponseItemAnswer`](README.md#responseitemanswer) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[] ; `question`: [`ResponseItemQuestion`](README.md#responseitemquestion) ; `status`: ``null``  }  } |
 
 ##### Returns
 
@@ -132,7 +254,7 @@ ___
 
 ### HookOnSurveyCompleted
 
-Ƭ **HookOnSurveyCompleted**: (`data`: [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `response`: \{ `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  }) => `void`
+Ƭ **HookOnSurveyCompleted**: (`data`: [`HookCommonPropertiesSurvey`](README.md#hookcommonpropertiessurvey) & \{ `response`: \{ `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  }) => `void`
 
 #### Type declaration
 
@@ -142,7 +264,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `data` | [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `response`: \{ `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  } |
+| `data` | [`HookCommonPropertiesSurvey`](README.md#hookcommonpropertiessurvey) & \{ `response`: \{ `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  } |
 
 ##### Returns
 
@@ -150,9 +272,29 @@ ___
 
 ___
 
+### HookOnSurveyDisplayAllowed
+
+Ƭ **HookOnSurveyDisplayAllowed**: (`data`: [`HookCommonPropertiesSurvey`](README.md#hookcommonpropertiessurvey)) => `boolean`
+
+#### Type declaration
+
+▸ (`data`): `boolean`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `data` | [`HookCommonPropertiesSurvey`](README.md#hookcommonpropertiessurvey) |
+
+##### Returns
+
+`boolean`
+
+___
+
 ### HookOnSurveyHidden
 
-Ƭ **HookOnSurveyHidden**: (`data`: [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `response`: \{ `hide_reason`: [`ResponseStatus`](README.md#responsestatus) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  }) => `void`
+Ƭ **HookOnSurveyHidden**: (`data`: [`HookCommonPropertiesSurvey`](README.md#hookcommonpropertiessurvey) & \{ `response`: \{ `hide_reason`: [`ResponseStatus`](README.md#responsestatus) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  }) => `void`
 
 #### Type declaration
 
@@ -162,7 +304,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `data` | [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `response`: \{ `hide_reason`: [`ResponseStatus`](README.md#responsestatus) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  } |
+| `data` | [`HookCommonPropertiesSurvey`](README.md#hookcommonpropertiessurvey) & \{ `response`: \{ `hide_reason`: [`ResponseStatus`](README.md#responsestatus) ; `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  } |
 
 ##### Returns
 
@@ -172,7 +314,7 @@ ___
 
 ### HookOnSurveyShowed
 
-Ƭ **HookOnSurveyShowed**: (`data`: [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `response`: \{ `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  }) => `void`
+Ƭ **HookOnSurveyShowed**: (`data`: [`HookCommonPropertiesSurvey`](README.md#hookcommonpropertiessurvey) & \{ `response`: \{ `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  }) => `void`
 
 #### Type declaration
 
@@ -182,7 +324,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `data` | [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `response`: \{ `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  } |
+| `data` | [`HookCommonPropertiesSurvey`](README.md#hookcommonpropertiessurvey) & \{ `response`: \{ `id`: `string` ; `items`: [`ResponseItem`](README.md#responseitem)[]  }  } |
 
 ##### Returns
 
@@ -192,7 +334,7 @@ ___
 
 ### HookOnSurveyStarted
 
-Ƭ **HookOnSurveyStarted**: (`data`: [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `response`: \{ `id`: `string`  }  }) => `void`
+Ƭ **HookOnSurveyStarted**: (`data`: [`HookCommonPropertiesSurvey`](README.md#hookcommonpropertiessurvey) & \{ `response`: \{ `id`: `string`  }  }) => `void`
 
 #### Type declaration
 
@@ -202,7 +344,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `data` | [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `response`: \{ `id`: `string`  }  } |
+| `data` | [`HookCommonPropertiesSurvey`](README.md#hookcommonpropertiessurvey) & \{ `response`: \{ `id`: `string`  }  } |
 
 ##### Returns
 
@@ -210,23 +352,60 @@ ___
 
 ___
 
-### Hooks
+### HooksInit
 
-Ƭ **Hooks**: `Object`
+Ƭ **HooksInit**: [`HooksSurveyStart`](README.md#hookssurveystart) & [`HooksMessageStart`](README.md#hooksmessagestart) & \{ `onMessageDisplayAllowed?`: [`HookOnMessageDisplayAllowed`](README.md#hookonmessagedisplayallowed) ; `onReady?`: [`HookOnReady`](README.md#hookonready) ; `onSurveyDisplayAllowed?`: [`HookOnSurveyDisplayAllowed`](README.md#hookonsurveydisplayallowed) ; `version`: `string`  }
 
-This is the Screeb tag hooks object.
+This is the Screeb tag hooks object available on `init` command.
+
+___
+
+### HooksMessageStart
+
+Ƭ **HooksMessageStart**: `Object`
+
+This is the Screeb tag hooks object available on `message.start` command.
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `onMessageCompleted?` | [`HookOnMessageCompleted`](README.md#hookonmessagecompleted) | This hook is triggered when a message is completed |
+| `onMessageHidden?` | [`HookOnMessageHidden`](README.md#hookonmessagehidden) | This hook is triggered when a message is hidden |
+| `onMessageShowed?` | [`HookOnMessageShowed`](README.md#hookonmessageshowed) | This hook is triggered when a message is displayed on screen (also triggered when page is reloaded) |
+| `onMessageStarted?` | [`HookOnMessageStarted`](README.md#hookonmessagestarted) | This hook is triggered when a message is started |
+| `onQuestionReplied?` | [`HookOnQuestionReplied`](README.md#hookonquestionreplied) | This hook is triggered when a question is answered |
+
+___
+
+### HooksSurveyStart
+
+Ƭ **HooksSurveyStart**: `Object`
+
+This is the Screeb tag hooks object available on `survey.start` command.
 
 #### Type declaration
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `onQuestionReplied?` | [`HookOnQuestionReplied`](README.md#hookonquestionreplied) | This hook is triggered when a question is answered |
-| `onReady?` | [`HookOnReady`](README.md#hookonready) | This hook is triggered when Screeb SD is loaded, initialized and ready to rock |
 | `onSurveyCompleted?` | [`HookOnSurveyCompleted`](README.md#hookonsurveycompleted) | This hook is triggered when a survey is completed |
 | `onSurveyHidden?` | [`HookOnSurveyHidden`](README.md#hookonsurveyhidden) | This hook is triggered when a survey is hidden |
 | `onSurveyShowed?` | [`HookOnSurveyShowed`](README.md#hookonsurveyshowed) | This hook is triggered when a survey is displayed on screen (also triggered when page is reloaded) |
 | `onSurveyStarted?` | [`HookOnSurveyStarted`](README.md#hookonsurveystarted) | This hook is triggered when a survey is started |
-| `version` | `string` | This defines the version of hooks and their data |
+
+___
+
+### Message
+
+Ƭ **Message**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `id` | `string` |
+| `messagey_size` | ``100`` |
 
 ___
 
@@ -715,7 +894,7 @@ Initializes Screeb tag.
 | `websiteId` | `string` | Your website/channel id. |
 | `userId?` | `string` | The unique identifier of your user. |
 | `userProperties?` | [`PropertyRecord`](README.md#propertyrecord) | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date ``` |
-| `hooks?` | [`Hooks`](README.md#hooks) | Hooks to be called when SDK is ready or a survey is showed, started, completed, hidden or when a question is replied. |
+| `hooks?` | [`HooksInit`](README.md#hooksinit) | Hooks to be called when SDK is ready or a survey is showed, started, completed, hidden or when a question is replied. |
 | `language?` | `string` | Force a specific language for the tag. eg: 'en'. default: browser language. |
 
 #### Returns
@@ -827,7 +1006,7 @@ Starts a message by its ID.
 | :------ | :------ |
 | `messageId` | `string` |
 | `hiddenFields` | [`PropertyRecord`](README.md#propertyrecord) |
-| `hooks?` | [`Hooks`](README.md#hooks) |
+| `hooks?` | [`HooksMessageStart`](README.md#hooksmessagestart) |
 | `language?` | `string` |
 
 #### Returns
@@ -890,7 +1069,7 @@ Starts a survey by its ID.
 | `distributionId` | `string` | `undefined` |
 | `allowMultipleResponses` | `boolean` | `true` |
 | `hiddenFields` | [`PropertyRecord`](README.md#propertyrecord) | `{}` |
-| `hooks?` | [`Hooks`](README.md#hooks) | `undefined` |
+| `hooks?` | [`HooksSurveyStart`](README.md#hookssurveystart) | `undefined` |
 | `language?` | `string` | `undefined` |
 
 #### Returns

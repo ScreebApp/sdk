@@ -370,7 +370,7 @@ Initializes Screeb tag.
 | `websiteId` | `string` | Your website/channel id. |
 | `userId?` | `string` | The unique identifier of your user. |
 | `userProperties?` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date ``` |
-| `hooks?` | `Hooks` | - |
+| `hooks?` | `HooksInit` | - |
 | `language?` | `string` | Force a specific language for the tag. eg: 'en'. default: browser language. |
 
 #### Returns
@@ -454,7 +454,7 @@ Starts a message by its ID.
 | :------ | :------ |
 | `messageId` | `string` |
 | `hiddenFields` | `PropertyRecord` |
-| `hooks?` | `Hooks` |
+| `hooks?` | `HooksMessageStart` |
 | `language?` | `string` |
 
 #### Returns
@@ -513,7 +513,7 @@ Starts a survey by its ID.
 | `distributionId` | `string` |
 | `allowMultipleResponses` | `boolean` |
 | `hiddenFields` | `PropertyRecord` |
-| `hooks?` | `Hooks` |
+| `hooks?` | `HooksSurveyStart` |
 | `language?` | `string` |
 
 #### Returns

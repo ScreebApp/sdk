@@ -1,5 +1,5 @@
+import { HooksInit, HooksMessageStart, HooksSurveyStart } from "./hooks.types";
 import {
-  Hooks,
   PropertyRecord,
   ScreebFunction,
   ScreebIdentityGetReturn,
@@ -128,12 +128,12 @@ export const init = (
   websiteId: string,
   userId?: string,
   userProperties?: PropertyRecord,
-  hooks?: Hooks,
+  hooks?: HooksInit,
   language?: string,
 ) => {
   let identityObject:
     | {
-        hooks?: Hooks;
+        hooks?: HooksInit;
         identity?: { id?: string; properties?: PropertyRecord };
         language?: string;
       }
@@ -450,7 +450,7 @@ export const surveyStart = (
   distributionId: string,
   allowMultipleResponses = true,
   hiddenFields: PropertyRecord = {},
-  hooks?: Hooks,
+  hooks?: HooksSurveyStart,
   language?: string,
 ) =>
   callScreebCommand("survey.start", surveyId, {
@@ -498,7 +498,7 @@ export const messageClose = () => callScreebCommand("message.close");
 export const messageStart = (
   messageId: string,
   hiddenFields: PropertyRecord = {},
-  hooks?: Hooks,
+  hooks?: HooksMessageStart,
   language?: string,
 ) =>
   callScreebCommand("message.start", messageId, {

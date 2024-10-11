@@ -145,7 +145,7 @@ export const ScreebProvider: React.FC<
       websiteId: string,
       userId?: string,
       userProperties?: Screeb.PropertyRecord,
-      hooks?: Screeb.Hooks,
+      hooks?: Screeb.HooksInit,
       language?: string,
     ) => {
       await ensureScreeb(
@@ -200,7 +200,7 @@ export const ScreebProvider: React.FC<
       distributionId: string,
       allowMultipleResponses: boolean,
       hiddenFields: Screeb.PropertyRecord,
-      hooks?: Screeb.Hooks,
+      hooks?: Screeb.HooksSurveyStart,
       language?: string,
     ) =>
       await ensureScreeb("surveyStart", () =>
@@ -225,7 +225,7 @@ export const ScreebProvider: React.FC<
     async (
       messageId: string,
       hiddenFields: Screeb.PropertyRecord,
-      hooks?: Screeb.Hooks,
+      hooks?: Screeb.HooksMessageStart,
       language?: string,
     ) =>
       await ensureScreeb("messageStart", () =>
