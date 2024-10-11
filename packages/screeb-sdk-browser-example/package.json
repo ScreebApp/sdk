@@ -1,6 +1,6 @@
 {
   "name": "@screeb/sdk-browser-example",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "private": true,
   "description": "Screeb's example app for browser sdk.",
   "homepage": "https://screeb.app",
@@ -23,7 +23,7 @@
     "start": "vite"
   },
   "dependencies": {
-    "@screeb/sdk-browser": "^0.2.0"
+    "@screeb/sdk-browser": "^0.2.1"
   },
   "devDependencies": {
     "@screeb/eslint-config": "^0.1.6",
