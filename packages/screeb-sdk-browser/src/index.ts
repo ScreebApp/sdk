@@ -447,7 +447,7 @@ export const surveyClose = () => callScreebCommand("survey.close");
  */
 export const surveyStart = (
   surveyId: string,
-  distributionId: string,
+  distributionId?: string,
   allowMultipleResponses = true,
   hiddenFields: PropertyRecord = {},
   hooks?: HooksSurveyStart,

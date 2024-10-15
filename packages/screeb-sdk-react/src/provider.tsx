@@ -197,9 +197,9 @@ export const ScreebProvider: React.FC<
   const surveyStart = React.useCallback(
     async (
       surveyId: string,
-      distributionId: string,
-      allowMultipleResponses: boolean,
-      hiddenFields: Screeb.PropertyRecord,
+      distributionId?: string,
+      allowMultipleResponses?: boolean,
+      hiddenFields?: Screeb.PropertyRecord,
       hooks?: Screeb.HooksSurveyStart,
       language?: string,
     ) =>

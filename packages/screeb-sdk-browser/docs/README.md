@@ -1057,7 +1057,7 @@ ___
 
 ### surveyStart
 
-▸ **surveyStart**(`surveyId`, `distributionId`, `allowMultipleResponses?`, `hiddenFields?`, `hooks?`, `language?`): `void` \| `Promise`\<`unknown`\>
+▸ **surveyStart**(`surveyId`, `distributionId?`, `allowMultipleResponses?`, `hiddenFields?`, `hooks?`, `language?`): `void` \| `Promise`\<`unknown`\>
 
 Starts a survey by its ID.
 
@@ -1066,7 +1066,7 @@ Starts a survey by its ID.
 | Name | Type | Default value |
 | :------ | :------ | :------ |
 | `surveyId` | `string` | `undefined` |
-| `distributionId` | `string` | `undefined` |
+| `distributionId?` | `string` | `undefined` |
 | `allowMultipleResponses` | `boolean` | `true` |
 | `hiddenFields` | [`PropertyRecord`](README.md#propertyrecord) | `{}` |
 | `hooks?` | [`HooksSurveyStart`](README.md#hookssurveystart) | `undefined` |

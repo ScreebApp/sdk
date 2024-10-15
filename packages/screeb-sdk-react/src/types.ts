@@ -346,9 +346,9 @@ export type SurveyCloseFunction = () => Promise<unknown>;
  */
 export type SurveyStartFunction = (
   surveyId: string,
-  distributionId: string,
-  allowMultipleResponses: boolean,
-  hiddenFields: PropertyRecord,
+  distributionId?: string,
+  allowMultipleResponses?: boolean,
+  hiddenFields?: PropertyRecord,
   hooks?: HooksSurveyStart,
   language?: string,
 ) => Promise<unknown>;
