@@ -79,7 +79,7 @@ export const ScreebProvider: React.FC<
       isLoaded.current = false;
       isInitialized = false;
     }
-  }, [isLoaded.current]);
+  }, [isLoaded.current, isInitialized]);
 
   const debug = React.useCallback(
     async () => await ensureScreeb("debug", () => Screeb.debug()),
@@ -156,6 +156,7 @@ export const ScreebProvider: React.FC<
             Screeb.init(websiteId, userId, userProperties, hooks, language);
 
             isInitialized = true;
+            isLoaded.current = true;
           }
         },
         true,
