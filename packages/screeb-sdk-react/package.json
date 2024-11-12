@@ -1,6 +1,6 @@
 {
   "name": "@screeb/sdk-react",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Screeb's browser sdk, optimized for React.",
   "keywords": [
     "product discovery",
