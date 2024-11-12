@@ -77,6 +77,7 @@ export const ScreebProvider: React.FC<
       await Screeb.close();
 
       isLoaded.current = false;
+      isInitialized = false;
     }
   }, [isLoaded.current]);
 
