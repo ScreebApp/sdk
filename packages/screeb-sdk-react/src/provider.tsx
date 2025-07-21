@@ -25,6 +25,7 @@ export const ScreebProvider: React.FC<
   ...rest
 }) => {
   const isLoaded = React.useRef(Screeb.isLoaded());
+  const currentUserId = React.useRef(userId);
 
   // Allow data-x attributes, see https://github.com/devrnt/react-use-screeb/issues/478
   const invalidPropKeys = Object.keys(rest).filter(
@@ -247,6 +248,25 @@ export const ScreebProvider: React.FC<
       await ensureScreeb("targetingDebug", () => Screeb.targetingDebug()),
     [],
   );
+
+  React.useEffect(() => {
+    if (!isInitialized) {
+      return;
+    }
+
+    if (currentUserId.current === userId) {
+      return;
+    }
+
+    if (userId) {
+      Screeb.identity(userId);
+      currentUserId.current = userId;
+      return;
+    }
+
+    Screeb.identityReset();
+    currentUserId.current = userId;
+  }, [userId]);
 
   const providerValue = React.useMemo<ScreebContextValues>(
     () => ({
