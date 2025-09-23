@@ -1,6 +1,6 @@
 {
   "name": "@screeb/sdk-angular",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Screeb's browser sdk, optimized for Angular.",
   "keywords": [
     "product discovery",
@@ -50,7 +50,7 @@
     "replace-version": "replace-in-files --string='0.0.0-dev' --replacement=$npm_package_version projects/screeb-sdk-angular/src/lib/constants.ts"
   },
   "dependencies": {
-    "@screeb/sdk-browser": "^0.2.2"
+    "@screeb/sdk-browser": "^0.3.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.2.6",
