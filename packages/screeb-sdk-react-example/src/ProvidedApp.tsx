@@ -22,7 +22,7 @@ export const ProvidedApp = () => {
   return (
     <ScreebProvider
       autoInit
-      websiteId="0e2b609a-8dce-4695-a80f-966fbfa87a88"
+      websiteId="dcbc04fb-39ed-43a3-9bb6-79663922ba32"
       userId={userId}
       userProperties={{
         authenticated: true,
@@ -42,9 +42,9 @@ export const ProvidedApp = () => {
       <App />
       <div>
         <h5>Identity: {userId}</h5>
-        <button onClick={() => identityReset()}>identity reset</button>
-        <button onClick={() => identitySet1()}>identity set 1</button>
-        <button onClick={() => identitySet2()}>identity set 2</button>
+        <button onClick={identityReset}>identity reset</button>
+        <button onClick={identitySet1}>identity set 1</button>
+        <button onClick={identitySet2}>identity set 2</button>
       </div>
     </ScreebProvider>
   );

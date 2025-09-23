@@ -444,18 +444,19 @@ ___
 
 ### messageStart
 
-▸ **messageStart**(`messageId`, `hiddenFields`, `hooks?`, `language?`): `Promise`\<`unknown`\>
+▸ **messageStart**(`messageId`, `allowMultipleResponses?`, `hiddenFields?`, `hooks?`, `language?`): `Promise`\<`unknown`\>
 
 Starts a message by its ID.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `messageId` | `string` |
-| `hiddenFields` | `PropertyRecord` |
-| `hooks?` | `HooksMessageStart` |
-| `language?` | `string` |
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `messageId` | `string` | `undefined` |
+| `allowMultipleResponses` | `boolean` | `true` |
+| `hiddenFields?` | `PropertyRecord` | `undefined` |
+| `hooks?` | `HooksMessageStart` | `undefined` |
+| `language?` | `string` | `undefined` |
 
 #### Returns
 
@@ -501,7 +502,7 @@ ___
 
 ### surveyStart
 
-▸ **surveyStart**(`surveyId`, `distributionId`, `allowMultipleResponses`, `hiddenFields`, `hooks?`, `language?`): `Promise`\<`unknown`\>
+▸ **surveyStart**(`surveyId`, `distributionId`, `allowMultipleResponses`, `hiddenFields?`, `hooks?`, `language?`): `Promise`\<`unknown`\>
 
 Starts a survey by its ID.
 
@@ -512,7 +513,7 @@ Starts a survey by its ID.
 | `surveyId` | `string` |
 | `distributionId` | `string` |
 | `allowMultipleResponses` | `boolean` |
-| `hiddenFields` | `PropertyRecord` |
+| `hiddenFields?` | `PropertyRecord` |
 | `hooks?` | `HooksSurveyStart` |
 | `language?` | `string` |
 

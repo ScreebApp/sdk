@@ -384,7 +384,8 @@ export type MessageCloseFunction = () => Promise<unknown>;
  */
 export type MessageStartFunction = (
   messageId: string,
-  hiddenFields: PropertyRecord,
+  allowMultipleResponses?: boolean,
+  hiddenFields?: PropertyRecord,
   hooks?: HooksMessageStart,
   language?: string,
 ) => Promise<unknown>;

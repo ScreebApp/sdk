@@ -497,11 +497,13 @@ export const messageClose = () => callScreebCommand("message.close");
  */
 export const messageStart = (
   messageId: string,
+  allowMultipleResponses = true,
   hiddenFields: PropertyRecord = {},
   hooks?: HooksMessageStart,
   language?: string,
 ) =>
   callScreebCommand("message.start", messageId, {
+    allow_multiple_responses: allowMultipleResponses,
     language: language,
     hidden_fields: hiddenFields,
     hooks: hooks,

@@ -324,7 +324,7 @@ export class Screeb {
     surveyId: string,
     distributionId: string,
     allowMultipleResponses: boolean,
-    hiddenFields: _Screeb.PropertyRecord,
+    hiddenFields?: _Screeb.PropertyRecord,
     hooks?: _Screeb.HooksSurveyStart,
     language?: string
   ) {
@@ -376,13 +376,20 @@ export class Screeb {
    */
   public async messageStart(
     messageId: string,
-    hiddenFields: _Screeb.PropertyRecord,
+    allowMultipleResponses = true,
+    hiddenFields?: _Screeb.PropertyRecord,
     hooks?: _Screeb.HooksMessageStart,
     language?: string
   ) {
     await this.ensureScreeb("messageStart");
 
-    return _Screeb.messageStart(messageId, hiddenFields, hooks, language);
+    return _Screeb.messageStart(
+      messageId,
+      allowMultipleResponses,
+      hiddenFields,
+      hooks,
+      language
+    );
   }
 
   /**

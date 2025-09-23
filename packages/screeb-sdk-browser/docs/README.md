@@ -996,18 +996,19 @@ ___
 
 ### messageStart
 
-▸ **messageStart**(`messageId`, `hiddenFields?`, `hooks?`, `language?`): `void` \| `Promise`\<`unknown`\>
+▸ **messageStart**(`messageId`, `allowMultipleResponses?`, `hiddenFields?`, `hooks?`, `language?`): `void` \| `Promise`\<`unknown`\>
 
 Starts a message by its ID.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `messageId` | `string` |
-| `hiddenFields` | [`PropertyRecord`](README.md#propertyrecord) |
-| `hooks?` | [`HooksMessageStart`](README.md#hooksmessagestart) |
-| `language?` | `string` |
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `messageId` | `string` | `undefined` |
+| `allowMultipleResponses` | `boolean` | `true` |
+| `hiddenFields` | [`PropertyRecord`](README.md#propertyrecord) | `{}` |
+| `hooks?` | [`HooksMessageStart`](README.md#hooksmessagestart) | `undefined` |
+| `language?` | `string` | `undefined` |
 
 #### Returns
 

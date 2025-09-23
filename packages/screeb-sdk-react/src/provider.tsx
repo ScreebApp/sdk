@@ -227,12 +227,19 @@ export const ScreebProvider: React.FC<
   const messageStart = React.useCallback(
     async (
       messageId: string,
-      hiddenFields: Screeb.PropertyRecord,
+      allowMultipleResponses = true,
+      hiddenFields?: Screeb.PropertyRecord,
       hooks?: Screeb.HooksMessageStart,
       language?: string,
     ) =>
       await ensureScreeb("messageStart", () =>
-        Screeb.messageStart(messageId, hiddenFields, hooks, language),
+        Screeb.messageStart(
+          messageId,
+          allowMultipleResponses,
+          hiddenFields,
+          hooks,
+          language,
+        ),
       ),
     [],
   );

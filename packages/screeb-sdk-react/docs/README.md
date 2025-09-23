@@ -465,7 +465,7 @@ ___
 
 ### MessageStartFunction
 
-Ƭ **MessageStartFunction**: (`messageId`: `string`, `hiddenFields`: `PropertyRecord`, `hooks?`: `HooksMessageStart`, `language?`: `string`) => `Promise`\<`unknown`\>
+Ƭ **MessageStartFunction**: (`messageId`: `string`, `allowMultipleResponses?`: `boolean`, `hiddenFields?`: `PropertyRecord`, `hooks?`: `HooksMessageStart`, `language?`: `string`) => `Promise`\<`unknown`\>
 
 Starts a message by its ID.
 
@@ -486,14 +486,15 @@ messageStart(
 
 #### Type declaration
 
-▸ (`messageId`, `hiddenFields`, `hooks?`, `language?`): `Promise`\<`unknown`\>
+▸ (`messageId`, `allowMultipleResponses?`, `hiddenFields?`, `hooks?`, `language?`): `Promise`\<`unknown`\>
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `messageId` | `string` |
-| `hiddenFields` | `PropertyRecord` |
+| `allowMultipleResponses?` | `boolean` |
+| `hiddenFields?` | `PropertyRecord` |
 | `hooks?` | `HooksMessageStart` |
 | `language?` | `string` |
 
