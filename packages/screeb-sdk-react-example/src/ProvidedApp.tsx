@@ -22,7 +22,7 @@ export const ProvidedApp = () => {
   return (
     <ScreebProvider
       autoInit
-      websiteId="dcbc04fb-39ed-43a3-9bb6-79663922ba32"
+      websiteId="0e2b609a-8dce-4695-a80f-966fbfa87a88"
       userId={userId}
       userProperties={{
         authenticated: true,
