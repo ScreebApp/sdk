@@ -244,6 +244,20 @@ export const ScreebProvider: React.FC<
     [],
   );
 
+  const sessionReplayStop = React.useCallback(
+    async () =>
+      await ensureScreeb("sessionReplayStop", () => Screeb.sessionReplayStop()),
+    [],
+  );
+
+  const sessionReplayStart = React.useCallback(
+    async () =>
+      await ensureScreeb("sessionReplayStart", () =>
+        Screeb.sessionReplayStart(),
+      ),
+    [],
+  );
+
   const targetingCheck = React.useCallback(
     async () =>
       await ensureScreeb("targetingCheck", () => Screeb.targetingCheck()),
@@ -292,6 +306,8 @@ export const ScreebProvider: React.FC<
       surveyStart,
       messageClose,
       messageStart,
+      sessionReplayStop,
+      sessionReplayStart,
       targetingCheck,
       targetingDebug,
     }),
@@ -311,6 +327,8 @@ export const ScreebProvider: React.FC<
       surveyStart,
       messageClose,
       messageStart,
+      sessionReplayStop,
+      sessionReplayStart,
       targetingCheck,
       targetingDebug,
     ],

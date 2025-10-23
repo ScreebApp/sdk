@@ -22,6 +22,8 @@
 - [ScreebContextValues](README.md#screebcontextvalues)
 - [ScreebProps](README.md#screebprops)
 - [ScreebProviderProps](README.md#screebproviderprops)
+- [SessionReplayStartFunction](README.md#sessionreplaystartfunction)
+- [SessionReplayStopFunction](README.md#sessionreplaystopfunction)
 - [SurveyCloseFunction](README.md#surveyclosefunction)
 - [SurveyStartFunction](README.md#surveystartfunction)
 - [TargetingCheckFunction](README.md#targetingcheckfunction)
@@ -527,6 +529,8 @@ Screeb context API
 | `load` | [`LoadFunction`](README.md#loadfunction) |
 | `messageClose` | [`MessageCloseFunction`](README.md#messageclosefunction) |
 | `messageStart` | [`MessageStartFunction`](README.md#messagestartfunction) |
+| `sessionReplayStart` | [`SessionReplayStartFunction`](README.md#sessionreplaystartfunction) |
+| `sessionReplayStop` | [`SessionReplayStopFunction`](README.md#sessionreplaystopfunction) |
 | `surveyClose` | [`SurveyCloseFunction`](README.md#surveyclosefunction) |
 | `surveyStart` | [`SurveyStartFunction`](README.md#surveystartfunction) |
 | `targetingCheck` | [`TargetingCheckFunction`](README.md#targetingcheckfunction) |
@@ -557,6 +561,54 @@ ___
 Ƭ **ScreebProviderProps**: \{ `autoInit?`: `boolean` ; `options?`: `ScreebOptions` ; `shouldLoad?`: `boolean`  } & `Partial`\<[`ScreebProps`](README.md#screebprops)\>
 
 Properties of Screeb provider
+
+___
+
+### SessionReplayStartFunction
+
+Ƭ **SessionReplayStartFunction**: () => `Promise`\<`unknown`\>
+
+Starts a session replay.
+
+**`Example`**
+
+```ts
+const { sessionReplayStart } = useScreeb();
+
+sessionReplayStart();
+```
+
+#### Type declaration
+
+▸ (): `Promise`\<`unknown`\>
+
+##### Returns
+
+`Promise`\<`unknown`\>
+
+___
+
+### SessionReplayStopFunction
+
+Ƭ **SessionReplayStopFunction**: () => `Promise`\<`unknown`\>
+
+Interrupts a running session replay.
+
+**`Example`**
+
+```ts
+const { sessionReplayStop } = useScreeb();
+
+sessionReplayStop();
+```
+
+#### Type declaration
+
+▸ (): `Promise`\<`unknown`\>
+
+##### Returns
+
+`Promise`\<`unknown`\>
 
 ___
 

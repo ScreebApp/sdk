@@ -510,6 +510,31 @@ export const messageStart = (
   });
 
 /**
+ * Interrupts a running session replay.
+ *
+ * @example
+ * ```ts
+ * import * as Screeb from "@screeb/sdk-browser";
+ *
+ * Screeb.sessionReplayStop();
+ * ```
+ */
+export const sessionReplayStop = () => callScreebCommand("session-replay.stop");
+
+/**
+ * Starts a session replay.
+ *
+ * @example
+ * ```ts
+ * import * as Screeb from "@screeb/sdk-browser";
+ *
+ * Screeb.sessionReplayStart();
+ * ```
+ */
+export const sessionReplayStart = () =>
+  callScreebCommand("session-replay.start");
+
+/**
  * Forces a targeting check.
  *
  * @example

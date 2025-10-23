@@ -391,6 +391,30 @@ export type MessageStartFunction = (
 ) => Promise<unknown>;
 
 /**
+ * Interrupts a running session replay.
+ *
+ * @example
+ * ```ts
+ * const { sessionReplayStop } = useScreeb();
+ *
+ * sessionReplayStop();
+ * ```
+ */
+export type SessionReplayStopFunction = () => Promise<unknown>;
+
+/**
+ * Starts a session replay.
+ *
+ * @example
+ * ```ts
+ * const { sessionReplayStart } = useScreeb();
+ *
+ * sessionReplayStart();
+ * ```
+ */
+export type SessionReplayStartFunction = () => Promise<unknown>;
+
+/**
  * Forces a targeting check.
  *
  * @example
@@ -445,6 +469,8 @@ export type ScreebContextValues = {
   surveyStart: SurveyStartFunction;
   messageClose: MessageCloseFunction;
   messageStart: MessageStartFunction;
+  sessionReplayStart: SessionReplayStartFunction;
+  sessionReplayStop: SessionReplayStopFunction;
   targetingCheck: TargetingCheckFunction;
   targetingDebug: TargetingDebugFunction;
 };

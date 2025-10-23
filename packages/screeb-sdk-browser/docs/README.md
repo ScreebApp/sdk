@@ -59,6 +59,8 @@
 - [load](README.md#load)
 - [messageClose](README.md#messageclose)
 - [messageStart](README.md#messagestart)
+- [sessionReplayStart](README.md#sessionreplaystart)
+- [sessionReplayStop](README.md#sessionreplaystop)
 - [surveyClose](README.md#surveyclose)
 - [surveyStart](README.md#surveystart)
 - [targetingCheck](README.md#targetingcheck)
@@ -1032,6 +1034,46 @@ Screeb.messageStart(
   },
   "en"
 );
+```
+
+___
+
+### sessionReplayStart
+
+▸ **sessionReplayStart**(): `void` \| `Promise`\<`unknown`\>
+
+Starts a session replay.
+
+#### Returns
+
+`void` \| `Promise`\<`unknown`\>
+
+**`Example`**
+
+```ts
+import * as Screeb from "@screeb/sdk-browser";
+
+Screeb.sessionReplayStart();
+```
+
+___
+
+### sessionReplayStop
+
+▸ **sessionReplayStop**(): `void` \| `Promise`\<`unknown`\>
+
+Interrupts a running session replay.
+
+#### Returns
+
+`void` \| `Promise`\<`unknown`\>
+
+**`Example`**
+
+```ts
+import * as Screeb from "@screeb/sdk-browser";
+
+Screeb.sessionReplayStop();
 ```
 
 ___

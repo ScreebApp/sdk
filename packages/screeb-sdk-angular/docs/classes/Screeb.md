@@ -29,6 +29,8 @@
 - [load](Screeb.md#load)
 - [messageClose](Screeb.md#messageclose)
 - [messageStart](Screeb.md#messagestart)
+- [sessionReplayStart](Screeb.md#sessionreplaystart)
+- [sessionReplayStop](Screeb.md#sessionreplaystop)
 - [surveyClose](Screeb.md#surveyclose)
 - [surveyStart](Screeb.md#surveystart)
 - [targetingCheck](Screeb.md#targetingcheck)
@@ -478,6 +480,42 @@ this.screeb.messageStart(
   },
   "en"
 );
+```
+
+___
+
+### sessionReplayStart
+
+▸ **sessionReplayStart**(): `Promise`\<`unknown`\>
+
+Starts a session replay.
+
+#### Returns
+
+`Promise`\<`unknown`\>
+
+**`Example`**
+
+```ts
+this.screeb.sessionReplayStart();
+```
+
+___
+
+### sessionReplayStop
+
+▸ **sessionReplayStop**(): `Promise`\<`unknown`\>
+
+Interrupts a running session replay.
+
+#### Returns
+
+`Promise`\<`unknown`\>
+
+**`Example`**
+
+```ts
+this.screeb.sessionReplayStop();
 ```
 
 ___

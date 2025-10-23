@@ -393,6 +393,34 @@ export class Screeb {
   }
 
   /**
+   * Interrupts a running session replay.
+   *
+   * @example
+   * ```ts
+   * this.screeb.sessionReplayStop();
+   * ```
+   */
+  public async sessionReplayStop() {
+    await this.ensureScreeb("sessionReplayStop");
+
+    return _Screeb.sessionReplayStop();
+  }
+
+  /**
+   * Starts a session replay.
+   *
+   * @example
+   * ```ts
+   * this.screeb.sessionReplayStart();
+   * ```
+   */
+  public async sessionReplayStart() {
+    await this.ensureScreeb("sessionReplayStart");
+
+    return _Screeb.sessionReplayStart();
+  }
+
+  /**
    * Forces a targeting check.
    *
    * @example
