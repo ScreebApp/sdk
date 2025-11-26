@@ -1100,7 +1100,7 @@ ___
 
 ### surveyStart
 
-▸ **surveyStart**(`surveyId`, `distributionId?`, `allowMultipleResponses?`, `hiddenFields?`, `hooks?`, `language?`): `void` \| `Promise`\<`unknown`\>
+▸ **surveyStart**(`surveyId`, `distributionId?`, `allowMultipleResponses?`, `hiddenFields?`, `hooks?`, `language?`, `selectors?`): `void` \| `Promise`\<`unknown`\>
 
 Starts a survey by its ID.
 
@@ -1114,6 +1114,7 @@ Starts a survey by its ID.
 | `hiddenFields` | [`PropertyRecord`](README.md#propertyrecord) | `{}` |
 | `hooks?` | [`HooksSurveyStart`](README.md#hookssurveystart) | `undefined` |
 | `language?` | `string` | `undefined` |
+| `selectors?` | `string` \| `string`[] | `undefined` |
 
 #### Returns
 
@@ -1128,15 +1129,16 @@ Screeb.surveyStart(
   '<UUID>',
   '<UUID>',
   false,
-  {
+  { // optional
     color: "green",
     article_id: 42
   },
-  {
+  { // optional
     version: "1.0.0",
     onSurveyShowed: (payload) => console.log("Survey showed", payload),
   },
-  "en"
+  "en", // optional
+  "#screeb-survey-container" // optional
 );
 ```
 

@@ -205,6 +205,7 @@ export const ScreebProvider: React.FC<
       hiddenFields?: Screeb.PropertyRecord,
       hooks?: Screeb.HooksSurveyStart,
       language?: string,
+      selectors?: string | string[],
     ) =>
       await ensureScreeb("surveyStart", () =>
         Screeb.surveyStart(
@@ -214,6 +215,7 @@ export const ScreebProvider: React.FC<
           hiddenFields,
           hooks,
           language,
+          selectors,
         ),
       ),
     [],

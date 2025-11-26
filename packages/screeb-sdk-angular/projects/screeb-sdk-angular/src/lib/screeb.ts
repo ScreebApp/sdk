@@ -308,15 +308,16 @@ export class Screeb {
    *   '<UUID>',
    *   '<UUID>',
    *   false,
-   *   {
+   *   { // optional
    *     color: "green",
    *     article_id: 42
    *   },
-   *   {
+   *   { // optional
    *     version: "1.0.0",
    *     onSurveyShowed: (payload) => console.log("Survey showed", payload),
    *   },
-   *   "en"
+   *   "en", // optional
+   *   "#screeb-survey-container" // optional
    * );
    * ```
    */
@@ -326,7 +327,8 @@ export class Screeb {
     allowMultipleResponses: boolean,
     hiddenFields?: _Screeb.PropertyRecord,
     hooks?: _Screeb.HooksSurveyStart,
-    language?: string
+    language?: string,
+    selectors?: string | string[]
   ) {
     await this.ensureScreeb("surveyStart");
 
@@ -336,7 +338,8 @@ export class Screeb {
       allowMultipleResponses,
       hiddenFields,
       hooks,
-      language
+      language,
+      selectors
     );
   }
 

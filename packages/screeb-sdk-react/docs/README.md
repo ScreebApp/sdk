@@ -638,7 +638,7 @@ ___
 
 ### SurveyStartFunction
 
-Ƭ **SurveyStartFunction**: (`surveyId`: `string`, `distributionId?`: `string`, `allowMultipleResponses?`: `boolean`, `hiddenFields?`: `PropertyRecord`, `hooks?`: `HooksSurveyStart`, `language?`: `string`) => `Promise`\<`unknown`\>
+Ƭ **SurveyStartFunction**: (`surveyId`: `string`, `distributionId?`: `string`, `allowMultipleResponses?`: `boolean`, `hiddenFields?`: `PropertyRecord`, `hooks?`: `HooksSurveyStart`, `language?`: `string`, `selectors?`: `string` \| `string`[]) => `Promise`\<`unknown`\>
 
 Starts a survey by its ID.
 
@@ -651,16 +651,22 @@ surveyStart(
   '<UUID>',
   '<UUID>',
   false,
-  {
+  { // optional
     color: "green",
     article_id: 42
-  }
+  },
+  { // optional
+    version: "1.0.0",
+    onSurveyShowed: (payload) => console.log("Survey showed", payload),
+  },
+  "en", // optional
+  "#screeb-survey-container" // optional
 );
 ```
 
 #### Type declaration
 
-▸ (`surveyId`, `distributionId?`, `allowMultipleResponses?`, `hiddenFields?`, `hooks?`, `language?`): `Promise`\<`unknown`\>
+▸ (`surveyId`, `distributionId?`, `allowMultipleResponses?`, `hiddenFields?`, `hooks?`, `language?`, `selectors?`): `Promise`\<`unknown`\>
 
 ##### Parameters
 
@@ -672,6 +678,7 @@ surveyStart(
 | `hiddenFields?` | `PropertyRecord` |
 | `hooks?` | `HooksSurveyStart` |
 | `language?` | `string` |
+| `selectors?` | `string` \| `string`[] |
 
 ##### Returns
 
