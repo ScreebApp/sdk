@@ -337,10 +337,16 @@ export type SurveyCloseFunction = () => Promise<unknown>;
  *   '<UUID>',
  *   '<UUID>',
  *   false,
- *   {
+ *   { // optional
  *     color: "green",
  *     article_id: 42
- *   }
+ *   },
+ *   { // optional
+ *     version: "1.0.0",
+ *     onSurveyShowed: (payload) => console.log("Survey showed", payload),
+ *   },
+ *   "en", // optional
+ *   "#screeb-survey-container" // optional
  * );
  * ```
  */
@@ -351,6 +357,7 @@ export type SurveyStartFunction = (
   hiddenFields?: PropertyRecord,
   hooks?: HooksSurveyStart,
   language?: string,
+  selectors?: string | string[],
 ) => Promise<unknown>;
 
 /**

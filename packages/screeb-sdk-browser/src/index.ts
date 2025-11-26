@@ -433,15 +433,16 @@ export const surveyClose = () => callScreebCommand("survey.close");
  *   '<UUID>',
  *   '<UUID>',
  *   false,
- *   {
+ *   { // optional
  *     color: "green",
  *     article_id: 42
  *   },
- *   {
+ *   { // optional
  *     version: "1.0.0",
  *     onSurveyShowed: (payload) => console.log("Survey showed", payload),
  *   },
- *   "en"
+ *   "en", // optional
+ *   "#screeb-survey-container" // optional
  * );
  * ```
  */
@@ -452,13 +453,15 @@ export const surveyStart = (
   hiddenFields: PropertyRecord = {},
   hooks?: HooksSurveyStart,
   language?: string,
+  selectors?: string | string[],
 ) =>
   callScreebCommand("survey.start", surveyId, {
-    distribution_id: distributionId,
     allow_multiple_responses: allowMultipleResponses,
-    language: language,
+    distribution_id: distributionId,
     hidden_fields: hiddenFields,
-    hooks: hooks,
+    hooks,
+    language,
+    selectors,
   });
 
 /**
