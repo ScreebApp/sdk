@@ -17,7 +17,6 @@ jobs:
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
-          cache: 'npm'
       - run: npm ci
       - run: npm run build --workspace=packages/sdk-angular
       - run: npm publish --workspace=packages/sdk-angular --access public --provenance
