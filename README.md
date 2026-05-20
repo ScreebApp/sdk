@@ -13,7 +13,8 @@ Public SDKs for [Screeb](https://screeb.app) — the Product Discovery platform.
 | React | [`@screeb/sdk-react`](packages/sdk-react) | npm |
 | React Native | [`@screeb/react-native`](packages/sdk-reactnative) | npm |
 | Flutter | [`plugin_screeb`](packages/sdk-flutter) | pub.dev |
-| iOS | [`ScreebApp/sdk-ios-public`](https://github.com/ScreebApp/sdk-ios-public) | SPM |
+| iOS | Closed source — [docs](https://developers.screeb.app) | SPM |
+| Android | Closed source — [docs](https://developers.screeb.app) | Maven |
 
 ## Contributing
 
