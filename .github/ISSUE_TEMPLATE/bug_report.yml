@@ -1,0 +1,46 @@
+name: Bug Report
+description: File a bug report
+labels: ['bug']
+body:
+  - type: dropdown
+    id: sdk
+    attributes:
+      label: Which SDK?
+      options:
+        - Browser (@screeb/sdk-browser)
+        - Angular (@screeb/sdk-angular)
+        - React (@screeb/sdk-react)
+        - React Native (@screeb/react-native)
+        - Flutter (plugin_screeb)
+        - iOS (sdk-ios-public / SPM)
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+  - type: input
+    id: version
+    attributes:
+      label: SDK version
+      placeholder: e.g. 0.5.0
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Platform / environment
+      placeholder: e.g. Chrome 124, iOS 17, Android 14

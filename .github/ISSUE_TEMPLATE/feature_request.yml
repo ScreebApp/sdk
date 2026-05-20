@@ -1,0 +1,31 @@
+name: Feature Request
+description: Suggest a new feature or improvement
+labels: ['enhancement']
+body:
+  - type: dropdown
+    id: sdk
+    attributes:
+      label: Which SDK?
+      options:
+        - Browser (@screeb/sdk-browser)
+        - Angular (@screeb/sdk-angular)
+        - React (@screeb/sdk-react)
+        - React Native (@screeb/react-native)
+        - Flutter (plugin_screeb)
+        - iOS (sdk-ios-public / SPM)
+        - All SDKs
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: What problem does this feature address?
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
