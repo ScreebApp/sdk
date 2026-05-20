@@ -1,0 +1,30 @@
+name: Publish plugin_screeb
+
+on:
+  push:
+    tags:
+      - 'sdk-flutter/v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          channel: 'stable'
+      - name: Setup pub.dev credentials
+        run: |
+          mkdir -p ~/.config/dart
+          cat > ~/.config/dart/pub-credentials.json << 'EOF'
+          {
+            "accessToken": "${{ secrets.PUB_DEV_ACCESS_TOKEN }}",
+            "refreshToken": "${{ secrets.PUB_DEV_REFRESH_TOKEN }}",
+            "tokenEndpoint": "https://accounts.google.com/o/oauth2/token",
+            "scopes": ["openid", "https://www.googleapis.com/auth/userinfo.email"],
+            "expiration": 1645560340000
+          }
+          EOF
+      - run: cd packages/sdk-flutter && flutter pub get
+      - run: cd packages/sdk-flutter && flutter pub publish --force
