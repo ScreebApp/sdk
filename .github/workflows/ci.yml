@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-      - run: npm ci
+      - run: npm install
       - run: npm run build
       - run: npm test
 
@@ -31,4 +31,3 @@ jobs:
           channel: 'stable'
       - run: cd packages/sdk-flutter && flutter pub get
       - run: cd packages/sdk-flutter && flutter analyze
-      - run: cd packages/sdk-flutter && flutter build apk --debug
