@@ -14,7 +14,7 @@ Public SDKs for [Screeb](https://screeb.app) — the Product Discovery platform.
 | React Native | [`@screeb/react-native`](packages/sdk-reactnative) | [npm](https://www.npmjs.com/package/@screeb/react-native) | [Install](https://developers.screeb.app/sdk-react-native/install) |
 | Flutter | [`plugin_screeb`](packages/sdk-flutter) | [pub.dev](https://pub.dev/packages/plugin_screeb) | [Install](https://developers.screeb.app/sdk-flutter/install) |
 | iOS | Closed source ([`sdk-ios-public`](https://github.com/ScreebApp/sdk-ios-public) — SPM mirror) | [SPM](https://github.com/ScreebApp/sdk-ios-public) | [Install](https://developers.screeb.app/sdk-ios/install) |
-| Android | Closed source | [Maven](https://central.sonatype.com/search?q=screeb&namespace=app.screeb) | [Install](https://developers.screeb.app/sdk-android/install) |
+| Android | Closed source | [Maven](https://central.sonatype.com/artifact/app.screeb.sdk/survey) | [Install](https://developers.screeb.app/sdk-android/install) |
 
 ## Contributing
 
