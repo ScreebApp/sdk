@@ -3,23 +3,23 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "screeb-sdk-angular": {
+    "sdk-angular": {
       "projectType": "library",
-      "root": "projects/screeb-sdk-angular",
-      "sourceRoot": "projects/screeb-sdk-angular/src",
+      "root": "projects/sdk-angular",
+      "sourceRoot": "projects/sdk-angular/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/screeb-sdk-angular/ng-package.json"
+            "project": "projects/sdk-angular/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/screeb-sdk-angular/tsconfig.lib.prod.json"
+              "tsConfig": "projects/sdk-angular/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/screeb-sdk-angular/tsconfig.lib.json"
+              "tsConfig": "projects/sdk-angular/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -27,7 +27,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": "projects/screeb-sdk-angular/tsconfig.spec.json",
+            "tsConfig": "projects/sdk-angular/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"

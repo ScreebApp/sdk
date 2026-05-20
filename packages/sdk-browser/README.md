@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://screeb.app" alt="Screeb">
-    <img src="https://raw.githubusercontent.com/ScreebApp/sdk-js/master/packages/screeb-sdk-browser/readme/screeb-logo.svg?token=GHSAT0AAAAAAB2OOPMGT2QD5TL3IRJN3CKCZDEYHJA" alt="Logo" height="120px" style="margin-top: 20px;"/>
+    <img src="https://raw.githubusercontent.com/ScreebApp/sdk-js/master/packages/sdk-browser/readme/screeb-logo.svg?token=GHSAT0AAAAAAB2OOPMGT2QD5TL3IRJN3CKCZDEYHJA" alt="Logo" height="120px" style="margin-top: 20px;"/>
   </a>
 </p>
 <h1 align="center">@screeb/sdk-browser</h1>
@@ -50,9 +50,9 @@ Screeb.load();
 Screeb.init('<your-website-id>');
 ```
 
-For a working example, see our [Screeb Angular SDK example app](https://github.com/ScreebApp/sdk-js/tree/master/packages/screeb-sdk-browser-example).
+For a working example, see our [Screeb Browser SDK example app](https://github.com/ScreebApp/sdk-js/tree/master/examples/example-browser).
 
-For a more advanced usage and a complete API documentation, see [documentation generated from source files](https://github.com/ScreebApp/sdk-js/tree/master/packages/screeb-sdk-browser/docs).
+For a more advanced usage and a complete API documentation, see [documentation generated from source files](https://github.com/ScreebApp/sdk-js/tree/master/packages/sdk-browser/docs).
 
 For further information, see [our developper documentation](https://github.com/ScreebApp/developers).
 

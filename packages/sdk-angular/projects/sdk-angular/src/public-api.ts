@@ -1,5 +1,5 @@
 /*
- * Public API Surface of screeb-sdk-angular
+ * Public API Surface of @screeb/sdk-angular
  */
 
 export { ScreebModule } from "./lib/screeb.module";

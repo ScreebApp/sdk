@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.screeb.debug();
 
-    this.screeb.eventTrack("screeb-sdk-angular-example started", {
+    this.screeb.eventTrack("example-angular started", {
       test: 123,
     });
     this.screeb.identityProperties({ hello: "I'm a dev." });

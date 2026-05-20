@@ -19,19 +19,19 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/ScreebApp/sdk-js.git",
-    "directory": "packages/screeb-sdk-angular"
+    "directory": "packages/sdk-angular"
   },
   "license": "MIT",
   "author": "Screeb's frontend team",
   "sideEffects": false,
-  "module": "dist/screeb-sdk-angular/fesm2022/screeb-sdk-angular.mjs",
-  "typings": "dist/screeb-sdk-angular/index.d.ts",
+  "module": "dist/sdk-angular/esm2022/public-api.mjs",
+  "typings": "dist/sdk-angular/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/screeb-sdk-angular/index.d.ts",
-      "esm2022": "./dist/screeb-sdk-angular/esm2022/screeb-sdk-angular.mjs",
-      "esm": "./dist/screeb-sdk-angular/esm2022/screeb-sdk-angular.mjs",
-      "default": "./dist/screeb-sdk-angular/fesm2022/screeb-sdk-angular.mjs"
+      "types": "./dist/sdk-angular/index.d.ts",
+      "esm2022": "./dist/sdk-angular/esm2022/public-api.mjs",
+      "esm": "./dist/sdk-angular/esm2022/public-api.mjs",
+      "default": "./dist/sdk-angular/esm2022/public-api.mjs"
     }
   },
   "files": [
@@ -41,13 +41,13 @@
   ],
   "scripts": {
     "ng": "ng",
-    "build": "npm run replace-version && ng build && git checkout -f projects/screeb-sdk-angular/src/lib/constants.ts",
+    "build": "npm run replace-version && ng build && git checkout -f projects/sdk-angular/src/lib/constants.ts",
     "build:watch": "ng build --watch --configuration development",
-    "build:doc": "typedoc projects/screeb-sdk-angular/src/public-api.ts",
+    "build:doc": "typedoc projects/sdk-angular/src/public-api.ts",
     "clean": "rm -Rf dist",
     "lint": "eslint .",
     "test": "echo '@TODO'",
-    "replace-version": "replace-in-files --string='0.0.0-dev' --replacement=$npm_package_version projects/screeb-sdk-angular/src/lib/constants.ts"
+    "replace-version": "replace-in-files --string='0.0.0-dev' --replacement=$npm_package_version projects/sdk-angular/src/lib/constants.ts"
   },
   "dependencies": {
     "@screeb/sdk-browser": "^0.5.0"

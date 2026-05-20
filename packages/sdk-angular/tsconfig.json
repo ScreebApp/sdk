@@ -9,8 +9,8 @@
     "strict": true,
     "noImplicitOverride": true,
     "paths": {
-      "screeb-sdk-angular": [
-        "dist/screeb-sdk-angular"
+      "@screeb/sdk-angular": [
+        "dist/sdk-angular"
       ]
     },
     "noPropertyAccessFromIndexSignature": true,
