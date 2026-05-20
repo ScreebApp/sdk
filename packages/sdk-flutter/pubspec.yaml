@@ -1,0 +1,26 @@
+name: plugin_screeb
+description: Continuous Product Discovery
+version: 3.1.0
+homepage: https://screeb.app
+repository: https://github.com/ScreebApp/sdk
+
+environment:
+  sdk: ">=2.15.0 <4.0.0"
+  flutter: ">=2.5.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.1
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: app.screeb.plugin_screeb
+        pluginClass: PluginScreebPlugin
+      ios:
+        pluginClass: PluginScreebPlugin
