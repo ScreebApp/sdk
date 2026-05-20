@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://screeb.app" alt="Screeb">
-    <img src="https://raw.githubusercontent.com/ScreebApp/sdk-js/master/packages/sdk-react/readme/screeb-logo.svg?token=GHSAT0AAAAAAB2OOPMGT2QD5TL3IRJN3CKCZDEYHJA" alt="Logo" height="120px" style="margin-top: 20px;"/>
+    <img src="https://raw.githubusercontent.com/ScreebApp/sdk/master/packages/sdk-react/readme/screeb-logo.svg" alt="Logo" height="120px" style="margin-top: 20px;"/>
   </a>
 </p>
 <h1 align="center">@screeb/sdk-react</h1>
@@ -13,8 +13,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/ScreebApp/sdk-js/actions/workflows/node.js.yml" alt="ci">
-    <img alt="ci" src="https://github.com/ScreebApp/sdk-js/actions/workflows/node.js.yml/badge.svg">
+  <a href="https://github.com/ScreebApp/sdk/actions/workflows/ci.yml" alt="ci">
+    <img alt="ci" src="https://github.com/ScreebApp/sdk/actions/workflows/ci.yml/badge.svg">
   </a>
   <a href="https://www.npmjs.com/package/@screeb/sdk-react" alt="version">
     <img alt="version" src="https://img.shields.io/npm/v/@screeb/sdk-react.svg" />
@@ -86,7 +86,7 @@ const HomePage = () => {
 };
 ```
 
-For a working example, see our [Screeb React SDK example app](https://github.com/ScreebApp/sdk-js/tree/master/examples/example-react).
+For a working example, see our [Screeb React SDK example app](https://github.com/ScreebApp/sdk/tree/master/examples/example-react).
 
 For a more advanced usage and a complete API documentation, see [documentation generated from source files](https://github.com/ScreebApp/sdk/tree/master/packages/sdk-react/docs).
 
@@ -100,4 +100,4 @@ All third party contributors acknowledge that any contributions they provide wil
 
 ## License
 
-Released under [MIT License](https://github.com/ScreebApp/sdk-js/blob/master/LICENSE).
+Released under [MIT License](https://github.com/ScreebApp/sdk/blob/master/LICENSE).
