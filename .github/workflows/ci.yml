@@ -10,6 +10,8 @@ jobs:
   js:
     name: JS/TS packages
     runs-on: ubuntu-latest
+    env:
+      HUSKY: 0
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
