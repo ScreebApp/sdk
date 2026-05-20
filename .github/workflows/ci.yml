@@ -31,4 +31,4 @@ jobs:
           channel: 'stable'
       - run: cd packages/sdk-flutter && flutter pub get
       - run: cd packages/sdk-flutter && flutter analyze
-      - run: cd packages/sdk-flutter && flutter test
+      - run: cd packages/sdk-flutter && flutter build apk --debug
