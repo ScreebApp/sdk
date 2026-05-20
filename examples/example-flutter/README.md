@@ -2,6 +2,8 @@
 
 Demonstrates how to use the plugin_screeb plugin.
 
+> Screeb SDK documentation: [developers.screeb.app/sdk-flutter/install](https://developers.screeb.app/sdk-flutter/install)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

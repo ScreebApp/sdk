@@ -2,6 +2,8 @@
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
+> Screeb SDK documentation: [developers.screeb.app/sdk-react-native/install](https://developers.screeb.app/sdk-react-native/install)
+
 ## Get started
 
 1. Install dependencies from the repository root (all workspaces share the same lockfile).

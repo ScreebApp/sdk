@@ -2,6 +2,8 @@
 
 Screeb's example app for Angular sdk.
 
+> Documentation: [developers.screeb.app/sdk-js/install](https://developers.screeb.app/sdk-js/install)
+
 ## Get started
 
 ### Before get started

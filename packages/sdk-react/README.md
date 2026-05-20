@@ -88,9 +88,9 @@ const HomePage = () => {
 
 For a working example, see our [Screeb React SDK example app](https://github.com/ScreebApp/sdk-js/tree/master/examples/example-react).
 
-For a more advanced usage and a complete API documentation, see [documentation generated from source files](https://github.com/ScreebApp/sdk-js/tree/master/packages/sdk-react/docs).
+For a more advanced usage and a complete API documentation, see [documentation generated from source files](https://github.com/ScreebApp/sdk/tree/master/packages/sdk-react/docs).
 
-For further information, see [our developper documentation](https://github.com/ScreebApp/developers).
+For further information, see [our developer documentation](https://developers.screeb.app/sdk-js/install).
 
 ## Support
 For any issues, please contact our support team at support@screeb.com.

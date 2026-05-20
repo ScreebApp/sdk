@@ -13,7 +13,7 @@ A flutter plugin to integrate Screeb mobile sdk for Android and/or iOS.
 
 ## How to install the Flutter SDK in your app ?
 
-[See here.](https://github.com/ScreebApp/developers/wiki/Flutter-SDK-install)
+[See here.](https://developers.screeb.app/sdk-flutter/install)
 
 ## Changelog
 
