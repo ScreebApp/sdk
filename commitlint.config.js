@@ -11,7 +11,9 @@ module.exports = {
             "sdk-react",
             "example-react",
             "sdk-angular",
-            "example-angular"
+            "example-angular",
+            "sdk-vue",
+            "example-vue"
         ]],
         "scope-empty": [2, "never"],
         "scope-min-length": [2, "always", 1],

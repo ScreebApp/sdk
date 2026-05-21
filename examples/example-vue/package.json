@@ -1,0 +1,41 @@
+{
+  "name": "@screeb/sdk-vue-example",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Screeb's example app for Vue SDK.",
+  "homepage": "https://screeb.app",
+  "bugs": {
+    "url": "https://github.com/ScreebApp/sdk-js/issues",
+    "email": "support@screeb.app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ScreebApp/sdk-js.git",
+    "directory": "examples/example-vue"
+  },
+  "license": "MIT",
+  "author": "Screeb's frontend team",
+  "type": "module",
+  "scripts": {
+    "build": "vue-tsc && vite build",
+    "clean": "rm -Rf dist",
+    "lint": "eslint .",
+    "start": "vite"
+  },
+  "dependencies": {
+    "@screeb/sdk-vue": "*",
+    "vue": "^3.3.0"
+  },
+  "devDependencies": {
+    "@screeb/eslint-config": "^0.1.6",
+    "@typescript-eslint/eslint-plugin": "^6.7.5",
+    "@typescript-eslint/parser": "^6.7.5",
+    "@vitejs/plugin-vue": "^4.4.0",
+    "eslint": "^8.51.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-prettier": "^5.0.1",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.11",
+    "vue-tsc": "^2.0.0"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "extends": [
+    "@screeb/eslint-config"
+  ]
+}

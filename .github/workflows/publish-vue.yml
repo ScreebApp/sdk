@@ -1,0 +1,22 @@
+name: Publish @screeb/sdk-vue
+
+on:
+  push:
+    tags:
+      - 'sdk-vue/v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm run build --workspace=packages/sdk-vue
+      - run: npm publish --workspace=packages/sdk-vue --access public --provenance
