@@ -30,3 +30,14 @@ yarn-error.log*
 .config.env
 
 .vscode
+
+# MAUI SDK - native binaries (downloaded at build time)
+packages/sdk-maui/native/ios/Screeb.xcframework/
+packages/sdk-maui/native/ios/Screeb.zip
+packages/sdk-maui/native/ios/sdk-ios-public-*/
+
+# .NET build artifacts
+packages/sdk-maui/bin/
+packages/sdk-maui/obj/
+examples/example-maui/bin/
+examples/example-maui/obj/

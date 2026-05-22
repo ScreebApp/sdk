@@ -52,5 +52,8 @@ npx lerna version --scope=@screeb/sdk-browser
 
 # Flutter
 # 1. Bump version in packages/sdk-flutter/pubspec.yaml
-# 2. git tag sdk-flutter/vX.Y.Z && git push --tags
+git tag sdk-flutter/vX.Y.Z && git push --tags
+
+# MAUI (NuGet)
+git tag sdk-maui/v0.1.0 && git push --tags
 ```

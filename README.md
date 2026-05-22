@@ -14,6 +14,7 @@ Public SDKs for [Screeb](https://screeb.app) — the Product Discovery platform.
 | Vue | [`@screeb/sdk-vue`](packages/sdk-vue) | [npm](https://www.npmjs.com/package/@screeb/sdk-vue) | [Install](https://developers.screeb.app/sdk-vue/install) |
 | Ionic | Uses `@screeb/sdk-angular` / `@screeb/sdk-react` / `@screeb/sdk-browser` | — | [Install](https://developers.screeb.app/sdk-js/sdk-ionic) |
 | React Native | [`@screeb/react-native`](packages/sdk-reactnative) | [npm](https://www.npmjs.com/package/@screeb/react-native) | [Install](https://developers.screeb.app/sdk-react-native/install) |
+| .NET MAUI | [`Screeb.Maui`](packages/sdk-maui) | [NuGet](https://www.nuget.org/packages/Screeb.Maui) | [Install](https://developers.screeb.app/sdk-maui/install) |
 | Flutter | [`plugin_screeb`](packages/sdk-flutter) | [pub.dev](https://pub.dev/packages/plugin_screeb) | [Install](https://developers.screeb.app/sdk-flutter/install) |
 | iOS | Closed source ([`sdk-ios-public`](https://github.com/ScreebApp/sdk-ios-public) — SPM mirror) | [SPM](https://github.com/ScreebApp/sdk-ios-public) | [Install](https://developers.screeb.app/sdk-ios/install) |
 | Android | Closed source | [Maven](https://central.sonatype.com/artifact/app.screeb.sdk/survey) | [Install](https://developers.screeb.app/sdk-android/install) |
@@ -29,6 +30,7 @@ Public SDKs for [Screeb](https://screeb.app) — the Product Discovery platform.
 | Ionic | Angular 16 + Capacitor | [`examples/example-ionic`](examples/example-ionic) |
 | Expo | React Native + Expo | [`examples/example-expo`](examples/example-expo) |
 | React Native | React Native CLI | [`examples/example-reactnative`](examples/example-reactnative) |
+| .NET MAUI | .NET MAUI | [`examples/example-maui`](examples/example-maui) |
 | Flutter | Flutter | [`examples/example-flutter`](examples/example-flutter) |
 | Android | Android (Kotlin) | [`examples/example-android`](examples/example-android) |
 | iOS | iOS (Swift) | [`examples/example-ios`](examples/example-ios) |
