@@ -39,3 +39,5 @@ packages/sdk-maui/native/ios/sdk-ios-public-*/
 # .NET build artifacts
 packages/sdk-maui/bin/
 packages/sdk-maui/obj/
+examples/example-maui/bin/
+examples/example-maui/obj/

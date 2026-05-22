@@ -1,5 +1,5 @@
 using Microsoft.Extensions.Logging;
-using Screeb.Maui;
+using static Screeb.Maui.Screeb;
 
 namespace ExampleMaui;
 
@@ -10,10 +10,9 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder.UseMauiApp<App>();
 
-        // Initialize Screeb — replace with your channel ID
         Task.Run(async () =>
         {
-            await Screeb.InitSdk(
+            await InitSdk(
                 channelId: "0e2b609a-8dce-4695-a80f-966fbfa87a88",
                 userId: "maui-user-123",
                 properties: new Dictionary<string, object>
