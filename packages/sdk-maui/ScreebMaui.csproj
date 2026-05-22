@@ -20,6 +20,27 @@
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
+  <!-- Exclude platform-specific and test files from the default SDK glob -->
+  <ItemGroup>
+    <Compile Remove="Platforms/Android/**/*.cs" />
+    <Compile Remove="Platforms/iOS/**/*.cs" />
+    <Compile Remove="tests/**/*.cs" />
+  </ItemGroup>
+
+  <!-- Android platform files -->
+  <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+    <Compile Include="Platforms/Android/Screeb.Android.cs" />
+    <Compile Include="Platforms/Android/HooksAndroid.cs" />
+  </ItemGroup>
+
+  <!-- iOS platform files -->
+  <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
+    <Compile Include="Platforms/iOS/ApiDefinitions.cs" />
+    <Compile Include="Platforms/iOS/StructsAndEnums.cs" />
+    <Compile Include="Platforms/iOS/Screeb.iOS.cs" />
+    <Compile Include="Platforms/iOS/HooksIOS.cs" />
+  </ItemGroup>
+
   <!-- Android native binding -->
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
     <AndroidMavenLibrary
@@ -41,8 +62,6 @@
       <Frameworks>Foundation UIKit</Frameworks>
       <IsCxx>false</IsCxx>
     </NativeReference>
-    <Compile Include="Platforms/iOS/ApiDefinitions.cs" />
-    <Compile Include="Platforms/iOS/StructsAndEnums.cs" />
   </ItemGroup>
 
   <!-- NuGet: include README and native iOS framework -->
