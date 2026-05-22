@@ -12,11 +12,11 @@ namespace Screeb.iOS.Binding;
 interface Screeb
 {
     [Static]
-    [Export("setSecondarySDK:version:")]
+    [Export("setSecondarySDKWithName:version:")]
     void SetSecondarySDK(string name, string version);
 
     [Static]
-    [Export("initSdk:channelId:identity:visitorProperty:initOptions:hooks:language:")]
+    [Export("initSdkWithContext:channelId:identity:visitorProperty:initOptions:hooks:language:")]
     void InitSdk(
         [NullAllowed] UIViewController context,
         string channelId,
@@ -31,11 +31,11 @@ interface Screeb
     void CloseSdk();
 
     [Static]
-    [Export("setIdentity:visitorProperty:")]
+    [Export("setIdentityWithUniqueVisitorId:visitorProperty:")]
     void SetIdentity(string uniqueVisitorId, NSDictionary visitorProperty);
 
     [Static]
-    [Export("visitorProperty:")]
+    [Export("visitorPropertyWithVisitorProperty:")]
     void VisitorProperty(NSDictionary visitorProperty);
 
     [Static]
@@ -43,27 +43,27 @@ interface Screeb
     void ResetIdentity();
 
     [Static]
-    [Export("getIdentity:")]
-    void GetIdentity(Action<NSDictionary?, NSError?> completion);
+    [Export("getIdentityWithCallback:")]
+    void GetIdentity(Action<NSDictionary?, NSError?> callback);
 
     [Static]
-    [Export("assignGroup:name:properties:")]
+    [Export("assignGroupWithType:name:properties:")]
     void AssignGroup([NullAllowed] string type, string name, NSDictionary properties);
 
     [Static]
-    [Export("unassignGroup:name:properties:")]
+    [Export("unassignGroupWithType:name:properties:")]
     void UnassignGroup([NullAllowed] string type, string name, NSDictionary properties);
 
     [Static]
-    [Export("trackEvent:trackingEventProperties:")]
+    [Export("trackEventWithName:trackingEventProperties:")]
     void TrackEvent(string name, NSDictionary trackingEventProperties);
 
     [Static]
-    [Export("trackScreen:trackingEventProperties:")]
+    [Export("trackScreenWithName:trackingEventProperties:")]
     void TrackScreen(string name, NSDictionary trackingEventProperties);
 
     [Static]
-    [Export("startSurvey:allowMultipleResponses:hiddenFields:ignoreSurveyStatus:hooks:language:distributionId:")]
+    [Export("startSurveyWithSurveyId:allowMultipleResponses:hiddenFields:ignoreSurveyStatus:hooks:language:distributionId:")]
     void StartSurvey(
         string surveyId,
         bool allowMultipleResponses,
@@ -74,11 +74,11 @@ interface Screeb
         [NullAllowed] string distributionId);
 
     [Static]
-    [Export("closeSurvey:")]
+    [Export("closeSurveyWithSurveyId:")]
     void CloseSurvey([NullAllowed] string surveyId);
 
     [Static]
-    [Export("startMessage:allowMultipleResponses:hiddenFields:ignoreMessageStatus:hooks:language:distributionId:")]
+    [Export("startMessageWithMessageId:allowMultipleResponses:hiddenFields:ignoreMessageStatus:hooks:language:distributionId:")]
     void StartMessage(
         string messageId,
         bool allowMultipleResponses,
@@ -89,7 +89,7 @@ interface Screeb
         [NullAllowed] string distributionId);
 
     [Static]
-    [Export("closeMessage:")]
+    [Export("closeMessageWithMessageId:")]
     void CloseMessage([NullAllowed] string messageId);
 
     [Static]
@@ -101,12 +101,12 @@ interface Screeb
     void SessionReplayStop();
 
     [Static]
-    [Export("debug:")]
-    void Debug(Action<string?, NSError?> completion);
+    [Export("debugWithCallback:")]
+    void Debug(Action<string?, NSError?> callback);
 
     [Static]
-    [Export("debugTargeting:")]
-    void DebugTargeting(Action<string?, NSError?> completion);
+    [Export("debugTargetingWithCallback:")]
+    void DebugTargeting(Action<string?, NSError?> callback);
 }
 
 [BaseType(typeof(NSObject))]
