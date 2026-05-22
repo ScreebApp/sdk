@@ -13,7 +13,7 @@ jobs:
 
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '9.0.x'
 
       - name: Install MAUI workloads
         run: dotnet workload install android ios
@@ -22,10 +22,10 @@ jobs:
         run: dotnet restore packages/sdk-maui/ScreebMaui.csproj
 
       - name: Build Android
-        run: dotnet build packages/sdk-maui/ScreebMaui.csproj -f net8.0-android -c Release --no-restore
+        run: dotnet build packages/sdk-maui/ScreebMaui.csproj -f net9.0-android -c Release --no-restore
 
       - name: Build iOS
-        run: dotnet build packages/sdk-maui/ScreebMaui.csproj -f net8.0-ios -c Release --no-restore
+        run: dotnet build packages/sdk-maui/ScreebMaui.csproj -f net9.0-ios -c Release --no-restore
 
       - name: Pack
         run: dotnet pack packages/sdk-maui/ScreebMaui.csproj -c Release --no-build -o ./nupkg
