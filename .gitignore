@@ -35,3 +35,7 @@ yarn-error.log*
 packages/sdk-maui/native/ios/Screeb.xcframework/
 packages/sdk-maui/native/ios/Screeb.zip
 packages/sdk-maui/native/ios/sdk-ios-public-*/
+
+# .NET build artifacts
+packages/sdk-maui/bin/
+packages/sdk-maui/obj/
