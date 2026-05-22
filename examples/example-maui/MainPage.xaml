@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExampleMaui.MainPage"
+             Title="Screeb MAUI Example"
+             BackgroundColor="White">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <Label Text="Screeb .NET MAUI SDK" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Text="SDK initialized on startup (see MauiProgram.cs)" HorizontalOptions="Center" />
+
+            <Button Text="Track Event" Clicked="OnTrackEventClicked" BackgroundColor="#6200EE" TextColor="White" />
+            <Button Text="Track Screen" Clicked="OnTrackScreenClicked" BackgroundColor="#6200EE" TextColor="White" />
+            <Button Text="Set Identity" Clicked="OnSetIdentityClicked" BackgroundColor="#6200EE" TextColor="White" />
+            <Button Text="Reset Identity" Clicked="OnResetIdentityClicked" BackgroundColor="#9E9E9E" TextColor="White" />
+            <Button Text="Get Identity" Clicked="OnGetIdentityClicked" BackgroundColor="#6200EE" TextColor="White" />
+            <Button Text="Assign Group" Clicked="OnAssignGroupClicked" BackgroundColor="#6200EE" TextColor="White" />
+            <Button Text="Start Survey" Clicked="OnStartSurveyClicked" BackgroundColor="#03DAC5" TextColor="Black" />
+            <Button Text="Start Message" Clicked="OnStartMessageClicked" BackgroundColor="#03DAC5" TextColor="Black" />
+
+            <Label x:Name="StatusLabel" Text="Ready" HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

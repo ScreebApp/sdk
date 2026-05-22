@@ -1,0 +1,80 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net9.0-android;net9.0-ios</TargetFrameworks>
+    <RootNamespace>Screeb.Maui</RootNamespace>
+    <AssemblyName>Screeb.Maui</AssemblyName>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <SingleProject>true</SingleProject>
+    <!-- NuGet metadata -->
+    <PackageId>Screeb.Maui</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Screeb</Authors>
+    <Company>Screeb</Company>
+    <Description>Screeb Continuous Product Discovery SDK for .NET MAUI (Android + iOS)</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://developers.screeb.app/sdk-maui/install</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ScreebApp/sdk</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>maui android ios screeb survey analytics</PackageTags>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <!-- Exclude platform-specific and test files from the default SDK glob -->
+  <ItemGroup>
+    <Compile Remove="Platforms/Android/**/*.cs" />
+    <Compile Remove="Platforms/iOS/**/*.cs" />
+    <Compile Remove="tests/**/*.cs" />
+  </ItemGroup>
+
+  <!-- Android platform files -->
+  <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+    <Compile Include="Platforms/Android/Screeb.Android.cs" />
+    <Compile Include="Platforms/Android/HooksAndroid.cs" />
+  </ItemGroup>
+
+  <!-- iOS: activate bgen binding generation -->
+  <PropertyGroup Condition="$(TargetFramework.Contains('-ios'))">
+    <IsBindingProject>true</IsBindingProject>
+  </PropertyGroup>
+
+  <!-- iOS platform files -->
+  <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
+    <ObjcBindingApiDefinition Include="Platforms/iOS/ApiDefinitions.cs" />
+    <ObjcBindingCoreSource Include="Platforms/iOS/StructsAndEnums.cs" />
+    <Compile Include="Platforms/iOS/ScreebClassPtr.cs" />
+    <Compile Include="Platforms/iOS/Screeb.iOS.cs" />
+    <Compile Include="Platforms/iOS/HooksIOS.cs" />
+  </ItemGroup>
+
+  <!-- Android native binding -->
+  <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+    <AndroidMavenLibrary
+      Include="app.screeb.sdk:survey"
+      Version="3.2.0"
+      Bind="true" />
+    <!-- Transitive Maven dependencies required by app.screeb.sdk:survey -->
+    <PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="2.3.21" />
+    <PackageReference Include="Xamarin.AndroidX.Core.Core.Ktx" Version="1.18.0" />
+    <PackageReference Include="Xamarin.AndroidX.WebKit" Version="1.16.0" />
+    <PackageReference Include="Xamarin.Google.Android.Play.Review" Version="2.0.2.7" />
+    <PackageReference Include="Xamarin.Google.Android.Play.Review.Ktx" Version="2.0.2.7" />
+  </ItemGroup>
+
+  <!-- iOS native binding -->
+  <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
+    <NativeReference Include="native/ios/Screeb.xcframework">
+      <Kind>Framework</Kind>
+      <Frameworks>Foundation UIKit</Frameworks>
+      <IsCxx>false</IsCxx>
+    </NativeReference>
+  </ItemGroup>
+
+  <!-- NuGet: include README and native iOS framework -->
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="/" />
+    <None Include="native/ios/Screeb.xcframework/**"
+          Pack="true"
+          PackagePath="runtimes/ios/native/" />
+  </ItemGroup>
+</Project>
