@@ -42,10 +42,13 @@ public static partial class Screeb
         {
             var uuidMap = HooksRegistry.RegisterHooks(hooks);
             App.Screeb.Sdk.Screeb.Instance.SetSecondarySDK("maui", SdkVersion);
-            App.Screeb.Sdk.Screeb.Instance.PluginInit(
+            App.Screeb.Sdk.Screeb.Instance.InitSdk(
+                Android.App.Application.Context,
                 channelId, userId,
                 ToJavaDictionary(ScreebUtils.FormatProperties(properties)),
-                ToInitOptionsMap(initOptions),
+                new App.Screeb.Sdk.InitOptions(
+                    initOptions?.IsDebugMode ?? false,
+                    initOptions?.DisableMirror ?? false),
                 HooksAndroid.ToGlobalHooks(uuidMap),
                 language);
         });
@@ -170,14 +173,6 @@ public static partial class Screeb
         return null;
     }
 
-    private static IDictionary<string, Java.Lang.Object>? ToInitOptionsMap(ScreebInitOptions? opts)
-    {
-        if (opts == null) return null;
-        return new Dictionary<string, Java.Lang.Object>
-        {
-            ["isDebugMode"] = Java.Lang.Boolean.ValueOf(opts.IsDebugMode)!,
-            ["disableMirror"] = Java.Lang.Boolean.ValueOf(opts.DisableMirror)!
-        };
-    }
+
 }
 #endif

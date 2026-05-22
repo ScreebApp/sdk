@@ -4,15 +4,19 @@ namespace ExampleMaui;
 
 public partial class App : Application
 {
+    private bool _sdkInitialized;
+
     public App()
     {
         InitializeComponent();
         MainPage = new MainPage();
     }
 
-    protected override async void OnStart()
+    protected override async void OnResume()
     {
-        base.OnStart();
+        base.OnResume();
+        if (_sdkInitialized) return;
+        _sdkInitialized = true;
         await InitSdk(
             channelId: "0e2b609a-8dce-4695-a80f-966fbfa87a88",
             userId: "maui-user-123",
