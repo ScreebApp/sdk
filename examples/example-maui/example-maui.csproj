@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ExampleMaui</RootNamespace>
+    <ApplicationId>app.screeb.example.maui</ApplicationId>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>0.1.0</ApplicationDisplayVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseMaui>true</UseMaui>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../packages/sdk-maui/ScreebMaui.csproj" />
+  </ItemGroup>
+</Project>

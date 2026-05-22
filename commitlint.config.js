@@ -13,7 +13,9 @@ module.exports = {
             "sdk-angular",
             "example-angular",
             "sdk-vue",
-            "example-vue"
+            "example-vue",
+            "sdk-maui",
+            "example-maui"
         ]],
         "scope-empty": [2, "never"],
         "scope-min-length": [2, "always", 1],
