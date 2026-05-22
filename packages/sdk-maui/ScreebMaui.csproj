@@ -26,6 +26,12 @@
       Include="app.screeb.sdk:survey"
       Version="3.2.0"
       Bind="true" />
+    <!-- Transitive Maven dependencies required by app.screeb.sdk:survey -->
+    <PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="2.3.21" />
+    <PackageReference Include="Xamarin.AndroidX.Core.Core.Ktx" Version="1.18.0" />
+    <PackageReference Include="Xamarin.AndroidX.WebKit" Version="1.16.0" />
+    <PackageReference Include="Xamarin.Google.Android.Play.Review" Version="2.0.2.7" />
+    <PackageReference Include="Xamarin.Google.Android.Play.Review.Ktx" Version="2.0.2.7" />
   </ItemGroup>
 
   <!-- iOS native binding -->
