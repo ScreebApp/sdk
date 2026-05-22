@@ -40,7 +40,7 @@ public static partial class Screeb
         ScreebHooks? hooks, ScreebInitOptions? initOptions, string? language)
         => OnMain(() =>
         {
-            App.Screeb.Sdk.Screeb.Instance.SetSecondarySDK("maui", "0.1.0");
+            App.Screeb.Sdk.Screeb.Instance.SetSecondarySDK("maui", SdkVersion);
             var uuidMap = HooksRegistry.RegisterHooks(hooks);
             _globalHookUuids = uuidMap.Values.ToList();
             App.Screeb.Sdk.Screeb.Instance.PluginInit(

@@ -1,3 +1,5 @@
+using System.Reflection;
+
 namespace Screeb.Maui;
 
 /// <summary>
@@ -6,6 +8,13 @@ namespace Screeb.Maui;
 /// </summary>
 public static partial class Screeb
 {
+    internal static readonly string SdkVersion =
+        typeof(Screeb).Assembly
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+            ?.InformationalVersion
+            ?.Split('+')[0]   // strip build metadata (e.g. "0.1.0+abc123" → "0.1.0")
+        ?? "0.0.0";
+
     /// <summary>
     /// Initialize the Screeb SDK. Must be called before any other method.
     /// </summary>

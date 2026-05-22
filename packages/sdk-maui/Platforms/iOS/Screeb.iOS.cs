@@ -38,7 +38,7 @@ public static partial class Screeb
         ScreebHooks? hooks, ScreebInitOptions? initOptions, string? language)
         => OnMain(() =>
         {
-            NativeScreeb.SetSecondarySDK("maui", "0.1.0");
+            NativeScreeb.SetSecondarySDK("maui", SdkVersion);
             NativeScreeb.InitSdk(null, channelId, userId,
                 ToNSDictionary(ScreebUtils.FormatProperties(properties)) ?? new NSDictionary(),
                 new InitOptions(NSDictionary.FromObjectsAndKeys(
