@@ -46,6 +46,12 @@ jobs:
           dotnet-version: '9.0.x'
       - name: Install MAUI workloads
         run: dotnet workload install android ios
+      - name: Download Screeb iOS XCFramework
+        run: |
+          curl -sL https://github.com/ScreebApp/sdk-ios-public/releases/download/3.2.3/Screeb.zip -o /tmp/Screeb.zip
+          unzip -q /tmp/Screeb.zip -d /tmp/screeb_ios
+          mkdir -p packages/sdk-maui/native/ios
+          cp -r /tmp/screeb_ios/Screeb.xcframework packages/sdk-maui/native/ios/
       - name: Restore
         run: dotnet restore packages/sdk-maui/ScreebMaui.csproj
       - name: Build Android

@@ -33,10 +33,16 @@
     <Compile Include="Platforms/Android/HooksAndroid.cs" />
   </ItemGroup>
 
+  <!-- iOS: activate bgen binding generation -->
+  <PropertyGroup Condition="$(TargetFramework.Contains('-ios'))">
+    <IsBindingProject>true</IsBindingProject>
+  </PropertyGroup>
+
   <!-- iOS platform files -->
   <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
-    <Compile Include="Platforms/iOS/ApiDefinitions.cs" />
-    <Compile Include="Platforms/iOS/StructsAndEnums.cs" />
+    <ObjcBindingApiDefinition Include="Platforms/iOS/ApiDefinitions.cs" />
+    <ObjcBindingCoreSource Include="Platforms/iOS/StructsAndEnums.cs" />
+    <Compile Include="Platforms/iOS/ScreebClassPtr.cs" />
     <Compile Include="Platforms/iOS/Screeb.iOS.cs" />
     <Compile Include="Platforms/iOS/HooksIOS.cs" />
   </ItemGroup>
@@ -67,8 +73,8 @@
   <!-- NuGet: include README and native iOS framework -->
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="/" />
-    <Content Include="native/ios/Screeb.xcframework/**"
-             Pack="true"
-             PackagePath="runtimes/ios/native/" />
+    <None Include="native/ios/Screeb.xcframework/**"
+          Pack="true"
+          PackagePath="runtimes/ios/native/" />
   </ItemGroup>
 </Project>

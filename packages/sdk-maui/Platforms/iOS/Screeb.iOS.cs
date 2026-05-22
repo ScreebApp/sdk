@@ -1,6 +1,7 @@
 #if IOS
 using Foundation;
 using Screeb.iOS.Binding;
+using NativeScreeb = global::Screeb.iOS.Binding.Screeb;
 
 namespace Screeb.Maui;
 
@@ -11,19 +12,19 @@ public static partial class Screeb
         ScreebHooks? hooks, ScreebInitOptions? initOptions, string? language)
     {
         var tcs = new TaskCompletionSource<bool?>();
-        MainThread.InvokeOnMainThread(() =>
+        NSRunLoop.Main.BeginInvokeOnMainThread(() =>
         {
             try
             {
-                Screeb.iOS.Binding.Screeb.SetSecondarySDK("maui", "0.1.0");
-                var ioOpts = new Screeb.iOS.Binding.InitOptions(NSDictionary.FromObjectsAndKeys(
+                NativeScreeb.SetSecondarySDK("maui", "0.1.0");
+                var ioOpts = new InitOptions(NSDictionary.FromObjectsAndKeys(
                     new object[] { 
                         NSNumber.FromBoolean(initOptions?.IsDebugMode ?? false), 
                         NSNumber.FromBoolean(initOptions?.DisableMirror ?? false) 
                     },
                     new object[] { "isDebugMode", "disableMirror" }));
                 var jHooks = HooksIOS.ToNSDictionary(HooksRegistry.RegisterHooks(hooks));
-                Screeb.iOS.Binding.Screeb.InitSdk(
+                NativeScreeb.InitSdk(
                     null, channelId, userId,
                     ToNSDictionary(ScreebUtils.FormatProperties(properties)) ?? new NSDictionary(),
                     ioOpts, jHooks, language);
@@ -37,9 +38,9 @@ public static partial class Screeb
     public static partial Task<bool?> CloseSdk()
     {
         var tcs = new TaskCompletionSource<bool?>();
-        MainThread.InvokeOnMainThread(() =>
+        NSRunLoop.Main.BeginInvokeOnMainThread(() =>
         {
-            try { Screeb.iOS.Binding.Screeb.CloseSdk(); tcs.SetResult(true); }
+            try { NativeScreeb.CloseSdk(); tcs.SetResult(true); }
             catch (Exception ex) { tcs.SetException(ex); }
         });
         return tcs.Task;
@@ -48,11 +49,11 @@ public static partial class Screeb
     public static partial Task<bool?> SetIdentity(string userId, Dictionary<string, object>? properties)
     {
         var tcs = new TaskCompletionSource<bool?>();
-        MainThread.InvokeOnMainThread(() =>
+        NSRunLoop.Main.BeginInvokeOnMainThread(() =>
         {
             try
             {
-                Screeb.iOS.Binding.Screeb.SetIdentity(userId,
+                NativeScreeb.SetIdentity(userId,
                     ToNSDictionary(ScreebUtils.FormatProperties(properties)) ?? new NSDictionary());
                 tcs.SetResult(true);
             }
@@ -64,11 +65,11 @@ public static partial class Screeb
     public static partial Task<bool?> SetProperties(Dictionary<string, object>? properties)
     {
         var tcs = new TaskCompletionSource<bool?>();
-        MainThread.InvokeOnMainThread(() =>
+        NSRunLoop.Main.BeginInvokeOnMainThread(() =>
         {
             try
             {
-                Screeb.iOS.Binding.Screeb.VisitorProperty(
+                NativeScreeb.VisitorProperty(
                     ToNSDictionary(ScreebUtils.FormatProperties(properties)) ?? new NSDictionary());
                 tcs.SetResult(true);
             }
@@ -80,9 +81,9 @@ public static partial class Screeb
     public static partial Task<bool?> ResetIdentity()
     {
         var tcs = new TaskCompletionSource<bool?>();
-        MainThread.InvokeOnMainThread(() =>
+        NSRunLoop.Main.BeginInvokeOnMainThread(() =>
         {
-            try { Screeb.iOS.Binding.Screeb.ResetIdentity(); tcs.SetResult(true); }
+            try { NativeScreeb.ResetIdentity(); tcs.SetResult(true); }
             catch (Exception ex) { tcs.SetException(ex); }
         });
         return tcs.Task;
@@ -91,11 +92,11 @@ public static partial class Screeb
     public static partial Task<Dictionary<string, object>?> GetIdentity()
     {
         var tcs = new TaskCompletionSource<Dictionary<string, object>?>();
-        MainThread.InvokeOnMainThread(() =>
+        NSRunLoop.Main.BeginInvokeOnMainThread(() =>
         {
             try
             {
-                Screeb.iOS.Binding.Screeb.GetIdentity((identity, error) =>
+                NativeScreeb.GetIdentity((identity, error) =>
                 {
                     if (error != null) tcs.SetException(new Exception(error.LocalizedDescription));
                     else tcs.SetResult(FromNSDictionary(identity));
@@ -109,11 +110,11 @@ public static partial class Screeb
     public static partial Task<bool?> AssignGroup(string? groupType, string groupName, Dictionary<string, object>? properties)
     {
         var tcs = new TaskCompletionSource<bool?>();
-        MainThread.InvokeOnMainThread(() =>
+        NSRunLoop.Main.BeginInvokeOnMainThread(() =>
         {
             try
             {
-                Screeb.iOS.Binding.Screeb.AssignGroup(groupType, groupName,
+                NativeScreeb.AssignGroup(groupType, groupName,
                     ToNSDictionary(ScreebUtils.FormatProperties(properties)) ?? new NSDictionary());
                 tcs.SetResult(true);
             }
@@ -125,11 +126,11 @@ public static partial class Screeb
     public static partial Task<bool?> UnassignGroup(string? groupType, string groupName, Dictionary<string, object>? properties)
     {
         var tcs = new TaskCompletionSource<bool?>();
-        MainThread.InvokeOnMainThread(() =>
+        NSRunLoop.Main.BeginInvokeOnMainThread(() =>
         {
             try
             {
-                Screeb.iOS.Binding.Screeb.UnassignGroup(groupType, groupName,
+                NativeScreeb.UnassignGroup(groupType, groupName,
                     ToNSDictionary(ScreebUtils.FormatProperties(properties)) ?? new NSDictionary());
                 tcs.SetResult(true);
             }
@@ -141,11 +142,11 @@ public static partial class Screeb
     public static partial Task<bool?> TrackEvent(string name, Dictionary<string, object>? properties)
     {
         var tcs = new TaskCompletionSource<bool?>();
-        MainThread.InvokeOnMainThread(() =>
+        NSRunLoop.Main.BeginInvokeOnMainThread(() =>
         {
             try
             {
-                Screeb.iOS.Binding.Screeb.TrackEvent(name,
+                NativeScreeb.TrackEvent(name,
                     ToNSDictionary(ScreebUtils.FormatProperties(properties)) ?? new NSDictionary());
                 tcs.SetResult(true);
             }
@@ -157,11 +158,11 @@ public static partial class Screeb
     public static partial Task<bool?> TrackScreen(string name, Dictionary<string, object>? properties)
     {
         var tcs = new TaskCompletionSource<bool?>();
-        MainThread.InvokeOnMainThread(() =>
+        NSRunLoop.Main.BeginInvokeOnMainThread(() =>
         {
             try
             {
-                Screeb.iOS.Binding.Screeb.TrackScreen(name,
+                NativeScreeb.TrackScreen(name,
                     ToNSDictionary(ScreebUtils.FormatProperties(properties)) ?? new NSDictionary());
                 tcs.SetResult(true);
             }
@@ -175,12 +176,12 @@ public static partial class Screeb
         bool ignoreSurveyStatus, ScreebHooks? hooks, string? language, string? distributionId)
     {
         var tcs = new TaskCompletionSource<bool?>();
-        MainThread.InvokeOnMainThread(() =>
+        NSRunLoop.Main.BeginInvokeOnMainThread(() =>
         {
             try
             {
                 var jHooks = HooksIOS.ToNSDictionary(HooksRegistry.RegisterHooks(hooks));
-                Screeb.iOS.Binding.Screeb.StartSurvey(
+                NativeScreeb.StartSurvey(
                     surveyId, allowMultipleResponses,
                     ToNSDictionary(ScreebUtils.FormatProperties(hiddenFields)) ?? new NSDictionary(),
                     ignoreSurveyStatus, jHooks, language, distributionId);
@@ -194,9 +195,9 @@ public static partial class Screeb
     public static partial Task<bool?> CloseSurvey(string? surveyId)
     {
         var tcs = new TaskCompletionSource<bool?>();
-        MainThread.InvokeOnMainThread(() =>
+        NSRunLoop.Main.BeginInvokeOnMainThread(() =>
         {
-            try { Screeb.iOS.Binding.Screeb.CloseSurvey(surveyId); tcs.SetResult(true); }
+            try { NativeScreeb.CloseSurvey(surveyId); tcs.SetResult(true); }
             catch (Exception ex) { tcs.SetException(ex); }
         });
         return tcs.Task;
@@ -207,12 +208,12 @@ public static partial class Screeb
         bool ignoreMessageStatus, ScreebHooks? hooks, string? language, string? distributionId)
     {
         var tcs = new TaskCompletionSource<bool?>();
-        MainThread.InvokeOnMainThread(() =>
+        NSRunLoop.Main.BeginInvokeOnMainThread(() =>
         {
             try
             {
                 var jHooks = HooksIOS.ToNSDictionary(HooksRegistry.RegisterHooks(hooks));
-                Screeb.iOS.Binding.Screeb.StartMessage(
+                NativeScreeb.StartMessage(
                     messageId, allowMultipleResponses,
                     ToNSDictionary(ScreebUtils.FormatProperties(hiddenFields)) ?? new NSDictionary(),
                     ignoreMessageStatus, jHooks, language, distributionId);
@@ -226,9 +227,9 @@ public static partial class Screeb
     public static partial Task<bool?> CloseMessage(string? messageId)
     {
         var tcs = new TaskCompletionSource<bool?>();
-        MainThread.InvokeOnMainThread(() =>
+        NSRunLoop.Main.BeginInvokeOnMainThread(() =>
         {
-            try { Screeb.iOS.Binding.Screeb.CloseMessage(messageId); tcs.SetResult(true); }
+            try { NativeScreeb.CloseMessage(messageId); tcs.SetResult(true); }
             catch (Exception ex) { tcs.SetException(ex); }
         });
         return tcs.Task;
@@ -237,9 +238,9 @@ public static partial class Screeb
     public static partial Task<bool?> SessionReplayStart()
     {
         var tcs = new TaskCompletionSource<bool?>();
-        MainThread.InvokeOnMainThread(() =>
+        NSRunLoop.Main.BeginInvokeOnMainThread(() =>
         {
-            try { Screeb.iOS.Binding.Screeb.SessionReplayStart(); tcs.SetResult(true); }
+            try { NativeScreeb.SessionReplayStart(); tcs.SetResult(true); }
             catch (Exception ex) { tcs.SetException(ex); }
         });
         return tcs.Task;
@@ -248,9 +249,9 @@ public static partial class Screeb
     public static partial Task<bool?> SessionReplayStop()
     {
         var tcs = new TaskCompletionSource<bool?>();
-        MainThread.InvokeOnMainThread(() =>
+        NSRunLoop.Main.BeginInvokeOnMainThread(() =>
         {
-            try { Screeb.iOS.Binding.Screeb.SessionReplayStop(); tcs.SetResult(true); }
+            try { NativeScreeb.SessionReplayStop(); tcs.SetResult(true); }
             catch (Exception ex) { tcs.SetException(ex); }
         });
         return tcs.Task;
@@ -259,11 +260,11 @@ public static partial class Screeb
     public static partial Task<string?> Debug()
     {
         var tcs = new TaskCompletionSource<string?>();
-        MainThread.InvokeOnMainThread(() =>
+        NSRunLoop.Main.BeginInvokeOnMainThread(() =>
         {
             try
             {
-                Screeb.iOS.Binding.Screeb.Debug((info, error) =>
+                NativeScreeb.Debug((info, error) =>
                 {
                     if (error != null) tcs.SetException(new Exception(error.LocalizedDescription));
                     else tcs.SetResult(info);
@@ -277,11 +278,11 @@ public static partial class Screeb
     public static partial Task<string?> DebugTargeting()
     {
         var tcs = new TaskCompletionSource<string?>();
-        MainThread.InvokeOnMainThread(() =>
+        NSRunLoop.Main.BeginInvokeOnMainThread(() =>
         {
             try
             {
-                Screeb.iOS.Binding.Screeb.DebugTargeting((info, error) =>
+                NativeScreeb.DebugTargeting((info, error) =>
                 {
                     if (error != null) tcs.SetException(new Exception(error.LocalizedDescription));
                     else tcs.SetResult(info);

@@ -1,4 +1,5 @@
 // packages/sdk-maui/Platforms/iOS/ApiDefinitions.cs
+using System;
 using Foundation;
 using UIKit;
 using ObjCRuntime;
@@ -7,6 +8,7 @@ namespace Screeb.iOS.Binding;
 
 [Static]
 [DisableDefaultCtor]
+[BaseType(typeof(NSObject))]
 interface Screeb
 {
     [Static]
