@@ -14,7 +14,7 @@ public static class MauiProgram
         Task.Run(async () =>
         {
             await Screeb.InitSdk(
-                channelId: "<YOUR_CHANNEL_ID>",
+                channelId: "0e2b609a-8dce-4695-a80f-966fbfa87a88",
                 userId: "maui-user-123",
                 properties: new Dictionary<string, object>
                 {
