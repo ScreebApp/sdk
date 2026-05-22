@@ -35,3 +35,22 @@ jobs:
           channel: 'stable'
       - run: cd packages/sdk-flutter && flutter pub get
       - run: cd packages/sdk-flutter && flutter analyze
+
+  maui:
+    name: .NET MAUI SDK
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Install MAUI workloads
+        run: dotnet workload install android ios
+      - name: Restore
+        run: dotnet restore packages/sdk-maui/ScreebMaui.csproj
+      - name: Build Android
+        run: dotnet build packages/sdk-maui/ScreebMaui.csproj -f net8.0-android --no-restore
+      - name: Build iOS
+        run: dotnet build packages/sdk-maui/ScreebMaui.csproj -f net8.0-ios --no-restore
+      - name: Run unit tests
+        run: dotnet test packages/sdk-maui/tests/ScreebUtilsTests.csproj
