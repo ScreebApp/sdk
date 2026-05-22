@@ -1,39 +1,36 @@
 // packages/sdk-maui/Platforms/Android/HooksAndroid.cs
 #if ANDROID
-using Java.Util;
-
 namespace Screeb.Maui;
 
 internal static class HooksAndroid
 {
-    internal static HashMap? ToGlobalHooks(Dictionary<string, string> uuidMap)
+    internal static IDictionary<string, Java.Lang.Object>? ToGlobalHooks(Dictionary<string, string> uuidMap)
         => BuildHooksMap(uuidMap);
 
-    internal static HashMap? ToSurveyHooks(Dictionary<string, string> uuidMap)
+    internal static IDictionary<string, Java.Lang.Object>? ToSurveyHooks(Dictionary<string, string> uuidMap)
         => BuildHooksMap(uuidMap);
 
-    private static HashMap? BuildHooksMap(Dictionary<string, string> uuidMap)
+    private static IDictionary<string, Java.Lang.Object>? BuildHooksMap(Dictionary<string, string> uuidMap)
     {
         if (uuidMap.Count == 0) return null;
-        var map = new HashMap();
+        var map = new Dictionary<string, Java.Lang.Object>();
         foreach (var (key, value) in uuidMap)
         {
             if (key == "version")
             {
-                map.Put(key, new Java.Lang.String(value));
+                map[key] = new Java.Lang.String(value);
             }
             else
             {
                 var uuid = value; // capture
-                map.Put(key, new KotlinHookCallback(payload =>
+                map[key] = new KotlinHookCallback(payload =>
                 {
                     var fn = HooksRegistry.Get(uuid);
                     if (fn != null)
                     {
-                        // Fire and forget — run the C# callback asynchronously
                         Task.Run(() => fn(payload?.ToString() ?? "{}"));
                     }
-                }));
+                });
             }
         }
         return map;
@@ -57,6 +54,27 @@ internal class KotlinHookCallback : Java.Lang.Object, Kotlin.Jvm.Functions.IFunc
     public Java.Lang.Object? Invoke(Java.Lang.Object? p0)
     {
         _onHook(p0);
+        return null; // Kotlin Unit → null
+    }
+}
+
+/// <summary>
+/// Wraps a C# Action as a Kotlin Function2&lt;Object, Object, Unit&gt; for
+/// result/error callbacks (GetIdentity, Debug, DebugTargeting).
+/// </summary>
+[Android.Runtime.Register("app/screeb/maui/KotlinResultCallback")]
+internal sealed class KotlinResultCallback : Java.Lang.Object, Kotlin.Jvm.Functions.IFunction2
+{
+    private readonly Action<Java.Lang.Object?, Java.Lang.Object?> _callback;
+
+    internal KotlinResultCallback(Action<Java.Lang.Object?, Java.Lang.Object?> callback)
+    {
+        _callback = callback;
+    }
+
+    public Java.Lang.Object? Invoke(Java.Lang.Object? p1, Java.Lang.Object? p2)
+    {
+        _callback(p1, p2);
         return null; // Kotlin Unit → null
     }
 }

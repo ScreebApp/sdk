@@ -2,7 +2,6 @@
 #if ANDROID
 using Android.OS;
 using App.Screeb.Sdk;
-using Java.Util;
 
 namespace Screeb.Maui;
 
@@ -27,7 +26,7 @@ public static partial class Screeb
             try
             {
                 App.Screeb.Sdk.Screeb.Instance.SetSecondarySDK("maui", "0.1.0");
-                var jProps = ToHashMap(ScreebUtils.FormatProperties(properties));
+                var jProps = ToJavaDictionary(ScreebUtils.FormatProperties(properties));
                 var jInitOptions = ToInitOptionsMap(initOptions);
                 var uuidMap = HooksRegistry.RegisterHooks(hooks);
                 _globalHookUuids = uuidMap.Values.ToList();
@@ -68,7 +67,7 @@ public static partial class Screeb
         {
             try
             {
-                App.Screeb.Sdk.Screeb.Instance.SetIdentity(userId, ToHashMap(ScreebUtils.FormatProperties(properties)));
+                App.Screeb.Sdk.Screeb.Instance.SetIdentity(userId, ToJavaDictionary(ScreebUtils.FormatProperties(properties)));
                 tcs.SetResult(true);
             }
             catch (Exception ex) { tcs.SetException(ex); }
@@ -83,7 +82,7 @@ public static partial class Screeb
         {
             try
             {
-                var props = ToHashMap(ScreebUtils.FormatProperties(properties));
+                var props = ToJavaDictionary(ScreebUtils.FormatProperties(properties));
                 if (props != null) App.Screeb.Sdk.Screeb.Instance.SetVisitorProperties(props);
                 tcs.SetResult(true);
             }
@@ -108,11 +107,15 @@ public static partial class Screeb
         var tcs = new TaskCompletionSource<Dictionary<string, object>?>();
         new Handler(Looper.MainLooper!).Post(() =>
         {
-            App.Screeb.Sdk.Screeb.Instance.GetIdentity((identity, error) =>
+            try
             {
-                if (error != null) tcs.SetException(new Exception(error.Message));
-                else tcs.SetResult(FromHashMap(identity));
-            });
+                App.Screeb.Sdk.Screeb.Instance.GetIdentity(new KotlinResultCallback((identity, error) =>
+                {
+                    if (error != null) tcs.SetException(new Exception(error.ToString()));
+                    else tcs.SetResult(FromJavaObject(identity));
+                }));
+            }
+            catch (Exception ex) { tcs.SetException(ex); }
         });
         return tcs.Task;
     }
@@ -124,7 +127,7 @@ public static partial class Screeb
         {
             try
             {
-                App.Screeb.Sdk.Screeb.Instance.AssignGroup(groupType, groupName, ToHashMap(ScreebUtils.FormatProperties(properties)));
+                App.Screeb.Sdk.Screeb.Instance.AssignGroup(groupType, groupName, ToJavaDictionary(ScreebUtils.FormatProperties(properties)));
                 tcs.SetResult(true);
             }
             catch (Exception ex) { tcs.SetException(ex); }
@@ -139,7 +142,7 @@ public static partial class Screeb
         {
             try
             {
-                App.Screeb.Sdk.Screeb.Instance.UnassignGroup(groupType, groupName, ToHashMap(ScreebUtils.FormatProperties(properties)));
+                App.Screeb.Sdk.Screeb.Instance.UnassignGroup(groupType, groupName, ToJavaDictionary(ScreebUtils.FormatProperties(properties)));
                 tcs.SetResult(true);
             }
             catch (Exception ex) { tcs.SetException(ex); }
@@ -154,7 +157,7 @@ public static partial class Screeb
         {
             try
             {
-                App.Screeb.Sdk.Screeb.Instance.TrackEvent(name, ToHashMap(ScreebUtils.FormatProperties(properties)));
+                App.Screeb.Sdk.Screeb.Instance.TrackEvent(name, ToJavaDictionary(ScreebUtils.FormatProperties(properties)));
                 tcs.SetResult(true);
             }
             catch (Exception ex) { tcs.SetException(ex); }
@@ -169,7 +172,7 @@ public static partial class Screeb
         {
             try
             {
-                App.Screeb.Sdk.Screeb.Instance.TrackScreen(name, ToHashMap(ScreebUtils.FormatProperties(properties)));
+                App.Screeb.Sdk.Screeb.Instance.TrackScreen(name, ToJavaDictionary(ScreebUtils.FormatProperties(properties)));
                 tcs.SetResult(true);
             }
             catch (Exception ex) { tcs.SetException(ex); }
@@ -187,9 +190,9 @@ public static partial class Screeb
             try
             {
                 var jHooks = HooksAndroid.ToSurveyHooks(HooksRegistry.RegisterHooks(hooks));
-                // TODO: unregister survey hooks on close
+                // TODO: unregister survey hooks on close (v0.2.0)
                 App.Screeb.Sdk.Screeb.Instance.StartSurvey(
-                    surveyId, allowMultipleResponses, ToHashMap(ScreebUtils.FormatProperties(hiddenFields)),
+                    surveyId, allowMultipleResponses, ToJavaDictionary(ScreebUtils.FormatProperties(hiddenFields)),
                     ignoreSurveyStatus, jHooks, language, distributionId);
                 tcs.SetResult(true);
             }
@@ -219,9 +222,9 @@ public static partial class Screeb
             try
             {
                 var jHooks = HooksAndroid.ToSurveyHooks(HooksRegistry.RegisterHooks(hooks));
-                // TODO: unregister message hooks on close
+                // TODO: unregister message hooks on close (v0.2.0)
                 App.Screeb.Sdk.Screeb.Instance.StartMessage(
-                    messageId, allowMultipleResponses, ToHashMap(ScreebUtils.FormatProperties(hiddenFields)),
+                    messageId, allowMultipleResponses, ToJavaDictionary(ScreebUtils.FormatProperties(hiddenFields)),
                     ignoreMessageStatus, jHooks, language, distributionId);
                 tcs.SetResult(true);
             }
@@ -268,11 +271,15 @@ public static partial class Screeb
         var tcs = new TaskCompletionSource<string?>();
         new Handler(Looper.MainLooper!).Post(() =>
         {
-            App.Screeb.Sdk.Screeb.Instance.Debug((info, error) =>
+            try
             {
-                if (error != null) tcs.SetException(new Exception(error.Message));
-                else tcs.SetResult(info);
-            });
+                App.Screeb.Sdk.Screeb.Instance.Debug(new KotlinResultCallback((info, error) =>
+                {
+                    if (error != null) tcs.SetException(new Exception(error.ToString()));
+                    else tcs.SetResult(info?.ToString());
+                }));
+            }
+            catch (Exception ex) { tcs.SetException(ex); }
         });
         return tcs.Task;
     }
@@ -282,49 +289,56 @@ public static partial class Screeb
         var tcs = new TaskCompletionSource<string?>();
         new Handler(Looper.MainLooper!).Post(() =>
         {
-            App.Screeb.Sdk.Screeb.Instance.DebugTargeting((info, error) =>
+            try
             {
-                if (error != null) tcs.SetException(new Exception(error.Message));
-                else tcs.SetResult(info);
-            });
+                App.Screeb.Sdk.Screeb.Instance.DebugTargeting(new KotlinResultCallback((info, error) =>
+                {
+                    if (error != null) tcs.SetException(new Exception(error.ToString()));
+                    else tcs.SetResult(info?.ToString());
+                }));
+            }
+            catch (Exception ex) { tcs.SetException(ex); }
         });
         return tcs.Task;
     }
 
     // --- Helpers ---
 
-    private static HashMap? ToHashMap(Dictionary<string, object>? dict)
+    private static IDictionary<string, Java.Lang.Object>? ToJavaDictionary(Dictionary<string, object>? dict)
     {
         if (dict == null) return null;
-        var map = new HashMap();
+        var map = new Dictionary<string, Java.Lang.Object>();
         foreach (var (k, v) in dict)
-            map.Put(k, v is string s ? new Java.Lang.String(s) :
-                       v is bool b ? Java.Lang.Boolean.ValueOf(b) :
-                       v is int i ? Java.Lang.Integer.ValueOf(i) :
-                       v is long l ? Java.Lang.Long.ValueOf(l) :
-                       v is double d ? Java.Lang.Double.ValueOf(d) :
-                       Java.Lang.Object.FromArray(new[] { v.ToString() }));
+            map[k] = v is string s ? new Java.Lang.String(s) :
+                       v is bool b ? Java.Lang.Boolean.ValueOf(b)! :
+                       v is int i ? Java.Lang.Integer.ValueOf(i)! :
+                       v is long l ? Java.Lang.Long.ValueOf(l)! :
+                       v is double d ? Java.Lang.Double.ValueOf(d)! :
+                       new Java.Lang.String(v.ToString() ?? "");
         return map;
     }
 
-    private static Dictionary<string, object>? FromHashMap(Java.Util.HashMap? map)
+    private static Dictionary<string, object>? FromJavaObject(Java.Lang.Object? obj)
     {
-        if (map == null) return null;
-        var result = new Dictionary<string, object>();
-        var entries = map.EntrySet();
-        if (entries == null) return result;
-        foreach (Java.Util.IMapEntry entry in entries)
-            result[entry.Key?.ToString() ?? ""] = entry.Value?.ToString() ?? "";
-        return result;
+        if (obj == null) return null;
+        if (obj is IDictionary<string, Java.Lang.Object> dict)
+        {
+            var result = new Dictionary<string, object>();
+            foreach (var (k, v) in dict)
+                result[k] = v?.ToString() ?? "";
+            return result;
+        }
+        return null;
     }
 
-    private static HashMap? ToInitOptionsMap(ScreebInitOptions? opts)
+    private static IDictionary<string, Java.Lang.Object>? ToInitOptionsMap(ScreebInitOptions? opts)
     {
         if (opts == null) return null;
-        var map = new HashMap();
-        map.Put("isDebugMode", Java.Lang.Boolean.ValueOf(opts.IsDebugMode));
-        map.Put("disableMirror", Java.Lang.Boolean.ValueOf(opts.DisableMirror));
-        return map;
+        return new Dictionary<string, Java.Lang.Object>
+        {
+            ["isDebugMode"] = Java.Lang.Boolean.ValueOf(opts.IsDebugMode)!,
+            ["disableMirror"] = Java.Lang.Boolean.ValueOf(opts.DisableMirror)!
+        };
     }
 }
 #endif
