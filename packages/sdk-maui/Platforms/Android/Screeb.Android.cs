@@ -7,300 +7,141 @@ namespace Screeb.Maui;
 
 public static partial class Screeb
 {
-    private static Android.Content.Context AppContext =>
-        Android.App.Application.Context;
-
     private static IEnumerable<string>? _globalHookUuids;
 
-    public static partial async Task<bool?> InitSdk(
-        string channelId,
-        string? userId,
-        Dictionary<string, object>? properties,
-        ScreebHooks? hooks,
-        ScreebInitOptions? initOptions,
-        string? language)
+    // Dispatches body to the main thread; catches exceptions and forwards them to the returned Task.
+    private static Task<bool?> OnMain(Action<TaskCompletionSource<bool?>> body)
     {
         var tcs = new TaskCompletionSource<bool?>();
         new Handler(Looper.MainLooper!).Post(() =>
         {
-            try
-            {
-                App.Screeb.Sdk.Screeb.Instance.SetSecondarySDK("maui", "0.1.0");
-                var jProps = ToJavaDictionary(ScreebUtils.FormatProperties(properties));
-                var jInitOptions = ToInitOptionsMap(initOptions);
-                var uuidMap = HooksRegistry.RegisterHooks(hooks);
-                _globalHookUuids = uuidMap.Values.ToList();
-                var jHooks = HooksAndroid.ToGlobalHooks(uuidMap);
-                App.Screeb.Sdk.Screeb.Instance.PluginInit(
-                    channelId, userId, jProps, jInitOptions, jHooks, language);
-                tcs.SetResult(true);
-            }
+            try { body(tcs); }
             catch (Exception ex) { tcs.SetException(ex); }
         });
-        return await tcs.Task;
+        return tcs.Task;
     }
 
-    public static partial async Task<bool?> CloseSdk()
+    private static Task<bool?> OnMain(Action body) =>
+        OnMain(tcs => { body(); tcs.SetResult(true); });
+
+    private static Task<T?> OnMain<T>(Action<TaskCompletionSource<T?>> body) where T : class
     {
-        var tcs = new TaskCompletionSource<bool?>();
+        var tcs = new TaskCompletionSource<T?>();
         new Handler(Looper.MainLooper!).Post(() =>
         {
-            try
-            {
-                if (_globalHookUuids != null)
-                {
-                    HooksRegistry.Unregister(_globalHookUuids);
-                    _globalHookUuids = null;
-                }
-                App.Screeb.Sdk.Screeb.Instance.CloseSdk();
-                tcs.SetResult(true);
-            }
+            try { body(tcs); }
             catch (Exception ex) { tcs.SetException(ex); }
         });
-        return await tcs.Task;
+        return tcs.Task;
     }
 
-    public static partial async Task<bool?> SetIdentity(string userId, Dictionary<string, object>? properties)
-    {
-        var tcs = new TaskCompletionSource<bool?>();
-        new Handler(Looper.MainLooper!).Post(() =>
+    public static partial Task<bool?> InitSdk(
+        string channelId, string? userId, Dictionary<string, object>? properties,
+        ScreebHooks? hooks, ScreebInitOptions? initOptions, string? language)
+        => OnMain(() =>
         {
-            try
-            {
-                App.Screeb.Sdk.Screeb.Instance.SetIdentity(userId, ToJavaDictionary(ScreebUtils.FormatProperties(properties)));
-                tcs.SetResult(true);
-            }
-            catch (Exception ex) { tcs.SetException(ex); }
+            App.Screeb.Sdk.Screeb.Instance.SetSecondarySDK("maui", "0.1.0");
+            var uuidMap = HooksRegistry.RegisterHooks(hooks);
+            _globalHookUuids = uuidMap.Values.ToList();
+            App.Screeb.Sdk.Screeb.Instance.PluginInit(
+                channelId, userId,
+                ToJavaDictionary(ScreebUtils.FormatProperties(properties)),
+                ToInitOptionsMap(initOptions),
+                HooksAndroid.ToGlobalHooks(uuidMap),
+                language);
         });
-        return await tcs.Task;
-    }
 
-    public static partial async Task<bool?> SetProperties(Dictionary<string, object>? properties)
+    public static partial Task<bool?> CloseSdk() => OnMain(() =>
     {
-        var tcs = new TaskCompletionSource<bool?>();
-        new Handler(Looper.MainLooper!).Post(() =>
-        {
-            try
-            {
-                var props = ToJavaDictionary(ScreebUtils.FormatProperties(properties));
-                if (props != null) App.Screeb.Sdk.Screeb.Instance.SetVisitorProperties(props);
-                tcs.SetResult(true);
-            }
-            catch (Exception ex) { tcs.SetException(ex); }
-        });
-        return await tcs.Task;
-    }
+        if (_globalHookUuids != null) { HooksRegistry.Unregister(_globalHookUuids); _globalHookUuids = null; }
+        App.Screeb.Sdk.Screeb.Instance.CloseSdk();
+    });
 
-    public static partial async Task<bool?> ResetIdentity()
-    {
-        var tcs = new TaskCompletionSource<bool?>();
-        new Handler(Looper.MainLooper!).Post(() =>
+    public static partial Task<bool?> SetIdentity(string userId, Dictionary<string, object>? properties)
+        => OnMain(() => App.Screeb.Sdk.Screeb.Instance.SetIdentity(
+            userId, ToJavaDictionary(ScreebUtils.FormatProperties(properties))));
+
+    public static partial Task<bool?> SetProperties(Dictionary<string, object>? properties)
+        => OnMain(() =>
         {
-            try { App.Screeb.Sdk.Screeb.Instance.ResetIdentity(); tcs.SetResult(true); }
-            catch (Exception ex) { tcs.SetException(ex); }
+            var props = ToJavaDictionary(ScreebUtils.FormatProperties(properties));
+            if (props != null) App.Screeb.Sdk.Screeb.Instance.SetVisitorProperties(props);
         });
-        return await tcs.Task;
-    }
+
+    public static partial Task<bool?> ResetIdentity()
+        => OnMain(() => App.Screeb.Sdk.Screeb.Instance.ResetIdentity());
 
     public static partial Task<Dictionary<string, object>?> GetIdentity()
-    {
-        var tcs = new TaskCompletionSource<Dictionary<string, object>?>();
-        new Handler(Looper.MainLooper!).Post(() =>
-        {
-            try
+        => OnMain<Dictionary<string, object>>(tcs =>
+            App.Screeb.Sdk.Screeb.Instance.GetIdentity(new KotlinResultCallback((identity, error) =>
             {
-                App.Screeb.Sdk.Screeb.Instance.GetIdentity(new KotlinResultCallback((identity, error) =>
-                {
-                    if (error != null) tcs.SetException(new Exception(error.ToString()));
-                    else tcs.SetResult(FromJavaObject(identity));
-                }));
-            }
-            catch (Exception ex) { tcs.SetException(ex); }
-        });
-        return tcs.Task;
-    }
+                if (error != null) tcs.SetException(new Exception(error.ToString()));
+                else tcs.SetResult(FromJavaObject(identity));
+            })));
 
-    public static partial async Task<bool?> AssignGroup(string? groupType, string groupName, Dictionary<string, object>? properties)
-    {
-        var tcs = new TaskCompletionSource<bool?>();
-        new Handler(Looper.MainLooper!).Post(() =>
-        {
-            try
-            {
-                App.Screeb.Sdk.Screeb.Instance.AssignGroup(groupType, groupName, ToJavaDictionary(ScreebUtils.FormatProperties(properties)));
-                tcs.SetResult(true);
-            }
-            catch (Exception ex) { tcs.SetException(ex); }
-        });
-        return await tcs.Task;
-    }
+    public static partial Task<bool?> AssignGroup(string? groupType, string groupName, Dictionary<string, object>? properties)
+        => OnMain(() => App.Screeb.Sdk.Screeb.Instance.AssignGroup(
+            groupType, groupName, ToJavaDictionary(ScreebUtils.FormatProperties(properties))));
 
-    public static partial async Task<bool?> UnassignGroup(string? groupType, string groupName, Dictionary<string, object>? properties)
-    {
-        var tcs = new TaskCompletionSource<bool?>();
-        new Handler(Looper.MainLooper!).Post(() =>
-        {
-            try
-            {
-                App.Screeb.Sdk.Screeb.Instance.UnassignGroup(groupType, groupName, ToJavaDictionary(ScreebUtils.FormatProperties(properties)));
-                tcs.SetResult(true);
-            }
-            catch (Exception ex) { tcs.SetException(ex); }
-        });
-        return await tcs.Task;
-    }
+    public static partial Task<bool?> UnassignGroup(string? groupType, string groupName, Dictionary<string, object>? properties)
+        => OnMain(() => App.Screeb.Sdk.Screeb.Instance.UnassignGroup(
+            groupType, groupName, ToJavaDictionary(ScreebUtils.FormatProperties(properties))));
 
-    public static partial async Task<bool?> TrackEvent(string name, Dictionary<string, object>? properties)
-    {
-        var tcs = new TaskCompletionSource<bool?>();
-        new Handler(Looper.MainLooper!).Post(() =>
-        {
-            try
-            {
-                App.Screeb.Sdk.Screeb.Instance.TrackEvent(name, ToJavaDictionary(ScreebUtils.FormatProperties(properties)));
-                tcs.SetResult(true);
-            }
-            catch (Exception ex) { tcs.SetException(ex); }
-        });
-        return await tcs.Task;
-    }
+    public static partial Task<bool?> TrackEvent(string name, Dictionary<string, object>? properties)
+        => OnMain(() => App.Screeb.Sdk.Screeb.Instance.TrackEvent(
+            name, ToJavaDictionary(ScreebUtils.FormatProperties(properties))));
 
-    public static partial async Task<bool?> TrackScreen(string name, Dictionary<string, object>? properties)
-    {
-        var tcs = new TaskCompletionSource<bool?>();
-        new Handler(Looper.MainLooper!).Post(() =>
-        {
-            try
-            {
-                App.Screeb.Sdk.Screeb.Instance.TrackScreen(name, ToJavaDictionary(ScreebUtils.FormatProperties(properties)));
-                tcs.SetResult(true);
-            }
-            catch (Exception ex) { tcs.SetException(ex); }
-        });
-        return await tcs.Task;
-    }
+    public static partial Task<bool?> TrackScreen(string name, Dictionary<string, object>? properties)
+        => OnMain(() => App.Screeb.Sdk.Screeb.Instance.TrackScreen(
+            name, ToJavaDictionary(ScreebUtils.FormatProperties(properties))));
 
-    public static partial async Task<bool?> StartSurvey(
+    public static partial Task<bool?> StartSurvey(
         string surveyId, bool allowMultipleResponses, Dictionary<string, object>? hiddenFields,
         bool ignoreSurveyStatus, ScreebHooks? hooks, string? language, string? distributionId)
-    {
-        var tcs = new TaskCompletionSource<bool?>();
-        new Handler(Looper.MainLooper!).Post(() =>
-        {
-            try
-            {
-                var jHooks = HooksAndroid.ToSurveyHooks(HooksRegistry.RegisterHooks(hooks));
-                // TODO: unregister survey hooks on close (v0.2.0)
-                App.Screeb.Sdk.Screeb.Instance.StartSurvey(
-                    surveyId, allowMultipleResponses, ToJavaDictionary(ScreebUtils.FormatProperties(hiddenFields)),
-                    ignoreSurveyStatus, jHooks, language, distributionId);
-                tcs.SetResult(true);
-            }
-            catch (Exception ex) { tcs.SetException(ex); }
-        });
-        return await tcs.Task;
-    }
+        => OnMain(() => App.Screeb.Sdk.Screeb.Instance.StartSurvey(
+            surveyId, allowMultipleResponses,
+            ToJavaDictionary(ScreebUtils.FormatProperties(hiddenFields)),
+            ignoreSurveyStatus,
+            HooksAndroid.ToSurveyHooks(HooksRegistry.RegisterHooks(hooks)),
+            language, distributionId));
 
-    public static partial async Task<bool?> CloseSurvey(string? surveyId)
-    {
-        var tcs = new TaskCompletionSource<bool?>();
-        new Handler(Looper.MainLooper!).Post(() =>
-        {
-            try { App.Screeb.Sdk.Screeb.Instance.CloseSurvey(surveyId); tcs.SetResult(true); }
-            catch (Exception ex) { tcs.SetException(ex); }
-        });
-        return await tcs.Task;
-    }
+    public static partial Task<bool?> CloseSurvey(string? surveyId)
+        => OnMain(() => App.Screeb.Sdk.Screeb.Instance.CloseSurvey(surveyId));
 
-    public static partial async Task<bool?> StartMessage(
+    public static partial Task<bool?> StartMessage(
         string messageId, bool allowMultipleResponses, Dictionary<string, object>? hiddenFields,
         bool ignoreMessageStatus, ScreebHooks? hooks, string? language, string? distributionId)
-    {
-        var tcs = new TaskCompletionSource<bool?>();
-        new Handler(Looper.MainLooper!).Post(() =>
-        {
-            try
-            {
-                var jHooks = HooksAndroid.ToSurveyHooks(HooksRegistry.RegisterHooks(hooks));
-                // TODO: unregister message hooks on close (v0.2.0)
-                App.Screeb.Sdk.Screeb.Instance.StartMessage(
-                    messageId, allowMultipleResponses, ToJavaDictionary(ScreebUtils.FormatProperties(hiddenFields)),
-                    ignoreMessageStatus, jHooks, language, distributionId);
-                tcs.SetResult(true);
-            }
-            catch (Exception ex) { tcs.SetException(ex); }
-        });
-        return await tcs.Task;
-    }
+        => OnMain(() => App.Screeb.Sdk.Screeb.Instance.StartMessage(
+            messageId, allowMultipleResponses,
+            ToJavaDictionary(ScreebUtils.FormatProperties(hiddenFields)),
+            ignoreMessageStatus,
+            HooksAndroid.ToSurveyHooks(HooksRegistry.RegisterHooks(hooks)),
+            language, distributionId));
 
-    public static partial async Task<bool?> CloseMessage(string? messageId)
-    {
-        var tcs = new TaskCompletionSource<bool?>();
-        new Handler(Looper.MainLooper!).Post(() =>
-        {
-            try { App.Screeb.Sdk.Screeb.Instance.CloseMessage(messageId); tcs.SetResult(true); }
-            catch (Exception ex) { tcs.SetException(ex); }
-        });
-        return await tcs.Task;
-    }
+    public static partial Task<bool?> CloseMessage(string? messageId)
+        => OnMain(() => App.Screeb.Sdk.Screeb.Instance.CloseMessage(messageId));
 
-    public static partial async Task<bool?> SessionReplayStart()
-    {
-        var tcs = new TaskCompletionSource<bool?>();
-        new Handler(Looper.MainLooper!).Post(() =>
-        {
-            try { App.Screeb.Sdk.Screeb.Instance.SessionReplayStart(); tcs.SetResult(true); }
-            catch (Exception ex) { tcs.SetException(ex); }
-        });
-        return await tcs.Task;
-    }
+    public static partial Task<bool?> SessionReplayStart()
+        => OnMain(() => App.Screeb.Sdk.Screeb.Instance.SessionReplayStart());
 
-    public static partial async Task<bool?> SessionReplayStop()
-    {
-        var tcs = new TaskCompletionSource<bool?>();
-        new Handler(Looper.MainLooper!).Post(() =>
-        {
-            try { App.Screeb.Sdk.Screeb.Instance.SessionReplayStop(); tcs.SetResult(true); }
-            catch (Exception ex) { tcs.SetException(ex); }
-        });
-        return await tcs.Task;
-    }
+    public static partial Task<bool?> SessionReplayStop()
+        => OnMain(() => App.Screeb.Sdk.Screeb.Instance.SessionReplayStop());
 
     public static partial Task<string?> Debug()
-    {
-        var tcs = new TaskCompletionSource<string?>();
-        new Handler(Looper.MainLooper!).Post(() =>
-        {
-            try
+        => OnMain<string>(tcs =>
+            App.Screeb.Sdk.Screeb.Instance.Debug(new KotlinResultCallback((info, error) =>
             {
-                App.Screeb.Sdk.Screeb.Instance.Debug(new KotlinResultCallback((info, error) =>
-                {
-                    if (error != null) tcs.SetException(new Exception(error.ToString()));
-                    else tcs.SetResult(info?.ToString());
-                }));
-            }
-            catch (Exception ex) { tcs.SetException(ex); }
-        });
-        return tcs.Task;
-    }
+                if (error != null) tcs.SetException(new Exception(error.ToString()));
+                else tcs.SetResult(info?.ToString());
+            })));
 
     public static partial Task<string?> DebugTargeting()
-    {
-        var tcs = new TaskCompletionSource<string?>();
-        new Handler(Looper.MainLooper!).Post(() =>
-        {
-            try
+        => OnMain<string>(tcs =>
+            App.Screeb.Sdk.Screeb.Instance.DebugTargeting(new KotlinResultCallback((info, error) =>
             {
-                App.Screeb.Sdk.Screeb.Instance.DebugTargeting(new KotlinResultCallback((info, error) =>
-                {
-                    if (error != null) tcs.SetException(new Exception(error.ToString()));
-                    else tcs.SetResult(info?.ToString());
-                }));
-            }
-            catch (Exception ex) { tcs.SetException(ex); }
-        });
-        return tcs.Task;
-    }
+                if (error != null) tcs.SetException(new Exception(error.ToString()));
+                else tcs.SetResult(info?.ToString());
+            })));
 
     // --- Helpers ---
 
@@ -324,8 +165,7 @@ public static partial class Screeb
         if (obj is IDictionary<string, Java.Lang.Object> dict)
         {
             var result = new Dictionary<string, object>();
-            foreach (var (k, v) in dict)
-                result[k] = v?.ToString() ?? "";
+            foreach (var (k, v) in dict) result[k] = v?.ToString() ?? "";
             return result;
         }
         return null;
