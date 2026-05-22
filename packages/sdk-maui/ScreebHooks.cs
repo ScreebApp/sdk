@@ -2,7 +2,8 @@ namespace Screeb.Maui;
 
 public class ScreebHooks
 {
-    public string? Version { get; set; }
+    /// <summary>Hooks version identifier passed verbatim to the native SDK.</summary>
+    public required string Version { get; set; }
 
     /// <summary>
     /// Hook callbacks: key = hook name (e.g. "onSurveyShowed"),
@@ -38,13 +39,16 @@ internal static class HooksRegistry
     internal static Func<string, Task<object?>>? Get(string uuid)
         => _registry.TryGetValue(uuid, out var fn) ? fn : null;
 
-    /// <summary>
-    /// Removes registered callbacks by UUID. Call after SDK teardown or hook de-registration
-    /// to prevent unbounded memory growth across repeated InitSdk/StartSurvey calls.
-    /// </summary>
+    /// <summary>Removes registered callbacks by UUID.</summary>
     internal static void Unregister(IEnumerable<string> uuids)
     {
         foreach (var uuid in uuids)
             _registry.TryRemove(uuid, out _);
     }
+
+    /// <summary>
+    /// Removes all registered callbacks. Call on CloseSdk to prevent unbounded
+    /// memory growth across repeated InitSdk/StartSurvey/StartMessage calls.
+    /// </summary>
+    internal static void UnregisterAll() => _registry.Clear();
 }

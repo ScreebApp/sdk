@@ -7,13 +7,13 @@ namespace Screeb.Maui;
 
 public static partial class Screeb
 {
-    private static IEnumerable<string>? _globalHookUuids;
+    private static readonly Handler _mainHandler = new Handler(Looper.MainLooper!);
 
     // Dispatches body to the main thread; catches exceptions and forwards them to the returned Task.
     private static Task<bool?> OnMain(Action<TaskCompletionSource<bool?>> body)
     {
-        var tcs = new TaskCompletionSource<bool?>();
-        new Handler(Looper.MainLooper!).Post(() =>
+        var tcs = new TaskCompletionSource<bool?>(TaskCreationOptions.RunContinuationsAsynchronously);
+        _mainHandler.Post(() =>
         {
             try { body(tcs); }
             catch (Exception ex) { tcs.SetException(ex); }
@@ -26,8 +26,8 @@ public static partial class Screeb
 
     private static Task<T?> OnMain<T>(Action<TaskCompletionSource<T?>> body) where T : class
     {
-        var tcs = new TaskCompletionSource<T?>();
-        new Handler(Looper.MainLooper!).Post(() =>
+        var tcs = new TaskCompletionSource<T?>(TaskCreationOptions.RunContinuationsAsynchronously);
+        _mainHandler.Post(() =>
         {
             try { body(tcs); }
             catch (Exception ex) { tcs.SetException(ex); }
@@ -40,9 +40,8 @@ public static partial class Screeb
         ScreebHooks? hooks, ScreebInitOptions? initOptions, string? language)
         => OnMain(() =>
         {
-            App.Screeb.Sdk.Screeb.Instance.SetSecondarySDK("maui", SdkVersion);
             var uuidMap = HooksRegistry.RegisterHooks(hooks);
-            _globalHookUuids = uuidMap.Values.ToList();
+            App.Screeb.Sdk.Screeb.Instance.SetSecondarySDK("maui", SdkVersion);
             App.Screeb.Sdk.Screeb.Instance.PluginInit(
                 channelId, userId,
                 ToJavaDictionary(ScreebUtils.FormatProperties(properties)),
@@ -53,7 +52,7 @@ public static partial class Screeb
 
     public static partial Task<bool?> CloseSdk() => OnMain(() =>
     {
-        if (_globalHookUuids != null) { HooksRegistry.Unregister(_globalHookUuids); _globalHookUuids = null; }
+        HooksRegistry.UnregisterAll();
         App.Screeb.Sdk.Screeb.Instance.CloseSdk();
     });
 

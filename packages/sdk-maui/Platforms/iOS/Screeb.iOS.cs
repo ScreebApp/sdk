@@ -10,7 +10,7 @@ public static partial class Screeb
     // Dispatches body to the main thread; catches exceptions and forwards them to the returned Task.
     private static Task<bool?> OnMain(Action<TaskCompletionSource<bool?>> body)
     {
-        var tcs = new TaskCompletionSource<bool?>();
+        var tcs = new TaskCompletionSource<bool?>(TaskCreationOptions.RunContinuationsAsynchronously);
         NSRunLoop.Main.BeginInvokeOnMainThread(() =>
         {
             try { body(tcs); }
@@ -24,7 +24,7 @@ public static partial class Screeb
 
     private static Task<T?> OnMain<T>(Action<TaskCompletionSource<T?>> body) where T : class
     {
-        var tcs = new TaskCompletionSource<T?>();
+        var tcs = new TaskCompletionSource<T?>(TaskCreationOptions.RunContinuationsAsynchronously);
         NSRunLoop.Main.BeginInvokeOnMainThread(() =>
         {
             try { body(tcs); }
@@ -49,7 +49,7 @@ public static partial class Screeb
         });
 
     public static partial Task<bool?> CloseSdk()
-        => OnMain(() => NativeScreeb.CloseSdk());
+        => OnMain(() => { HooksRegistry.UnregisterAll(); NativeScreeb.CloseSdk(); });
 
     public static partial Task<bool?> SetIdentity(string userId, Dictionary<string, object>? properties)
         => OnMain(() => NativeScreeb.SetIdentity(
