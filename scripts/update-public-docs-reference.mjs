@@ -761,7 +761,7 @@ function inlineSignature(signature) {
 }
 
 function tableCode(text) {
-  return text.replace(/\|/g, "\\|").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  return text.replace(/\|/g, "\\|");
 }
 
 function inlineDescription(description) {
