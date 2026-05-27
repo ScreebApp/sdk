@@ -29,7 +29,7 @@ env:
 jobs:
   js:
     name: JS/TS packages
-    runs-on: [self-hosted, Linux]
+    runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -41,7 +41,7 @@ jobs:
 
   react-native:
     name: React Native release check
-    runs-on: [self-hosted, Linux]
+    runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -53,7 +53,7 @@ jobs:
 
   flutter:
     name: Flutter package
-    runs-on: [self-hosted, Linux]
+    runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v4
       - uses: android-actions/setup-android@v3
@@ -67,7 +67,7 @@ jobs:
 
   maui-android:
     name: .NET MAUI Android SDK
-    runs-on: [self-hosted, Linux]
+    runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
@@ -107,7 +107,7 @@ jobs:
 
   kmp-android:
     name: Kotlin Multiplatform Android SDK
-    runs-on: [self-hosted, Linux]
+    runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v4
       - uses: android-actions/setup-android@v3
