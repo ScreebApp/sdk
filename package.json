@@ -24,6 +24,7 @@
     "versions:sync": "node scripts/sync-sdk-versions.mjs",
     "versions:check": "node scripts/sync-sdk-versions.mjs --check",
     "docs:reference:update": "node scripts/update-public-docs-reference.mjs",
+    "docs:reference:check": "node scripts/update-public-docs-reference.mjs --check",
     "docs:reference:coverage": "node scripts/update-public-docs-reference.mjs --check-capabilities",
     "verify:release": "node scripts/verify-release.mjs",
     "size:sdks": "node scripts/report-sdk-sizes.mjs",

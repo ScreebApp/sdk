@@ -112,6 +112,7 @@ Regenerate them from the SDK source files after any public API, hook payload, wr
 
 ```bash
 npm run docs:reference:update
+npm run docs:reference:check
 npm run docs:reference:coverage
 ```
 

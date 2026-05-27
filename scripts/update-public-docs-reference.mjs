@@ -7,6 +7,7 @@ import ts from "typescript";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const docsRoot = resolve(root, process.env.DOCS_PUBLIC_PATH || "../screeb/docs/public");
+const checkOnly = process.argv.includes("--check");
 const checkCapabilitiesOnly = process.argv.includes("--check-capabilities");
 
 const browserTypeFiles = [
@@ -1336,13 +1337,35 @@ function generate(target) {
 }
 
 function main() {
+  const staleReferences = [];
+
   for (const target of targets) {
     const content = `${generate(target).trimEnd()}\n`;
+    if (checkOnly) {
+      const current = readFileSync(target.reference, "utf8");
+      if (current !== content) {
+        staleReferences.push(relative(root, target.reference));
+      }
+      continue;
+    }
     if (!checkCapabilitiesOnly) {
       writeFileSync(target.reference, content);
       console.log(`Updated ${relative(root, target.reference)}`);
     }
   }
+
+  if (checkOnly) {
+    if (staleReferences.length > 0) {
+      console.error("Public docs references are stale. Run `npm run docs:reference:update`.");
+      for (const reference of staleReferences) {
+        console.error(`- ${reference}`);
+      }
+      process.exitCode = 1;
+    } else {
+      console.log("Public docs references are up to date.");
+    }
+  }
+
   printCapabilityReport();
 }
 

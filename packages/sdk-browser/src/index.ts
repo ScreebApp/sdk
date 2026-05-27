@@ -507,9 +507,9 @@ export const messageStart = (
 ) =>
   callScreebCommand("message.start", messageId, {
     allow_multiple_responses: allowMultipleResponses,
-    language: language,
     hidden_fields: hiddenFields,
     hooks: hooks,
+    language: language,
   });
 
 /**
