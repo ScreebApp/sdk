@@ -53,7 +53,6 @@ const links = {
   startSurvey: "[👉](./start-survey-programmatically)",
   surveyClose: "[👉](./start-survey-programmatically)",
   surveyStart: "[👉](./start-survey-programmatically)",
-  targetingCheck: "-",
   targetingDebug: "[👉](./troubleshooting)",
   trackEvent: "[👉](./event-tracking)",
   trackScreen: "[👉](./screen-tracking)",
@@ -101,7 +100,7 @@ const methodGroups = [
   },
   {
     title: "Debug",
-    names: ["debug", "debugTargeting", "targetingCheck", "targetingDebug", "isLoaded"],
+    names: ["debug", "debugTargeting", "targetingDebug", "isLoaded"],
   },
   {
     title: "Privacy helpers",
@@ -147,7 +146,6 @@ const methodDescriptions = {
   startSurvey: "Start a specific survey programmatically.",
   surveyClose: "Close the currently displayed survey.",
   surveyStart: "Start a specific survey programmatically.",
-  targetingCheck: "Force a targeting check.",
   targetingDebug: "Get targeting debug information.",
   trackEvent: "Track a custom event.",
   trackScreen: "Track a screen navigation event.",
@@ -182,7 +180,6 @@ const capabilityChecks = [
   { label: "Stop session replay", aliases: ["sessionReplayStop"] },
   { label: "Debug", aliases: ["debug"] },
   { label: "Debug targeting", aliases: ["debugTargeting", "targetingDebug"] },
-  { label: "Targeting check", aliases: ["targetingCheck"] },
   { label: "Privacy mask text", aliases: ["ScreebMaskText", "screebMaskText"] },
   { label: "Privacy no capture", aliases: ["ScreebNoCapture", "screebNoCapture"] },
   { label: "Privacy element ID", aliases: ["ScreebId", "screebId"] },

@@ -160,8 +160,6 @@ export const createScreebClient = (config: ScreebConfig): ScreebClient => {
           selectors,
         ),
       ),
-    targetingCheck: async () =>
-      ensureScreeb("targetingCheck", () => Screeb.targetingCheck()),
     targetingDebug: async () =>
       ensureScreeb("targetingDebug", () => Screeb.targetingDebug()),
   };

@@ -116,7 +116,7 @@ npm run docs:reference:check
 npm run docs:reference:coverage
 ```
 
-The generator is `scripts/update-public-docs-reference.mjs`. Keep extraction source-driven when possible; only edit the SDK-specific descriptions, groups, links, or known capability rules in that script. The expected coverage result is complete for web SDKs; mobile SDKs may still report the intentional `Targeting check` gap until that API is public there.
+The generator is `scripts/update-public-docs-reference.mjs`. Keep extraction source-driven when possible; only edit the SDK-specific descriptions, groups, links, or known capability rules in that script.
 
 Before publishing docs, validate the public docs app:
 

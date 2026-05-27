@@ -260,12 +260,6 @@ export const ScreebProvider: React.FC<
     [],
   );
 
-  const targetingCheck = React.useCallback(
-    async () =>
-      await ensureScreeb("targetingCheck", () => Screeb.targetingCheck()),
-    [],
-  );
-
   const targetingDebug = React.useCallback(
     async () =>
       await ensureScreeb("targetingDebug", () => Screeb.targetingDebug()),
@@ -313,7 +307,6 @@ export const ScreebProvider: React.FC<
       sessionReplayStop,
       surveyClose,
       surveyStart,
-      targetingCheck,
       targetingDebug,
     }),
     [
@@ -334,7 +327,6 @@ export const ScreebProvider: React.FC<
       messageStart,
       sessionReplayStop,
       sessionReplayStart,
-      targetingCheck,
       targetingDebug,
     ],
   );
