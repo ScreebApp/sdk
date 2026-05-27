@@ -1,4 +1,6 @@
 // packages/sdk-maui/Platforms/iOS/ApiDefinitions.cs
+#nullable enable
+
 using System;
 using Foundation;
 using UIKit;
@@ -29,6 +31,10 @@ interface Screeb
     [Static]
     [Export("closeSdk")]
     void CloseSdk();
+
+    [Static]
+    [Export("makeHooks:callback:")]
+    NSDictionary MakeHooks(NSDictionary hookIds, Action<string, string, string> callback);
 
     [Static]
     [Export("setIdentity:visitorProperty:")]
@@ -93,6 +99,10 @@ interface Screeb
     void CloseMessage([NullAllowed] string messageId);
 
     [Static]
+    [Export("onHookResult:result:")]
+    void OnHookResult(string hook, [NullAllowed] NSObject result);
+
+    [Static]
     [Export("sessionReplayStart")]
     void SessionReplayStart();
 
@@ -107,6 +117,24 @@ interface Screeb
     [Static]
     [Export("debugTargeting:")]
     void DebugTargeting(Action<string?, NSError?> completion);
+}
+
+[Static]
+[DisableDefaultCtor]
+[BaseType(typeof(NSObject))]
+interface ScreebView
+{
+    [Static]
+    [Export("screebId:id:")]
+    void ScreebId(UIView view, string id);
+
+    [Static]
+    [Export("screebMaskText:")]
+    void ScreebMaskText(UIView view);
+
+    [Static]
+    [Export("screebNoCapture:")]
+    void ScreebNoCapture(UIView view);
 }
 
 [BaseType(typeof(NSObject))]

@@ -40,6 +40,13 @@ npm install @screeb/sdk-react --save
 yarn add @screeb/sdk-react
 ```
 
+## Package Size
+
+Current package size snapshot:
+
+- npm tarball: 17.3 KB
+- unpacked package: 89.2 KB
+
 ## Usage
 
 Basic usage:
@@ -88,9 +95,10 @@ const HomePage = () => {
 
 For a working example, see our [Screeb React SDK example app](https://github.com/ScreebApp/sdk/tree/master/examples/example-react).
 
-For a more advanced usage and a complete API documentation, see [documentation generated from source files](https://github.com/ScreebApp/sdk/tree/master/packages/sdk-react/docs).
+## Documentation
 
-For further information, see [our developer documentation](https://developers.screeb.app/sdk-js/install).
+- Install guide: [developers.screeb.app/sdk-react/install](https://developers.screeb.app/sdk-react/install)
+- API reference: [developers.screeb.app/sdk-react/reference](https://developers.screeb.app/sdk-react/reference)
 
 ## Support
 For any issues, please contact our support team at support@screeb.com.

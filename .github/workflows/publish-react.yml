@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm install --ignore-scripts
-      - run: npm run build --workspace=packages/sdk-react
+      - run: npm ci --ignore-scripts
+      - run: npm run versions:check
+      - run: npm run release:check --workspace=packages/sdk-react
       - run: npm publish --workspace=packages/sdk-react --access public --provenance

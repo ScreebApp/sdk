@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <SingleProject>true</SingleProject>
+    <UseMaui>true</UseMaui>
     <!-- NuGet metadata -->
     <PackageId>Screeb.Maui</PackageId>
     <Version>0.1.0</Version>
@@ -31,7 +32,13 @@
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
     <Compile Include="Platforms/Android/Screeb.Android.cs" />
     <Compile Include="Platforms/Android/HooksAndroid.cs" />
+    <Compile Include="Platforms/Android/ScreebView.Android.cs" />
   </ItemGroup>
+
+  <PropertyGroup Condition="$(TargetFramework.Contains('-android'))">
+    <!-- The Android binding generator drops Kotlin synthetic/internal symbols from the native AAR. -->
+    <NoWarn>$(NoWarn);BG8605;BG8606</NoWarn>
+  </PropertyGroup>
 
   <!-- iOS: activate bgen binding generation -->
   <PropertyGroup Condition="$(TargetFramework.Contains('-ios'))">
@@ -45,17 +52,78 @@
     <Compile Include="Platforms/iOS/ScreebClassPtr.cs" />
     <Compile Include="Platforms/iOS/Screeb.iOS.cs" />
     <Compile Include="Platforms/iOS/HooksIOS.cs" />
+    <Compile Include="Platforms/iOS/ScreebView.iOS.cs" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <ScreebAndroidSdkVersion>4.0.0</ScreebAndroidSdkVersion>
+    <ScreebUseLocalSdk Condition="'$(SCREEB_USE_LOCAL_SDK)' == 'true' Or '$(SCREEB_USE_LOCAL_SDK)' == 'True'">true</ScreebUseLocalSdk>
+    <ScreebUseLocalAndroidSdk Condition="'$(ScreebUseLocalSdk)' == 'true'">true</ScreebUseLocalAndroidSdk>
+    <ScreebLocalMavenRepository Condition="'$(ScreebLocalMavenRepository)' == ''">$(HOME)/.m2/repository</ScreebLocalMavenRepository>
+    <ScreebAndroidSdkPath Condition="'$(SCREEB_ANDROID_SDK_PATH)' != ''">$(SCREEB_ANDROID_SDK_PATH)</ScreebAndroidSdkPath>
+    <ScreebAndroidSdkPath Condition="'$(ScreebAndroidSdkPath)' == ''">$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\..\sdk-android'))</ScreebAndroidSdkPath>
+    <ScreebLocalAndroidAar Condition="'$(ScreebUseLocalSdk)' == 'true'">$([System.IO.Path]::GetFullPath('$(ScreebAndroidSdkPath)\sdk\build\outputs\aar\sdk-release.aar'))</ScreebLocalAndroidAar>
+    <ScreebLocalAndroidAar Condition="'$(ScreebLocalAndroidAar)' == ''">$(ScreebLocalMavenRepository)/app/screeb/sdk/survey/$(ScreebAndroidSdkVersion)/survey-$(ScreebAndroidSdkVersion).aar</ScreebLocalAndroidAar>
+    <ScreebIosSdkPath Condition="'$(SCREEB_IOS_SDK_PATH)' != ''">$(SCREEB_IOS_SDK_PATH)</ScreebIosSdkPath>
+    <ScreebIosSdkPath Condition="'$(ScreebIosSdkPath)' == ''">$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\..\sdk-ios'))</ScreebIosSdkPath>
+    <ScreebLocalIosXcframeworkPath Condition="'$(ScreebLocalIosXcframeworkPath)' == ''">$([System.IO.Path]::GetFullPath('$(BaseIntermediateOutputPath)local-ios/Screeb.xcframework'))</ScreebLocalIosXcframeworkPath>
+    <ScreebIosXcframeworkPath Condition="'$(ScreebUseLocalSdk)' == 'true'">$(ScreebLocalIosXcframeworkPath)</ScreebIosXcframeworkPath>
+    <ScreebIosXcframeworkPath Condition="'$(ScreebIosXcframeworkPath)' == ''">native/ios/Screeb.xcframework</ScreebIosXcframeworkPath>
+  </PropertyGroup>
+
   <!-- Android native binding -->
-  <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+  <ItemGroup Condition="$(TargetFramework.Contains('-android')) And '$(ScreebUseLocalAndroidSdk)' == 'true'">
+    <AndroidLibrary Include="$(ScreebLocalAndroidAar)" Bind="true" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.Contains('-android')) And '$(ScreebUseLocalAndroidSdk)' != 'true'">
     <AndroidMavenLibrary
       Include="app.screeb.sdk:survey"
-      Version="3.2.0"
+      Version="$(ScreebAndroidSdkVersion)"
       Bind="true" />
+  </ItemGroup>
+
+  <Target
+    Name="BuildLocalScreebAndroidAar"
+    BeforeTargets="ResolveReferences"
+    Condition="$(TargetFramework.Contains('-android')) And '$(ScreebUseLocalSdk)' == 'true'">
+    <Exec Command="./gradlew :sdk:assembleRelease --no-daemon" WorkingDirectory="$(ScreebAndroidSdkPath)" />
+  </Target>
+
+  <Target
+    Name="ValidateScreebLocalAndroidAar"
+    BeforeTargets="ResolveReferences"
+    Condition="$(TargetFramework.Contains('-android')) And '$(ScreebUseLocalAndroidSdk)' == 'true' And !Exists('$(ScreebLocalAndroidAar)')">
+    <Error Text="SCREEB_USE_LOCAL_SDK=true but the Android SDK AAR was not found at $(ScreebLocalAndroidAar). Set SCREEB_ANDROID_SDK_PATH if ../sdk-android is not next to this repository." />
+  </Target>
+
+  <Target
+    Name="BuildLocalScreebIosXcframework"
+    BeforeTargets="ResolveReferences"
+    Condition="$(TargetFramework.Contains('-ios')) And '$(ScreebUseLocalSdk)' == 'true'">
+    <Exec Command="node &quot;$(MSBuildThisFileDirectory)..\..\scripts\build-local-ios-xcframework.mjs&quot; --sdk-ios &quot;$(ScreebIosSdkPath)&quot; --output &quot;$(ScreebLocalIosXcframeworkPath)&quot;" />
+  </Target>
+
+  <!-- Android transitive dependencies -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.120" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+    <TransformFile Include="Transforms/AndroidMetadata.xml" />
     <!-- Transitive Maven dependencies required by app.screeb.sdk:survey -->
     <PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="2.3.21" />
+    <PackageReference Include="Xamarin.AndroidX.Activity.Ktx" Version="1.12.4.1" />
+    <PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.6.0" />
     <PackageReference Include="Xamarin.AndroidX.Core.Core.Ktx" Version="1.18.0" />
+    <PackageReference Include="Xamarin.AndroidX.Fragment.Ktx" Version="1.8.9.2" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.10.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData.Core.Ktx" Version="2.10.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Process" Version="2.10.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Runtime.Ktx" Version="2.10.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Runtime.Ktx.Android" Version="2.10.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.ViewModel.Ktx" Version="2.10.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.SavedState.SavedState.Ktx" Version="1.4.0.2" />
     <PackageReference Include="Xamarin.AndroidX.WebKit" Version="1.16.0" />
     <PackageReference Include="Xamarin.Google.Android.Play.Review" Version="2.0.2.7" />
     <PackageReference Include="Xamarin.Google.Android.Play.Review.Ktx" Version="2.0.2.7" />
@@ -63,7 +131,7 @@
 
   <!-- iOS native binding -->
   <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
-    <NativeReference Include="native/ios/Screeb.xcframework">
+    <NativeReference Include="$(ScreebIosXcframeworkPath)">
       <Kind>Framework</Kind>
       <Frameworks>Foundation UIKit</Frameworks>
       <IsCxx>false</IsCxx>

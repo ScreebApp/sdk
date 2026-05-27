@@ -104,6 +104,9 @@ export type SessionReplayStopFunction = () => Promise<unknown>;
 export type SessionReplayStartFunction = () => Promise<unknown>;
 export type TargetingCheckFunction = () => Promise<unknown>;
 export type TargetingDebugFunction = () => Promise<unknown>;
+export type ScreebMaskTextFunction = <T extends Element>(element: T) => T;
+export type ScreebNoCaptureFunction = <T extends Element>(element: T) => T;
+export type ScreebIdFunction = <T extends Element>(element: T, id: string) => T;
 
 /** All Screeb methods provided via `useScreeb()` */
 export type ScreebContextValues = {
@@ -126,4 +129,7 @@ export type ScreebContextValues = {
   sessionReplayStop: SessionReplayStopFunction;
   targetingCheck: TargetingCheckFunction;
   targetingDebug: TargetingDebugFunction;
+  ScreebMaskText: ScreebMaskTextFunction;
+  ScreebNoCapture: ScreebNoCaptureFunction;
+  ScreebId: ScreebIdFunction;
 };

@@ -96,8 +96,8 @@ export class HomePage implements OnInit {
 
   updateIdentity(): void {
     this.screeb.identityProperties({
-      last_action_at: new Date(),
       app_version: "1.0.0",
+      last_action_at: new Date(),
     });
     // eslint-disable-next-line no-console
     console.log("Identity updated");

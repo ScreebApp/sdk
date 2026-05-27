@@ -1,5 +1,5 @@
-import { App, InjectionKey, Plugin, reactive, watch } from "vue";
 import * as Screeb from "@screeb/sdk-browser";
+import { App, InjectionKey, Plugin, reactive, watch } from "vue";
 
 import CONSTANTS from "./constants";
 import * as logger from "./logger";
@@ -235,6 +235,9 @@ export const ScreebPlugin: Plugin = {
     );
 
     const context: ScreebContextValues = {
+      ScreebId: Screeb.ScreebId,
+      ScreebMaskText: Screeb.ScreebMaskText,
+      ScreebNoCapture: Screeb.ScreebNoCapture,
       close,
       debug,
       eventTrack,
@@ -246,12 +249,12 @@ export const ScreebPlugin: Plugin = {
       identityReset,
       init,
       load,
-      surveyClose,
-      surveyStart,
       messageClose,
       messageStart,
-      sessionReplayStop,
       sessionReplayStart,
+      sessionReplayStop,
+      surveyClose,
+      surveyStart,
       targetingCheck,
       targetingDebug,
     };

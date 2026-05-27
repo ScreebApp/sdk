@@ -5,47 +5,94 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
+  workflow_dispatch:
+    inputs:
+      run_macos_native:
+        description: 'Run macOS-only MAUI iOS and full KMP checks'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  HUSKY: 0
+  NX_DAEMON: false
+  NX_NO_CLOUD: true
+  NX_DISABLE_DB: true
 
 jobs:
   js:
     name: JS/TS packages
-    runs-on: ubuntu-latest
-    env:
-      HUSKY: 0
-      NX_DAEMON: false
-      NX_NO_CLOUD: true
-      NX_DISABLE_DB: true
+    runs-on: [self-hosted, linux]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: npm install --ignore-scripts
-      - run: npm run build
-      - run: npm test
+      - run: npm ci --ignore-scripts
+      - run: npm run ci:js
+      - run: npm run examples:check
+
+  react-native:
+    name: React Native release check
+    runs-on: [self-hosted, linux]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci --ignore-scripts
+      - run: npm run versions:check
+      - run: npm run release:check --workspace=packages/sdk-reactnative
 
   flutter:
     name: Flutter package
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux]
     steps:
       - uses: actions/checkout@v4
+      - uses: android-actions/setup-android@v3
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.x'
           channel: 'stable'
       - run: cd packages/sdk-flutter && flutter pub get
       - run: cd packages/sdk-flutter && flutter analyze
+      - run: cd packages/sdk-flutter && flutter test
 
-  maui:
-    name: .NET MAUI SDK
-    runs-on: macos-latest
+  maui-android:
+    name: .NET MAUI Android SDK
+    runs-on: [self-hosted, linux]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
       - name: Install MAUI workloads
-        run: dotnet workload install android ios
+        run: dotnet workload install android
+      - name: Restore
+        run: dotnet restore packages/sdk-maui/ScreebMaui.csproj
+      - name: Build Android
+        run: dotnet build packages/sdk-maui/ScreebMaui.csproj -f net9.0-android --no-restore
+      - name: Run unit tests
+        run: dotnet test packages/sdk-maui/tests/ScreebUtilsTests.csproj
+
+  maui-ios:
+    name: .NET MAUI iOS SDK
+    runs-on: macos-latest
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_macos_native }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - name: Install MAUI workloads
+        run: dotnet workload install ios
       - name: Download Screeb iOS XCFramework
         run: |
           SCREEB_IOS_URL=$(curl -sL https://api.github.com/repos/ScreebApp/sdk-ios-public/releases/latest | python3 -c "import sys,json; print(next(a['browser_download_url'] for a in json.load(sys.stdin)['assets'] if a['name']=='Screeb.zip'))")
@@ -55,9 +102,44 @@ jobs:
           cp -r /tmp/screeb_ios/Screeb.xcframework packages/sdk-maui/native/ios/
       - name: Restore
         run: dotnet restore packages/sdk-maui/ScreebMaui.csproj
-      - name: Build Android
-        run: dotnet build packages/sdk-maui/ScreebMaui.csproj -f net9.0-android --no-restore
       - name: Build iOS
         run: dotnet build packages/sdk-maui/ScreebMaui.csproj -f net9.0-ios --no-restore
-      - name: Run unit tests
-        run: dotnet test packages/sdk-maui/tests/ScreebUtilsTests.csproj
+
+  kmp-android:
+    name: Kotlin Multiplatform Android SDK
+    runs-on: [self-hosted, linux]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: android-actions/setup-android@v3
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Make gradlew executable
+        run: chmod +x packages/sdk-kmp/gradlew
+      - name: Build Android target
+        run: cd packages/sdk-kmp && ./gradlew assembleRelease testDebugUnitTest --no-daemon
+
+  kmp-full:
+    name: Kotlin Multiplatform full SDK
+    runs-on: macos-latest
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_macos_native }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Download Screeb iOS XCFramework
+        run: |
+          set -euo pipefail
+          SCREEB_IOS_SDK_VERSION=$(grep '^SCREEB_IOS_SDK_VERSION=' packages/sdk-kmp/gradle.properties | cut -d= -f2)
+          SCREEB_IOS_URL=$(curl -sL "https://api.github.com/repos/ScreebApp/sdk-ios-public/releases/tags/v${SCREEB_IOS_SDK_VERSION}" | python3 -c "import sys,json; print(next(a['browser_download_url'] for a in json.load(sys.stdin)['assets'] if a['name']=='Screeb.zip'))")
+          curl -sL "$SCREEB_IOS_URL" -o /tmp/Screeb.zip
+          unzip -q /tmp/Screeb.zip -d /tmp/screeb_ios
+          mkdir -p packages/sdk-kmp/native/ios
+          cp -r /tmp/screeb_ios/Screeb.xcframework packages/sdk-kmp/native/ios/
+      - name: Make gradlew executable
+        run: chmod +x packages/sdk-kmp/gradlew
+      - name: Build SDK
+        run: cd packages/sdk-kmp && ./gradlew clean build --no-daemon

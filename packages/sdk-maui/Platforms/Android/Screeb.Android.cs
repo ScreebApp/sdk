@@ -149,12 +149,29 @@ public static partial class Screeb
         if (dict == null) return null;
         var map = new Dictionary<string, Java.Lang.Object>();
         foreach (var (k, v) in dict)
-            map[k] = v is string s ? new Java.Lang.String(s) :
-                       v is bool b ? Java.Lang.Boolean.ValueOf(b)! :
-                       v is int i ? Java.Lang.Integer.ValueOf(i)! :
-                       v is long l ? Java.Lang.Long.ValueOf(l)! :
-                       v is double d ? Java.Lang.Double.ValueOf(d)! :
-                       new Java.Lang.String(v.ToString() ?? "");
+            map[k] = ToJavaObject(v);
+        return map;
+    }
+
+    private static Java.Lang.Object ToJavaObject(object value)
+    {
+        if (value is string s) return new Java.Lang.String(s);
+        if (value is bool b) return Java.Lang.Boolean.ValueOf(b)!;
+        if (value is int i) return Java.Lang.Integer.ValueOf(i)!;
+        if (value is long l) return Java.Lang.Long.ValueOf(l)!;
+        if (value is float f) return Java.Lang.Float.ValueOf(f)!;
+        if (value is double d) return Java.Lang.Double.ValueOf(d)!;
+        if (value is Java.Lang.Object javaObject) return javaObject;
+        if (value is Dictionary<string, object> nested) return ToJavaHashMap(nested);
+        if (value is IDictionary<string, object> nestedDict) return ToJavaHashMap(new Dictionary<string, object>(nestedDict));
+        return new Java.Lang.String(value.ToString() ?? "");
+    }
+
+    private static Java.Util.HashMap ToJavaHashMap(Dictionary<string, object> dict)
+    {
+        var map = new Java.Util.HashMap();
+        foreach (var (key, value) in dict)
+            map.Put(new Java.Lang.String(key), ToJavaObject(value));
         return map;
     }
 

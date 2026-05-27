@@ -1,4 +1,34 @@
-# Screeb.Maui
+<p align="center">
+  <a href="https://screeb.app" alt="Screeb">
+    <img src="https://raw.githubusercontent.com/ScreebApp/sdk/master/packages/sdk-maui/readme/screeb-logo.svg" alt="Logo" height="120px" style="margin-top: 20px;"/>
+  </a>
+</p>
+<h1 align="center">Screeb.Maui</h1>
+<p align="center">
+  Screeb's mobile SDK for .NET MAUI (Android &amp; iOS).
+
+  <b>Continuous Product Discovery, Without the Time Sink.</b>
+
+  <a href="https://screeb.app" alt="Screeb">Screeb</a> is the only Continuous Product Discovery platform that lets you analyse users' behaviour, ask in-app questions, recruit people for interviews and analyse data in a blink with AI.
+</p>
+
+<p align="center">
+  <a href="https://github.com/ScreebApp/sdk/actions/workflows/ci.yml" alt="ci">
+    <img alt="ci" src="https://github.com/ScreebApp/sdk/actions/workflows/ci.yml/badge.svg">
+  </a>
+  <a href="https://www.nuget.org/packages/Screeb.Maui" alt="version">
+    <img alt="NuGet" src="https://img.shields.io/nuget/v/Screeb.Maui">
+  </a>
+  <a href="https://cocoapods.org/pods/Screeb" alt="CocoaPods">
+    <img src="https://img.shields.io/cocoapods/v/Screeb.svg?style=flat" alt="Cocoapods">
+  </a>
+  <a href="https://search.maven.org/search?q=g:%22app.screeb.sdk%22%20AND%20a:%22survey%22" alt="Maven Central">
+    <img src="https://img.shields.io/maven-central/v/app.screeb.sdk/survey.svg?label=Maven%20Central" alt="Maven Central">
+  </a>
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/license-MIT-purple.svg" alt="License: MIT">
+  </a>
+</p>
 
 .NET MAUI SDK for [Screeb](https://screeb.app) — Continuous Product Discovery.
 
@@ -9,6 +39,21 @@ Supports **Android** (API 24+) and **iOS** (14.0+).
 ```sh
 dotnet add package Screeb.Maui
 ```
+
+## Package Size
+
+Current package size snapshot. Native SDK sizes are listed separately to help estimate app impact:
+
+- Android Release DLL: 44.0 KB
+- iOS Release DLL: 38.0 KB
+- native Android SDK AAR: 110.3 KB
+- native iOS app size impact: about 450 KB
+
+## Battery usage
+
+Screeb is optimized to minimize battery impact. Most features are event-driven, and session replay adapts automatically to app activity and device conditions.
+
+When session replay is enabled, the SDK reduces work while idle and under Low Power Mode, Battery Saver, thermal pressure, or memory pressure. It prioritizes reducing image quality, resolution, and changed-region processing before lowering active capture cadence.
 
 ## Android Setup
 
@@ -52,7 +97,7 @@ public class AppDelegate : MauiUIApplicationDelegate
 }
 ```
 
-The iOS SDK requires the `Screeb.xcframework` binary — see [Development Setup](#development-setup) below.
+The NuGet package includes the native iOS framework required by the SDK.
 
 ## Usage
 
@@ -131,11 +176,30 @@ await InitSdk(channelId: "<YOUR_CHANNEL_ID>", hooks: hooks);
 
 ## Development Setup
 
-### iOS XCFramework
+### Local native SDKs
 
-The iOS SDK is distributed as a binary XCFramework (gitignored). Before building for iOS:
+Screeb contributors can build this package against local native SDK checkouts:
 
-1. Download the latest release from https://github.com/ScreebApp/sdk-ios-public/releases
-2. Extract `Screeb.xcframework` to `packages/sdk-maui/native/ios/Screeb.xcframework/`
+```sh
+SCREEB_USE_LOCAL_SDK=true dotnet build ScreebMaui.csproj -f net9.0-android
+SCREEB_USE_LOCAL_SDK=true dotnet build ScreebMaui.csproj -f net9.0-ios
+```
 
-See [full documentation](https://developers.screeb.app/sdk-maui/install).
+By default this uses sibling `../sdk-android` and `../sdk-ios` repositories. Override with `SCREEB_ANDROID_SDK_PATH` or `SCREEB_IOS_SDK_PATH` when needed.
+
+## Documentation
+
+- Install guide: [developers.screeb.app/sdk-maui/install](https://developers.screeb.app/sdk-maui/install)
+- API reference: [developers.screeb.app/sdk-maui/reference](https://developers.screeb.app/sdk-maui/reference)
+
+## Support
+
+For any issues, please contact our support team at support@screeb.com.
+
+## Contributing
+
+All third party contributors acknowledge that any contributions they provide will be made under the same open source license that the open source project is provided under.
+
+## License
+
+Released under [MIT License](https://github.com/ScreebApp/sdk/blob/master/LICENSE).

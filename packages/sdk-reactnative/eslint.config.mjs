@@ -1,29 +1,34 @@
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import { fixupConfigRules } from "@eslint/compat";
-import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
-import { defineConfig } from "eslint/config";
+import typescriptPlugin from "@typescript-eslint/eslint-plugin";
+import typescriptParser from "@typescript-eslint/parser";
 import prettier from "eslint-plugin-prettier";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-	baseDirectory: __dirname,
-	recommendedConfig: js.configs.recommended,
-	allConfig: js.configs.all,
-});
-
-export default defineConfig([
-	{
-		extends: fixupConfigRules(compat.extends("@react-native", "prettier")),
-		plugins: { prettier },
-		rules: {
-			"react/react-in-jsx-scope": "off",
-			"prettier/prettier": "error",
-		},
-	},
+export default [
 	{
 		ignores: ["node_modules/", "lib/", "eslint.config.mjs"],
 	},
-]);
+	js.configs.recommended,
+	{
+		files: ["**/*.{js,mjs,cjs,ts,tsx}"],
+		languageOptions: {
+			ecmaVersion: "latest",
+			parser: typescriptParser,
+			parserOptions: {
+				ecmaFeatures: {
+					jsx: true,
+				},
+				sourceType: "module",
+			},
+			sourceType: "module",
+		},
+		plugins: {
+			"@typescript-eslint": typescriptPlugin,
+			prettier,
+		},
+		rules: {
+			...typescriptPlugin.configs.recommended.rules,
+			"no-undef": "off",
+			"prettier/prettier": "error",
+		},
+	},
+];

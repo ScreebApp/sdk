@@ -49,6 +49,21 @@ For iOS, also run:
 cd ios && pod install
 ```
 
+## Package Size
+
+Current package size snapshot. Native SDK sizes are listed separately to help estimate app impact:
+
+- npm tarball: 18.0 KB
+- unpacked package: 75.0 KB
+- native Android SDK AAR: 110.3 KB
+- native iOS app size impact: about 450 KB
+
+## Battery usage
+
+Screeb is optimized to minimize battery impact. Most features are event-driven, and session replay adapts automatically to app activity and device conditions.
+
+When session replay is enabled, the SDK reduces work while idle and under Low Power Mode, Battery Saver, thermal pressure, or memory pressure. It prioritizes reducing image quality, resolution, and changed-region processing before lowering active capture cadence.
+
 ## Usage
 
 Basic usage:
@@ -69,11 +84,32 @@ Screeb.setIdentity("<user-id>", {
 });
 ```
 
+Session Replay privacy helpers:
+
+```tsx
+import { ScreebId, ScreebMaskText, ScreebNoCapture } from '@screeb/react-native';
+
+<ScreebMaskText>
+  <TextInput />
+</ScreebMaskText>
+
+<ScreebNoCapture>
+  <SensitiveView />
+</ScreebNoCapture>
+
+<ScreebId id="checkout_button">
+  <Button title="Checkout" />
+</ScreebId>
+```
+
 For working examples, see:
 - [React Native CLI example](https://github.com/ScreebApp/sdk/tree/master/examples/example-reactnative)
 - [Expo example](https://github.com/ScreebApp/sdk/tree/master/examples/example-expo)
 
-For further information, see [our developer documentation](https://developers.screeb.app/sdk-react-native/install).
+## Documentation
+
+- Install guide: [developers.screeb.app/sdk-react-native/install](https://developers.screeb.app/sdk-react-native/install)
+- API reference: [developers.screeb.app/sdk-react-native/reference](https://developers.screeb.app/sdk-react-native/reference)
 
 ## Run examples
 

@@ -46,6 +46,22 @@ Then run:
 flutter pub get
 ```
 
+Requires Flutter 3.19+.
+
+## Package Size
+
+Current package size snapshot. Native SDK sizes are listed separately to help estimate app impact:
+
+- Flutter package source estimate: 80.3 KB
+- native Android SDK AAR: 110.3 KB
+- native iOS app size impact: about 450 KB
+
+## Battery usage
+
+Screeb is optimized to minimize battery impact. Most features are event-driven, and session replay adapts automatically to app activity and device conditions.
+
+When session replay is enabled, the SDK reduces work while idle and under Low Power Mode, Battery Saver, thermal pressure, or memory pressure. It prioritizes reducing image quality, resolution, and changed-region processing before lowering active capture cadence.
+
 ## Usage
 
 Basic usage:
@@ -64,11 +80,19 @@ PluginScreeb.setIdentity("<user-id>", {
   "age": 42,
   "authenticated": true,
 });
+
+// Optional: protect sensitive UI in Session Replay
+ScreebMaskText(child: TextField(...));
+ScreebNoCapture(child: SensitiveWidget());
+ScreebId("checkout_button", child: ElevatedButton(...));
 ```
 
 For a working example, see our [Screeb Flutter SDK example app](https://github.com/ScreebApp/sdk/tree/master/examples/example-flutter).
 
-For further information, see [our developer documentation](https://developers.screeb.app/sdk-flutter/install).
+## Documentation
+
+- Install guide: [developers.screeb.app/sdk-flutter/install](https://developers.screeb.app/sdk-flutter/install)
+- API reference: [developers.screeb.app/sdk-flutter/reference](https://developers.screeb.app/sdk-flutter/reference)
 
 ## Changelog
 

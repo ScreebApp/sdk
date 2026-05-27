@@ -40,6 +40,13 @@ npm install @screeb/sdk-browser --save
 yarn add @screeb/sdk-browser
 ```
 
+## Package Size
+
+Current package size snapshot:
+
+- npm tarball: 15.0 KB
+- unpacked package: 101.0 KB
+
 ## Usage
 
 Basic usage:
@@ -52,9 +59,10 @@ Screeb.init('<your-website-id>');
 
 For a working example, see our [Screeb Browser SDK example app](https://github.com/ScreebApp/sdk/tree/master/examples/example-browser).
 
-For a more advanced usage and a complete API documentation, see [documentation generated from source files](https://github.com/ScreebApp/sdk/tree/master/packages/sdk-browser/docs).
+## Documentation
 
-For further information, see [our developer documentation](https://developers.screeb.app/sdk-js/install).
+- Install guide: [developers.screeb.app/sdk-browser/install](https://developers.screeb.app/sdk-browser/install)
+- API reference: [developers.screeb.app/sdk-browser/reference](https://developers.screeb.app/sdk-browser/reference)
 
 ## Support
 For any issues, please contact our support team at support@screeb.com.

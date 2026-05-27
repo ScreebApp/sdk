@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm install --ignore-scripts
-      - run: npm run build --workspace=packages/sdk-reactnative
+      - run: npm ci --ignore-scripts
+      - run: npm run versions:check
+      - run: npm run release:check --workspace=packages/sdk-reactnative
       - run: npm publish --workspace=packages/sdk-reactnative --access public --provenance

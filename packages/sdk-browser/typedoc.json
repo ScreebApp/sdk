@@ -1,9 +1,0 @@
-{
-  "out": "./docs",
-  "name": "@screeb/sdk-browser",
-  "theme": "markdown",
-  "readme": "none",
-  "tsconfig": "./tsconfig.json",
-  "plugin": ["typedoc-plugin-markdown"],
-  "disableSources": true
-}

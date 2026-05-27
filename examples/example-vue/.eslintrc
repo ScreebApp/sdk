@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "@screeb/eslint-config"
+  ],
+  "parserOptions": {
+    "project": ["tsconfig.json"],
+    "tsconfigRootDir": "./"
+  },
+  "rules": {
+    "semi": 0
+  }
+}

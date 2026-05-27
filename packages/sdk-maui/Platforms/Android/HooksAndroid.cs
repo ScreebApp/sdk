@@ -13,48 +13,62 @@ internal static class HooksAndroid
     private static IDictionary<string, Java.Lang.Object>? BuildHooksMap(Dictionary<string, string> uuidMap)
     {
         if (uuidMap.Count == 0) return null;
-        var map = new Dictionary<string, Java.Lang.Object>();
-        foreach (var (key, value) in uuidMap)
+        return App.Screeb.Sdk.Screeb.Instance.MakeHooks(uuidMap, new ScreebHookCallbackAdapter());
+    }
+
+    internal static Java.Lang.Object? ToJavaObject(object? value)
+    {
+        return value switch
         {
-            if (key == "version")
-            {
-                map[key] = new Java.Lang.String(value);
-            }
-            else
-            {
-                var uuid = value; // capture
-                map[key] = new KotlinHookCallback(payload =>
-                {
-                    var fn = HooksRegistry.Get(uuid);
-                    if (fn != null)
-                    {
-                        Task.Run(() => fn(payload?.ToString() ?? "{}"));
-                    }
-                });
-            }
+            null => null,
+            Java.Lang.Object javaObject => javaObject,
+            string s => new Java.Lang.String(s),
+            bool b => Java.Lang.Boolean.ValueOf(b),
+            int i => Java.Lang.Integer.ValueOf(i),
+            long l => Java.Lang.Long.ValueOf(l),
+            float f => Java.Lang.Float.ValueOf(f),
+            double d => Java.Lang.Double.ValueOf(d),
+            IDictionary<string, object> dict => ToJavaDictionary(dict),
+            _ => new Java.Lang.String(value.ToString() ?? "")
+        };
+    }
+
+    private static Java.Util.HashMap ToJavaDictionary(IDictionary<string, object> dict)
+    {
+        var map = new Java.Util.HashMap();
+        foreach (var (key, value) in dict)
+        {
+            map.Put(new Java.Lang.String(key), ToJavaObject(value));
         }
         return map;
     }
 }
 
-/// <summary>
-/// Wraps a C# Action as a Kotlin Function1&lt;Object, Unit&gt; so the
-/// Android Screeb SDK can call it as a hook callback.
-/// </summary>
-[Android.Runtime.Register("app/screeb/maui/KotlinHookCallback")]
-internal class KotlinHookCallback : Java.Lang.Object, Kotlin.Jvm.Functions.IFunction1
+internal sealed class ScreebHookCallbackAdapter : Java.Lang.Object, App.Screeb.Sdk.IScreebHookCallback
 {
-    private readonly Action<Java.Lang.Object?> _onHook;
-
-    public KotlinHookCallback(Action<Java.Lang.Object?> onHook)
+    public void Invoke(string hookId, string nativeHookId, string payload)
     {
-        _onHook = onHook;
-    }
+        var fn = HooksRegistry.Get(hookId);
+        if (fn == null) return;
 
-    public Java.Lang.Object? Invoke(Java.Lang.Object? p0)
-    {
-        _onHook(p0);
-        return null; // Kotlin Unit → null
+        Task.Run(async () =>
+        {
+            try
+            {
+                var callbackResult = await fn(payload).ConfigureAwait(false);
+                if (!string.IsNullOrWhiteSpace(nativeHookId))
+                {
+                    App.Screeb.Sdk.Screeb.Instance.OnHookResult(nativeHookId, HooksAndroid.ToJavaObject(callbackResult));
+                }
+            }
+            catch
+            {
+                if (!string.IsNullOrWhiteSpace(nativeHookId))
+                {
+                    App.Screeb.Sdk.Screeb.Instance.OnHookResult(nativeHookId, Java.Lang.Boolean.ValueOf(false));
+                }
+            }
+        });
     }
 }
 

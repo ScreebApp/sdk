@@ -22,4 +22,14 @@ plugins {
     id("org.jetbrains.kotlin.android") version "1.8.22" apply false
 }
 
+if (providers.gradleProperty("SCREEB_USE_LOCAL_SDK").orElse(providers.environmentVariable("SCREEB_USE_LOCAL_SDK")).orNull.equals("true", ignoreCase = true)) {
+    val screebAndroidSdkPath = providers.environmentVariable("SCREEB_ANDROID_SDK_PATH")
+        .orElse(file("../../../../sdk-android").canonicalPath)
+        .get()
+    exec {
+        workingDir = file(screebAndroidSdkPath)
+        commandLine("./gradlew", ":sdk:publishReleasePublicationToMavenLocal", "--no-daemon")
+    }
+}
+
 include(":app")

@@ -12,6 +12,7 @@ coverage
 build
 dist
 storybook-static
+.local/
 
 # misc
 .DS_Store
@@ -24,6 +25,7 @@ lerna-debug.log*
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+java_pid*.hprof
 
 .npmrc
 .idea
@@ -36,8 +38,40 @@ packages/sdk-maui/native/ios/Screeb.xcframework/
 packages/sdk-maui/native/ios/Screeb.zip
 packages/sdk-maui/native/ios/sdk-ios-public-*/
 
+# KMP SDK - native binaries (downloaded/built at build time)
+packages/sdk-kmp/native/ios/Screeb.xcframework/
+packages/sdk-kmp/native/ios/Screeb.zip
+packages/sdk-kmp/native/ios/sdk-ios-public-*/
+
 # .NET build artifacts
+obj/
 packages/sdk-maui/bin/
 packages/sdk-maui/obj/
+packages/sdk-maui/tests/bin/
+packages/sdk-maui/tests/obj/
 examples/example-maui/bin/
 examples/example-maui/obj/
+
+# Android example build artifacts
+examples/example-android/.gradle/
+examples/example-android/build/
+examples/example-android/app/build/
+examples/example-android/local.properties
+
+# Expo generated artifacts
+examples/example-expo/.expo/
+examples/example-expo/android/
+examples/example-expo/ios/
+
+# Android / Gradle generated files
+**/.gradle/
+**/.kotlin/
+**/.cxx/
+**/.externalNativeBuild/
+**/local.properties
+captures/
+
+# iOS generated files
+**/ios/Pods/
+**/ios/build/
+**/ios/.xcode.env.local

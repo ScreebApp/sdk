@@ -40,6 +40,13 @@ npm install @screeb/sdk-angular --save
 yarn add @screeb/sdk-angular
 ```
 
+## Package Size
+
+Current package size snapshot:
+
+- npm tarball: 27.6 KB
+- unpacked package: 129.5 KB
+
 ## Usage
 
 Basic usage:
@@ -96,9 +103,10 @@ export class AppComponent implements OnInit {
 
 For a working example, see our [Screeb Angular SDK example app](https://github.com/ScreebApp/sdk/tree/master/examples/example-angular).
 
-For a more advanced usage and a complete API documentation, see [documentation generated from source files](https://github.com/ScreebApp/sdk/tree/master/packages/sdk-angular/docs).
+## Documentation
 
-For further information, see [our developer documentation](https://developers.screeb.app/sdk-js/install).
+- Install guide: [developers.screeb.app/sdk-angular/install](https://developers.screeb.app/sdk-angular/install)
+- API reference: [developers.screeb.app/sdk-angular/reference](https://developers.screeb.app/sdk-angular/reference)
 
 ## Support
 For any issues, please contact our support team at support@screeb.com.

@@ -1,6 +1,24 @@
 pluginManagement { includeBuild("../node_modules/@react-native/gradle-plugin") }
 plugins { id("com.facebook.react.settings") }
 extensions.configure(com.facebook.react.ReactSettingsExtension){ ex -> ex.autolinkLibrariesFromCommand() }
+dependencyResolutionManagement {
+    repositories {
+        if (providers.gradleProperty("SCREEB_USE_LOCAL_SDK").orElse(providers.environmentVariable("SCREEB_USE_LOCAL_SDK")).orNull == "true") {
+            mavenLocal()
+        }
+        google()
+        mavenCentral()
+    }
+}
+if (providers.gradleProperty("SCREEB_USE_LOCAL_SDK").orElse(providers.environmentVariable("SCREEB_USE_LOCAL_SDK")).orNull == "true") {
+    def screebAndroidSdkPath = providers.environmentVariable("SCREEB_ANDROID_SDK_PATH")
+        .orElse(file("../../../../sdk-android").canonicalPath)
+        .get()
+    exec {
+        workingDir screebAndroidSdkPath
+        commandLine "./gradlew", ":sdk:publishReleasePublicationToMavenLocal", "--no-daemon"
+    }
+}
 rootProject.name = 'screebreactnative.example'
 include ':app'
 includeBuild('../node_modules/@react-native/gradle-plugin')

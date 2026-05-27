@@ -458,6 +458,9 @@ export type TargetingCheckFunction = () => Promise<unknown>;
  * ```
  */
 export type TargetingDebugFunction = () => Promise<unknown>;
+export type ScreebMaskTextFunction = <T extends Element>(element: T) => T;
+export type ScreebNoCaptureFunction = <T extends Element>(element: T) => T;
+export type ScreebIdFunction = <T extends Element>(element: T, id: string) => T;
 
 /** Screeb context API */
 export type ScreebContextValues = {
@@ -480,6 +483,9 @@ export type ScreebContextValues = {
   sessionReplayStop: SessionReplayStopFunction;
   targetingCheck: TargetingCheckFunction;
   targetingDebug: TargetingDebugFunction;
+  ScreebMaskText: ScreebMaskTextFunction;
+  ScreebNoCapture: ScreebNoCaptureFunction;
+  ScreebId: ScreebIdFunction;
 };
 
 /** Properties of Screeb provider */

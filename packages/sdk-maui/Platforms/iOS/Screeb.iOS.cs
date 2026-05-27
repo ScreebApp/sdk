@@ -144,14 +144,23 @@ public static partial class Screeb
         foreach (var (k, v) in dict)
         {
             keys.Add(new NSString(k));
-            values.Add(v is string s ? new NSString(s) :
-                       v is bool b ? NSNumber.FromBoolean(b) :
-                       v is int i ? NSNumber.FromInt32(i) :
-                       v is long l ? NSNumber.FromInt64(l) :
-                       v is double d ? NSNumber.FromDouble(d) :
-                       (NSObject)new NSString(v.ToString() ?? ""));
+            values.Add(ToNSObject(v));
         }
         return NSDictionary.FromObjectsAndKeys(values.ToArray(), keys.ToArray());
+    }
+
+    private static NSObject ToNSObject(object value)
+    {
+        if (value is NSObject nsObject) return nsObject;
+        if (value is string s) return new NSString(s);
+        if (value is bool b) return NSNumber.FromBoolean(b);
+        if (value is int i) return NSNumber.FromInt32(i);
+        if (value is long l) return NSNumber.FromInt64(l);
+        if (value is float f) return NSNumber.FromFloat(f);
+        if (value is double d) return NSNumber.FromDouble(d);
+        if (value is Dictionary<string, object> nested) return ToNSDictionary(nested) ?? new NSDictionary();
+        if (value is IDictionary<string, object> nestedDict) return ToNSDictionary(new Dictionary<string, object>(nestedDict)) ?? new NSDictionary();
+        return new NSString(value.ToString() ?? "");
     }
 
     private static Dictionary<string, object>? FromNSDictionary(NSDictionary? dict)
