@@ -37,7 +37,7 @@
     "example:expo": "npm run start --workspace=example-expo",
     "typecheck": "tsc",
     "lint": "eslint . --ext .js,.ts,.tsx",
-    "clean": "del-cli android/build ../../examples/example-reactnative/android/build ../../examples/example-reactnative/ios/build ../../examples/example-expo/android ../../examples/example-expo/ios lib",
+    "clean": "del-cli --force android/build ../../examples/example-reactnative/android/build ../../examples/example-reactnative/ios/build ../../examples/example-expo/android ../../examples/example-expo/ios lib",
     "prepare": "bob build",
     "release": "release-it --only-version"
   },
