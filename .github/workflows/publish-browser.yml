@@ -3,7 +3,7 @@ name: Publish @screeb/sdk-browser
 on:
   push:
     tags:
-      - 'sdk-browser/v*'
+      - '@screeb/sdk-browser@*'
 
 jobs:
   publish:
