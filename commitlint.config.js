@@ -15,7 +15,11 @@ module.exports = {
             "sdk-vue",
             "example-vue",
             "sdk-maui",
-            "example-maui"
+            "example-maui",
+            "sdk-flutter",
+            "example-flutter",
+            "sdk-react-native",
+            "example-react-native"
         ]],
         "scope-empty": [2, "never"],
         "scope-min-length": [2, "always", 1],
