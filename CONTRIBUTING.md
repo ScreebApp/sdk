@@ -48,7 +48,7 @@ Each package is released independently. Releases are triggered by pushing a git 
 
 ```bash
 # JS packages — use Lerna
-npx lerna version --scope=@screeb/sdk-browser
+npm run version
 
 # Flutter
 # 1. Bump version in packages/sdk-flutter/pubspec.yaml
