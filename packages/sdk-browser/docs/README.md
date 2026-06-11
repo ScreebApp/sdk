@@ -33,6 +33,7 @@
 - [ResponseItemAnswer](README.md#responseitemanswer)
 - [ResponseItemQuestion](README.md#responseitemquestion)
 - [ResponseStatus](README.md#responsestatus)
+- [ScreebEndpoints](README.md#screebendpoints)
 - [ScreebFunction](README.md#screebfunction)
 - [ScreebIdentityGetReturn](README.md#screebidentitygetreturn)
 - [ScreebObject](README.md#screebobject)
@@ -478,6 +479,33 @@ ___
 
 ___
 
+### ScreebEndpoints
+
+Ƭ **ScreebEndpoints**: `Object`
+
+Custom collector URLs used to bypass AdBlockers by routing Screeb traffic
+through your own domain (reverse proxy).
+
+Every key is optional: any omitted endpoint falls back to Screeb's default
+URL. All endpoints must use `https://` (or `wss://` for the WebSocket one),
+and the domains must be allow-listed in Screeb Admin → Settings → Custom Domains.
+
+**`See`**
+
+https://developers.screeb.app/sdk-js/custom-collector-url
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `centipede?` | `string` | WebSocket (real-time targeting). Default: `wss://centipede.screeb.app`. |
+| `hostedPage?` | `string` | Hosted survey page. Default: `https://survey.screeb.app`. |
+| `report?` | `string` | Response reporting. Default: `https://r.screeb.app/rpc`. |
+| `rpc?` | `string` | REST API (surveys, tracking). Default: `https://rpc.screeb.app/rpc`. |
+| `static?` | `string` | Static assets (images, fonts). Default: `https://static.screeb.app`. |
+
+___
+
 ### ScreebFunction
 
 Ƭ **ScreebFunction**: (...`_`: `unknown`[]) => `void` \| `Promise`\<`unknown`\>
@@ -536,6 +564,7 @@ This is the Screeb tag options object.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
+| `endpoints?` | [`ScreebEndpoints`](README.md#screebendpoints) | Override Screeb's collector URLs to route traffic through your own domain (custom domains / AdBlocker bypass). Only the endpoints you provide are overridden; the rest fall back to Screeb's defaults. **`See`** https://developers.screeb.app/sdk-js/custom-collector-url |
 | `screebEndpoint?` | `string` | Please don't do this. |
 | `sdkName?` | `string` | SDK name (eg: sdk-browser, sdk-react, sdk-angular, etc...) |
 | `sdkVersion?` | `string` | SDK version (eg: 1.2.3) |

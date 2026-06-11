@@ -6,6 +6,29 @@ export type PropertyRecord = {
   [key: string]: PropertyType | PropertyType[];
 };
 
+/**
+ * Custom collector URLs used to bypass AdBlockers by routing Screeb traffic
+ * through your own domain (reverse proxy).
+ *
+ * Every key is optional: any omitted endpoint falls back to Screeb's default
+ * URL. All endpoints must use `https://` (or `wss://` for the WebSocket one),
+ * and the domains must be allow-listed in Screeb Admin → Settings → Custom Domains.
+ *
+ * @see https://developers.screeb.app/sdk-js/custom-collector-url
+ */
+export type ScreebEndpoints = {
+  /** REST API (surveys, tracking). Default: `https://rpc.screeb.app/rpc`. */
+  rpc?: string;
+  /** Static assets (images, fonts). Default: `https://static.screeb.app`. */
+  static?: string;
+  /** Response reporting. Default: `https://r.screeb.app/rpc`. */
+  report?: string;
+  /** Hosted survey page. Default: `https://survey.screeb.app`. */
+  hostedPage?: string;
+  /** WebSocket (real-time targeting). Default: `wss://centipede.screeb.app`. */
+  centipede?: string;
+};
+
 /** This is the Screeb tag options object. */
 export type ScreebOptions = {
   /** If you're running Screeb tag in an iframe, please set the inner window here. */
@@ -18,6 +41,15 @@ export type ScreebOptions = {
 
   /** Please don't do this. */
   screebEndpoint?: string;
+
+  /**
+   * Override Screeb's collector URLs to route traffic through your own domain
+   * (custom domains / AdBlocker bypass). Only the endpoints you provide are
+   * overridden; the rest fall back to Screeb's defaults.
+   *
+   * @see https://developers.screeb.app/sdk-js/custom-collector-url
+   */
+  endpoints?: ScreebEndpoints;
 
   /** @hidden Use a specific platform */
   platform?: string;
