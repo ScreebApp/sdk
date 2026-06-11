@@ -36,7 +36,8 @@
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "4.22.5"
   },
+  "packageManager": "npm@10.8.2",
   "engines": {
-    "node": ">=18"
+    "node": ">=20.0.0"
   }
 }
