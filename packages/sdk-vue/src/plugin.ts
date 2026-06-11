@@ -1,5 +1,5 @@
-import { App, InjectionKey, Plugin, reactive, watch } from "vue";
 import * as Screeb from "@screeb/sdk-browser";
+import { App, InjectionKey, Plugin, reactive, watch } from "vue";
 
 import CONSTANTS from "./constants";
 import * as logger from "./logger";
