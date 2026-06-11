@@ -31,6 +31,8 @@ yarn-error.log*
 
 .vscode
 
+.gradle
+
 # MAUI SDK - native binaries (downloaded at build time)
 packages/sdk-maui/native/ios/Screeb.xcframework/
 packages/sdk-maui/native/ios/Screeb.zip
