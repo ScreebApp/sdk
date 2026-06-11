@@ -48,14 +48,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ScreebApp/sdk-reactnative.git"
+    "url": "git+https://github.com/ScreebApp/sdk.git"
   },
   "author": "Alexis <alexis@screeb.app> (https://github.com/Alexays)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ScreebApp/sdk-reactnative/issues"
+    "url": "https://github.com/ScreebApp/sdk/issues"
   },
-  "homepage": "https://github.com/ScreebApp/sdk-reactnative#readme",
+  "homepage": "https://github.com/ScreebApp/sdk#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

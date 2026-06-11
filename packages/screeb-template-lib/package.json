@@ -5,12 +5,12 @@
   "description": "Screeb's template for a front-end lib.",
   "homepage": "https://screeb.app",
   "bugs": {
-    "url": "https://github.com/ScreebApp/sdk-js/issues",
+    "url": "https://github.com/ScreebApp/sdk/issues",
     "email": "support@screeb.app"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ScreebApp/sdk-js.git",
+    "url": "https://github.com/ScreebApp/sdk.git",
     "directory": "packages/screeb-template-lib"
   },
   "license": "MIT",
