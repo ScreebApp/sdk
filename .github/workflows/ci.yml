@@ -47,11 +47,12 @@ jobs:
       - name: Install MAUI workloads
         run: dotnet workload install android ios
       - name: Download Screeb iOS XCFramework
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          SCREEB_IOS_URL=$(curl -sL https://api.github.com/repos/ScreebApp/sdk-ios-public/releases/latest | python3 -c "import sys,json; print(next(a['browser_download_url'] for a in json.load(sys.stdin)['assets'] if a['name']=='Screeb.zip'))")
-          curl -sL "$SCREEB_IOS_URL" -o /tmp/Screeb.zip
-          unzip -q /tmp/Screeb.zip -d /tmp/screeb_ios
           mkdir -p packages/sdk-maui/native/ios
+          gh release download --repo ScreebApp/sdk-ios-public --pattern 'Screeb.zip' --output /tmp/Screeb.zip --clobber
+          unzip -q /tmp/Screeb.zip -d /tmp/screeb_ios
           cp -r /tmp/screeb_ios/Screeb.xcframework packages/sdk-maui/native/ios/
       - name: Restore
         run: dotnet restore packages/sdk-maui/ScreebMaui.csproj
