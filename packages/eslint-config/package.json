@@ -1,6 +1,6 @@
 {
   "name": "@screeb/eslint-config",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "private": true,
   "description": "Screeb's eslint config for frontend app.",
   "homepage": "https://screeb.app",

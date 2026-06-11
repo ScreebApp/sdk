@@ -1,6 +1,6 @@
 {
   "name": "@screeb/sdk-vue",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Screeb's browser SDK, optimized for Vue 3.",
   "keywords": [
     "product discovery",
@@ -41,11 +41,11 @@
     "test": "echo '@TODO'"
   },
   "dependencies": {
-    "@screeb/sdk-browser": "^0.5.0"
+    "@screeb/sdk-browser": "^0.6.0"
   },
   "devDependencies": {
-    "@screeb/eslint-config": "^0.1.6",
-    "@screeb/typescript-config": "^0.1.10",
+    "@screeb/eslint-config": "^0.1.7",
+    "@screeb/typescript-config": "^0.1.11",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "eslint": "^8.51.0",
     "eslint-plugin-import": "^2.28.1",
