@@ -19,5 +19,5 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm install -g npm@latest
       - run: npm install --ignore-scripts
-      - run: npm run build --workspace=packages/sdk-vue
+      - run: npm run build
       - run: npm publish --workspace=packages/sdk-vue --access public --provenance
