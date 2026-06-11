@@ -5,7 +5,8 @@
   "version": "independent",
   "command": {
     "version": {
-      "message": "chore(*): publish"
+      "message": "chore(*): publish",
+      "push": false
     }
   },
   "$schema": "node_modules/lerna/schemas/lerna-schema.json"
