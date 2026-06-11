@@ -3,7 +3,7 @@ name: Publish @screeb/sdk-angular
 on:
   push:
     tags:
-      - 'sdk-angular/v*'
+      - '@screeb/sdk-angular@*'
 
 jobs:
   publish:

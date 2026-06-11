@@ -3,7 +3,7 @@ name: Publish @screeb/sdk-vue
 on:
   push:
     tags:
-      - 'sdk-vue/v*'
+      - '@screeb/sdk-vue@*'
 
 jobs:
   publish:
