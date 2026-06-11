@@ -3,7 +3,7 @@ name: Publish @screeb/sdk-react
 on:
   push:
     tags:
-      - 'sdk-react/v*'
+      - '@screeb/sdk-react@*'
 
 jobs:
   publish:
