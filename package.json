@@ -15,7 +15,6 @@
     "lint:commit": "commitlint --verbose --edit",
     "lint:fix": "lerna run --parallel lint -- --fix",
     "prepare": "npm run build && husky install",
-    "publish": "npm run version && lerna publish --no-private",
     "start": "lerna run start",
     "test": "lerna run --parallel test",
     "upgrade:all": "npm-upgrade && lerna exec --concurrency 1 npm-upgrade",
