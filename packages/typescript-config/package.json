@@ -5,12 +5,12 @@
   "description": "Screeb's typescript configs for frontend app.",
   "homepage": "https://screeb.app",
   "bugs": {
-    "url": "https://github.com/ScreebApp/sdk-js/issues",
+    "url": "https://github.com/ScreebApp/sdk/issues",
     "email": "support@screeb.app"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ScreebApp/sdk-js.git",
+    "url": "https://github.com/ScreebApp/sdk.git",
     "directory": "packages/typescript-config"
   },
   "license": "MIT",

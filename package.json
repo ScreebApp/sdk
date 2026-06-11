@@ -19,8 +19,8 @@
     "test": "lerna run --parallel test",
     "upgrade:all": "npm-upgrade && lerna exec --concurrency 1 npm-upgrade",
     "preversion": "npm run clean && npm i && npm run lint && npm run build && npm run test",
-    "version": "lerna version && npm run build",
-    "postversion": "git push && git push --tags"
+    "version": "lerna version && npm run build && npm run push:release",
+    "push:release": "git push origin HEAD && for t in $(git tag --points-at HEAD); do git push origin \"refs/tags/$t\"; done"
   },
   "dependencies": {
     "@commitlint/cli": "^17.7.2",
