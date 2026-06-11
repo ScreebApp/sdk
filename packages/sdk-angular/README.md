@@ -94,6 +94,34 @@ export class AppComponent implements OnInit {
 }
 ```
 
+### Custom domains (AdBlocker bypass)
+
+If you route Screeb traffic through your own domain (reverse proxy) to bypass AdBlockers, pass the
+`endpoints` (and optionally `screebEndpoint` for the loader URL) through `options` in
+`ScreebModule.forRoot`. Only the endpoints you provide are overridden; the rest fall back to
+Screeb's defaults.
+
+```ts
+ScreebModule.forRoot({
+  autoInit: true,
+  websiteId: "<your-website-id>",
+  options: {
+    screebEndpoint: "https://analytics.acme.com/sdk/tag.js",
+    endpoints: {
+      rpc:        "https://analytics.acme.com/rpc",
+      static:     "https://analytics.acme.com/static",
+      report:     "https://analytics.acme.com/report",
+      hostedPage: "https://analytics.acme.com/hosted-page",
+      centipede:  "wss://analytics.acme.com/centipede",
+    },
+  },
+})
+```
+
+All endpoints must use `https://` (or `wss://` for `centipede`) and the domains must be allow-listed
+in **Screeb Admin → Settings → Custom Domains**. See the
+[Custom Collector URL guide](https://developers.screeb.app/sdk-js/custom-collector-url).
+
 For a working example, see our [Screeb Angular SDK example app](https://github.com/ScreebApp/sdk/tree/master/examples/example-angular).
 
 For a more advanced usage and a complete API documentation, see [documentation generated from source files](https://github.com/ScreebApp/sdk/tree/master/packages/sdk-angular/docs).

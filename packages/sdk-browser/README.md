@@ -50,6 +50,34 @@ Screeb.load();
 Screeb.init('<your-website-id>');
 ```
 
+### Custom domains (AdBlocker bypass)
+
+If you route Screeb traffic through your own domain (reverse proxy) to bypass AdBlockers, pass an
+`endpoints` object to `load()`. Only the endpoints you provide are overridden; the rest fall back
+to Screeb's defaults. The tag loader URL itself is set separately via `screebEndpoint`.
+
+```ts
+import * as Screeb from "@screeb/sdk-browser";
+
+Screeb.load({
+  // Load the SDK bundle from your domain
+  screebEndpoint: "https://analytics.acme.com/sdk/tag.js",
+  // Route collector traffic through your domain
+  endpoints: {
+    rpc:        "https://analytics.acme.com/rpc",
+    static:     "https://analytics.acme.com/static",
+    report:     "https://analytics.acme.com/report",
+    hostedPage: "https://analytics.acme.com/hosted-page",
+    centipede:  "wss://analytics.acme.com/centipede",
+  },
+});
+Screeb.init('<your-website-id>');
+```
+
+All endpoints must use `https://` (or `wss://` for `centipede`) and the domains must be allow-listed
+in **Screeb Admin → Settings → Custom Domains**. See the
+[Custom Collector URL guide](https://developers.screeb.app/sdk-js/custom-collector-url).
+
 For a working example, see our [Screeb Browser SDK example app](https://github.com/ScreebApp/sdk/tree/master/examples/example-browser).
 
 For a more advanced usage and a complete API documentation, see [documentation generated from source files](https://github.com/ScreebApp/sdk/tree/master/packages/sdk-browser/docs).
