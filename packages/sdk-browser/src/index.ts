@@ -1,6 +1,7 @@
 import { HooksInit, HooksMessageStart, HooksSurveyStart } from "./hooks.types";
 import {
   PropertyRecord,
+  ScreebEndpoints,
   ScreebFunction,
   ScreebIdentityGetReturn,
   ScreebObject,
@@ -12,7 +13,7 @@ export * from "./hooks.types";
 
 declare const window: Window & {
   $screeb?: ScreebObject;
-  ScreebConfig?: { platform: string };
+  ScreebConfig?: { platform?: string; endpoints?: ScreebEndpoints };
 };
 
 const SCREEB_TAG_ENDPOINT = "https://t.screeb.app/tag.js";
@@ -36,6 +37,8 @@ const callScreebCommand: ScreebFunction = (...args) => {
  * @param options Screeb module options.
  * @param options.window If you're running Screeb tag in an iframe, please set the inner window here.
  * @param options.screebEndpoint Please don't do this.
+ * @param options.endpoints Override Screeb's collector URLs to route traffic through your own
+ * domain (custom domains / AdBlocker bypass). Only the endpoints you provide are overridden.
  *
  * @example
  * ```ts
@@ -56,8 +59,11 @@ export const load = (options: ScreebOptions = {}) =>
     scriptElement.addEventListener("load", () => resolve(undefined));
     scriptElement.addEventListener("error", reject);
 
-    if (options.platform) {
-      _window["ScreebConfig"] = { platform: options.platform };
+    if (options.platform || options.endpoints) {
+      _window["ScreebConfig"] = {
+        ...(options.platform ? { platform: options.platform } : {}),
+        ...(options.endpoints ? { endpoints: options.endpoints } : {}),
+      };
     }
 
     _window.$screeb =
