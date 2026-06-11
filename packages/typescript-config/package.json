@@ -1,6 +1,6 @@
 {
   "name": "@screeb/typescript-config",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "private": true,
   "description": "Screeb's typescript configs for frontend app.",
   "homepage": "https://screeb.app",
