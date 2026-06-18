@@ -231,6 +231,9 @@ export const ScreebPlugin: Plugin = {
     );
 
     const context: ScreebContextValues = {
+      ScreebId: Screeb.ScreebId,
+      ScreebMaskText: Screeb.ScreebMaskText,
+      ScreebNoCapture: Screeb.ScreebNoCapture,
       close,
       debug,
       eventTrack,
@@ -242,12 +245,12 @@ export const ScreebPlugin: Plugin = {
       identityReset,
       init,
       load,
-      surveyClose,
-      surveyStart,
       messageClose,
       messageStart,
-      sessionReplayStop,
       sessionReplayStart,
+      sessionReplayStop,
+      surveyClose,
+      surveyStart,
       targetingDebug,
     };
 

@@ -21,6 +21,9 @@
 - [MessageStartFunction](README.md#messagestartfunction)
 - [ScreebConfig](README.md#screebconfig)
 - [ScreebContextValues](README.md#screebcontextvalues)
+- [ScreebIdFunction](README.md#screebidfunction)
+- [ScreebMaskTextFunction](README.md#screebmasktextfunction)
+- [ScreebNoCaptureFunction](README.md#screebnocapturefunction)
 - [SessionReplayStartFunction](README.md#sessionreplaystartfunction)
 - [SessionReplayStopFunction](README.md#sessionreplaystopfunction)
 - [SurveyCloseFunction](README.md#surveyclosefunction)
@@ -312,6 +315,9 @@ All Screeb methods provided via `useScreeb()`
 
 | Name | Type |
 | :------ | :------ |
+| `ScreebId` | [`ScreebIdFunction`](README.md#screebidfunction) |
+| `ScreebMaskText` | [`ScreebMaskTextFunction`](README.md#screebmasktextfunction) |
+| `ScreebNoCapture` | [`ScreebNoCaptureFunction`](README.md#screebnocapturefunction) |
 | `close` | [`CloseFunction`](README.md#closefunction) |
 | `debug` | [`DebugFunction`](README.md#debugfunction) |
 | `eventTrack` | [`EventTrackFunction`](README.md#eventtrackfunction) |
@@ -330,6 +336,85 @@ All Screeb methods provided via `useScreeb()`
 | `surveyClose` | [`SurveyCloseFunction`](README.md#surveyclosefunction) |
 | `surveyStart` | [`SurveyStartFunction`](README.md#surveystartfunction) |
 | `targetingDebug` | [`TargetingDebugFunction`](README.md#targetingdebugfunction) |
+
+___
+
+### ScreebIdFunction
+
+Ƭ **ScreebIdFunction**: \<T\>(`element`: `T`, `id`: `string`) => `T`
+
+#### Type declaration
+
+▸ \<`T`\>(`element`, `id`): `T`
+
+##### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `Element` |
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `element` | `T` |
+| `id` | `string` |
+
+##### Returns
+
+`T`
+
+___
+
+### ScreebMaskTextFunction
+
+Ƭ **ScreebMaskTextFunction**: \<T\>(`element`: `T`) => `T`
+
+#### Type declaration
+
+▸ \<`T`\>(`element`): `T`
+
+##### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `Element` |
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `element` | `T` |
+
+##### Returns
+
+`T`
+
+___
+
+### ScreebNoCaptureFunction
+
+Ƭ **ScreebNoCaptureFunction**: \<T\>(`element`: `T`) => `T`
+
+#### Type declaration
+
+▸ \<`T`\>(`element`): `T`
+
+##### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `Element` |
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `element` | `T` |
+
+##### Returns
+
+`T`
 
 ___
 

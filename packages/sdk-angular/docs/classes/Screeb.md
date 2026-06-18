@@ -15,6 +15,9 @@
 
 ### Methods
 
+- [ScreebId](Screeb.md#screebid)
+- [ScreebMaskText](Screeb.md#screebmasktext)
+- [ScreebNoCapture](Screeb.md#screebnocapture)
 - [close](Screeb.md#close)
 - [debug](Screeb.md#debug)
 - [ensureScreeb](Screeb.md#ensurescreeb)
@@ -64,6 +67,79 @@ ___
 • `Private` **isInitialized**: `boolean` = `false`
 
 ## Methods
+
+### ScreebId
+
+▸ **ScreebId**\<`T`\>(`element`, `id`): `T`
+
+Sets a stable Screeb element ID for IAM targeting and replay context.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `Element` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `element` | `T` |
+| `id` | `string` |
+
+#### Returns
+
+`T`
+
+___
+
+### ScreebMaskText
+
+▸ **ScreebMaskText**\<`T`\>(`element`): `T`
+
+Marks an element as sensitive in Screeb session replay.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `Element` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `element` | `T` |
+
+#### Returns
+
+`T`
+
+___
+
+### ScreebNoCapture
+
+▸ **ScreebNoCapture**\<`T`\>(`element`): `T`
+
+Excludes an element from Screeb session replay capture.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `Element` |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `element` | `T` |
+
+#### Returns
+
+`T`
+
+___
 
 ### close
 
