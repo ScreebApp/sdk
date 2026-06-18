@@ -1,0 +1,29 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        if (providers.gradleProperty("SCREEB_USE_LOCAL_SDK").orElse(providers.environmentVariable("SCREEB_USE_LOCAL_SDK")).orNull == "true") {
+            mavenLocal()
+        }
+        google()
+        mavenCentral()
+    }
+}
+
+if (providers.gradleProperty("SCREEB_USE_LOCAL_SDK").orElse(providers.environmentVariable("SCREEB_USE_LOCAL_SDK")).orNull == "true") {
+    includeBuild("../../../sdk-android") {
+        dependencySubstitution {
+            substitute(module("app.screeb.sdk:survey")).using(project(":sdk"))
+        }
+    }
+}
+
+rootProject.name = 'screeb-example-android'
+include ':app'

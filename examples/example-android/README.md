@@ -1,57 +1,53 @@
-# example-android
+# Screeb Android Example
 
-Minimal Android example showing Screeb SDK integration.
+Complete native Android example for the Screeb Android SDK.
 
-> The Android SDK is closed source. See [developers.screeb.app/sdk-android/install](https://developers.screeb.app/sdk-android/install) for the full documentation.
+Full documentation: [developers.screeb.app/sdk-android/install](https://developers.screeb.app/sdk-android/install)
+
+## What This Example Covers
+
+- SDK initialization with visitor properties
+- Deep link handling for the Screeb editor
+- Identity and visitor property updates
+- Event and screen tracking
+- Programmatic survey/message start
+- Session replay start/stop
+- SDK debug command
+- Optional camera/microphone permissions for media questions
 
 ## Requirements
 
-- Android SDK 19+ (Android 4.4+)
+- Android Studio
+- Android SDK 35
+- JDK 17
 
-## Setup
+## Run
 
-`build.gradle` (project level):
+From this directory:
 
-```gradle
-allprojects {
-    repositories {
-        mavenCentral()
-    }
-}
+```bash
+./gradlew :app:installDebug
 ```
 
-`app/build.gradle`:
+To verify the SDK consumer ProGuard rules in a minified app build:
 
-```gradle
-dependencies {
-    implementation 'app.screeb.sdk:survey:x.x.x'
-}
+```bash
+./gradlew :app:assembleRelease
 ```
 
-## Permissions
+## Deep Links
 
-`AndroidManifest.xml`:
+The manifest registers:
 
 ```xml
-<uses-permission android:name="android.permission.INTERNET" />
-
-<!-- Audio/Video feature (optional) -->
-<uses-permission android:name="android.permission.CAMERA" />
-<uses-permission android:name="android.permission.RECORD_AUDIO" />
-<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+<data android:scheme="screeb-${screebChannelId}" />
 ```
 
-## Deep links (In-App Message editor)
+The example uses the same demo channel ID in the manifest and in `Screeb.initSdk`.
 
-Add to your main Activity in `AndroidManifest.xml`:
+## Files
 
-```xml
-<intent-filter>
-    <action android:name="android.intent.action.VIEW" />
-    <category android:name="android.intent.category.DEFAULT" />
-    <category android:name="android.intent.category.BROWSABLE" />
-    <data android:scheme="screeb-<channel-id>" />
-</intent-filter>
-```
-
-## Usage
+- [settings.gradle](settings.gradle): plugin and repository configuration
+- [app/build.gradle](app/build.gradle): app module and Screeb dependency
+- [AndroidManifest.xml](app/src/main/AndroidManifest.xml): permissions and deep links
+- [MainActivity.kt](app/src/main/kotlin/app/screeb/example/MainActivity.kt): complete SDK usage sample

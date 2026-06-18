@@ -33,7 +33,6 @@
 - [sessionReplayStop](Screeb.md#sessionreplaystop)
 - [surveyClose](Screeb.md#surveyclose)
 - [surveyStart](Screeb.md#surveystart)
-- [targetingCheck](Screeb.md#targetingcheck)
 - [targetingDebug](Screeb.md#targetingdebug)
 
 ## Constructors
@@ -578,24 +577,6 @@ this.screeb.surveyStart(
   "en", // optional
   "#screeb-survey-container" // optional
 );
-```
-
-___
-
-### targetingCheck
-
-▸ **targetingCheck**(): `Promise`\<`unknown`\>
-
-Forces a targeting check.
-
-#### Returns
-
-`Promise`\<`unknown`\>
-
-**`Example`**
-
-```ts
-this.screeb.targetingCheck();
 ```
 
 ___

@@ -424,20 +424,6 @@ export class Screeb {
   }
 
   /**
-   * Forces a targeting check.
-   *
-   * @example
-   * ```ts
-   * this.screeb.targetingCheck();
-   * ```
-   */
-  public async targetingCheck() {
-    await this.ensureScreeb("targetingCheck");
-
-    return _Screeb.targetingCheck();
-  }
-
-  /**
    * Prints the current state of the targeting engine.
    *
    * @example
