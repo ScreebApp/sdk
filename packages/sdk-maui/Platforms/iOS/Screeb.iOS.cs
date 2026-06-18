@@ -19,8 +19,22 @@ public static partial class Screeb
         return tcs.Task;
     }
 
-    private static Task<bool?> OnMain(Action body) =>
-        OnMain(tcs => { body(); tcs.SetResult(true); });
+    // Fire-and-forget calls return true on success and false on failure (never
+    // faults the task, so an unobserved fire-and-forget call can't crash the app).
+    private static Task<bool?> OnMain(Action body)
+    {
+        var tcs = new TaskCompletionSource<bool?>(TaskCreationOptions.RunContinuationsAsynchronously);
+        NSRunLoop.Main.BeginInvokeOnMainThread(() =>
+        {
+            try { body(); tcs.SetResult(true); }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[Screeb] call failed: {ex}");
+                tcs.SetResult(false);
+            }
+        });
+        return tcs.Task;
+    }
 
     private static Task<T?> OnMain<T>(Action<TaskCompletionSource<T?>> body) where T : class
     {

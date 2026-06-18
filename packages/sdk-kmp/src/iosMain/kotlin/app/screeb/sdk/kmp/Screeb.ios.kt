@@ -48,7 +48,7 @@ actual object Screeb {
                 language = language,
             )
             true
-        }.getOrNull()
+        }.orNullRethrowingCancellation()
     }
 
     actual suspend fun closeSdk(): Boolean? = withContext(Dispatchers.Main) {
@@ -57,7 +57,7 @@ actual object Screeb {
             HooksScope.reset()
             NativeScreeb.closeSdk()
             true
-        }.getOrNull()
+        }.orNullRethrowingCancellation()
     }
 
     actual suspend fun setIdentity(
@@ -70,7 +70,7 @@ actual object Screeb {
                 visitorProperty = properties.toObjCMap(),
             )
             true
-        }.getOrNull()
+        }.orNullRethrowingCancellation()
     }
 
     actual suspend fun setProperties(properties: Map<String, Any>?): Boolean? =
@@ -78,11 +78,11 @@ actual object Screeb {
             runCatching {
                 NativeScreeb.visitorProperty(properties.toObjCMap())
                 true
-            }.getOrNull()
+            }.orNullRethrowingCancellation()
         }
 
     actual suspend fun resetIdentity(): Boolean? = withContext(Dispatchers.Main) {
-        runCatching { NativeScreeb.resetIdentity(); true }.getOrNull()
+        runCatching { NativeScreeb.resetIdentity(); true }.orNullRethrowingCancellation()
     }
 
     actual suspend fun getIdentity(): Map<String, Any>? = withContext(Dispatchers.Main) {
@@ -93,7 +93,7 @@ actual object Screeb {
                     else cont.resume((identity as Map<Any?, *>?).toKotlinMap())
                 }
             }
-        }.getOrNull()
+        }.orNullRethrowingCancellation()
     }
 
     actual suspend fun assignGroup(
@@ -108,7 +108,7 @@ actual object Screeb {
                 properties = properties.toObjCMap(),
             )
             true
-        }.getOrNull()
+        }.orNullRethrowingCancellation()
     }
 
     actual suspend fun unassignGroup(
@@ -123,7 +123,7 @@ actual object Screeb {
                 properties = properties.toObjCMap(),
             )
             true
-        }.getOrNull()
+        }.orNullRethrowingCancellation()
     }
 
     actual suspend fun trackEvent(name: String, properties: Map<String, Any>?): Boolean? =
@@ -134,7 +134,7 @@ actual object Screeb {
                     trackingEventProperties = properties.toObjCMap(),
                 )
                 true
-            }.getOrNull()
+            }.orNullRethrowingCancellation()
         }
 
     actual suspend fun trackScreen(name: String, properties: Map<String, Any>?): Boolean? =
@@ -145,7 +145,7 @@ actual object Screeb {
                     trackingEventProperties = properties.toObjCMap(),
                 )
                 true
-            }.getOrNull()
+            }.orNullRethrowingCancellation()
         }
 
     actual suspend fun startSurvey(
@@ -169,11 +169,11 @@ actual object Screeb {
                 distributionId = distributionId,
             )
             true
-        }.getOrNull()
+        }.orNullRethrowingCancellation()
     }
 
     actual suspend fun closeSurvey(surveyId: String?): Boolean? = withContext(Dispatchers.Main) {
-        runCatching { NativeScreeb.closeSurvey(surveyId); true }.getOrNull()
+        runCatching { NativeScreeb.closeSurvey(surveyId); true }.orNullRethrowingCancellation()
     }
 
     actual suspend fun startMessage(
@@ -197,19 +197,19 @@ actual object Screeb {
                 distributionId = distributionId,
             )
             true
-        }.getOrNull()
+        }.orNullRethrowingCancellation()
     }
 
     actual suspend fun closeMessage(messageId: String?): Boolean? = withContext(Dispatchers.Main) {
-        runCatching { NativeScreeb.closeMessage(messageId); true }.getOrNull()
+        runCatching { NativeScreeb.closeMessage(messageId); true }.orNullRethrowingCancellation()
     }
 
     actual suspend fun sessionReplayStart(): Boolean? = withContext(Dispatchers.Main) {
-        runCatching { NativeScreeb.sessionReplayStart(); true }.getOrNull()
+        runCatching { NativeScreeb.sessionReplayStart(); true }.orNullRethrowingCancellation()
     }
 
     actual suspend fun sessionReplayStop(): Boolean? = withContext(Dispatchers.Main) {
-        runCatching { NativeScreeb.sessionReplayStop(); true }.getOrNull()
+        runCatching { NativeScreeb.sessionReplayStop(); true }.orNullRethrowingCancellation()
     }
 
     actual suspend fun debug(): String? = withContext(Dispatchers.Main) {
@@ -220,7 +220,7 @@ actual object Screeb {
                     else cont.resume(info)
                 }
             }
-        }.getOrNull()
+        }.orNullRethrowingCancellation()
     }
 
     actual suspend fun debugTargeting(): String? = withContext(Dispatchers.Main) {
@@ -231,6 +231,6 @@ actual object Screeb {
                     else cont.resume(info)
                 }
             }
-        }.getOrNull()
+        }.orNullRethrowingCancellation()
     }
 }

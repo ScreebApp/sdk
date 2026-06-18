@@ -41,7 +41,12 @@ internal static partial class ScreebViewPlatform
         var id = view.Resources?.GetIdentifier(resourceName, "id", view.Context?.PackageName) ?? 0;
         if (id == 0)
         {
-            throw new InvalidOperationException($"Unable to resolve Screeb Android resource id '{resourceName}'.");
+            // Fail safe: a privacy/targeting marker must never crash the host app.
+            // The id is missing when the native Screeb resources aren't merged
+            // (native SDK absent, resource shrinking, wrong package).
+            System.Diagnostics.Debug.WriteLine(
+                $"[Screeb] Unable to resolve Android resource id '{resourceName}'; skipping marker.");
+            return;
         }
         view.SetTag(id, value);
     }
