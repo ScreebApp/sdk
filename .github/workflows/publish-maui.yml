@@ -8,6 +8,8 @@ on:
 jobs:
   publish:
     runs-on: macos-latest
+    permissions:
+      id-token: write # enable GitHub OIDC token issuance for NuGet Trusted Publishing
     steps:
       - uses: actions/checkout@v4
 
@@ -39,5 +41,11 @@ jobs:
       - name: Pack
         run: dotnet pack packages/sdk-maui/ScreebMaui.csproj -c Release --no-build -o ./nupkg
 
+      - name: NuGet login (OIDC -> temporary API key)
+        id: login
+        uses: NuGet/login@v1
+        with:
+          user: alexays
+
       - name: Push to NuGet
-        run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+        run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ steps.login.outputs.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
