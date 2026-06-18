@@ -122,7 +122,7 @@ For a more advanced usage and a complete API documentation, see [documentation g
 For further information, see [our developer documentation](https://developers.screeb.app/sdk-js/install).
 
 ## Support
-For any issues, please contact our support team at support@screeb.com.
+For any issues, please contact our support team at support@screeb.app.
 
 ## Contributing
 All third party contributors acknowledge that any contributions they provide will be made under the same open source license that the open source project is provided under.

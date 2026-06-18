@@ -39,7 +39,8 @@
     "lint": "eslint . --ext .js,.ts,.tsx",
     "clean": "del-cli --force android/build ../../examples/example-reactnative/android/build ../../examples/example-reactnative/ios/build ../../examples/example-expo/android ../../examples/example-expo/ios lib",
     "prepare": "bob build",
-    "release": "release-it --only-version"
+    "release": "release-it --only-version",
+    "test": "echo \"no unit tests yet\""
   },
   "keywords": [
     "react-native",
@@ -48,16 +49,18 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ScreebApp/sdk.git"
+    "url": "https://github.com/ScreebApp/sdk.git",
+    "directory": "packages/sdk-reactnative"
   },
-  "author": "Alexis <alexis@screeb.app> (https://github.com/Alexays)",
+  "author": "Screeb's frontend team",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ScreebApp/sdk/issues"
+    "url": "https://github.com/ScreebApp/sdk/issues",
+    "email": "support@screeb.app"
   },
-  "homepage": "https://github.com/ScreebApp/sdk#readme",
+  "homepage": "https://screeb.app",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "access": "public"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^19.8.1",

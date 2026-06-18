@@ -158,7 +158,7 @@ All methods return `Boolean?` (or the appropriate type), and `null` on unexpecte
 
 ## Support
 
-For any issues, please contact our support team at support@screeb.com.
+For any issues, please contact our support team at support@screeb.app.
 
 ## Contributing
 

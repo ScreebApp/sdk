@@ -112,7 +112,7 @@ For a working example, see our [Screeb Svelte SDK example app](https://github.co
 
 ## Support
 
-For any issues, please contact our support team at support@screeb.com.
+For any issues, please contact our support team at support@screeb.app.
 
 ## Contributing
 

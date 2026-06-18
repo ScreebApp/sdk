@@ -36,7 +36,8 @@
     "build": "rollup -c ../../node_modules/@screeb/typescript-config/src/rollup.config.js",
     "clean": "rm -Rf dist",
     "lint": "eslint .",
-    "release:check": "npm run build --workspace=@screeb/sdk-browser && npm run build && npm run lint"
+    "release:check": "npm run build --workspace=@screeb/sdk-browser && npm run build && npm run lint",
+    "test": "echo \"no unit tests yet\""
   },
   "dependencies": {
     "@screeb/sdk-browser": "^0.6.0"
