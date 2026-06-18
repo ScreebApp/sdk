@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:plugin_screeb/plugin_screeb.dart';
-import 'dart:developer';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -44,16 +43,24 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _visitorProperty(Map<String, dynamic>? properties) {
-    PluginScreeb.setProperty(properties);
+    PluginScreeb.setProperties(properties);
     debugPrint("SetIdentityProperties");
   }
 
-  void _sendAssignGroup(String? groupType, String groupName, Map<String, dynamic>? properties) {
+  void _sendAssignGroup(
+    String? groupType,
+    String groupName,
+    Map<String, dynamic>? properties,
+  ) {
     PluginScreeb.assignGroup(groupType, groupName, properties: properties);
     debugPrint("AssignGroup");
   }
 
-  void _sendUnassignGroup(String? groupType, String groupName, Map<String, dynamic>? properties) {
+  void _sendUnassignGroup(
+    String? groupType,
+    String groupName,
+    Map<String, dynamic>? properties,
+  ) {
     PluginScreeb.unassignGroup(groupType, groupName, properties);
     debugPrint("UnassignGroup");
   }
@@ -68,8 +75,16 @@ class _MyAppState extends State<MyApp> {
     debugPrint("TrackingScreen");
   }
 
-  void _startSurvey(String surveyId, bool allowMultiple, Map<String, dynamic>? hooks) {
-    PluginScreeb.startSurvey(surveyId, allowMultipleResponses: allowMultiple, hooks: hooks);
+  void _startSurvey(
+    String surveyId,
+    bool allowMultiple,
+    Map<String, dynamic>? hooks,
+  ) {
+    PluginScreeb.startSurvey(
+      surveyId,
+      allowMultipleResponses: allowMultiple,
+      hooks: hooks,
+    );
     debugPrint("StartSurvey");
   }
 
@@ -124,17 +139,21 @@ class _MyAppState extends State<MyApp> {
                 ElevatedButton(
                   child: const Text('start survey'),
                   onPressed:
-                      () => _startSurvey("1b1fe0c4-d41d-4307-9ca0-b0b66cce8cff", true, <String, dynamic>{
-                        "version": "1.0.0",
-                        "onSurveyShowed": (dynamic data) {
-                          print("onSurveyShowed");
-                          print(data.toString());
+                      () => _startSurvey(
+                        "1b1fe0c4-d41d-4307-9ca0-b0b66cce8cff",
+                        true,
+                        <String, dynamic>{
+                          "version": "1.0.0",
+                          "onSurveyShowed": (dynamic data) {
+                            debugPrint("onSurveyShowed");
+                            debugPrint(data.toString());
+                          },
+                          "onQuestionReplied": (dynamic data) {
+                            debugPrint("onQuestionReplied");
+                            debugPrint(data.toString());
+                          },
                         },
-                        "onQuestionReplied": (dynamic data) {
-                          print("onQuestionReplied");
-                          print(data.toString());
-                        },
-                      }),
+                      ),
                 ),
                 ElevatedButton(
                   child: const Text('set identity'),
@@ -148,10 +167,16 @@ class _MyAppState extends State<MyApp> {
                 ElevatedButton(
                   child: const Text('send visitor property'),
                   onPressed:
-                      () =>
-                          _visitorProperty(<String, dynamic>{'isConnected': false, 'age': 29, 'product': 'iPhone 13'}),
+                      () => _visitorProperty(<String, dynamic>{
+                        'isConnected': false,
+                        'age': 29,
+                        'product': 'iPhone 13',
+                      }),
                 ),
-                ElevatedButton(child: const Text('assign group'), onPressed: () => _sendAssignGroup(null, "Apple", {})),
+                ElevatedButton(
+                  child: const Text('assign group'),
+                  onPressed: () => _sendAssignGroup(null, "Apple", {}),
+                ),
                 ElevatedButton(
                   child: const Text('unassign group'),
                   onPressed: () => _sendUnassignGroup(null, "Apple", {}),
@@ -178,10 +203,26 @@ class _MyAppState extends State<MyApp> {
                         'flutterAccount': false,
                       }),
                 ),
-                ElevatedButton(child: const Text('reset Identity'), onPressed: () => _resetIdentity()),
-                ElevatedButton(child: const Text('get identity'), onPressed: () => _getIdentity()),
-                ElevatedButton(child: const Text('debug'), onPressed: () => _debug()),
-                ElevatedButton(child: const Text('debug targeting'), onPressed: () => _debugTargeting()),
+                ElevatedButton(
+                  child: const Text('reset Identity'),
+                  onPressed: () => _resetIdentity(),
+                ),
+                ElevatedButton(
+                  child: const Text('get identity'),
+                  onPressed: () => _getIdentity(),
+                ),
+                ElevatedButton(
+                  child: const Text('debug'),
+                  onPressed: () => _debug(),
+                ),
+                ElevatedButton(
+                  child: const Text('debug targeting'),
+                  onPressed: () => _debugTargeting(),
+                ),
+                ElevatedButton(
+                  child: const Text('close SDK'),
+                  onPressed: () => _closeSdk(),
+                ),
               ],
             ),
           ),

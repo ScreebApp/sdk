@@ -2254,7 +2254,7 @@ PODS:
     - React-utils (= 0.81.1)
     - SocketRocket
   - Screeb (3.1.1)
-  - ScreebReactNative (3.1.1):
+  - ScreebReactNative (3.2.0):
     - boost
     - DoubleConversion
     - fast_float
@@ -2358,7 +2358,7 @@ DEPENDENCIES:
   - ReactAppDependencyProvider (from `build/generated/ios`)
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - ScreebReactNative (from `../..`)
+  - ScreebReactNative (from `../../../packages/sdk-reactnative`)
   - SocketRocket (~> 0.7.1)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -2510,7 +2510,7 @@ EXTERNAL SOURCES:
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
   ScreebReactNative:
-    :path: "../.."
+    :path: "../../../packages/sdk-reactnative"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -2586,10 +2586,10 @@ SPEC CHECKSUMS:
   ReactCodegen: 4d203eddf6f977caa324640a20f92e70408d648b
   ReactCommon: ce5d4226dfaf9d5dacbef57b4528819e39d3a120
   Screeb: 5ba8a24da7c23c0ef24fe2c118d351ca4d35c5ad
-  ScreebReactNative: adfe96599035c0fa776bb1bdea596741e8e942b2
+  ScreebReactNative: 7a955dccf5060c4723a6f786426ec9071286dd52
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 11c9686a21e2cd82a094a723649d9f4507200fb0
 
-PODFILE CHECKSUM: 5c3aad95fa8d3b90633494ac8c9d225945b8e4c3
+PODFILE CHECKSUM: 39e8cdf141fa69a48b8b17f60dd1639cbadd5451
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

@@ -19,7 +19,7 @@
   "scripts": {
     "build": "vue-tsc && vite build",
     "clean": "rm -Rf dist",
-    "lint": "eslint .",
+    "lint": "eslint \"src/**/*.ts\"",
     "start": "vite"
   },
   "dependencies": {

@@ -21,7 +21,7 @@ public partial class App : Application
                 ["platform"] = "maui",
                 ["plan"] = "free"
             },
-            initOptions: new Screeb.Maui.ScreebInitOptions { IsDebugMode = true }
+            initOptions: new Screeb.Maui.ScreebInitOptions { IsDebugMode = false }
         );
     }
 }

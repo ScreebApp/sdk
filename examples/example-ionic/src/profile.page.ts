@@ -56,7 +56,9 @@ import { Screeb } from "@screeb/sdk-angular";
           <h2>Reset identity</h2>
           <ion-note>Log out the current visitor</ion-note>
         </ion-label>
-        <ion-button slot="end" color="danger" (click)="logout()">Logout</ion-button>
+        <ion-button slot="end" color="danger" (click)="logout()"
+          >Logout</ion-button
+        >
       </ion-item>
     </ion-content>
   `,
