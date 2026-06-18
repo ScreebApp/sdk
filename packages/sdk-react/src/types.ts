@@ -422,18 +422,6 @@ export type SessionReplayStopFunction = () => Promise<unknown>;
 export type SessionReplayStartFunction = () => Promise<unknown>;
 
 /**
- * Forces a targeting check.
- *
- * @example
- * ```ts
- * const { targetingCheck } = useScreeb();
- *
- * targetingCheck();
- * ```
- */
-export type TargetingCheckFunction = () => Promise<unknown>;
-
-/**
  * Prints the current state of the targeting engine.
  *
  * @example
@@ -478,7 +466,6 @@ export type ScreebContextValues = {
   messageStart: MessageStartFunction;
   sessionReplayStart: SessionReplayStartFunction;
   sessionReplayStop: SessionReplayStopFunction;
-  targetingCheck: TargetingCheckFunction;
   targetingDebug: TargetingDebugFunction;
 };
 

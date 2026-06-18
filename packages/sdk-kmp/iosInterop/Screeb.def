@@ -1,0 +1,3 @@
+language = Objective-C
+headers = Screeb/Screeb-Swift.h
+package = app.screeb.sdk.ios.cinterop

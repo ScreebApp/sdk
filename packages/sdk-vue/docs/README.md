@@ -25,7 +25,6 @@
 - [SessionReplayStopFunction](README.md#sessionreplaystopfunction)
 - [SurveyCloseFunction](README.md#surveyclosefunction)
 - [SurveyStartFunction](README.md#surveystartfunction)
-- [TargetingCheckFunction](README.md#targetingcheckfunction)
 - [TargetingDebugFunction](README.md#targetingdebugfunction)
 
 ### Variables
@@ -330,7 +329,6 @@ All Screeb methods provided via `useScreeb()`
 | `sessionReplayStop` | [`SessionReplayStopFunction`](README.md#sessionreplaystopfunction) |
 | `surveyClose` | [`SurveyCloseFunction`](README.md#surveyclosefunction) |
 | `surveyStart` | [`SurveyStartFunction`](README.md#surveystartfunction) |
-| `targetingCheck` | [`TargetingCheckFunction`](README.md#targetingcheckfunction) |
 | `targetingDebug` | [`TargetingDebugFunction`](README.md#targetingdebugfunction) |
 
 ___
@@ -396,20 +394,6 @@ ___
 | `hooks?` | `HooksSurveyStart` |
 | `language?` | `string` |
 | `selectors?` | `string` \| `string`[] |
-
-##### Returns
-
-`Promise`\<`unknown`\>
-
-___
-
-### TargetingCheckFunction
-
-Ƭ **TargetingCheckFunction**: () => `Promise`\<`unknown`\>
-
-#### Type declaration
-
-▸ (): `Promise`\<`unknown`\>
 
 ##### Returns
 
