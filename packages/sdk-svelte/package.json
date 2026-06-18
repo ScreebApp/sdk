@@ -40,11 +40,11 @@
     "test": "echo \"no unit tests yet\""
   },
   "dependencies": {
-    "@screeb/sdk-browser": "^0.6.0"
+    "@screeb/sdk-browser": "^0.6.1"
   },
   "devDependencies": {
-    "@screeb/eslint-config": "^0.1.6",
-    "@screeb/typescript-config": "^0.1.10",
+    "@screeb/eslint-config": "^0.1.7",
+    "@screeb/typescript-config": "^0.1.12",
     "@types/node": "^20.8.4",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "eslint": "^8.51.0",

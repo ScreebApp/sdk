@@ -30,19 +30,9 @@
     "verify:release": "node scripts/verify-release.mjs",
     "size:sdks": "node scripts/report-sdk-sizes.mjs",
     "upgrade:all": "npm-upgrade && lerna exec --concurrency 1 npm-upgrade",
-    "preversion": "npm run clean && npm i && npm run lint && npm run build && npm run test",
+    "preversion": "npm run clean && npm i && npm run versions:check && npm run lint && npm run build && npm run test",
     "version": "lerna version && npm run build && npm run push:release",
     "push:release": "git push origin HEAD && for t in $(git tag --points-at HEAD); do git push origin \"refs/tags/$t\"; done"
-  },
-  "dependencies": {
-    "@commitlint/cli": "^17.7.2",
-    "@commitlint/config-conventional": "^17.7.0",
-    "@tsconfig/svelte": "^5.0.2",
-    "husky": "^8.0.3",
-    "lerna": "^8.1.8",
-    "svelte-check": "^4.0.0",
-    "svelte-preprocess": "^5.0.4",
-    "typescript": "^5.2.2"
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "4.22.5"
@@ -51,5 +41,15 @@
   "engines": {
     "node": ">=20.0.0",
     "npm": ">=10.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.7.2",
+    "@commitlint/config-conventional": "^17.7.0",
+    "@tsconfig/svelte": "^5.0.2",
+    "husky": "^8.0.3",
+    "lerna": "^8.1.8",
+    "svelte-check": "^4.0.0",
+    "svelte-preprocess": "^5.0.4",
+    "typescript": "^5.2.2"
   }
 }

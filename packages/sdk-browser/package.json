@@ -30,7 +30,6 @@
   "types": "dist/es/index.d.ts",
   "files": [
     "dist",
-    "docs",
     "README.md"
   ],
   "scripts": {
