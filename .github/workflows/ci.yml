@@ -39,6 +39,7 @@ jobs:
       - run: npm run build
       - run: npm run lint
       - run: npm test
+      - run: npm run typecheck --workspace=@screeb/react-native
 
   flutter:
     name: Flutter package
@@ -60,6 +61,7 @@ jobs:
         run: git config --global --add safe.directory "$FLUTTER_ROOT"
       - run: cd packages/sdk-flutter && flutter pub get
       - run: cd packages/sdk-flutter && flutter analyze
+      - run: cd packages/sdk-flutter && flutter test
 
   maui-android:
     name: .NET MAUI Android SDK

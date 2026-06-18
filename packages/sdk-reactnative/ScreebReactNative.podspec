@@ -16,7 +16,11 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,mm,cpp,swift}"
   s.private_header_files = "ios/**/*.h"
 
-  s.dependency "Screeb", '~> 3.1.1'
+  if ENV["SCREEB_USE_LOCAL_SDK"] == "true"
+    s.dependency "Screeb"
+  else
+    s.dependency "Screeb", '~> 3.1.1'
+  end
   s.dependency "React-Core"
   install_modules_dependencies(s)
 end

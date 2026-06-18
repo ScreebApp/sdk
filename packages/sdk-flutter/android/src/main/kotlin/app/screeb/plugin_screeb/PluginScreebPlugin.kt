@@ -9,7 +9,6 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import org.json.JSONObject
 import java.util.HashMap
 
 class PluginScreebPlugin : FlutterPlugin, MethodCallHandler {
@@ -34,28 +33,7 @@ class PluginScreebPlugin : FlutterPlugin, MethodCallHandler {
                 val initOptions = (arguments[3] as? Map<*, *>)?.toProperty()
                 val hooks = (arguments[4] as? Map<*, *>)?.toProperty()
                 val language: String? = arguments[5] as? String
-                var mapHooks = hashMapOf<String, Any>()
-                if (hooks != null) {
-                    hooks.forEach { (key, value) ->
-                        if (key == "version"){
-                            mapHooks[key as String] = value as String
-                        } else {
-                            mapHooks[key as String] = { payload: Any -> channel.invokeMethod("handleHooks", hashMapOf("hookId" to value, "payload" to payload.toString()), object : MethodChannel.Result {
-                                override fun success(result: Any?) {
-                                    val obj = payload as? JSONObject ?: return
-                                    val hookId = obj.getString("hook_id") ?: return
-                                    Screeb.onHookResult(hookId, result)
-                                }
-
-                                override fun error(errorCode: String, errorMessage: String?, errorDetails: Any?) {
-                                    println("error: $errorCode, $errorMessage, $errorDetails")
-                                }
-
-                                override fun notImplemented() {}
-                            }) }
-                        }
-                    }
-                }
+                val mapHooks = buildHooks(hooks) ?: hashMapOf()
 
                 Screeb.pluginInit(channelId, userId, properties, initOptions, mapHooks, language)
                 return result.success(true)
@@ -105,35 +83,14 @@ class PluginScreebPlugin : FlutterPlugin, MethodCallHandler {
                 val hooks = (arguments[4] as? Map<*, *>)?.toProperty()
                 val language = arguments[5] as? String
                 val distributionId = arguments[6] as? String
-                var mapHooks = hashMapOf<String, Any>()
-                if (hooks != null) {
-                    hooks.forEach { (key, value) ->
-                        if (key == "version"){
-                            mapHooks[key as String] = value as String
-                        } else {
-                            mapHooks[key as String] = { payload:Any -> channel.invokeMethod("handleHooks", hashMapOf("hookId" to value, "payload" to payload.toString()), object : MethodChannel.Result {
-                                override fun success(result: Any?) {
-                                    val obj = payload as? JSONObject ?: return
-                                    val hookId = obj.getString("hook_id") ?: return
-                                    Screeb.onHookResult(hookId, result)
-                                }
-
-                                override fun error(errorCode: String, errorMessage: String?, errorDetails: Any?) {
-                                    println("error: $errorCode, $errorMessage, $errorDetails")
-                                }
-
-                                override fun notImplemented() {}
-                            }) }
-                        }
-                    }
-                }
+                val mapHooks = buildHooks(hooks)
 
                 Screeb.startSurvey(
                     surveyId = surveyId,
                     allowMultipleResponses,
                     (hiddenFields?.filterValues { it != null }) as HashMap<String, Any?>?,
                     ignoreSurveyStatus,
-                    mapHooks.isNotEmpty().let { if (it) mapHooks else null },
+                    mapHooks,
                     language,
                     distributionId
                 )
@@ -147,35 +104,14 @@ class PluginScreebPlugin : FlutterPlugin, MethodCallHandler {
                 val hooks = (arguments[4] as? Map<*, *>)?.toProperty()
                 val language = arguments[5] as? String
                 val distributionId = arguments[6] as? String
-                var mapHooks = hashMapOf<String, Any>()
-                if (hooks != null) {
-                    hooks.forEach { (key, value) ->
-                        if (key == "version"){
-                            mapHooks[key as String] = value as String
-                        } else {
-                            mapHooks[key as String] = { payload:Any -> channel.invokeMethod("handleHooks", hashMapOf("hookId" to value, "payload" to payload.toString()), object : MethodChannel.Result {
-                                override fun success(result: Any?) {
-                                    val obj = payload as? JSONObject ?: return
-                                    val hookId = obj.getString("hook_id") ?: return
-                                    Screeb.onHookResult(hookId, result)
-                                }
-
-                                override fun error(errorCode: String, errorMessage: String?, errorDetails: Any?) {
-                                    println("error: $errorCode, $errorMessage, $errorDetails")
-                                }
-
-                                override fun notImplemented() {}
-                            }) }
-                        }
-                    }
-                }
+                val mapHooks = buildHooks(hooks)
 
                 Screeb.startMessage(
                     messageId = messageId,
                     allowMultipleResponses,
                     (hiddenFields?.filterValues { it != null }) as HashMap<String, Any?>?,
                     ignoreMessageStatus,
-                    mapHooks.isNotEmpty().let { if (it) mapHooks else null },
+                    mapHooks,
                     language,
                     distributionId
                 )
@@ -243,6 +179,42 @@ class PluginScreebPlugin : FlutterPlugin, MethodCallHandler {
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
     }
+
+    private fun buildHooks(hooks: Map<String, Any?>?): HashMap<String, Any>? {
+        if (hooks == null) return null
+
+        val hookIds = hashMapOf<String, String>()
+        hooks.forEach { (key, value) ->
+            if (value is String) {
+                hookIds[key] = value
+            }
+        }
+
+        if (hookIds.isEmpty()) return null
+
+        return Screeb.makeHooks(hookIds) { hookId, nativeHookId, payload ->
+            channel.invokeMethod(
+                "handleHooks",
+                hashMapOf("hookId" to hookId, "payload" to payload),
+                hookResultCallback(nativeHookId)
+            )
+        }
+    }
+
+    private fun hookResultCallback(nativeHookId: String): MethodChannel.Result =
+        object : MethodChannel.Result {
+            override fun success(result: Any?) {
+                if (nativeHookId.isNotEmpty()) {
+                    Screeb.onHookResult(nativeHookId, result)
+                }
+            }
+
+            override fun error(errorCode: String, errorMessage: String?, errorDetails: Any?) {
+                println("error: $errorCode, $errorMessage, $errorDetails")
+            }
+
+            override fun notImplemented() {}
+        }
 
     companion object {
         const val CALL_INIT_SDK = "initSdk"

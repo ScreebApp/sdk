@@ -1,0 +1,9 @@
+<metadata>
+  <remove-node path="/api/package[@name='a']" />
+  <remove-node path="/api/package[@name='b']" />
+  <remove-node path="/api/package[@name='c']" />
+  <remove-node path="/api/package[@name='app.screeb.sdk.init.model']" />
+  <remove-node path="/api/package[@name='app.screeb.sdk']/class[@name='InitOptions']/field[@name='Companion']" />
+  <remove-node path="/api/package[@name='app.screeb.sdk']/class[@name='ScreebFilePickerActivity']" />
+  <remove-node path="/api/package[@name='app.screeb.sdk']/class[@name='ScreebInitProvider']" />
+</metadata>

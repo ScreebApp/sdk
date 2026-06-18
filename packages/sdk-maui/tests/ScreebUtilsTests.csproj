@@ -12,7 +12,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <!-- Reference only ScreebUtils.cs, not the full MAUI project -->
+    <!-- Reference only platform-neutral source files, not the full MAUI project -->
+    <Compile Include="../ScreebHooks.cs" />
     <Compile Include="../ScreebUtils.cs" />
   </ItemGroup>
 </Project>

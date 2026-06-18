@@ -4,6 +4,9 @@ buildscript {
   }
 
   repositories {
+    if (providers.gradleProperty("SCREEB_USE_LOCAL_SDK").orElse(providers.environmentVariable("SCREEB_USE_LOCAL_SDK")).orNull == "true") {
+      mavenLocal()
+    }
     google()
     mavenCentral()
   }
@@ -65,6 +68,9 @@ android {
 }
 
 repositories {
+  if (providers.gradleProperty("SCREEB_USE_LOCAL_SDK").orElse(providers.environmentVariable("SCREEB_USE_LOCAL_SDK")).orNull == "true") {
+    mavenLocal()
+  }
   mavenCentral()
   google()
 }

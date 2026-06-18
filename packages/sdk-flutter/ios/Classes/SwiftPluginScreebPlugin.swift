@@ -23,26 +23,7 @@ public class SwiftPluginScreebPlugin: NSObject, FlutterPlugin {
                 let initOptions: [String: Any?]? = args[3] as? [String: Any?]
                 let hooks: [String: Any?]? = args[4] as? [String: Any?]
                 let language: String? = args[5] as? String
-                var mapHooks: [String: Any?]? = nil
-                if (hooks != nil) {
-                    mapHooks = [:]
-                    hooks?.forEach{ hook in
-                        if (hook.key == "version") {
-                            mapHooks![hook.key] = hook.value as? String
-                        } else {
-                            mapHooks![hook.key] = {(payload: Any) -> () in DispatchQueue.main.async {
-                                SwiftPluginScreebPlugin.channel!.invokeMethod("handleHooks", arguments: ["hookId": hook.value, "payload": String(describing: payload)]) { (result: Any?) in
-                                    if let obj = payload as? [String: Any?] {
-                                        if let hookId = obj["hook_id"] as? String {
-                                            Screeb.onHookResult(hookId, result)
-                                        }
-                                    }
-                                }
-                            }}
-                        }
-                    }
-                }
-
+                let mapHooks = buildHooks(hooks)
                 let initOptionsDict: NSDictionary = NSDictionary(dictionary: (initOptions ?? [:]).compactMapValues { $0 })
                 let initOptionsFinal = InitOptions(dict: initOptionsDict)
                 Screeb.initSdk(context: nil, channelId: channelId, identity: userId, visitorProperty: property ?? [:], initOptions: initOptionsFinal, hooks: mapHooks as GlobalHooks?, language: language)
@@ -107,23 +88,7 @@ public class SwiftPluginScreebPlugin: NSObject, FlutterPlugin {
                 let hooks: [String: Any?]? = args[4] as? [String: Any?]
                 let language: String? = args[5] as? String
                 let distributionId: String? = args[6] as? String
-                var mapHooks: [String: Any?]? = nil
-                if (hooks != nil) {
-                    mapHooks = [:]
-                    hooks?.forEach{ hook in
-                        if (hook.key == "version") {
-                            mapHooks![hook.key] = hook.value as? String
-                        } else {
-                            mapHooks![hook.key] = {(payload:Any) -> () in DispatchQueue.main.async {
-                                if let obj = payload as? [String: Any?] {
-                                    if let hookId = obj["hook_id"] as? String {
-                                        Screeb.onHookResult(hookId, result)
-                                    }
-                                }
-                            }}
-                        }
-                    }
-                }
+                let mapHooks = buildHooks(hooks)
                 Screeb.startSurvey(
                     surveyId: surveyId,
                     allowMultipleResponses: allowMultipleResponses,
@@ -145,23 +110,7 @@ public class SwiftPluginScreebPlugin: NSObject, FlutterPlugin {
                 let hooks: [String: Any?]? = args[4] as? [String: Any?]
                 let language: String? = args[5] as? String
                 let distributionId: String? = args[6] as? String
-                var mapHooks: [String: Any?]? = nil
-                if (hooks != nil) {
-                    mapHooks = [:]
-                    hooks?.forEach{ hook in
-                        if (hook.key == "version") {
-                            mapHooks![hook.key] = hook.value as? String
-                        } else {
-                            mapHooks![hook.key] = {(payload:Any) -> () in DispatchQueue.main.async {
-                                if let obj = payload as? [String: Any?] {
-                                    if let hookId = obj["hook_id"] as? String {
-                                        Screeb.onHookResult(hookId, result)
-                                    }
-                                }
-                            }}
-                        }
-                    }
-                }
+                let mapHooks = buildHooks(hooks)
                 Screeb.startMessage(
                     messageId: messageId,
                     allowMultipleResponses: allowMultipleResponses,
@@ -223,5 +172,34 @@ public class SwiftPluginScreebPlugin: NSObject, FlutterPlugin {
             result(FlutterError(code: "-1", message: "iOS could not extract flutter arguments in method: \(call.method)", details: nil))
             break
         }
+  }
+
+  private func buildHooks(_ hooks: [String: Any?]?) -> [String: Any?]? {
+    guard let hooks else { return nil }
+
+    var hookIds: [String: String] = [:]
+    hooks.forEach { hook in
+      if let value = hook.value as? String {
+        hookIds[hook.key] = value
+      }
+    }
+
+    guard !hookIds.isEmpty else { return nil }
+
+    let mapHooks = Screeb.makeHooks(hookIds) { hookId, nativeHookId, payload in
+      SwiftPluginScreebPlugin.dispatchHook(hookId: hookId, nativeHookId: nativeHookId, payload: payload)
+    }
+    return mapHooks.mapValues { $0 as Any? }
+  }
+
+  private static func dispatchHook(hookId: String, nativeHookId: String, payload: String) {
+    guard let channel else { return }
+    DispatchQueue.main.async {
+      channel.invokeMethod("handleHooks", arguments: ["hookId": hookId, "payload": payload]) { callbackResult in
+        if !nativeHookId.isEmpty {
+          Screeb.onHookResult(nativeHookId, callbackResult)
+        }
+      }
+    }
   }
 }
