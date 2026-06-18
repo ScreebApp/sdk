@@ -27,7 +27,7 @@ class ScreebReactNativeModule(reactContext: ReactApplicationContext) :
     language: String?,
     promise: Promise
   ) {
-    Screeb.setSecondarySDK("react-native", "3.2.0")
+    Screeb.setSecondarySDK("react-native", "3.3.1")
     val mapHooks = makeHooks(hooks)
 
     Handler(Looper.getMainLooper()).post {

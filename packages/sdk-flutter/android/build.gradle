@@ -56,6 +56,6 @@ android {
 }
 
 dependencies {
-    api "app.screeb.sdk:survey:3.1.1"
+    api "app.screeb.sdk:survey:4.0.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
