@@ -544,18 +544,6 @@ export const sessionReplayStart = () =>
   callScreebCommand("session-replay.start");
 
 /**
- * Forces a targeting check.
- *
- * @example
- * ```ts
- * import * as Screeb from "@screeb/sdk-browser";
- *
- * Screeb.targetingCheck();
- * ```
- */
-export const targetingCheck = () => callScreebCommand("targeting.check");
-
-/**
  * Prints the current state of the targeting engine.
  *
  * @example

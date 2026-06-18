@@ -26,7 +26,6 @@
 - [SessionReplayStopFunction](README.md#sessionreplaystopfunction)
 - [SurveyCloseFunction](README.md#surveyclosefunction)
 - [SurveyStartFunction](README.md#surveystartfunction)
-- [TargetingCheckFunction](README.md#targetingcheckfunction)
 - [TargetingDebugFunction](README.md#targetingdebugfunction)
 
 ### Functions
@@ -533,7 +532,6 @@ Screeb context API
 | `sessionReplayStop` | [`SessionReplayStopFunction`](README.md#sessionreplaystopfunction) |
 | `surveyClose` | [`SurveyCloseFunction`](README.md#surveyclosefunction) |
 | `surveyStart` | [`SurveyStartFunction`](README.md#surveystartfunction) |
-| `targetingCheck` | [`TargetingCheckFunction`](README.md#targetingcheckfunction) |
 | `targetingDebug` | [`TargetingDebugFunction`](README.md#targetingdebugfunction) |
 
 ___
@@ -679,30 +677,6 @@ surveyStart(
 | `hooks?` | `HooksSurveyStart` |
 | `language?` | `string` |
 | `selectors?` | `string` \| `string`[] |
-
-##### Returns
-
-`Promise`\<`unknown`\>
-
-___
-
-### TargetingCheckFunction
-
-Ƭ **TargetingCheckFunction**: () => `Promise`\<`unknown`\>
-
-Forces a targeting check.
-
-**`Example`**
-
-```ts
-const { targetingCheck } = useScreeb();
-
-targetingCheck();
-```
-
-#### Type declaration
-
-▸ (): `Promise`\<`unknown`\>
 
 ##### Returns
 

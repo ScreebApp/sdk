@@ -102,7 +102,6 @@ export type MessageStartFunction = (
 
 export type SessionReplayStopFunction = () => Promise<unknown>;
 export type SessionReplayStartFunction = () => Promise<unknown>;
-export type TargetingCheckFunction = () => Promise<unknown>;
 export type TargetingDebugFunction = () => Promise<unknown>;
 
 /** All Screeb methods provided via `useScreeb()` */
@@ -124,6 +123,5 @@ export type ScreebContextValues = {
   messageStart: MessageStartFunction;
   sessionReplayStart: SessionReplayStartFunction;
   sessionReplayStop: SessionReplayStopFunction;
-  targetingCheck: TargetingCheckFunction;
   targetingDebug: TargetingDebugFunction;
 };

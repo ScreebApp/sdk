@@ -23,7 +23,6 @@ import {
   SessionReplayStopFunction,
   SurveyCloseFunction,
   SurveyStartFunction,
-  TargetingCheckFunction,
   TargetingDebugFunction,
 } from "./types";
 import { isSSR } from "./utils";
@@ -215,9 +214,6 @@ export const ScreebPlugin: Plugin = {
         Screeb.sessionReplayStart(),
       );
 
-    const targetingCheck: TargetingCheckFunction = async () =>
-      await ensureScreeb("targetingCheck", () => Screeb.targetingCheck());
-
     const targetingDebug: TargetingDebugFunction = async () =>
       await ensureScreeb("targetingDebug", () => Screeb.targetingDebug());
 
@@ -252,7 +248,6 @@ export const ScreebPlugin: Plugin = {
       messageStart,
       sessionReplayStop,
       sessionReplayStart,
-      targetingCheck,
       targetingDebug,
     };
 

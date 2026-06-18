@@ -64,7 +64,6 @@
 - [sessionReplayStop](README.md#sessionreplaystop)
 - [surveyClose](README.md#surveyclose)
 - [surveyStart](README.md#surveystart)
-- [targetingCheck](README.md#targetingcheck)
 - [targetingDebug](README.md#targetingdebug)
 
 ## Type Aliases
@@ -1169,26 +1168,6 @@ Screeb.surveyStart(
   "en", // optional
   "#screeb-survey-container" // optional
 );
-```
-
-___
-
-### targetingCheck
-
-▸ **targetingCheck**(): `void` \| `Promise`\<`unknown`\>
-
-Forces a targeting check.
-
-#### Returns
-
-`void` \| `Promise`\<`unknown`\>
-
-**`Example`**
-
-```ts
-import * as Screeb from "@screeb/sdk-browser";
-
-Screeb.targetingCheck();
 ```
 
 ___
