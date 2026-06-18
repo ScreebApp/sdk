@@ -60,6 +60,9 @@
       Include="app.screeb.sdk:survey"
       Version="3.2.0"
       Bind="true" />
+    <!-- Re-enable when binding survey 4.0.0 (the transform strips 4.0.0-only internal nodes;
+         it matches nothing on 3.2.0 and only emits BG8A00 warnings there): -->
+    <!-- <TransformFile Include="Transforms/AndroidMetadata.xml" /> -->
     <!-- Transitive Maven dependencies required by app.screeb.sdk:survey -->
     <PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="2.3.21" />
     <PackageReference Include="Xamarin.AndroidX.Core.Core.Ktx" Version="1.18.0" />
