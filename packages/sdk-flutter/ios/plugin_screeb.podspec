@@ -24,6 +24,6 @@ Pod::Spec.new do |s|
   if ENV['SCREEB_USE_LOCAL_SDK'] == 'true'
     s.dependency 'Screeb'
   else
-    s.dependency 'Screeb', '3.1.1'
+    s.dependency 'Screeb', '4.0.0'
   end
 end
