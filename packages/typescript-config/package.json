@@ -18,6 +18,7 @@
   "sideEffects": false,
   "type": "module",
   "dependencies": {
-    "@rollup/plugin-typescript": "^11.1.6"
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@rollup/plugin-terser": "^0.4.4"
   }
 }
