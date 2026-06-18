@@ -44,6 +44,25 @@ public class ScreebUtilsTests
     }
 
     [Fact]
+    public void FormatNativeProperties_NestedDictionary_RemainsDictionary()
+    {
+        var input = new Dictionary<string, object>
+        {
+            ["meta"] = new Dictionary<string, object>
+            {
+                ["plan"] = "pro",
+                ["at"] = new DateTimeOffset(2024, 6, 1, 0, 0, 0, TimeSpan.Zero)
+            }
+        };
+
+        var result = ScreebUtils.FormatNativeProperties(input)!;
+
+        var nested = Assert.IsType<Dictionary<string, object>>(result["meta"]);
+        Assert.Equal("pro", nested["plan"]);
+        Assert.Equal("2024-06-01T00:00:00.000+00:00", nested["at"]);
+    }
+
+    [Fact]
     public void FormatProperties_DateTimeUtcValue_ConvertsToIso8601WithZeroOffset()
     {
         var dt = DateTime.SpecifyKind(new DateTime(2024, 1, 15, 10, 30, 0), DateTimeKind.Utc);
