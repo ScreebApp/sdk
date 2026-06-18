@@ -19,7 +19,7 @@
   "scripts": {
     "build": "tsc && vite build",
     "clean": "rm -Rf dist && rm -Rf .swc",
-    "lint": "eslint .",
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "start": "vite"
   },
   "dependencies": {
@@ -36,10 +36,8 @@
     "@vitejs/plugin-react-swc": "^3.4.0",
     "eslint": "^8.51.0",
     "eslint-plugin-import": "^2.28.1",
-    "eslint-plugin-jest": "^27.4.2",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-prettier": "^5.0.1",
-    "jest": "^29.7.0",
     "typescript": "^5.2.2",
     "vite": "^4.4.11"
   }

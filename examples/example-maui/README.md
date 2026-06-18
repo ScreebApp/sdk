@@ -17,4 +17,3 @@ The channel ID is configured in `App.xaml.cs`.
 ## Notes
 
 - Android requires `Platforms/Android/MainApplication.cs` (already included) to bootstrap the MAUI runtime.
-- iOS requires the `Screeb.xcframework` binary in `packages/sdk-maui/native/ios/` (see SDK README for setup).
