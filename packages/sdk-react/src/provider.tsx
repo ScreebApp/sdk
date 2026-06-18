@@ -303,6 +303,9 @@ export const ScreebProvider: React.FC<
 
   const providerValue = React.useMemo<ScreebContextValues>(
     () => ({
+      ScreebId: Screeb.ScreebId,
+      ScreebMaskText: Screeb.ScreebMaskText,
+      ScreebNoCapture: Screeb.ScreebNoCapture,
       close,
       debug,
       eventTrack,
@@ -314,12 +317,12 @@ export const ScreebProvider: React.FC<
       identityReset,
       init,
       load,
-      surveyClose,
-      surveyStart,
       messageClose,
       messageStart,
-      sessionReplayStop,
       sessionReplayStart,
+      sessionReplayStop,
+      surveyClose,
+      surveyStart,
       targetingDebug,
     }),
     [
