@@ -31,6 +31,7 @@
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
     <Compile Include="Platforms/Android/Screeb.Android.cs" />
     <Compile Include="Platforms/Android/HooksAndroid.cs" />
+    <Compile Include="Platforms/Android/ScreebView.Android.cs" />
   </ItemGroup>
 
   <!-- iOS: activate bgen binding generation -->
@@ -45,6 +46,7 @@
     <Compile Include="Platforms/iOS/ScreebClassPtr.cs" />
     <Compile Include="Platforms/iOS/Screeb.iOS.cs" />
     <Compile Include="Platforms/iOS/HooksIOS.cs" />
+    <Compile Include="Platforms/iOS/ScreebView.iOS.cs" />
   </ItemGroup>
 
   <!-- Android native binding -->
@@ -53,6 +55,7 @@
       Include="app.screeb.sdk:survey"
       Version="3.2.0"
       Bind="true" />
+    <TransformFile Include="Transforms/AndroidMetadata.xml" />
     <!-- Transitive Maven dependencies required by app.screeb.sdk:survey -->
     <PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="2.3.21" />
     <PackageReference Include="Xamarin.AndroidX.Core.Core.Ktx" Version="1.18.0" />
