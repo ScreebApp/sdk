@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <SingleProject>true</SingleProject>
+    <UseMaui>true</UseMaui>
     <!-- NuGet metadata -->
     <PackageId>Screeb.Maui</PackageId>
     <Version>0.1.0</Version>
@@ -19,6 +20,10 @@
     <PackageTags>maui android ios screeb survey analytics</PackageTags>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.120" />
+  </ItemGroup>
 
   <!-- Exclude platform-specific and test files from the default SDK glob -->
   <ItemGroup>
@@ -55,7 +60,6 @@
       Include="app.screeb.sdk:survey"
       Version="3.2.0"
       Bind="true" />
-    <TransformFile Include="Transforms/AndroidMetadata.xml" />
     <!-- Transitive Maven dependencies required by app.screeb.sdk:survey -->
     <PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="2.3.21" />
     <PackageReference Include="Xamarin.AndroidX.Core.Core.Ktx" Version="1.18.0" />
