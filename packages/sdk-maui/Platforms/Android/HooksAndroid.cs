@@ -29,6 +29,7 @@ internal static class HooksAndroid
             float f => Java.Lang.Float.ValueOf(f),
             double d => Java.Lang.Double.ValueOf(d),
             IDictionary<string, object> dict => ToJavaDictionary(dict),
+            IEnumerable<object> list => ToJavaList(list),
             _ => new Java.Lang.String(value.ToString() ?? "")
         };
     }
@@ -41,6 +42,17 @@ internal static class HooksAndroid
             map.Put(new Java.Lang.String(key), ToJavaObject(value));
         }
         return map;
+    }
+
+    private static Java.Util.ArrayList ToJavaList(IEnumerable<object> list)
+    {
+        var array = new Java.Util.ArrayList();
+        foreach (var item in list)
+        {
+            var javaItem = ToJavaObject(item);
+            if (javaItem != null) array.Add(javaItem);
+        }
+        return array;
     }
 }
 
