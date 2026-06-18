@@ -5,12 +5,12 @@
   "description": "Screeb's example app for Vue SDK.",
   "homepage": "https://screeb.app",
   "bugs": {
-    "url": "https://github.com/ScreebApp/sdk-js/issues",
+    "url": "https://github.com/ScreebApp/sdk/issues",
     "email": "support@screeb.app"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ScreebApp/sdk-js.git",
+    "url": "https://github.com/ScreebApp/sdk.git",
     "directory": "examples/example-vue"
   },
   "license": "MIT",
