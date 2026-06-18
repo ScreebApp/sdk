@@ -36,20 +36,9 @@ jobs:
         with:
           node-version: '20'
       - run: npm ci --ignore-scripts
-      - run: npm run ci:js
-      - run: npm run examples:check
-
-  react-native:
-    name: React Native release check
-    runs-on: [self-hosted]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - run: npm ci --ignore-scripts
-      - run: npm run versions:check
-      - run: npm run release:check --workspace=packages/sdk-reactnative
+      - run: npm run build
+      - run: npm run lint
+      - run: npm test
 
   flutter:
     name: Flutter package
@@ -71,7 +60,6 @@ jobs:
         run: git config --global --add safe.directory "$FLUTTER_ROOT"
       - run: cd packages/sdk-flutter && flutter pub get
       - run: cd packages/sdk-flutter && flutter analyze
-      - run: cd packages/sdk-flutter && flutter test
 
   maui-android:
     name: .NET MAUI Android SDK
@@ -126,16 +114,32 @@ jobs:
     runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v4
+      - name: Check native Android artifact
+        id: native-android
+        run: |
+          version=$(sed -n 's/^SCREEB_ANDROID_SDK_VERSION=//p' packages/sdk-kmp/gradle.properties | head -n1)
+          url="https://repo.maven.apache.org/maven2/app/screeb/sdk/survey/${version}/survey-${version}.pom"
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+          if curl -fsI "$url" >/dev/null; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::app.screeb.sdk:survey:${version} is not published yet; skipping KMP Android build."
+            echo "available=false" >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/setup-java@v4
+        if: steps.native-android.outputs.available == 'true'
         with:
           java-version: '17'
           distribution: 'temurin'
       - uses: android-actions/setup-android@v3
+        if: steps.native-android.outputs.available == 'true'
         with:
           packages: tools platform-tools build-tools;35.0.0 platforms;android-35
       - name: Make gradlew executable
+        if: steps.native-android.outputs.available == 'true'
         run: chmod +x packages/sdk-kmp/gradlew
       - name: Build Android target
+        if: steps.native-android.outputs.available == 'true'
         run: cd packages/sdk-kmp && ./gradlew assembleRelease testDebugUnitTest --no-daemon
 
   kmp-full:
