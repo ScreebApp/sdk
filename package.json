@@ -17,6 +17,8 @@
     "prepare": "npm run build && husky install",
     "start": "lerna run start",
     "test": "lerna run --parallel test",
+    "verify:release": "node scripts/verify-release.mjs",
+    "size:sdks": "node scripts/report-sdk-sizes.mjs",
     "upgrade:all": "npm-upgrade && lerna exec --concurrency 1 npm-upgrade",
     "preversion": "npm run clean && npm i && npm run lint && npm run build && npm run test",
     "version": "lerna version && npm run build && npm run push:release",
