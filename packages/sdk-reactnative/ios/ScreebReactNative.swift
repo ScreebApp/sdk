@@ -28,7 +28,7 @@ class ScreebReactNative: RCTEventEmitter {
       resolve: @escaping RCTPromiseResolveBlock,
       reject: @escaping RCTPromiseRejectBlock
     ) {
-    Screeb.setSecondarySDK(name: "react-native", version: "3.3.1")
+    Screeb.setSecondarySDK(name: "react-native", version: "3.3.2")
     let mapHooks = makeHooks(hooks_)
 
     let initOptionsDict: NSDictionary = NSDictionary(dictionary: (initOptions_ ?? [:]).compactMapValues { $0 })

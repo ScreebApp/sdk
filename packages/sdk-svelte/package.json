@@ -40,7 +40,7 @@
     "test": "echo \"no unit tests yet\""
   },
   "dependencies": {
-    "@screeb/sdk-browser": "^0.6.1"
+    "@screeb/sdk-browser": "^0.7.0"
   },
   "devDependencies": {
     "@screeb/eslint-config": "^0.1.7",

@@ -72,6 +72,9 @@
     <!-- Strips R8-obfuscated (a/b/c) + internal-only nodes from the generated survey binding -->
     <TransformFile Include="Transforms/AndroidMetadata.xml" />
     <!-- Transitive Maven dependencies required by app.screeb.sdk:survey -->
+    <!-- StdLib (base) satisfies the survey pom's org.jetbrains.kotlin:kotlin-stdlib dep;
+         Jdk8 alone maps to kotlin-stdlib-jdk8 and does not clear XA4242 verification. -->
+    <PackageReference Include="Xamarin.Kotlin.StdLib" Version="2.3.21" />
     <PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="2.3.21" />
     <PackageReference Include="Xamarin.AndroidX.Activity.Ktx" Version="1.12.4.1" />
     <PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.6.0" />
