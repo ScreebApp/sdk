@@ -55,6 +55,17 @@ export type ScreebOptions = {
   platform?: string;
 };
 
+/**
+ * Host-provided navigation handler for the `in-page-spa` "Navigate to URL"
+ * target. It runs in your page (where your SPA router lives) instead of the tag
+ * doing a `history.pushState` + `popstate` dispatch itself. Provide this when
+ * your router does not resync on `popstate` (most React Router / Vue Router /
+ * Angular Router setups do, so this is only needed for custom routers). May be
+ * async so `onButtonNavigateCompleted` can await the route change.
+ */
+// eslint-disable-next-line no-unused-vars
+export type SpaNavigationHandler = (url: string) => void | Promise<void>;
+
 // eslint-disable-next-line no-unused-vars
 export type ScreebFunction = (..._: unknown[]) => void | Promise<unknown>;
 

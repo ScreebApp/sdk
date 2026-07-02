@@ -16,6 +16,7 @@ Configuration of Screeb module
 - [hooks](ScreebConfig.md#hooks)
 - [options](ScreebConfig.md#options)
 - [shouldLoad](ScreebConfig.md#shouldload)
+- [spaNavigationHandler](ScreebConfig.md#spanavigationhandler)
 - [userId](ScreebConfig.md#userid)
 - [userProperties](ScreebConfig.md#userproperties)
 - [websiteId](ScreebConfig.md#websiteid)
@@ -74,6 +75,14 @@ This will ping to the Screeb servers.
 **`Remarks`**
 
 if `true`, 'load' does not need to be called manually. Can be used for multistaged environments
+
+___
+
+### spaNavigationHandler
+
+• `Optional` **spaNavigationHandler**: `SpaNavigationHandler`
+
+Optional handler for the `in-page-spa` "Navigate to URL" target (custom SPA routers).
 
 ___
 

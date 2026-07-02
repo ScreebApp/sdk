@@ -6,6 +6,7 @@ import {
   PropertyRecord,
   ScreebIdentityGetReturn,
   ScreebOptions,
+  SpaNavigationHandler,
 } from "@screeb/sdk-browser";
 
 /** Configuration for the ScreebPlugin */
@@ -20,6 +21,8 @@ export type ScreebConfig = {
   hooks?: HooksInit;
   /** Force a specific language (e.g. 'en'). Default: browser language. */
   language?: string;
+  /** Optional handler for the `in-page-spa` "Navigate to URL" target (custom SPA routers). */
+  spaNavigationHandler?: SpaNavigationHandler;
   /**
    * Indicates if Screeb should be automatically loaded.
    * Set to false to prevent the SDK from loading (e.g. in CI).
@@ -74,6 +77,7 @@ export type InitFunction = (
   userProperties?: PropertyRecord,
   hooks?: HooksInit,
   language?: string,
+  spaNavigationHandler?: SpaNavigationHandler,
 ) => Promise<void>;
 
 export type LoadFunction = (options?: ScreebOptions) => Promise<void>;
