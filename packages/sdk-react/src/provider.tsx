@@ -18,6 +18,7 @@ export const ScreebProvider: React.FC<
   userProperties,
   hooks,
   language,
+  spaNavigationHandler,
   children,
   shouldLoad = !isSSR,
   autoInit = false,
@@ -149,12 +150,20 @@ export const ScreebProvider: React.FC<
       userProperties?: Screeb.PropertyRecord,
       hooks?: Screeb.HooksInit,
       language?: string,
+      spaNavigationHandler?: Screeb.SpaNavigationHandler,
     ) => {
       await ensureScreeb(
         "init",
         () => {
           if (!isInitialized) {
-            Screeb.init(websiteId, userId, userProperties, hooks, language);
+            Screeb.init(
+              websiteId,
+              userId,
+              userProperties,
+              hooks,
+              language,
+              spaNavigationHandler,
+            );
 
             isInitialized = true;
             isLoaded.current = true;
@@ -179,7 +188,14 @@ export const ScreebProvider: React.FC<
 
         if (autoInit) {
           if (websiteId) {
-            await init(websiteId, userId, userProperties, hooks, language);
+            await init(
+              websiteId,
+              userId,
+              userProperties,
+              hooks,
+              language,
+              spaNavigationHandler,
+            );
           } else {
             logger.log(
               "warn",

@@ -489,7 +489,8 @@ export class Screeb {
     userId?: string,
     userProperties?: _Screeb.PropertyRecord,
     hooks?: _Screeb.HooksInit,
-    language?: string
+    language?: string,
+    spaNavigationHandler?: _Screeb.SpaNavigationHandler
   ) {
     await this.ensureScreeb("init", true);
 
@@ -500,7 +501,8 @@ export class Screeb {
       userId,
       userProperties,
       hooks,
-      language
+      language,
+      spaNavigationHandler
     );
   }
 

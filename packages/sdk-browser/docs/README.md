@@ -11,6 +11,8 @@
 - [HookCommonProperties](README.md#hookcommonproperties)
 - [HookCommonPropertiesMessage](README.md#hookcommonpropertiesmessage)
 - [HookCommonPropertiesSurvey](README.md#hookcommonpropertiessurvey)
+- [HookOnButtonNavigateCompleted](README.md#hookonbuttonnavigatecompleted)
+- [HookOnButtonNavigateStarted](README.md#hookonbuttonnavigatestarted)
 - [HookOnMessageCompleted](README.md#hookonmessagecompleted)
 - [HookOnMessageDisplayAllowed](README.md#hookonmessagedisplayallowed)
 - [HookOnMessageHidden](README.md#hookonmessagehidden)
@@ -38,6 +40,7 @@
 - [ScreebIdentityGetReturn](README.md#screebidentitygetreturn)
 - [ScreebObject](README.md#screebobject)
 - [ScreebOptions](README.md#screeboptions)
+- [SpaNavigationHandler](README.md#spanavigationhandler)
 - [Survey](README.md#survey)
 - [SurveyFormat](README.md#surveyformat)
 - [SurveyPosition](README.md#surveyposition)
@@ -109,6 +112,46 @@ ___
 ### HookCommonPropertiesSurvey
 
 Ƭ **HookCommonPropertiesSurvey**: [`HookCommonProperties`](README.md#hookcommonproperties) & \{ `survey`: [`Survey`](README.md#survey)  }
+
+___
+
+### HookOnButtonNavigateCompleted
+
+Ƭ **HookOnButtonNavigateCompleted**: (`data`: [`HookCommonPropertiesSurvey`](README.md#hookcommonpropertiessurvey) & \{ `button`: \{ `url`: `string` ; `url_target?`: `string`  } ; `response`: \{ `id`: `string`  }  }) => `void`
+
+#### Type declaration
+
+▸ (`data`): `void`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `data` | [`HookCommonPropertiesSurvey`](README.md#hookcommonpropertiessurvey) & \{ `button`: \{ `url`: `string` ; `url_target?`: `string`  } ; `response`: \{ `id`: `string`  }  } |
+
+##### Returns
+
+`void`
+
+___
+
+### HookOnButtonNavigateStarted
+
+Ƭ **HookOnButtonNavigateStarted**: (`data`: [`HookCommonPropertiesSurvey`](README.md#hookcommonpropertiessurvey) & \{ `button`: \{ `url`: `string` ; `url_target?`: `string`  } ; `response`: \{ `id`: `string`  }  }) => `void`
+
+#### Type declaration
+
+▸ (`data`): `void`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `data` | [`HookCommonPropertiesSurvey`](README.md#hookcommonpropertiessurvey) & \{ `button`: \{ `url`: `string` ; `url_target?`: `string`  } ; `response`: \{ `id`: `string`  }  } |
+
+##### Returns
+
+`void`
 
 ___
 
@@ -372,6 +415,8 @@ This is the Screeb tag hooks object available on `message.start` command.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
+| `onButtonNavigateCompleted?` | [`HookOnButtonNavigateCompleted`](README.md#hookonbuttonnavigatecompleted) | This hook is triggered after a message/tour button "Navigate to URL" action ran (only fires when the SDK survives the navigation, e.g. `new-tab` or `in-page-spa`). |
+| `onButtonNavigateStarted?` | [`HookOnButtonNavigateStarted`](README.md#hookonbuttonnavigatestarted) | This hook is triggered before a message/tour button "Navigate to URL" action runs. |
 | `onMessageCompleted?` | [`HookOnMessageCompleted`](README.md#hookonmessagecompleted) | This hook is triggered when a message is completed |
 | `onMessageHidden?` | [`HookOnMessageHidden`](README.md#hookonmessagehidden) | This hook is triggered when a message is hidden |
 | `onMessageShowed?` | [`HookOnMessageShowed`](README.md#hookonmessageshowed) | This hook is triggered when a message is displayed on screen (also triggered when page is reloaded) |
@@ -390,6 +435,8 @@ This is the Screeb tag hooks object available on `survey.start` command.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
+| `onButtonNavigateCompleted?` | [`HookOnButtonNavigateCompleted`](README.md#hookonbuttonnavigatecompleted) | This hook is triggered after a message/tour button "Navigate to URL" action ran (only fires when the SDK survives the navigation, e.g. `new-tab` or `in-page-spa`). |
+| `onButtonNavigateStarted?` | [`HookOnButtonNavigateStarted`](README.md#hookonbuttonnavigatestarted) | This hook is triggered before a message/tour button "Navigate to URL" action runs. |
 | `onQuestionReplied?` | [`HookOnQuestionReplied`](README.md#hookonquestionreplied) | This hook is triggered when a question is answered |
 | `onSurveyCompleted?` | [`HookOnSurveyCompleted`](README.md#hookonsurveycompleted) | This hook is triggered when a survey is completed |
 | `onSurveyHidden?` | [`HookOnSurveyHidden`](README.md#hookonsurveyhidden) | This hook is triggered when a survey is hidden |
@@ -568,6 +615,33 @@ This is the Screeb tag options object.
 | `sdkName?` | `string` | SDK name (eg: sdk-browser, sdk-react, sdk-angular, etc...) |
 | `sdkVersion?` | `string` | SDK version (eg: 1.2.3) |
 | `window?` | `Window` | If you're running Screeb tag in an iframe, please set the inner window here. |
+
+___
+
+### SpaNavigationHandler
+
+Ƭ **SpaNavigationHandler**: (`url`: `string`) => `void` \| `Promise`\<`void`\>
+
+Host-provided navigation handler for the `in-page-spa` "Navigate to URL"
+target. It runs in your page (where your SPA router lives) instead of the tag
+doing a `history.pushState` + `popstate` dispatch itself. Provide this when
+your router does not resync on `popstate` (most React Router / Vue Router /
+Angular Router setups do, so this is only needed for custom routers). May be
+async so `onButtonNavigateCompleted` can await the route change.
+
+#### Type declaration
+
+▸ (`url`): `void` \| `Promise`\<`void`\>
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `url` | `string` |
+
+##### Returns
+
+`void` \| `Promise`\<`void`\>
 
 ___
 
@@ -913,7 +987,7 @@ ___
 
 ### init
 
-▸ **init**(`websiteId`, `userId?`, `userProperties?`, `hooks?`, `language?`): `void` \| `Promise`\<`unknown`\>
+▸ **init**(`websiteId`, `userId?`, `userProperties?`, `hooks?`, `language?`, `spaNavigationHandler?`): `void` \| `Promise`\<`unknown`\>
 
 Initializes Screeb tag.
 
@@ -926,6 +1000,7 @@ Initializes Screeb tag.
 | `userProperties?` | [`PropertyRecord`](README.md#propertyrecord) | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date ``` |
 | `hooks?` | [`HooksInit`](README.md#hooksinit) | Hooks to be called when SDK is ready or a survey is showed, started, completed, hidden or when a question is replied. |
 | `language?` | `string` | Force a specific language for the tag. eg: 'en'. default: browser language. |
+| `spaNavigationHandler?` | [`SpaNavigationHandler`](README.md#spanavigationhandler) | Optional handler for the `in-page-spa` "Navigate to URL" target. Runs in your page so your SPA router can navigate without a full reload. Only needed for custom routers that don't resync on `popstate` (React Router / Vue Router / Angular Router work out of the box). May be async so `onButtonNavigateCompleted` awaits it. |
 
 #### Returns
 
@@ -949,6 +1024,8 @@ Screeb.init(
   {
     version: "1.0.0",
     onReady: (payload) =>  console.log("Screeb SDK is ready!", payload),
+    onButtonNavigateStarted: (payload) => console.log("Button navigate started", payload),
+    onButtonNavigateCompleted: (payload) => console.log("Button navigate completed", payload),
   },
   "en"
 );

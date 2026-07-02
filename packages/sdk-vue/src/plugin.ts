@@ -122,12 +122,20 @@ export const ScreebPlugin: Plugin = {
       userProperties?: Screeb.PropertyRecord,
       hooks?: Screeb.HooksInit,
       language?: string,
+      spaNavigationHandler?: Screeb.SpaNavigationHandler,
     ) => {
       await ensureScreeb(
         "init",
         () => {
           if (!isInitialized) {
-            Screeb.init(websiteId, userId, userProperties, hooks, language);
+            Screeb.init(
+              websiteId,
+              userId,
+              userProperties,
+              hooks,
+              language,
+              spaNavigationHandler,
+            );
             isInitialized = true;
           }
         },
@@ -151,6 +159,7 @@ export const ScreebPlugin: Plugin = {
               reactiveConfig.userProperties,
               reactiveConfig.hooks,
               reactiveConfig.language,
+              reactiveConfig.spaNavigationHandler,
             );
           } else {
             logger.log(
