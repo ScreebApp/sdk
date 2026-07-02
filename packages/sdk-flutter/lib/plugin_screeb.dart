@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -8,6 +9,20 @@ class PluginScreeb {
   static const MethodChannel _channel = MethodChannel('plugin_screeb');
 
   static Map<String, Function> hooksRegistry = <String, Function>{};
+
+  // Screeb's native session-replay mirror reads the widget tree through Flutter's accessibility
+  // bridge. Flutter only builds that semantics tree when a screen reader is active, so we force it
+  // on (and keep the handle alive) — otherwise the mirror sees an opaque surface and captures
+  // nothing. Cheap: semantics are only serialized to the native side, no UI change.
+  static SemanticsHandle? _semanticsHandle;
+  static void _ensureSemanticsEnabled() {
+    try {
+      WidgetsFlutterBinding.ensureInitialized();
+      _semanticsHandle ??= SemanticsBinding.instance.ensureSemantics();
+    } catch (_) {
+      // Semantics are best-effort; never block SDK init on them.
+    }
+  }
 
   static Map<String, String>? _buildHooksMap(Map<String, dynamic>? hooks) {
     if (hooks == null) {
@@ -39,6 +54,7 @@ class PluginScreeb {
       Map<String, dynamic>? hooks,
       String? language}) {
     _channel.setMethodCallHandler(channelHandler);
+    _ensureSemanticsEnabled();
 
     final mapHooksId = _buildHooksMap(hooks);
 

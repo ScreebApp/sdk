@@ -233,4 +233,8 @@ actual object Screeb {
             }
         }.orNullRethrowingCancellation()
     }
+
+    // iOS: deep links reach the native SDK through the standard UIApplication URL flow; there is no
+    // explicit forwarding entry point in the framework, so this is a no-op on iOS.
+    actual fun handleDeepLink(url: String?) {}
 }

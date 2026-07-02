@@ -56,11 +56,20 @@
 
   <!-- Android native binding -->
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+    <!-- Published binding from Maven Central (default). -->
     <AndroidMavenLibrary
+      Condition="'$(SCREEB_USE_LOCAL_SDK)' != 'true'"
       Include="app.screeb.sdk:survey"
-      Version="4.0.0"
+      Version="4.0.1"
       Bind="true" />
-    <!-- Strips 4.0.0-only internal nodes from the generated survey binding -->
+    <!-- Local dev binding (SCREEB_USE_LOCAL_SDK=true): bind the aar published to ~/.m2 via
+         `./gradlew :sdk:publishReleasePublicationToMavenLocal` in sdk-android. Binding the local
+         aar directly (not AndroidMavenLibrary) skips the Maven Java-dependency verification. -->
+    <AndroidLibrary
+      Condition="'$(SCREEB_USE_LOCAL_SDK)' == 'true'"
+      Include="$(HOME)/.m2/repository/app/screeb/sdk/survey/4.0.1/survey-4.0.1.aar"
+      Bind="true" />
+    <!-- Strips R8-obfuscated (a/b/c) + internal-only nodes from the generated survey binding -->
     <TransformFile Include="Transforms/AndroidMetadata.xml" />
     <!-- Transitive Maven dependencies required by app.screeb.sdk:survey -->
     <PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="2.3.21" />

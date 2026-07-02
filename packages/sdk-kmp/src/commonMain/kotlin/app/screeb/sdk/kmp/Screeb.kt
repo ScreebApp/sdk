@@ -76,4 +76,11 @@ expect object Screeb {
     suspend fun debug(): String?
 
     suspend fun debugTargeting(): String?
+
+    /**
+     * Forward an incoming deep link (e.g. `screeb-<channel-id>://inspector`) to the SDK so it can
+     * act on it — used by the in-app message editor / native inspector. Pass the URL of the launch
+     * (or new) intent. On Android, call this from your Activity's `onCreate` and `onNewIntent`.
+     */
+    fun handleDeepLink(url: String?)
 }

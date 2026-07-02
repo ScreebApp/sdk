@@ -211,4 +211,8 @@ actual object Screeb {
             }
         }.orNullRethrowingCancellation()
     }
+
+    actual fun handleDeepLink(url: String?) {
+        AndroidScreeb.handleDeepLink(url)
+    }
 }

@@ -323,8 +323,8 @@ export class Screeb {
    */
   public async surveyStart(
     surveyId: string,
-    distributionId: string,
-    allowMultipleResponses: boolean,
+    distributionId?: string,
+    allowMultipleResponses = true,
     hiddenFields?: _Screeb.PropertyRecord,
     hooks?: _Screeb.HooksSurveyStart,
     language?: string,
