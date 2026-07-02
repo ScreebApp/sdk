@@ -1,6 +1,6 @@
 {
   "name": "@screeb/sdk-angular",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "Screeb's browser sdk, optimized for Angular.",
   "keywords": [
     "product discovery",
@@ -50,7 +50,7 @@
     "replace-version": "replace-in-files --string='0.0.0-dev' --replacement=$npm_package_version projects/sdk-angular/src/lib/constants.ts"
   },
   "dependencies": {
-    "@screeb/sdk-browser": "^0.6.1"
+    "@screeb/sdk-browser": "^0.7.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.2.16",
@@ -64,7 +64,7 @@
     "@angular/platform-browser": "^16.2.12",
     "@angular/platform-browser-dynamic": "^16.2.12",
     "@angular/router": "^16.2.12",
-    "@screeb/eslint-config": "^0.1.7",
+    "@screeb/eslint-config": "^0.1.8",
     "@types/jasmine": "~5.1.15",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "eslint": "^8.51.0",
