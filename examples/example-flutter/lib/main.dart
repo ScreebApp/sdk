@@ -17,6 +17,10 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
+    _initSdk();
+  }
+
+  void _initSdk() {
     PluginScreeb.initSdk(
       "0e2b609a-8dce-4695-a80f-966fbfa87a88",
       userId: "dev@screeb.app",
@@ -35,6 +39,7 @@ class _MyAppState extends State<MyApp> {
         },
       },
     );
+    debugPrint("InitSdk");
   }
 
   void _setIdentity(String userId, Map<String, dynamic>? properties) {
@@ -88,6 +93,29 @@ class _MyAppState extends State<MyApp> {
     debugPrint("StartSurvey");
   }
 
+  void _startMessage(
+    String messageId,
+    bool allowMultiple,
+    Map<String, dynamic>? hooks,
+  ) {
+    PluginScreeb.startMessage(
+      messageId,
+      allowMultipleResponses: allowMultiple,
+      hooks: hooks,
+    );
+    debugPrint("StartMessage");
+  }
+
+  void _sessionReplayStart() {
+    PluginScreeb.sessionReplayStart();
+    debugPrint("SessionReplayStart");
+  }
+
+  void _sessionReplayStop() {
+    PluginScreeb.sessionReplayStop();
+    debugPrint("SessionReplayStop");
+  }
+
   void _closeSdk() {
     PluginScreeb.closeSdk();
     debugPrint("CloseSdk");
@@ -137,7 +165,67 @@ class _MyAppState extends State<MyApp> {
               children: [
                 const Text("Screeb Commands"),
                 ElevatedButton(
-                  child: const Text('start survey'),
+                  child: const Text('Init SDK'),
+                  onPressed: () => _initSdk(),
+                ),
+                ElevatedButton(
+                  child: const Text('Set identity'),
+                  onPressed:
+                      () => _setIdentity('iosflutterId', <String, dynamic>{
+                        'isConnected': false,
+                        'age': 29,
+                        'product': 'iPhone 13',
+                      }),
+                ),
+                ElevatedButton(
+                  child: const Text('Set visitor properties'),
+                  onPressed:
+                      () => _visitorProperty(<String, dynamic>{
+                        'isConnected': false,
+                        'age': 29,
+                        'product': 'iPhone 13',
+                      }),
+                ),
+                ElevatedButton(
+                  child: const Text('Assign group'),
+                  onPressed: () => _sendAssignGroup(null, "Apple", {}),
+                ),
+                ElevatedButton(
+                  child: const Text('Unassign group'),
+                  onPressed: () => _sendUnassignGroup(null, "Apple", {}),
+                ),
+                ElevatedButton(
+                  child: const Text('Reset identity'),
+                  onPressed: () => _resetIdentity(),
+                ),
+                ElevatedButton(
+                  child: const Text('Get identity'),
+                  onPressed: () => _getIdentity(),
+                ),
+                ElevatedButton(
+                  child: const Text('Track event'),
+                  onPressed:
+                      () => _sendTrackingEvent("eventId", <String, dynamic>{
+                        'isConnected': true,
+                        'age': 27,
+                        'company': 'Screeb',
+                        'technology': 'iOS',
+                        'flutterAccount': true,
+                      }),
+                ),
+                ElevatedButton(
+                  child: const Text('Track screen'),
+                  onPressed:
+                      () => _sendTrackingScreen("Settings", <String, dynamic>{
+                        'isConnected': true,
+                        'age': 28,
+                        'company': 'Screeb',
+                        'technology': 'Android',
+                        'flutterAccount': false,
+                      }),
+                ),
+                ElevatedButton(
+                  child: const Text('Start survey'),
                   onPressed:
                       () => _startSurvey(
                         "1b1fe0c4-d41d-4307-9ca0-b0b66cce8cff",
@@ -156,71 +244,38 @@ class _MyAppState extends State<MyApp> {
                       ),
                 ),
                 ElevatedButton(
-                  child: const Text('set identity'),
+                  child: const Text('Start message'),
                   onPressed:
-                      () => _setIdentity('iosflutterId', <String, dynamic>{
-                        'isConnected': false,
-                        'age': 29,
-                        'product': 'iPhone 13',
-                      }),
+                      () => _startMessage(
+                        "642929b9-28f1-4cb5-b153-f482777e0003",
+                        true,
+                        <String, dynamic>{
+                          "version": "1.0.0",
+                          "onMessageShowed": (dynamic data) {
+                            debugPrint("onMessageShowed");
+                            debugPrint(data.toString());
+                          },
+                        },
+                      ),
                 ),
                 ElevatedButton(
-                  child: const Text('send visitor property'),
-                  onPressed:
-                      () => _visitorProperty(<String, dynamic>{
-                        'isConnected': false,
-                        'age': 29,
-                        'product': 'iPhone 13',
-                      }),
+                  child: const Text('Session replay start'),
+                  onPressed: () => _sessionReplayStart(),
                 ),
                 ElevatedButton(
-                  child: const Text('assign group'),
-                  onPressed: () => _sendAssignGroup(null, "Apple", {}),
+                  child: const Text('Session replay stop'),
+                  onPressed: () => _sessionReplayStop(),
                 ),
                 ElevatedButton(
-                  child: const Text('unassign group'),
-                  onPressed: () => _sendUnassignGroup(null, "Apple", {}),
-                ),
-                ElevatedButton(
-                  child: const Text('send tracking event'),
-                  onPressed:
-                      () => _sendTrackingEvent("eventId", <String, dynamic>{
-                        'isConnected': true,
-                        'age': 27,
-                        'company': 'Screeb',
-                        'technology': 'iOS',
-                        'flutterAccount': true,
-                      }),
-                ),
-                ElevatedButton(
-                  child: const Text('send tracking screen'),
-                  onPressed:
-                      () => _sendTrackingScreen("Settings", <String, dynamic>{
-                        'isConnected': true,
-                        'age': 28,
-                        'company': 'Screeb',
-                        'technology': 'Android',
-                        'flutterAccount': false,
-                      }),
-                ),
-                ElevatedButton(
-                  child: const Text('reset Identity'),
-                  onPressed: () => _resetIdentity(),
-                ),
-                ElevatedButton(
-                  child: const Text('get identity'),
-                  onPressed: () => _getIdentity(),
-                ),
-                ElevatedButton(
-                  child: const Text('debug'),
+                  child: const Text('Debug SDK'),
                   onPressed: () => _debug(),
                 ),
                 ElevatedButton(
-                  child: const Text('debug targeting'),
+                  child: const Text('Debug targeting'),
                   onPressed: () => _debugTargeting(),
                 ),
                 ElevatedButton(
-                  child: const Text('close SDK'),
+                  child: const Text('Close SDK'),
                   onPressed: () => _closeSdk(),
                 ),
               ],

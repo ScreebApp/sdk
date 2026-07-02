@@ -9,14 +9,22 @@
             <Label Text="Screeb .NET MAUI SDK" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
             <Label Text="SDK initialized on startup (see MauiProgram.cs)" HorizontalOptions="Center" />
 
-            <Button Text="Track Event" Clicked="OnTrackEventClicked" BackgroundColor="#6200EE" TextColor="White" />
-            <Button Text="Track Screen" Clicked="OnTrackScreenClicked" BackgroundColor="#6200EE" TextColor="White" />
-            <Button Text="Set Identity" Clicked="OnSetIdentityClicked" BackgroundColor="#6200EE" TextColor="White" />
-            <Button Text="Reset Identity" Clicked="OnResetIdentityClicked" BackgroundColor="#9E9E9E" TextColor="White" />
-            <Button Text="Get Identity" Clicked="OnGetIdentityClicked" BackgroundColor="#6200EE" TextColor="White" />
-            <Button Text="Assign Group" Clicked="OnAssignGroupClicked" BackgroundColor="#6200EE" TextColor="White" />
-            <Button Text="Start Survey" Clicked="OnStartSurveyClicked" BackgroundColor="#03DAC5" TextColor="Black" />
-            <Button Text="Start Message" Clicked="OnStartMessageClicked" BackgroundColor="#03DAC5" TextColor="Black" />
+            <Button Text="Init SDK" Clicked="OnInitSdkClicked" BackgroundColor="#9E9E9E" TextColor="White" />
+            <Button Text="Set identity" Clicked="OnSetIdentityClicked" BackgroundColor="#6200EE" TextColor="White" />
+            <Button Text="Set visitor properties" Clicked="OnSetPropertiesClicked" BackgroundColor="#6200EE" TextColor="White" />
+            <Button Text="Assign group" Clicked="OnAssignGroupClicked" BackgroundColor="#6200EE" TextColor="White" />
+            <Button Text="Unassign group" Clicked="OnUnassignGroupClicked" BackgroundColor="#6200EE" TextColor="White" />
+            <Button Text="Reset identity" Clicked="OnResetIdentityClicked" BackgroundColor="#6200EE" TextColor="White" />
+            <Button Text="Get identity" Clicked="OnGetIdentityClicked" BackgroundColor="#6200EE" TextColor="White" />
+            <Button Text="Track event" Clicked="OnTrackEventClicked" BackgroundColor="#6200EE" TextColor="White" />
+            <Button Text="Track screen" Clicked="OnTrackScreenClicked" BackgroundColor="#6200EE" TextColor="White" />
+            <Button Text="Start survey" Clicked="OnStartSurveyClicked" BackgroundColor="#03DAC5" TextColor="Black" />
+            <Button Text="Start message" Clicked="OnStartMessageClicked" BackgroundColor="#03DAC5" TextColor="Black" />
+            <Button Text="Session replay start" Clicked="OnSessionReplayStartClicked" BackgroundColor="#9E9E9E" TextColor="White" />
+            <Button Text="Session replay stop" Clicked="OnSessionReplayStopClicked" BackgroundColor="#9E9E9E" TextColor="White" />
+            <Button Text="Debug SDK" Clicked="OnDebugSdkClicked" BackgroundColor="#9E9E9E" TextColor="White" />
+            <Button Text="Debug targeting" Clicked="OnDebugTargetingClicked" BackgroundColor="#9E9E9E" TextColor="White" />
+            <Button Text="Close SDK" Clicked="OnCloseSdkClicked" BackgroundColor="#9E9E9E" TextColor="White" />
 
             <Label x:Name="StatusLabel" Text="Ready" HorizontalOptions="Center" />
         </VerticalStackLayout>

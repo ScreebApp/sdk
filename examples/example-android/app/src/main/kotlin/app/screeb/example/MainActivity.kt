@@ -69,6 +69,10 @@ class MainActivity : Activity() {
         status = body("Starting...")
         content.addView(status)
 
+        content.addView(action("Init SDK") {
+            initializeScreeb()
+        })
+
         content.addView(action("Set identity") {
             Screeb.setIdentity(
                 "android-example-user",
@@ -82,6 +86,37 @@ class MainActivity : Activity() {
                 hashMapOf("company" to "Screeb", "example_session" to System.currentTimeMillis()),
             )
             setStatus("Visitor properties sent")
+        })
+
+        content.addView(action("Assign group") {
+            Screeb.assignGroup(
+                "company",
+                "Screeb",
+                hashMapOf("plan" to "public-example", "source" to "native-android-example"),
+            )
+            setStatus("Group assigned")
+        })
+
+        content.addView(action("Unassign group") {
+            Screeb.unassignGroup(
+                "company",
+                "Screeb",
+                hashMapOf("source" to "native-android-example"),
+            )
+            setStatus("Group unassigned")
+        })
+
+        content.addView(action("Reset identity") {
+            Screeb.resetIdentity()
+            setStatus("Identity reset")
+        })
+
+        content.addView(action("Get identity") {
+            Screeb.getIdentity { identity, error ->
+                runOnUiThread {
+                    setStatus(error?.message ?: identity.toString())
+                }
+            }
         })
 
         content.addView(action("Track event") {
@@ -99,7 +134,7 @@ class MainActivity : Activity() {
 
         content.addView(action("Start survey") {
             Screeb.startSurvey(
-                surveyId = "replace-with-survey-id",
+                surveyId = "1b1fe0c4-d41d-4307-9ca0-b0b66cce8cff",
                 allowMultipleResponses = true,
                 hiddenFields = hashMapOf("example" to "android"),
                 ignoreSurveyStatus = true,
@@ -112,7 +147,7 @@ class MainActivity : Activity() {
 
         content.addView(action("Start message") {
             Screeb.startMessage(
-                messageId = "replace-with-message-id",
+                messageId = "642929b9-28f1-4cb5-b153-f482777e0003",
                 allowMultipleResponses = true,
                 hiddenFields = hashMapOf("example" to "android"),
                 ignoreMessageStatus = true,
@@ -137,6 +172,14 @@ class MainActivity : Activity() {
             Screeb.debug { result, error ->
                 runOnUiThread {
                     setStatus(error?.message ?: result.ifBlank { "Debug command sent" })
+                }
+            }
+        })
+
+        content.addView(action("Debug targeting") {
+            Screeb.debugTargeting { result, error ->
+                runOnUiThread {
+                    setStatus(error?.message ?: result.ifBlank { "Targeting debug command sent" })
                 }
             }
         })

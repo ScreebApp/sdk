@@ -13,6 +13,9 @@ build
 dist
 storybook-static
 
+# Android native build output (NDK/CMake), e.g. RN prefab under example-*/android/app/.cxx
+.cxx/
+
 # generated API reference (typedoc) — regenerate with `npm run build:doc`
 packages/*/docs/
 

@@ -11,7 +11,8 @@ import {
 
 const PROJECT_TOKEN = "0e2b609a-8dce-4695-a80f-966fbfa87a88";
 const RESPONDENT_ID = "0021de43-6e44-443c-9903-2ab99f9c4233";
-const SURVEY_ID = "8dd42ae1-f716-429c-9843-fad62adf2ac4";
+const SURVEY_ID = "1b1fe0c4-d41d-4307-9ca0-b0b66cce8cff";
+const MESSAGE_ID = "642929b9-28f1-4cb5-b153-f482777e0003";
 const USER_PROPERTIES = {
   locale: "fr-FR",
   premium: true,
@@ -56,7 +57,6 @@ export default function ScreebExpoExample() {
 
       <View style={styles.buttonList}>
         <Button title="Init SDK" onPress={() => initScreeb()} />
-        <Button title="Close SDK" onPress={() => Screeb.closeSdk()} />
         <Button
           title="Set identity"
           onPress={() =>
@@ -65,6 +65,39 @@ export default function ScreebExpoExample() {
               premium: true,
             })
           }
+        />
+        <Button
+          title="Set visitor properties"
+          onPress={() =>
+            Screeb.setProperties({
+              plan: "Pro",
+              premium: true,
+            })
+          }
+        />
+        <Button
+          title="Assign group"
+          onPress={() =>
+            Screeb.assignGroup(null, "ExpoFans", {
+              plan: "Pro",
+            })
+          }
+        />
+        <Button
+          title="Unassign group"
+          onPress={() =>
+            Screeb.unassignGroup(null, "ExpoFans", {
+              plan: "Pro",
+            })
+          }
+        />
+        <Button title="Reset identity" onPress={() => Screeb.resetIdentity()} />
+        <Button
+          title="Get identity"
+          onPress={async () => {
+            const identity = await Screeb.getIdentity();
+            console.log("Screeb identity", identity);
+          }}
         />
         <Button
           title="Track event"
@@ -85,15 +118,6 @@ export default function ScreebExpoExample() {
           }
         />
         <Button
-          title="Set visitor properties"
-          onPress={() =>
-            Screeb.setProperties({
-              plan: "Pro",
-              premium: true,
-            })
-          }
-        />
-        <Button
           title="Start survey"
           onPress={() =>
             Screeb.startSurvey(SURVEY_ID, true, null, true, {
@@ -106,23 +130,28 @@ export default function ScreebExpoExample() {
           }
         />
         <Button
-          title="Assign group"
+          title="Start message"
           onPress={() =>
-            Screeb.assignGroup(null, "ExpoFans", {
-              plan: "Pro",
+            Screeb.startMessage(MESSAGE_ID, true, null, true, {
+              onSurveyShowed: (payload: string) => {
+                console.log("Message displayed", payload);
+                return null;
+              },
+              version: "1.0.0",
             })
           }
         />
         <Button
-          title="Unassign group"
-          onPress={() =>
-            Screeb.unassignGroup(null, "ExpoFans", {
-              plan: "Pro",
-            })
-          }
+          title="Session replay start"
+          onPress={() => Screeb.sessionReplayStart()}
         />
-        <Button title="Debug" onPress={() => Screeb.debug()} />
+        <Button
+          title="Session replay stop"
+          onPress={() => Screeb.sessionReplayStop()}
+        />
+        <Button title="Debug SDK" onPress={() => Screeb.debug()} />
         <Button title="Debug targeting" onPress={() => Screeb.debugTargeting()} />
+        <Button title="Close SDK" onPress={() => Screeb.closeSdk()} />
       </View>
     </ScrollView>
   );

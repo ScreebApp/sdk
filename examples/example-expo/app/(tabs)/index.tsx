@@ -8,7 +8,8 @@ import { ThemedView } from "@/components/themed-view";
 
 const PROJECT_TOKEN = "0e2b609a-8dce-4695-a80f-966fbfa87a88";
 const RESPONDENT_ID = "0021de43-6e44-443c-9903-2ab99f9c4233";
-const SURVEY_ID = "8dd42ae1-f716-429c-9843-fad62adf2ac4";
+const SURVEY_ID = "1b1fe0c4-d41d-4307-9ca0-b0b66cce8cff";
+const MESSAGE_ID = "642929b9-28f1-4cb5-b153-f482777e0003";
 
 // Shared helper to run the Screeb setup with demo identifiers that work in preview environments.
 const initScreeb = async () => {
@@ -61,8 +62,6 @@ export default function HomeScreen() {
 				<View style={styles.buttonList}>
 					<Button title="Init SDK" onPress={() => initScreeb()} />
 					<View style={styles.spacer} />
-					<Button title="Close SDK" onPress={() => Screeb.closeSdk()} />
-					<View style={styles.spacer} />
 					<Button
 						title="Set identity"
 						onPress={() =>
@@ -71,6 +70,47 @@ export default function HomeScreen() {
 								plan: "Pro",
 							})
 						}
+					/>
+					<View style={styles.spacer} />
+					<Button
+						title="Set visitor properties"
+						onPress={() =>
+							Screeb.setProperties({
+								premium: true,
+								plan: "Pro",
+							})
+						}
+					/>
+					<View style={styles.spacer} />
+					<Button
+						title="Assign group"
+						onPress={() =>
+							Screeb.assignGroup(null, "ExpoFans", {
+								plan: "Pro",
+							})
+						}
+					/>
+					<View style={styles.spacer} />
+					<Button
+						title="Unassign group"
+						onPress={() =>
+							Screeb.unassignGroup(null, "ExpoFans", {
+								plan: "Pro",
+							})
+						}
+					/>
+					<View style={styles.spacer} />
+					<Button
+						title="Reset identity"
+						onPress={() => Screeb.resetIdentity()}
+					/>
+					<View style={styles.spacer} />
+					<Button
+						title="Get identity"
+						onPress={async () => {
+							const identity = await Screeb.getIdentity();
+							console.log("Screeb identity", identity);
+						}}
 					/>
 					<View style={styles.spacer} />
 					<Button
@@ -94,16 +134,6 @@ export default function HomeScreen() {
 					/>
 					<View style={styles.spacer} />
 					<Button
-						title="Set visitor properties"
-						onPress={() =>
-							Screeb.setProperties({
-								premium: true,
-								plan: "Pro",
-							})
-						}
-					/>
-					<View style={styles.spacer} />
-					<Button
 						title="Start survey"
 						onPress={() =>
 							Screeb.startSurvey(SURVEY_ID, true, null, true, {
@@ -117,29 +147,36 @@ export default function HomeScreen() {
 					/>
 					<View style={styles.spacer} />
 					<Button
-						title="Assign group"
+						title="Start message"
 						onPress={() =>
-							Screeb.assignGroup(null, "ExpoFans", {
-								plan: "Pro",
+							Screeb.startMessage(MESSAGE_ID, true, null, true, {
+								version: "1.0.0",
+								onSurveyShowed: (payload: string) => {
+									console.log("Message displayed", payload);
+									return null;
+								},
 							})
 						}
 					/>
 					<View style={styles.spacer} />
 					<Button
-						title="Unassign group"
-						onPress={() =>
-							Screeb.unassignGroup(null, "ExpoFans", {
-								plan: "Pro",
-							})
-						}
+						title="Session replay start"
+						onPress={() => Screeb.sessionReplayStart()}
 					/>
 					<View style={styles.spacer} />
-					<Button title="Debug" onPress={() => Screeb.debug()} />
+					<Button
+						title="Session replay stop"
+						onPress={() => Screeb.sessionReplayStop()}
+					/>
+					<View style={styles.spacer} />
+					<Button title="Debug SDK" onPress={() => Screeb.debug()} />
 					<View style={styles.spacer} />
 					<Button
 						title="Debug targeting"
 						onPress={() => Screeb.debugTargeting()}
 					/>
+					<View style={styles.spacer} />
+					<Button title="Close SDK" onPress={() => Screeb.closeSdk()} />
 				</View>
 			</ThemedView>
 			<ThemedView style={styles.section}>

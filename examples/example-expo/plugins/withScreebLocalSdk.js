@@ -44,7 +44,7 @@ function addLocalAndroidSdkBootstrap(settingsGradle) {
     return settingsGradle;
   }
 
-  return `${LOCAL_ANDROID_SDK_BOOTSTRAP}\n\n${settingsGradle}`;
+  return `${settingsGradle}\n\n${LOCAL_ANDROID_SDK_BOOTSTRAP}`;
 }
 
 const LOCAL_IOS_POD = [

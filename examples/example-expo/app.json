@@ -4,7 +4,10 @@
     "slug": "example-expo",
     "version": "1.0.0",
     "orientation": "portrait",
-    "scheme": "exampleexpo",
+    "scheme": [
+      "exampleexpo",
+      "screeb-0e2b609a-8dce-4695-a80f-966fbfa87a88"
+    ],
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
@@ -17,7 +20,9 @@
     },
     "plugins": [
       "./plugins/withScreebLocalSdk",
-      "expo-router"
+      "./plugins/withScreebDeepLink",
+      "expo-router",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true
