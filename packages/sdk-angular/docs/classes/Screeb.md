@@ -360,7 +360,7 @@ ___
 
 ### init
 
-▸ **init**(`websiteId`, `userId?`, `userProperties?`, `hooks?`, `language?`): `Promise`\<`unknown`\>
+▸ **init**(`websiteId`, `userId?`, `userProperties?`, `hooks?`, `language?`, `spaNavigationHandler?`): `Promise`\<`unknown`\>
 
 Initializes Screeb tag.
 
@@ -373,6 +373,7 @@ Initializes Screeb tag.
 | `userProperties?` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date ``` |
 | `hooks?` | `HooksInit` | - |
 | `language?` | `string` | Force a specific language for the tag. eg: 'en'. default: browser language. |
+| `spaNavigationHandler?` | `SpaNavigationHandler` | - |
 
 #### Returns
 

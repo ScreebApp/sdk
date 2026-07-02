@@ -183,6 +183,32 @@ export type HookOnQuestionReplied = (
   },
 ) => void;
 
+export type HookOnButtonNavigateStarted = (
+  // eslint-disable-next-line no-unused-vars
+  data: HookCommonPropertiesSurvey & {
+    response: {
+      id: string;
+    };
+    button: {
+      url: string;
+      url_target?: string;
+    };
+  },
+) => void;
+
+export type HookOnButtonNavigateCompleted = (
+  // eslint-disable-next-line no-unused-vars
+  data: HookCommonPropertiesSurvey & {
+    response: {
+      id: string;
+    };
+    button: {
+      url: string;
+      url_target?: string;
+    };
+  },
+) => void;
+
 /** This is the Screeb tag hooks object available on `survey.start` command. */
 export type HooksSurveyStart = {
   /** This hook is triggered when a survey is displayed on screen (also triggered when page is reloaded) */
@@ -196,6 +222,11 @@ export type HooksSurveyStart = {
 
   /** This hook is triggered when a question is answered */
   onQuestionReplied?: HookOnQuestionReplied;
+
+  /** This hook is triggered before a message/tour button "Navigate to URL" action runs. */
+  onButtonNavigateStarted?: HookOnButtonNavigateStarted;
+  /** This hook is triggered after a message/tour button "Navigate to URL" action ran (only fires when the SDK survives the navigation, e.g. `new-tab` or `in-page-spa`). */
+  onButtonNavigateCompleted?: HookOnButtonNavigateCompleted;
 };
 
 /** This is the Screeb tag hooks object available on `message.start` command. */
@@ -211,6 +242,11 @@ export type HooksMessageStart = {
 
   /** This hook is triggered when a question is answered */
   onQuestionReplied?: HookOnQuestionReplied;
+
+  /** This hook is triggered before a message/tour button "Navigate to URL" action runs. */
+  onButtonNavigateStarted?: HookOnButtonNavigateStarted;
+  /** This hook is triggered after a message/tour button "Navigate to URL" action ran (only fires when the SDK survives the navigation, e.g. `new-tab` or `in-page-spa`). */
+  onButtonNavigateCompleted?: HookOnButtonNavigateCompleted;
 };
 
 /** This is the Screeb tag hooks object available on `init` command. */

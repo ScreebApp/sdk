@@ -6,6 +6,7 @@ import {
   ScreebIdentityGetReturn,
   ScreebObject,
   ScreebOptions,
+  SpaNavigationHandler,
 } from "./types";
 
 export * from "./types";
@@ -108,6 +109,11 @@ export const load = (options: ScreebOptions = {}) =>
  *
  * @param language Force a specific language for the tag. eg: 'en'. default: browser language.
  *
+ * @param spaNavigationHandler Optional handler for the `in-page-spa` "Navigate to URL"
+ * target. Runs in your page so your SPA router can navigate without a full reload. Only
+ * needed for custom routers that don't resync on `popstate` (React Router / Vue Router /
+ * Angular Router work out of the box). May be async so `onButtonNavigateCompleted` awaits it.
+ *
  * @example
  * ```ts
  * import * as Screeb from "@screeb/sdk-browser";
@@ -125,6 +131,8 @@ export const load = (options: ScreebOptions = {}) =>
  *   {
  *     version: "1.0.0",
  *     onReady: (payload) =>  console.log("Screeb SDK is ready!", payload),
+ *     onButtonNavigateStarted: (payload) => console.log("Button navigate started", payload),
+ *     onButtonNavigateCompleted: (payload) => console.log("Button navigate completed", payload),
  *   },
  *   "en"
  * );
@@ -136,12 +144,14 @@ export const init = (
   userProperties?: PropertyRecord,
   hooks?: HooksInit,
   language?: string,
+  spaNavigationHandler?: SpaNavigationHandler,
 ) => {
   let identityObject:
     | {
         hooks?: HooksInit;
         identity?: { id?: string; properties?: PropertyRecord };
         language?: string;
+        spaNavigationHandler?: SpaNavigationHandler;
       }
     | undefined;
 
@@ -157,6 +167,10 @@ export const init = (
 
   if (language) {
     identityObject = { ...identityObject, language };
+  }
+
+  if (spaNavigationHandler) {
+    identityObject = { ...identityObject, spaNavigationHandler };
   }
 
   return callScreebCommand("init", websiteId, identityObject);

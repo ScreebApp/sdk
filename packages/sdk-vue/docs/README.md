@@ -201,11 +201,11 @@ ___
 
 ### InitFunction
 
-Ƭ **InitFunction**: (`websiteId`: `string`, `userId?`: `string`, `userProperties?`: `PropertyRecord`, `hooks?`: `HooksInit`, `language?`: `string`) => `Promise`\<`void`\>
+Ƭ **InitFunction**: (`websiteId`: `string`, `userId?`: `string`, `userProperties?`: `PropertyRecord`, `hooks?`: `HooksInit`, `language?`: `string`, `spaNavigationHandler?`: `SpaNavigationHandler`) => `Promise`\<`void`\>
 
 #### Type declaration
 
-▸ (`websiteId`, `userId?`, `userProperties?`, `hooks?`, `language?`): `Promise`\<`void`\>
+▸ (`websiteId`, `userId?`, `userProperties?`, `hooks?`, `language?`, `spaNavigationHandler?`): `Promise`\<`void`\>
 
 ##### Parameters
 
@@ -216,6 +216,7 @@ ___
 | `userProperties?` | `PropertyRecord` |
 | `hooks?` | `HooksInit` |
 | `language?` | `string` |
+| `spaNavigationHandler?` | `SpaNavigationHandler` |
 
 ##### Returns
 
@@ -296,6 +297,7 @@ Configuration for the ScreebPlugin
 | `language?` | `string` | Force a specific language (e.g. 'en'). Default: browser language. |
 | `options?` | `ScreebOptions` | Screeb tag initialization options — handle with care. |
 | `shouldLoad?` | `boolean` | Indicates if Screeb should be automatically loaded. Set to false to prevent the SDK from loading (e.g. in CI). **`Default`** ```ts true ``` |
+| `spaNavigationHandler?` | `SpaNavigationHandler` | Optional handler for the `in-page-spa` "Navigate to URL" target (custom SPA routers). |
 | `userId?` | `string` | The unique identifier of your user. |
 | `userProperties?` | `PropertyRecord` | The properties of your user. |
 | `websiteId` | `string` | Your website/channel id. |

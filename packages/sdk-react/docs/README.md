@@ -367,7 +367,7 @@ ___
 
 ### InitFunction
 
-Ƭ **InitFunction**: (`websiteId`: `string`, `userId?`: `string`, `userProperties?`: `PropertyRecord`, `hooks?`: `HooksInit`, `language?`: `string`) => `Promise`\<`void`\>
+Ƭ **InitFunction**: (`websiteId`: `string`, `userId?`: `string`, `userProperties?`: `PropertyRecord`, `hooks?`: `HooksInit`, `language?`: `string`, `spaNavigationHandler?`: `SpaNavigationHandler`) => `Promise`\<`void`\>
 
 Initializes Screeb tag.
 
@@ -392,7 +392,7 @@ init(
 
 #### Type declaration
 
-▸ (`websiteId`, `userId?`, `userProperties?`, `hooks?`, `language?`): `Promise`\<`void`\>
+▸ (`websiteId`, `userId?`, `userProperties?`, `hooks?`, `language?`, `spaNavigationHandler?`): `Promise`\<`void`\>
 
 ##### Parameters
 
@@ -403,6 +403,7 @@ init(
 | `userProperties?` | `PropertyRecord` | The properties of your user. ```text Requirements: - Property names must be limited to 128 characters - No more than 1000 attributes - Supported types for values: string, number, boolean and Date ``` |
 | `hooks?` | `HooksInit` | - |
 | `language?` | `string` | Force a specific language for the tag. eg: 'en'. default: browser language. |
+| `spaNavigationHandler?` | `SpaNavigationHandler` | - |
 
 ##### Returns
 
@@ -548,6 +549,7 @@ Properties of Screeb provider
 | :------ | :------ | :------ |
 | `hooks?` | `HooksInit` | Hooks to define callback for various event |
 | `language?` | `string` | The language you want to force |
+| `spaNavigationHandler?` | `SpaNavigationHandler` | Optional handler for the `in-page-spa` "Navigate to URL" target (custom SPA routers). |
 | `userId?` | `string` | The unique identifier of your user. |
 | `userProperties?` | `PropertyRecord` | The properties of your user. |
 | `websiteId` | `string` | Your website/channel id. |
