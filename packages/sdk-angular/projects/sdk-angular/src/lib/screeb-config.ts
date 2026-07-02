@@ -1,5 +1,10 @@
 import { Injectable } from "@angular/core";
-import { HooksInit, PropertyRecord, ScreebOptions } from "@screeb/sdk-browser";
+import {
+  HooksInit,
+  PropertyRecord,
+  ScreebOptions,
+  SpaNavigationHandler,
+} from "@screeb/sdk-browser";
 
 /** Configuration of Screeb module */
 @Injectable({ providedIn: "root" })
@@ -12,6 +17,8 @@ export class ScreebConfig {
   userProperties?: PropertyRecord;
   /** Hooks to define callback for various event */
   hooks?: HooksInit;
+  /** Optional handler for the `in-page-spa` "Navigate to URL" target (custom SPA routers). */
+  spaNavigationHandler?: SpaNavigationHandler;
   /**
    * Indicates if Screeb should be automatically loaded.
    * This will ping to the Screeb servers.

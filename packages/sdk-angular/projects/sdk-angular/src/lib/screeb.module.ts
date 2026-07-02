@@ -50,7 +50,9 @@ export class ScreebModule {
         config.websiteId,
         config.userId,
         config.userProperties,
-        config.hooks
+        config.hooks,
+        undefined,
+        config.spaNavigationHandler
       );
     }
   }
