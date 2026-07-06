@@ -1,8 +1,10 @@
 import UIKit
 import Screeb
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    /// Public demo channel — replace with your own (Screeb workspace → Settings → Channels).
+    static let screebChannelId = "0e2b609a-8dce-4695-a80f-966fbfa87a88"
 
     func application(
         _ application: UIApplication,
@@ -10,16 +12,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         Screeb.initSdk(
             context: nil,
-            channelId: "<channel-id>",
-            identity: "<user-id>",                                            // optional
-            visitorProperty: ["age": AnyEncodable(12), "name": AnyEncodable("JohnDoe")], // optional
-            language: "en"                                                    // optional
+            channelId: AppDelegate.screebChannelId,
+            identity: "ios-example-user",                       // optional
+            visitorProperty: [                                  // optional
+                "firstname": "Ada",
+                "lastname": "Lovelace",
+                "plan": "public-example",
+                "authenticated": true,
+            ],
+            language: "en"                                      // optional
         )
         return true
     }
 
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        Screeb.handleDeepLink(url: url)
-        return true
+    // MARK: UISceneSession Lifecycle
+
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        let configuration = UISceneConfiguration(name: nil, sessionRole: connectingSceneSession.role)
+        configuration.delegateClass = SceneDelegate.self
+        return configuration
     }
 }
