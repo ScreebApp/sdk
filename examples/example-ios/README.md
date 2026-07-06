@@ -23,6 +23,20 @@ demo channel, then exposes every public API from `ViewController.swift`.
 Replace `AppDelegate.screebChannelId` with your own channel id (Screeb
 workspace → Settings → Channels) to see your own surveys and replays.
 
+## Developing against the local SDK checkout
+
+Same convention as `example-android`'s `SCREEB_USE_LOCAL_SDK` property —
+switch the Swift package reference to a sibling `sdk-ios` checkout
+(`../../../sdk-ios`):
+
+```bash
+SCREEB_USE_LOCAL_SDK=true ./use-sdk.sh   # -> local checkout
+./use-sdk.sh                             # -> back to the published package
+```
+
+(Xcode has no environment-driven package resolution, so the script rewrites
+the project's package reference in place — idempotent, one block only.)
+
 ## CocoaPods alternative
 
 ```ruby
