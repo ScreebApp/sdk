@@ -34,12 +34,18 @@ local_block = """\t\tB40000012E00000000000001 /* XCLocalSwiftPackageReference ".
 \t\t\trelativePath = "../../../sdk-ios";
 \t\t};"""
 
+remote_comment = 'B40000012E00000000000001 /* XCRemoteSwiftPackageReference "sdk-ios-public" */'
+local_comment = 'B40000012E00000000000001 /* XCLocalSwiftPackageReference "../../../sdk-ios" */'
+
 if mode == "local":
     if local_block in content:
         print("already using the LOCAL sdk-ios checkout")
         sys.exit(0)
     assert remote_block in content, "remote package block not found — pbxproj drifted?"
     content = content.replace(remote_block, local_block)
+    # Keep every reference comment in sync (cosmetic for Xcode, but a lying
+    # comment defeats any human or grep audit of the current mode).
+    content = content.replace(remote_comment, local_comment)
     print("now using the LOCAL ../../../sdk-ios checkout")
 else:
     if remote_block in content:
@@ -47,6 +53,7 @@ else:
         sys.exit(0)
     assert local_block in content, "local package block not found — pbxproj drifted?"
     content = content.replace(local_block, remote_block)
+    content = content.replace(local_comment, remote_comment)
     print("now using the PUBLISHED sdk-ios-public package")
 
 open(path, "w").write(content)

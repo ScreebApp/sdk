@@ -37,6 +37,17 @@ SCREEB_USE_LOCAL_SDK=true ./use-sdk.sh   # -> local checkout
 (Xcode has no environment-driven package resolution, so the script rewrites
 the project's package reference in place — idempotent, one block only.)
 
+## Deep links
+
+The app registers the `screeb-<channelId>` URL scheme (Info.plist, same
+convention as example-android's manifest) and forwards URLs to
+`Screeb.handleDeepLink` from `SceneDelegate` (warm and cold start). This is
+what the survey-editor pairing QR code uses. Try it on a simulator:
+
+```bash
+xcrun simctl openurl booted "screeb-0e2b609a-8dce-4695-a80f-966fbfa87a88://editor?token=demo"
+```
+
 ## CocoaPods alternative
 
 ```ruby

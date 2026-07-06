@@ -10,6 +10,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = ViewController()
         window.makeKeyAndVisible()
         self.window = window
+        // Cold start from a deep link (app not running when the URL was opened).
+        Screeb.handleDeepLink(url: connectionOptions.urlContexts.first?.url)
     }
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
