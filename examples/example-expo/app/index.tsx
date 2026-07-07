@@ -1,4 +1,5 @@
 import * as Screeb from "@screeb/react-native";
+import * as Updates from "expo-updates";
 import { useEffect } from "react";
 import {
   Alert,
@@ -148,6 +149,23 @@ export default function ScreebExpoExample() {
         <Button
           title="Session replay stop"
           onPress={() => Screeb.sessionReplayStop()}
+        />
+        <Button
+          title="Reload JS (expo-updates)"
+          onPress={async () => {
+            // Same native path as applying an OTA: the JS bundle relaunches,
+            // the app re-runs initSdk against the already-loaded native
+            // singleton. Repro for "surveys stop displaying after an
+            // expo-updates reload" (readiness-gate bug, fixed in 4.0.2).
+            try {
+              await Updates.reloadAsync();
+            } catch (error) {
+              Alert.alert(
+                "expo-updates disabled",
+                "reloadAsync only works in a release build (expo-updates is inert in dev). Build with: npx expo run:android --variant release",
+              );
+            }
+          }}
         />
         <Button title="Debug SDK" onPress={() => Screeb.debug()} />
         <Button title="Debug targeting" onPress={() => Screeb.debugTargeting()} />

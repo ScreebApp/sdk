@@ -22,10 +22,17 @@
       "./plugins/withScreebLocalSdk",
       "./plugins/withScreebDeepLink",
       "expo-router",
-      "expo-web-browser"
+      "expo-web-browser",
+      "expo-updates"
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "updates": {
+      "enabled": true,
+      "checkAutomatically": "NEVER",
+      "url": "https://u.expo.dev/00000000-0000-0000-0000-000000000000"
+    },
+    "runtimeVersion": "1.0.0"
   }
 }
