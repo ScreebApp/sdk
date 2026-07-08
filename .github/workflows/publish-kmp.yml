@@ -23,12 +23,14 @@ jobs:
       - run: npm run versions:check
 
       - name: Download Screeb iOS XCFramework
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           SCREEB_IOS_SDK_VERSION=$(grep '^SCREEB_IOS_SDK_VERSION=' packages/sdk-kmp/gradle.properties | cut -d= -f2)
-          SCREEB_IOS_URL=$(curl -sL "https://api.github.com/repos/ScreebApp/sdk-ios-public/releases/tags/${SCREEB_IOS_SDK_VERSION}" \
-            | python3 -c "import sys,json; print(next(a['browser_download_url'] for a in json.load(sys.stdin)['assets'] if a['name']=='Screeb.zip'))")
-          curl -sL "$SCREEB_IOS_URL" -o /tmp/Screeb.zip
+          # Authenticated download (anonymous api.github.com calls are rate-limited
+          # on shared runners and come back without 'assets').
+          gh release download "${SCREEB_IOS_SDK_VERSION}" --repo ScreebApp/sdk-ios-public --pattern 'Screeb.zip' --output /tmp/Screeb.zip --clobber
           unzip -q /tmp/Screeb.zip -d /tmp/screeb_ios
           mkdir -p packages/sdk-kmp/native/ios
           cp -r /tmp/screeb_ios/Screeb.xcframework packages/sdk-kmp/native/ios/
