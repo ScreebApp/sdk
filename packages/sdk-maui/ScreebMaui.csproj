@@ -9,7 +9,7 @@
     <UseMaui>true</UseMaui>
     <!-- NuGet metadata -->
     <PackageId>Screeb.Maui</PackageId>
-    <Version>0.1.0</Version>
+    <Version>4.0.2</Version>
     <Authors>Screeb</Authors>
     <Company>Screeb</Company>
     <Description>Screeb Continuous Product Discovery SDK for .NET MAUI (Android + iOS)</Description>

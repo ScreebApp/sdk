@@ -27,7 +27,7 @@ jobs:
           set -euo pipefail
           SCREEB_IOS_SDK_VERSION=$(node -p "require('./sdk-versions.json').native.ios")
           mkdir -p packages/sdk-maui/native/ios
-          gh release download "v${SCREEB_IOS_SDK_VERSION}" --repo ScreebApp/sdk-ios-public --pattern 'Screeb.zip' --output /tmp/Screeb.zip --clobber
+          gh release download "${SCREEB_IOS_SDK_VERSION}" --repo ScreebApp/sdk-ios-public --pattern 'Screeb.zip' --output /tmp/Screeb.zip --clobber
           unzip -q /tmp/Screeb.zip -d /tmp/screeb_ios
           cp -r /tmp/screeb_ios/Screeb.xcframework packages/sdk-maui/native/ios/
 
