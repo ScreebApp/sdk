@@ -238,6 +238,6 @@ actual object Screeb {
     // from your AppDelegate's open-URL entry point or a shared linking listener.
     actual fun handleDeepLink(url: String?) {
         if (url == null) return
-        NativeScreeb.handleDeepLink(platform.Foundation.NSURL.URLWithString(url))
+        NativeScreeb.handleDeepLinkWithUrl(platform.Foundation.NSURL.URLWithString(url))
     }
 }
