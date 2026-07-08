@@ -234,7 +234,10 @@ actual object Screeb {
         }.orNullRethrowingCancellation()
     }
 
-    // iOS: deep links reach the native SDK through the standard UIApplication URL flow; there is no
-    // explicit forwarding entry point in the framework, so this is a no-op on iOS.
-    actual fun handleDeepLink(url: String?) {}
+    // Forward to the native SDK (editor/survey/message links open in-app). Call it
+    // from your AppDelegate's open-URL entry point or a shared linking listener.
+    actual fun handleDeepLink(url: String?) {
+        if (url == null) return
+        NativeScreeb.handleDeepLink(platform.Foundation.NSURL.URLWithString(url))
+    }
 }
