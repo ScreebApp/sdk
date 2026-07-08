@@ -176,3 +176,9 @@ signing {
         sign(publishing.publications)
     }
 }
+
+// The shared javadoc jar is signed once per publication into the same .asc:
+// every publish task must wait for all sign tasks or Gradle fails validation.
+tasks.withType<AbstractPublishToMaven>().configureEach {
+    dependsOn(tasks.withType<Sign>())
+}
