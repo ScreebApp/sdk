@@ -1,5 +1,10 @@
 allprojects {
     repositories {
+        // Local sdk-android checkout (published to ~/.m2 by settings.gradle.kts
+        // when SCREEB_USE_LOCAL_SDK=true) must win over mavenCentral.
+        if (providers.gradleProperty("SCREEB_USE_LOCAL_SDK").orElse(providers.environmentVariable("SCREEB_USE_LOCAL_SDK")).orNull.equals("true", ignoreCase = true)) {
+            mavenLocal()
+        }
         google()
         mavenCentral()
     }
