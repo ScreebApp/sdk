@@ -112,6 +112,13 @@ class ScreebReactNative: RCTEventEmitter {
     }
   }
 
+  @objc func handleDeepLink(_ url: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock){
+    DispatchQueue.main.async {
+      Screeb.handleDeepLink(url: URL(string: url))
+      resolve(nil)
+    }
+  }
+
   @objc func closeSurvey(_ surveyId: String?, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock){
     DispatchQueue.main.async {
       Screeb.closeSurvey(surveyId: surveyId)

@@ -185,6 +185,13 @@ export function getIdentity() {
   return ScreebReactNative.getIdentity();
 }
 
+// handleDeepLink — forward a Screeb deep link (screeb-<channel-id> scheme) to
+// the SDK: editor, survey and message links open in-app. Wire it to your
+// linking events (e.g. expo-linking / RN Linking url listener).
+export function handleDeepLink(url: string) {
+  return ScreebReactNative.handleDeepLink(url);
+}
+
 // closeSdk
 export function closeSdk() {
   eventSubscription?.remove();

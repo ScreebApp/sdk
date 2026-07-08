@@ -70,6 +70,9 @@ public static partial class Screeb
         App.Screeb.Sdk.Screeb.Instance.CloseSdk();
     });
 
+    public static partial Task<bool?> HandleDeepLink(string url)
+        => OnMain(() => App.Screeb.Sdk.Screeb.Instance.HandleDeepLink(Android.Net.Uri.Parse(url)));
+
     public static partial Task<bool?> SetIdentity(string userId, Dictionary<string, object>? properties)
         => OnMain(() => App.Screeb.Sdk.Screeb.Instance.SetIdentity(
             userId, ToJavaDictionary(ScreebUtils.FormatProperties(properties))));

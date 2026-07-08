@@ -65,6 +65,9 @@ public static partial class Screeb
     public static partial Task<bool?> CloseSdk()
         => OnMain(() => { HooksRegistry.UnregisterAll(); NativeScreeb.CloseSdk(); });
 
+    public static partial Task<bool?> HandleDeepLink(string url)
+        => OnMain(() => NativeScreeb.HandleDeepLink(new NSUrl(url)));
+
     public static partial Task<bool?> SetIdentity(string userId, Dictionary<string, object>? properties)
         => OnMain(() => NativeScreeb.SetIdentity(
             userId, ToNSDictionary(ScreebUtils.FormatProperties(properties)) ?? new NSDictionary()));

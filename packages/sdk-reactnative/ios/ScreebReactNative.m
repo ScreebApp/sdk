@@ -84,6 +84,10 @@ RCT_EXTERN_METHOD(getIdentity:(RCTPromiseResolveBlock)resolve
 RCT_EXTERN_METHOD(closeSdk:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 
+RCT_EXTERN_METHOD(handleDeepLink:(NSString *)url
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
 RCT_EXTERN_METHOD(closeSurvey:(nullable NSString *)surveyId
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)

@@ -194,6 +194,13 @@ class ScreebReactNativeModule(reactContext: ReactApplicationContext) :
     }
   }
 
+  override fun handleDeepLink(url: String, promise: Promise) {
+    Handler(Looper.getMainLooper()).post {
+      Screeb.handleDeepLink(android.net.Uri.parse(url))
+      promise.resolve(null)
+    }
+  }
+
   override fun closeSurvey(surveyId: String?, promise: Promise) {
     Handler(Looper.getMainLooper()).post {
       Screeb.closeSurvey(surveyId)

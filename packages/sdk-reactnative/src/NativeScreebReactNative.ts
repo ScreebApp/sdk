@@ -63,6 +63,7 @@ export interface Spec extends TurboModule {
   resetIdentity(): Promise<void>;
   getIdentity(): Promise<{ [key: string]: unknown } | null>;
   closeSdk(): Promise<void>;
+  handleDeepLink(url: string): Promise<void>;
   closeSurvey(surveyId?: string): Promise<void>;
   closeMessage(messageId?: string): Promise<void>;
   onHookResult(

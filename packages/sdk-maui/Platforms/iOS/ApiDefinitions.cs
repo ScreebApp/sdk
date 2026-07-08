@@ -33,6 +33,10 @@ interface Screeb
     void CloseSdk();
 
     [Static]
+    [Export("handleDeepLinkWithUrl:")]
+    void HandleDeepLink([NullAllowed] NSUrl url);
+
+    [Static]
     [Export("makeHooks:callback:")]
     NSDictionary MakeHooks(NSDictionary hookIds, Action<string, string, string> callback);
 
