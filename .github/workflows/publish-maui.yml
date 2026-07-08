@@ -17,6 +17,17 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
+      # macos-latest also preinstalls .NET 10; without a global.json `dotnet`
+      # resolves to the newest SDK, whose workload set no longer matches the
+      # net9.0 targets (NETSDK1147 asking for maui-android).
+      - name: Pin the .NET 9 SDK
+        run: |
+          set -euo pipefail
+          DOTNET9=$(dotnet --list-sdks | awk '/^9\./{v=$1} END{print v}')
+          test -n "$DOTNET9"
+          printf '{"sdk":{"version":"%s","rollForward":"latestFeature"}}\n' "$DOTNET9" > global.json
+          dotnet --version
+
       - name: Install MAUI workloads
         run: dotnet workload install android ios
 
