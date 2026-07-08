@@ -76,7 +76,7 @@ public partial class App : Application
             channelId: "<YOUR_CHANNEL_ID>",
             userId: "user-123",
             properties: new Dictionary<string, object> { ["plan"] = "premium" },
-            initOptions: new ScreebInitOptions { IsDebugMode = true }
+            initOptions: new ScreebInitOptions { IsDebugMode = false }
         );
     }
 }
