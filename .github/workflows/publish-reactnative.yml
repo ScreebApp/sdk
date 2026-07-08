@@ -17,6 +17,8 @@ jobs:
         with:
           node-version: '22'
           registry-url: 'https://registry.npmjs.org'
+      # npm Trusted Publishing (tokenless OIDC) needs npm >= 11.5 — node 22 ships 10.x
+      - run: npm install -g npm@latest
       - run: npm ci --ignore-scripts
       - run: npm run build
       - run: npm publish --workspace=packages/sdk-reactnative --access public --provenance
