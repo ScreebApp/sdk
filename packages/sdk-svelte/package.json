@@ -1,0 +1,65 @@
+{
+  "name": "@screeb/sdk-svelte",
+  "version": "0.1.0",
+  "description": "Screeb's browser SDK, optimized for Svelte.",
+  "keywords": [
+    "product discovery",
+    "product management",
+    "survey",
+    "analytics",
+    "user feedback",
+    "user research",
+    "svelte"
+  ],
+  "homepage": "https://screeb.app",
+  "bugs": {
+    "url": "https://github.com/ScreebApp/sdk/issues",
+    "email": "support@screeb.app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ScreebApp/sdk.git",
+    "directory": "packages/sdk-svelte"
+  },
+  "license": "MIT",
+  "author": "Screeb's frontend team",
+  "sideEffects": false,
+  "type": "module",
+  "module": "dist/es/index.mjs",
+  "main": "dist/cjs/index.cjs",
+  "types": "dist/es/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "rollup -c ../../node_modules/@screeb/typescript-config/src/rollup.config.js",
+    "clean": "rm -Rf dist",
+    "lint": "eslint .",
+    "release:check": "npm run build --workspace=@screeb/sdk-browser && npm run build && npm run lint",
+    "test": "echo \"no unit tests yet\""
+  },
+  "dependencies": {
+    "@screeb/sdk-browser": "^0.7.0"
+  },
+  "devDependencies": {
+    "@screeb/eslint-config": "^0.1.7",
+    "@screeb/typescript-config": "^0.1.12",
+    "@types/node": "^20.8.4",
+    "@typescript-eslint/eslint-plugin": "^6.7.5",
+    "eslint": "^8.51.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-prettier": "^5.0.1",
+    "prettier": "^3.0.3",
+    "rollup": "^4.0.2",
+    "svelte": ">=4.0.0",
+    "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "svelte": ">=4.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

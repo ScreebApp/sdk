@@ -1,18 +1,15 @@
-# plugin_screeb_example
+# Screeb Flutter Example
 
-Demonstrates how to use the plugin_screeb plugin.
+Minimal Flutter app for exercising the `plugin_screeb` wrapper.
 
 > Screeb SDK documentation: [developers.screeb.app/sdk-flutter/install](https://developers.screeb.app/sdk-flutter/install)
 
-## Getting Started
+## Run
 
-This project is a starting point for a Flutter application.
+```bash
+flutter pub get
+flutter run
+```
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The example initializes Screeb on startup and exposes buttons for identity,
+properties, events, screens, groups, survey start, debug, and shutdown.

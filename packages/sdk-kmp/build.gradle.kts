@@ -6,6 +6,7 @@ plugins {
     id("com.android.library") version "8.7.3"
     id("maven-publish")
     id("signing")
+    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
 }
 
 group = project.property("GROUP") as String
@@ -152,19 +153,16 @@ publishing {
             }
         }
     }
+}
+
+nexusPublishing {
     repositories {
-        maven {
-            name = "OSSRH"
-            url = uri(
-                if ((version as String).endsWith("SNAPSHOT"))
-                    "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-                else
-                    "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-            )
-            credentials {
-                username = System.getenv("OSSRH_USERNAME")
-                password = System.getenv("OSSRH_PASSWORD")
-            }
+        sonatype {
+            // Central Publishing Portal (legacy s01.oss.sonatype.org is decommissioned)
+            nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
+            username.set(System.getenv("OSSRH_USERNAME"))
+            password.set(System.getenv("OSSRH_PASSWORD"))
         }
     }
 }
@@ -177,4 +175,10 @@ signing {
         useInMemoryPgpKeys(gpgKeyId, gpgKey, gpgPassword)
         sign(publishing.publications)
     }
+}
+
+// The shared javadoc jar is signed once per publication into the same .asc:
+// every publish task must wait for all sign tasks or Gradle fails validation.
+tasks.withType<AbstractPublishToMaven>().configureEach {
+    dependsOn(tasks.withType<Sign>())
 }

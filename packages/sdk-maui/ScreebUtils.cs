@@ -8,6 +8,9 @@ public static class ScreebUtils
     /// Mirrors Flutter's _formatDates and React Native's normalizeValue.
     /// </summary>
     public static Dictionary<string, object>? FormatProperties(Dictionary<string, object>? props)
+        => FormatNativeProperties(props);
+
+    public static Dictionary<string, object>? FormatNativeProperties(Dictionary<string, object>? props)
     {
         if (props == null) return null;
         var result = new Dictionary<string, object>(props.Count);
@@ -20,7 +23,9 @@ public static class ScreebUtils
     {
         DateTimeOffset dto => FormatDateTimeOffset(dto),
         DateTime dt => FormatDateTimeOffset(new DateTimeOffset(dt)),
-        Dictionary<string, object> nested => FormatProperties(nested)!,
+        Dictionary<string, object> nested => FormatNativeProperties(nested)!,
+        IDictionary<string, object> nested => FormatNativeProperties(new Dictionary<string, object>(nested))!,
+        IEnumerable<object> values => values.Select(FormatValue).ToArray(),
         _ => value
     };
 

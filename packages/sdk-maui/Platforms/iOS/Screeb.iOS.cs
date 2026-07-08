@@ -19,8 +19,22 @@ public static partial class Screeb
         return tcs.Task;
     }
 
-    private static Task<bool?> OnMain(Action body) =>
-        OnMain(tcs => { body(); tcs.SetResult(true); });
+    // Fire-and-forget calls return true on success and false on failure (never
+    // faults the task, so an unobserved fire-and-forget call can't crash the app).
+    private static Task<bool?> OnMain(Action body)
+    {
+        var tcs = new TaskCompletionSource<bool?>(TaskCreationOptions.RunContinuationsAsynchronously);
+        NSRunLoop.Main.BeginInvokeOnMainThread(() =>
+        {
+            try { body(); tcs.SetResult(true); }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[Screeb] call failed: {ex}");
+                tcs.SetResult(false);
+            }
+        });
+        return tcs.Task;
+    }
 
     private static Task<T?> OnMain<T>(Action<TaskCompletionSource<T?>> body) where T : class
     {
@@ -50,6 +64,9 @@ public static partial class Screeb
 
     public static partial Task<bool?> CloseSdk()
         => OnMain(() => { HooksRegistry.UnregisterAll(); NativeScreeb.CloseSdk(); });
+
+    public static partial Task<bool?> HandleDeepLink(string url)
+        => OnMain(() => NativeScreeb.HandleDeepLink(new NSUrl(url)));
 
     public static partial Task<bool?> SetIdentity(string userId, Dictionary<string, object>? properties)
         => OnMain(() => NativeScreeb.SetIdentity(
@@ -144,14 +161,23 @@ public static partial class Screeb
         foreach (var (k, v) in dict)
         {
             keys.Add(new NSString(k));
-            values.Add(v is string s ? new NSString(s) :
-                       v is bool b ? NSNumber.FromBoolean(b) :
-                       v is int i ? NSNumber.FromInt32(i) :
-                       v is long l ? NSNumber.FromInt64(l) :
-                       v is double d ? NSNumber.FromDouble(d) :
-                       (NSObject)new NSString(v.ToString() ?? ""));
+            values.Add(ToNSObject(v));
         }
         return NSDictionary.FromObjectsAndKeys(values.ToArray(), keys.ToArray());
+    }
+
+    private static NSObject ToNSObject(object value)
+    {
+        if (value is NSObject nsObject) return nsObject;
+        if (value is string s) return new NSString(s);
+        if (value is bool b) return NSNumber.FromBoolean(b);
+        if (value is int i) return NSNumber.FromInt32(i);
+        if (value is long l) return NSNumber.FromInt64(l);
+        if (value is float f) return NSNumber.FromFloat(f);
+        if (value is double d) return NSNumber.FromDouble(d);
+        if (value is Dictionary<string, object> nested) return ToNSDictionary(nested) ?? new NSDictionary();
+        if (value is IDictionary<string, object> nestedDict) return ToNSDictionary(new Dictionary<string, object>(nestedDict)) ?? new NSDictionary();
+        return new NSString(value.ToString() ?? "");
     }
 
     private static Dictionary<string, object>? FromNSDictionary(NSDictionary? dict)

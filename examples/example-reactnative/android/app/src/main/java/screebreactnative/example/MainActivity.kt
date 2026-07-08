@@ -1,5 +1,8 @@
 package screebreactnative.example
 
+import android.content.Intent
+import android.os.Bundle
+import app.screeb.sdk.Screeb
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
@@ -19,4 +22,16 @@ class MainActivity : ReactActivity() {
    */
   override fun createReactActivityDelegate(): ReactActivityDelegate =
       DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled)
+
+  // Forward Screeb deep links (e.g. screeb-<channel-id>://inspector) to the SDK.
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    Screeb.handleDeepLink(intent)
+  }
+
+  override fun onNewIntent(intent: Intent?) {
+    super.onNewIntent(intent)
+    setIntent(intent)
+    Screeb.handleDeepLink(intent)
+  }
 }

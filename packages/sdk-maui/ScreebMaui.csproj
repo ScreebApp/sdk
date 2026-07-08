@@ -6,9 +6,10 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <SingleProject>true</SingleProject>
+    <UseMaui>true</UseMaui>
     <!-- NuGet metadata -->
     <PackageId>Screeb.Maui</PackageId>
-    <Version>0.1.0</Version>
+    <Version>4.0.2</Version>
     <Authors>Screeb</Authors>
     <Company>Screeb</Company>
     <Description>Screeb Continuous Product Discovery SDK for .NET MAUI (Android + iOS)</Description>
@@ -19,6 +20,10 @@
     <PackageTags>maui android ios screeb survey analytics</PackageTags>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.120" />
+  </ItemGroup>
 
   <!-- Exclude platform-specific and test files from the default SDK glob -->
   <ItemGroup>
@@ -31,6 +36,7 @@
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
     <Compile Include="Platforms/Android/Screeb.Android.cs" />
     <Compile Include="Platforms/Android/HooksAndroid.cs" />
+    <Compile Include="Platforms/Android/ScreebView.Android.cs" />
   </ItemGroup>
 
   <!-- iOS: activate bgen binding generation -->
@@ -45,17 +51,42 @@
     <Compile Include="Platforms/iOS/ScreebClassPtr.cs" />
     <Compile Include="Platforms/iOS/Screeb.iOS.cs" />
     <Compile Include="Platforms/iOS/HooksIOS.cs" />
+    <Compile Include="Platforms/iOS/ScreebView.iOS.cs" />
   </ItemGroup>
 
   <!-- Android native binding -->
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+    <!-- Published binding from Maven Central (default). -->
     <AndroidMavenLibrary
+      Condition="'$(SCREEB_USE_LOCAL_SDK)' != 'true'"
       Include="app.screeb.sdk:survey"
-      Version="3.2.0"
+      Version="4.0.2"
       Bind="true" />
+    <!-- Local dev binding (SCREEB_USE_LOCAL_SDK=true): bind the aar published to ~/.m2 via
+         `./gradlew :sdk:publishReleasePublicationToMavenLocal` in sdk-android. Binding the local
+         aar directly (not AndroidMavenLibrary) skips the Maven Java-dependency verification. -->
+    <AndroidLibrary
+      Condition="'$(SCREEB_USE_LOCAL_SDK)' == 'true'"
+      Include="$(HOME)/.m2/repository/app/screeb/sdk/survey/4.0.2/survey-4.0.2.aar"
+      Bind="true" />
+    <!-- Strips R8-obfuscated (a/b/c) + internal-only nodes from the generated survey binding -->
+    <TransformFile Include="Transforms/AndroidMetadata.xml" />
     <!-- Transitive Maven dependencies required by app.screeb.sdk:survey -->
+    <!-- StdLib (base) satisfies the survey pom's org.jetbrains.kotlin:kotlin-stdlib dep;
+         Jdk8 alone maps to kotlin-stdlib-jdk8 and does not clear XA4242 verification. -->
+    <PackageReference Include="Xamarin.Kotlin.StdLib" Version="2.3.21" />
     <PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="2.3.21" />
+    <PackageReference Include="Xamarin.AndroidX.Activity.Ktx" Version="1.12.4.1" />
+    <PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.6.0" />
     <PackageReference Include="Xamarin.AndroidX.Core.Core.Ktx" Version="1.18.0" />
+    <PackageReference Include="Xamarin.AndroidX.Fragment.Ktx" Version="1.8.9.2" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.10.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData.Core.Ktx" Version="2.10.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Process" Version="2.10.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Runtime.Ktx" Version="2.10.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Runtime.Ktx.Android" Version="2.10.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.ViewModel.Ktx" Version="2.10.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.SavedState.SavedState.Ktx" Version="1.4.0.2" />
     <PackageReference Include="Xamarin.AndroidX.WebKit" Version="1.16.0" />
     <PackageReference Include="Xamarin.Google.Android.Play.Review" Version="2.0.2.7" />
     <PackageReference Include="Xamarin.Google.Android.Play.Review.Ktx" Version="2.0.2.7" />

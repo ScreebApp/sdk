@@ -11,12 +11,16 @@ Pod::Spec.new do |s|
   s.authors      = package["author"]
 
   s.platforms    = { :ios => "12.0" }
-  s.source       = { :git => "https://github.com/ScreebApp/sdk-reactnative.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/ScreebApp/sdk.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,m,mm,cpp,swift}"
   s.private_header_files = "ios/**/*.h"
 
-  s.dependency "Screeb", '~> 3.1.1'
+  if ENV["SCREEB_USE_LOCAL_SDK"] == "true"
+    s.dependency "Screeb"
+  else
+    s.dependency "Screeb", '~> 4.0.2'
+  end
   s.dependency "React-Core"
   install_modules_dependencies(s)
 end

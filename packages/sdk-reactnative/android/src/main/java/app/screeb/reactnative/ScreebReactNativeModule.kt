@@ -27,32 +27,8 @@ class ScreebReactNativeModule(reactContext: ReactApplicationContext) :
     language: String?,
     promise: Promise
   ) {
-    Screeb.setSecondarySDK("react-native", "3.1.1")
-
-    val mapHooks: HashMap<String, Any>? = hooks?.let { readable ->
-      hashMapOf<String, Any>().apply {
-        val itKeys = readable.keySetIterator()
-        while (itKeys.hasNextKey()) {
-          val key = itKeys.nextKey()
-          if (key == "version") {
-            put(key, readable.getString(key)!!)
-          } else {
-            val value = readable.getString(key)
-            put(key) { payload: Any ->
-              reactApplicationContext
-                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-                .emit(
-                  "ScreebEvent",
-                  Arguments.createMap().apply {
-                    putString("hookId", value!!)
-                    putString("payload", payload.toString())
-                  }
-                )
-            }
-          }
-        }
-      }
-    }
+    Screeb.setSecondarySDK("react-native", "4.0.2")
+    val mapHooks = makeHooks(hooks)
 
     Handler(Looper.getMainLooper()).post {
       Screeb.pluginInit(channelId, userId, fromReadableMap(properties), fromReadableMap(initOptions), mapHooks, language)
@@ -112,30 +88,7 @@ class ScreebReactNativeModule(reactContext: ReactApplicationContext) :
     distributionId: String?,
     promise: Promise
   ) {
-    val mapHooks: HashMap<String, Any>? = hooks?.let { readable ->
-      hashMapOf<String, Any>().apply {
-        val itKeys = readable.keySetIterator()
-        while (itKeys.hasNextKey()) {
-          val key = itKeys.nextKey()
-          if (key == "version") {
-            put(key, readable.getString(key)!!)
-          } else {
-            val value = readable.getString(key)
-            put(key) { payload: Any ->
-              reactApplicationContext
-                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-                .emit(
-                  "ScreebEvent",
-                  Arguments.createMap().apply {
-                    putString("hookId", value!!)
-                    putString("payload", payload.toString())
-                  }
-                )
-            }
-          }
-        }
-      }
-    }
+    val mapHooks = makeHooks(hooks)
 
     Handler(Looper.getMainLooper()).post {
       Screeb.startSurvey(
@@ -161,30 +114,7 @@ class ScreebReactNativeModule(reactContext: ReactApplicationContext) :
     distributionId: String?,
     promise: Promise
   ) {
-    val mapHooks: HashMap<String, Any>? = hooks?.let { readable ->
-      hashMapOf<String, Any>().apply {
-        val itKeys = readable.keySetIterator()
-        while (itKeys.hasNextKey()) {
-          val key = itKeys.nextKey()
-          if (key == "version") {
-            put(key, readable.getString(key)!!)
-          } else {
-            val value = readable.getString(key)
-            put(key) { payload: Any ->
-              reactApplicationContext
-                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-                .emit(
-                  "ScreebEvent",
-                  Arguments.createMap().apply {
-                    putString("hookId", value!!)
-                    putString("payload", payload.toString())
-                  }
-                )
-            }
-          }
-        }
-      }
-    }
+    val mapHooks = makeHooks(hooks)
 
     Handler(Looper.getMainLooper()).post {
       Screeb.startMessage(
@@ -264,6 +194,13 @@ class ScreebReactNativeModule(reactContext: ReactApplicationContext) :
     }
   }
 
+  override fun handleDeepLink(url: String, promise: Promise) {
+    Handler(Looper.getMainLooper()).post {
+      Screeb.handleDeepLink(android.net.Uri.parse(url))
+      promise.resolve(null)
+    }
+  }
+
   override fun closeSurvey(surveyId: String?, promise: Promise) {
     Handler(Looper.getMainLooper()).post {
       Screeb.closeSurvey(surveyId)
@@ -287,6 +224,37 @@ class ScreebReactNativeModule(reactContext: ReactApplicationContext) :
 
   private fun fromReadableMap(readableMap: ReadableMap?): HashMap<String, Any?>? =
     readableMap?.toHashMap() as? HashMap<String, Any?>
+
+  private fun makeHooks(hooks: ReadableMap?): HashMap<String, Any>? {
+    if (hooks == null) return null
+
+    val hookIds = hashMapOf<String, String>()
+    val keys = hooks.keySetIterator()
+    while (keys.hasNextKey()) {
+      val key = keys.nextKey()
+      val value = hooks.getString(key) ?: continue
+      hookIds[key] = value
+    }
+
+    if (hookIds.isEmpty()) return null
+
+    return Screeb.makeHooks(hookIds) { hookId, nativeHookId, payload ->
+      emitHookEvent(hookId, nativeHookId, payload)
+    }
+  }
+
+  private fun emitHookEvent(hookId: String, nativeHookId: String, payload: String) {
+    reactApplicationContext
+      .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+      .emit(
+        "ScreebEvent",
+        Arguments.createMap().apply {
+          putString("hookId", hookId)
+          putString("nativeHookId", nativeHookId)
+          putString("payload", payload)
+        }
+      )
+  }
 
   companion object {
     const val NAME = "ScreebReactNative"

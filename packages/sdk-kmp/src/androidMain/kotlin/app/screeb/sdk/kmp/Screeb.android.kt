@@ -31,7 +31,7 @@ actual object Screeb {
                 language,
             )
             true
-        }.getOrNull()
+        }.orNullRethrowingCancellation()
     }
 
     actual suspend fun closeSdk(): Boolean? = withContext(Dispatchers.Main) {
@@ -40,7 +40,7 @@ actual object Screeb {
             HooksScope.reset()
             AndroidScreeb.closeSdk()
             true
-        }.getOrNull()
+        }.orNullRethrowingCancellation()
     }
 
     actual suspend fun setIdentity(
@@ -53,7 +53,7 @@ actual object Screeb {
                 ScreebUtils.formatProperties(properties)?.let { HashMap(it) },
             )
             true
-        }.getOrNull()
+        }.orNullRethrowingCancellation()
     }
 
     actual suspend fun setProperties(properties: Map<String, Any>?): Boolean? =
@@ -62,11 +62,11 @@ actual object Screeb {
                 val props = ScreebUtils.formatProperties(properties)?.let { HashMap(it) }
                 if (props != null) AndroidScreeb.setVisitorProperties(props)
                 true
-            }.getOrNull()
+            }.orNullRethrowingCancellation()
         }
 
     actual suspend fun resetIdentity(): Boolean? = withContext(Dispatchers.Main) {
-        runCatching { AndroidScreeb.resetIdentity(); true }.getOrNull()
+        runCatching { AndroidScreeb.resetIdentity(); true }.orNullRethrowingCancellation()
     }
 
     actual suspend fun getIdentity(): Map<String, Any>? = withContext(Dispatchers.Main) {
@@ -77,7 +77,7 @@ actual object Screeb {
                     else cont.resume(identity?.filterValues { it != null }?.mapValues { it.value!! })
                 }
             }
-        }.getOrNull()
+        }.orNullRethrowingCancellation()
     }
 
     actual suspend fun assignGroup(
@@ -91,7 +91,7 @@ actual object Screeb {
                 ScreebUtils.formatProperties(properties)?.let { HashMap(it) },
             )
             true
-        }.getOrNull()
+        }.orNullRethrowingCancellation()
     }
 
     actual suspend fun unassignGroup(
@@ -105,7 +105,7 @@ actual object Screeb {
                 ScreebUtils.formatProperties(properties)?.let { HashMap(it) },
             )
             true
-        }.getOrNull()
+        }.orNullRethrowingCancellation()
     }
 
     actual suspend fun trackEvent(name: String, properties: Map<String, Any>?): Boolean? =
@@ -116,7 +116,7 @@ actual object Screeb {
                     ScreebUtils.formatProperties(properties)?.let { HashMap(it) },
                 )
                 true
-            }.getOrNull()
+            }.orNullRethrowingCancellation()
         }
 
     actual suspend fun trackScreen(name: String, properties: Map<String, Any>?): Boolean? =
@@ -127,7 +127,7 @@ actual object Screeb {
                     ScreebUtils.formatProperties(properties)?.let { HashMap(it) },
                 )
                 true
-            }.getOrNull()
+            }.orNullRethrowingCancellation()
         }
 
     actual suspend fun startSurvey(
@@ -149,11 +149,11 @@ actual object Screeb {
                 language, distributionId,
             )
             true
-        }.getOrNull()
+        }.orNullRethrowingCancellation()
     }
 
     actual suspend fun closeSurvey(surveyId: String?): Boolean? = withContext(Dispatchers.Main) {
-        runCatching { AndroidScreeb.closeSurvey(surveyId); true }.getOrNull()
+        runCatching { AndroidScreeb.closeSurvey(surveyId); true }.orNullRethrowingCancellation()
     }
 
     actual suspend fun startMessage(
@@ -175,19 +175,19 @@ actual object Screeb {
                 language, distributionId,
             )
             true
-        }.getOrNull()
+        }.orNullRethrowingCancellation()
     }
 
     actual suspend fun closeMessage(messageId: String?): Boolean? = withContext(Dispatchers.Main) {
-        runCatching { AndroidScreeb.closeMessage(messageId); true }.getOrNull()
+        runCatching { AndroidScreeb.closeMessage(messageId); true }.orNullRethrowingCancellation()
     }
 
     actual suspend fun sessionReplayStart(): Boolean? = withContext(Dispatchers.Main) {
-        runCatching { AndroidScreeb.sessionReplayStart(); true }.getOrNull()
+        runCatching { AndroidScreeb.sessionReplayStart(); true }.orNullRethrowingCancellation()
     }
 
     actual suspend fun sessionReplayStop(): Boolean? = withContext(Dispatchers.Main) {
-        runCatching { AndroidScreeb.sessionReplayStop(); true }.getOrNull()
+        runCatching { AndroidScreeb.sessionReplayStop(); true }.orNullRethrowingCancellation()
     }
 
     actual suspend fun debug(): String? = withContext(Dispatchers.Main) {
@@ -198,7 +198,7 @@ actual object Screeb {
                     else cont.resume(info)
                 }
             }
-        }.getOrNull()
+        }.orNullRethrowingCancellation()
     }
 
     actual suspend fun debugTargeting(): String? = withContext(Dispatchers.Main) {
@@ -209,6 +209,10 @@ actual object Screeb {
                     else cont.resume(info)
                 }
             }
-        }.getOrNull()
+        }.orNullRethrowingCancellation()
+    }
+
+    actual fun handleDeepLink(url: String?) {
+        AndroidScreeb.handleDeepLink(url)
     }
 }

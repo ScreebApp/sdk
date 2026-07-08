@@ -8,26 +8,40 @@ RCT_EXTERN_METHOD(initSdk:(NSString *)channelId
                   properties:(nullable NSDictionary *)properties
                   hooks:(nullable NSDictionary *)hooks
                   initOptions:(nullable NSDictionary *)initOptions
-                  language:(nullable NSString *)language)
+                  language:(nullable NSString *)language
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(setIdentity:(NSString *)userId
-                  properties:(nullable NSDictionary *)properties)
+                  properties:(nullable NSDictionary *)properties
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 
-RCT_EXTERN_METHOD(setProperties:(nullable NSDictionary *)properties)
+RCT_EXTERN_METHOD(setProperties:(nullable NSDictionary *)properties
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(assignGroup:(nullable NSString *)type
                   name:(NSString *)name
-                  properties:(nullable NSDictionary *)properties)
+                  properties:(nullable NSDictionary *)properties
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(unassignGroup:(nullable NSString *)type
                   name:(NSString *)name
-                  properties:(nullable NSDictionary *)properties)
+                  properties:(nullable NSDictionary *)properties
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(trackEvent:(NSString *)name
-                  properties:(nullable NSDictionary *)properties)
+                  properties:(nullable NSDictionary *)properties
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(trackScreen:(NSString *)name
-                  properties:(nullable NSDictionary *)properties)
+                  properties:(nullable NSDictionary *)properties
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(startSurvey:(NSString *)surveyId
                   allowMultipleResponses:(BOOL)allowMultipleResponses
@@ -35,7 +49,9 @@ RCT_EXTERN_METHOD(startSurvey:(NSString *)surveyId
                   ignoreSurveyStatus:(BOOL)ignoreSurveyStatus
                   hooks:(nullable NSDictionary *)hooks
                   language:(nullable NSString *)language
-                  distributionId:(nullable NSString *)distributionId)
+                  distributionId:(nullable NSString *)distributionId
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(startMessage:(NSString *)messageId
                   allowMultipleResponses:(BOOL)allowMultipleResponses
@@ -43,7 +59,9 @@ RCT_EXTERN_METHOD(startMessage:(NSString *)messageId
                   ignoreMessageStatus:(BOOL)ignoreMessageStatus
                   hooks:(nullable NSDictionary *)hooks
                   language:(nullable NSString *)language
-                  distributionId:(nullable NSString *)distributionId)
+                  distributionId:(nullable NSString *)distributionId
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(debug:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
@@ -51,22 +69,36 @@ RCT_EXTERN_METHOD(debug:(RCTPromiseResolveBlock)resolve
 RCT_EXTERN_METHOD(debugTargeting:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 
-RCT_EXTERN_METHOD(sessionReplayStart)
+RCT_EXTERN_METHOD(sessionReplayStart:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 
-RCT_EXTERN_METHOD(sessionReplayStop)
+RCT_EXTERN_METHOD(sessionReplayStop:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 
-RCT_EXTERN_METHOD(resetIdentity)
+RCT_EXTERN_METHOD(resetIdentity:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(getIdentity:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 
-RCT_EXTERN_METHOD(closeSdk)
+RCT_EXTERN_METHOD(closeSdk:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 
-RCT_EXTERN_METHOD(closeSurvey:(nullable NSString *)surveyId)
+RCT_EXTERN_METHOD(handleDeepLink:(NSString *)url
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 
-RCT_EXTERN_METHOD(closeMessage:(nullable NSString *)messageId)
+RCT_EXTERN_METHOD(closeSurvey:(nullable NSString *)surveyId
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(closeMessage:(nullable NSString *)messageId
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(onHookResult:(NSString *)hookId
-                  payload:(nullable NSDictionary *)payload)
+                  payload:(nullable NSDictionary *)payload
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
 
 @end

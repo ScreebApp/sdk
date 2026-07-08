@@ -9,13 +9,13 @@ jobs:
   publish:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '20'
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9 # v4
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -23,12 +23,14 @@ jobs:
       - run: npm run versions:check
 
       - name: Download Screeb iOS XCFramework
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           SCREEB_IOS_SDK_VERSION=$(grep '^SCREEB_IOS_SDK_VERSION=' packages/sdk-kmp/gradle.properties | cut -d= -f2)
-          SCREEB_IOS_URL=$(curl -sL "https://api.github.com/repos/ScreebApp/sdk-ios-public/releases/tags/v${SCREEB_IOS_SDK_VERSION}" \
-            | python3 -c "import sys,json; print(next(a['browser_download_url'] for a in json.load(sys.stdin)['assets'] if a['name']=='Screeb.zip'))")
-          curl -sL "$SCREEB_IOS_URL" -o /tmp/Screeb.zip
+          # Authenticated download (anonymous api.github.com calls are rate-limited
+          # on shared runners and come back without 'assets').
+          gh release download "${SCREEB_IOS_SDK_VERSION}" --repo ScreebApp/sdk-ios-public --pattern 'Screeb.zip' --output /tmp/Screeb.zip --clobber
           unzip -q /tmp/Screeb.zip -d /tmp/screeb_ios
           mkdir -p packages/sdk-kmp/native/ios
           cp -r /tmp/screeb_ios/Screeb.xcframework packages/sdk-kmp/native/ios/
@@ -45,4 +47,4 @@ jobs:
           GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
           GPG_KEY: ${{ secrets.GPG_KEY }}
           GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
-        run: ./gradlew publishAllPublicationsToOSSRHRepository --no-daemon
+        run: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository --no-daemon

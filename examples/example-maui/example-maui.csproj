@@ -21,12 +21,15 @@
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
     <Compile Include="Platforms/iOS/**/*.cs" />
+    <!-- Merged into the generated Info.plist (Screeb deep-link URL scheme). -->
+    <PartialAppManifest Include="Platforms/iOS/Info.plist" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="../../packages/sdk-maui/ScreebMaui.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.120" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
   </ItemGroup>
   <!-- Pin Android dependency versions to avoid duplicate class conflicts (D8/R8) -->

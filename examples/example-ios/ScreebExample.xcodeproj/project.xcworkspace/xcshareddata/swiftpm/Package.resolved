@@ -1,0 +1,15 @@
+{
+  "originHash" : "0cd751fda7fdbb83a671a5f21c837bfc6ea38a685f7110b55b7a1b1fa7404c60",
+  "pins" : [
+    {
+      "identity" : "sdk-ios-public",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ScreebApp/sdk-ios-public",
+      "state" : {
+        "revision" : "a38e760cdf703441b2f803d74c6f53d4b8ed8ac6",
+        "version" : "3.2.4"
+      }
+    }
+  ],
+  "version" : 3
+}

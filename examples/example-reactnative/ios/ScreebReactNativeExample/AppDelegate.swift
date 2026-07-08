@@ -2,6 +2,7 @@ import UIKit
 import React
 import React_RCTAppDelegate
 import ReactAppDependencyProvider
+import Screeb
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,6 +30,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       launchOptions: launchOptions
     )
 
+    // Cold start from a deep link (app not running when the URL was opened).
+    Screeb.handleDeepLink(url: launchOptions?[.url] as? URL)
+    return true
+  }
+
+  func application(
+    _ app: UIApplication,
+    open url: URL,
+    options: [UIApplication.OpenURLOptionsKey: Any] = [:]
+  ) -> Bool {
+    // Screeb deep links (screeb-* scheme) — editor/survey/message links open in-app.
+    Screeb.handleDeepLink(url: url)
     return true
   }
 }

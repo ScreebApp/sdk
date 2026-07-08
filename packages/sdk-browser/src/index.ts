@@ -558,6 +558,32 @@ export const sessionReplayStart = () =>
   callScreebCommand("session-replay.start");
 
 /**
+ * Marks an element as sensitive in Screeb session replay.
+ *
+ * The tag records it with masked text content.
+ */
+export const ScreebMaskText = <T extends Element>(element: T): T => {
+  element.classList.add("screeb-mask-text");
+  return element;
+};
+
+/**
+ * Excludes an element from Screeb session replay capture.
+ */
+export const ScreebNoCapture = <T extends Element>(element: T): T => {
+  element.classList.add("screeb-no-capture");
+  return element;
+};
+
+/**
+ * Sets a stable Screeb element ID for IAM targeting and replay context.
+ */
+export const ScreebId = <T extends Element>(element: T, id: string): T => {
+  element.setAttribute("data-screeb-id", id);
+  return element;
+};
+
+/**
  * Prints the current state of the targeting engine.
  *
  * @example

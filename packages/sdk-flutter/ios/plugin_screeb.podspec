@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'plugin_screeb'
-  s.version          = '3.1.0'
+  s.version          = '4.0.2'
   s.summary          = 'Screeb - Continuous Product Discovery Without the Time Sink'
   s.description      = 'Screeb - Continuous Product Discovery Without the Time Sink'
   s.homepage         = 'https://screeb.app'
@@ -21,5 +21,9 @@ Pod::Spec.new do |s|
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
   s.swift_version = '5.0'
 
-  s.dependency 'Screeb', '3.1.1'
+  if ENV['SCREEB_USE_LOCAL_SDK'] == 'true'
+    s.dependency 'Screeb'
+  else
+    s.dependency 'Screeb', '4.0.2'
+  end
 end

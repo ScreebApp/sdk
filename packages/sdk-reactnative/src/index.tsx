@@ -3,11 +3,25 @@ import {
   NativeEventEmitter,
   NativeModules,
   Platform,
+  View,
+  type ViewProps,
 } from 'react-native';
 import ScreebReactNative from './NativeScreebReactNative';
 
-// biome-ignore lint/suspicious/noExplicitAny: .
-let emitter: any;
+type ScreebEvent = {
+  hookId?: string;
+  nativeHookId?: string;
+  payload?: unknown;
+};
+type ScreebEventEmitter = {
+  addListener(
+    eventType: 'ScreebEvent',
+    listener: (event: ScreebEvent) => void
+  ): { remove: () => void };
+};
+
+let emitter: ScreebEventEmitter | undefined;
+let eventSubscription: { remove: () => void } | undefined;
 
 type HookFn = (payload: string) => unknown | Promise<unknown>;
 type HookMap = {
@@ -20,6 +34,10 @@ type InitOptions = {
   isDebugMode?: boolean;
   disableMirror?: boolean;
 };
+export type ScreebPrivacyViewProps = ViewProps;
+export type ScreebIdProps = ViewProps & {
+  id: string;
+};
 
 // initSdk
 export function initSdk(
@@ -30,36 +48,9 @@ export function initSdk(
   initOptions?: InitOptions,
   language?: string
 ) {
-  // Use NativeEventEmitter on both platforms; pass the native module on iOS
-  // and rely on the default emitter on Android.
-  if (Platform.OS === 'ios') {
-    emitter = new NativeEventEmitter(NativeModules.ScreebReactNative);
-  } else {
-    emitter = DeviceEventEmitter;
-  }
-
-  emitter.addListener('ScreebEvent', handleEvent);
-
-  let mapHooksId: HookIdsMap | undefined;
-  if (hooks != null) {
-    mapHooksId = {};
-    Object.keys(hooks).forEach((key) => {
-      if (key === 'version') {
-        const v = hooks.version ?? undefined;
-        if (v)
-          mapHooksId = { ...mapHooksId, version: v } as {
-            [key: string]: string;
-          };
-      } else {
-        const uuid = Date.now().toString() + Math.random().toString() + key;
-        const fn = (hooks as Record<string, unknown>)[key];
-        if (typeof fn === 'function') {
-          hooksRegistry.set(uuid, fn as HookFn);
-        }
-        mapHooksId = { ...mapHooksId, [key]: uuid };
-      }
-    });
-  }
+  registerEventListener();
+  hooksRegistry.clear();
+  const mapHooksId = buildHooksMap(hooks);
 
   return ScreebReactNative.initSdk(
     channelId,
@@ -130,26 +121,7 @@ export function startSurvey(
   language?: string,
   distributionId?: string
 ) {
-  let mapHooksId: HookIdsMap | undefined;
-  if (hooks !== undefined) {
-    mapHooksId = {};
-    Object.keys(hooks).forEach((key) => {
-      if (key === 'version') {
-        const v = hooks.version ?? undefined;
-        if (v)
-          mapHooksId = { ...mapHooksId, version: v } as {
-            [key: string]: string;
-          };
-      } else {
-        const uuid = Date.now().toString() + Math.random().toString() + key;
-        const fn = (hooks as Record<string, unknown>)[key];
-        if (typeof fn === 'function') {
-          hooksRegistry.set(uuid, fn as HookFn);
-        }
-        mapHooksId = { ...mapHooksId, [key]: uuid };
-      }
-    });
-  }
+  const mapHooksId = buildHooksMap(hooks);
   return ScreebReactNative.startSurvey(
     surveyId,
     allowMultipleResponses ?? true,
@@ -171,26 +143,7 @@ export function startMessage(
   language?: string,
   distributionId?: string
 ) {
-  let mapHooksId: HookIdsMap | undefined;
-  if (hooks !== undefined) {
-    mapHooksId = {};
-    Object.keys(hooks).forEach((key) => {
-      if (key === 'version') {
-        const v = hooks.version ?? undefined;
-        if (v)
-          mapHooksId = { ...mapHooksId, version: v } as {
-            [key: string]: string;
-          };
-      } else {
-        const uuid = Date.now().toString() + Math.random().toString() + key;
-        const fn = (hooks as Record<string, unknown>)[key];
-        if (typeof fn === 'function') {
-          hooksRegistry.set(uuid, fn as HookFn);
-        }
-        mapHooksId = { ...mapHooksId, [key]: uuid };
-      }
-    });
-  }
+  const mapHooksId = buildHooksMap(hooks);
   return ScreebReactNative.startMessage(
     messageId,
     allowMultipleResponses ?? true,
@@ -232,12 +185,19 @@ export function getIdentity() {
   return ScreebReactNative.getIdentity();
 }
 
+// handleDeepLink — forward a Screeb deep link (screeb-<channel-id> scheme) to
+// the SDK: editor, survey and message links open in-app. Wire it to your
+// linking events (e.g. expo-linking / RN Linking url listener).
+export function handleDeepLink(url: string) {
+  return ScreebReactNative.handleDeepLink(url);
+}
+
 // closeSdk
 export function closeSdk() {
-  if (emitter) {
-    emitter.removeAllListeners('ScreebEvent');
-    emitter = undefined;
-  }
+  eventSubscription?.remove();
+  eventSubscription = undefined;
+  emitter = undefined;
+  hooksRegistry.clear();
   return ScreebReactNative.closeSdk();
 }
 
@@ -251,12 +211,103 @@ export function closeMessage(messageId?: string) {
   return ScreebReactNative.closeMessage(messageId);
 }
 
+export function ScreebMaskText(props: ScreebPrivacyViewProps) {
+  const marker = screebPlatformMarker({
+    android: 'screeb-mask-text',
+    ios: 'screebMaskText',
+  });
+
+  return (
+    <View
+      {...props}
+      accessibilityLabel={marker}
+      collapsable={false}
+      nativeID={marker}
+    />
+  );
+}
+
+export function ScreebNoCapture(props: ScreebPrivacyViewProps) {
+  const marker = screebPlatformMarker({
+    android: 'screeb-no-capture',
+    ios: 'screebNoCapture',
+  });
+
+  return (
+    <View
+      {...props}
+      accessibilityLabel={marker}
+      collapsable={false}
+      nativeID={marker}
+    />
+  );
+}
+
+export function ScreebId({ id, ...props }: ScreebIdProps) {
+  const marker = `screebId:${id}`;
+
+  return (
+    <View
+      {...props}
+      accessibilityLabel={marker}
+      collapsable={false}
+      nativeID={marker}
+    />
+  );
+}
+
 const hooksRegistry = new Map<
   string,
   (payload: string) => unknown | Promise<unknown>
 >();
 
-function handleEvent(event: { hookId?: string; payload?: unknown }) {
+function screebPlatformMarker(markers: { android: string; ios: string }) {
+  return Platform.OS === 'android' ? markers.android : markers.ios;
+}
+
+function registerEventListener() {
+  eventSubscription?.remove();
+
+  // Use NativeEventEmitter on both platforms; pass the native module on iOS
+  // and rely on the default emitter on Android.
+  if (Platform.OS === 'ios') {
+    emitter = new NativeEventEmitter(
+      NativeModules.ScreebReactNative
+    ) as unknown as ScreebEventEmitter;
+  } else {
+    emitter = DeviceEventEmitter as unknown as ScreebEventEmitter;
+  }
+
+  eventSubscription = emitter?.addListener('ScreebEvent', handleEvent);
+}
+
+function buildHooksMap(hooks?: HookMap | null): HookIdsMap | undefined {
+  if (hooks == null) {
+    return undefined;
+  }
+
+  const mapHooksId: HookIdsMap = {};
+  Object.keys(hooks).forEach((key) => {
+    if (key === 'version') {
+      const version = hooks.version ?? undefined;
+      if (version) {
+        mapHooksId.version = version;
+      }
+      return;
+    }
+
+    const uuid = Date.now().toString() + Math.random().toString() + key;
+    const fn = (hooks as Record<string, unknown>)[key];
+    if (typeof fn === 'function') {
+      hooksRegistry.set(uuid, fn as HookFn);
+    }
+    mapHooksId[key] = uuid;
+  });
+
+  return mapHooksId;
+}
+
+function handleEvent(event: ScreebEvent) {
   if (event?.hookId != null) {
     const hook = hooksRegistry.get(event.hookId);
     if (hook != null) {
@@ -265,12 +316,19 @@ function handleEvent(event: { hookId?: string; payload?: unknown }) {
           ? JSON.stringify(event.payload)
           : event.payload
         : '{}';
-      const result = hook(payload);
-      const parsedPayload = JSON.parse(payload);
-      const originalHookId = parsedPayload?.hook_id;
+      let originalHookId = event.nativeHookId;
+      if (!originalHookId) {
+        try {
+          const parsedPayload = JSON.parse(payload) as { hook_id?: string };
+          originalHookId = parsedPayload?.hook_id;
+        } catch (error) {
+          console.error(error);
+          return;
+        }
+      }
       if (originalHookId) {
-        if (result instanceof Promise) {
-          result
+        try {
+          Promise.resolve(hook(payload))
             .then((hookResult) => {
               ScreebReactNative.onHookResult(originalHookId, {
                 result: hookResult,
@@ -278,9 +336,15 @@ function handleEvent(event: { hookId?: string; payload?: unknown }) {
             })
             .catch((error) => {
               console.error(error);
+              ScreebReactNative.onHookResult(originalHookId, {
+                result: false,
+              });
             });
-        } else {
-          ScreebReactNative.onHookResult(originalHookId, { result });
+        } catch (error) {
+          console.error(error);
+          ScreebReactNative.onHookResult(originalHookId, {
+            result: false,
+          });
         }
       }
     }
@@ -329,14 +393,18 @@ function normalizeValue(value: unknown): unknown {
 
 // Format payloads so DateTime properties are correctly interpreted by the SDK
 function formatDateValue(value: Date): string {
-  const timezoneOffsetHours = -value.getTimezoneOffset() / 60;
-  const sign = timezoneOffsetHours >= 0 ? '+' : '-';
-  const offset = Math.abs(timezoneOffsetHours).toString().padStart(2, '0');
+  const timezoneOffsetMinutes = -value.getTimezoneOffset();
+  const sign = timezoneOffsetMinutes >= 0 ? '+' : '-';
+  const absOffset = Math.abs(timezoneOffsetMinutes);
+  const offsetHours = Math.floor(absOffset / 60)
+    .toString()
+    .padStart(2, '0');
+  const offsetMinutes = (absOffset % 60).toString().padStart(2, '0');
   const pad = (n: number, l = 2) => n.toString().padStart(l, '0');
   const isoWithoutTimezone = `${value.getFullYear()}-${pad(
     value.getMonth() + 1
   )}-${pad(value.getDate())}T${pad(value.getHours())}:${pad(
     value.getMinutes()
   )}:${pad(value.getSeconds())}.${pad(value.getMilliseconds(), 3)}`;
-  return `${isoWithoutTimezone}${sign}${offset}:00`;
+  return `${isoWithoutTimezone}${sign}${offsetHours}:${offsetMinutes}`;
 }

@@ -37,6 +37,12 @@ public static partial class Screeb
     /// <returns>true if closure succeeded, false if it failed or SDK not initialized, null if unsupported.</returns>
     public static partial Task<bool?> CloseSdk();
 
+    /// <summary>Forward a Screeb deep link (screeb-&lt;channel-id&gt; scheme) to the SDK —
+    /// editor, survey and message links open in-app. Call from your platform's
+    /// open-URL entry point (iOS OpenUrl / Android OnNewIntent).</summary>
+    /// <returns>true if the link was forwarded, false on failure, null if unsupported.</returns>
+    public static partial Task<bool?> HandleDeepLink(string url);
+
     /// <summary>Identify the current user with optional properties.</summary>
     /// <param name="userId">Visitor identifier.</param>
     /// <param name="properties">User properties. Supports string, int, double, bool, DateTime, and nested Dictionary values. Pass null for no properties.</param>

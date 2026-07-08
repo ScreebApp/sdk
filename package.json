@@ -17,12 +17,32 @@
     "prepare": "npm run build && husky install",
     "start": "lerna run start",
     "test": "lerna run --parallel test",
+    "versions:sync": "node scripts/sync-sdk-versions.mjs",
+    "versions:check": "node scripts/sync-sdk-versions.mjs --check",
+    "ci:js": "npm run versions:check && npm run build && npm run lint",
+    "release:check": "npm run versions:check && npm run build && npm run lint",
+    "examples:build": "npm run build --workspace=examples/example-browser && npm run build --workspace=examples/example-react && npm run build --workspace=examples/example-vue && npm run build --workspace=examples/example-svelte && npm run build --workspace=examples/example-angular && npm run build --workspace=examples/example-ionic",
+    "examples:lint": "npm run lint --workspace=examples/example-browser && npm run lint --workspace=examples/example-react && npm run lint --workspace=examples/example-vue && npm run lint --workspace=examples/example-svelte && npm run lint --workspace=examples/example-angular && npm run lint --workspace=examples/example-ionic",
+    "examples:check": "npm run examples:lint && npm run examples:build",
+    "docs:reference:update": "node scripts/update-public-docs-reference.mjs",
+    "docs:reference:check": "node scripts/update-public-docs-reference.mjs --check",
+    "docs:reference:coverage": "node scripts/update-public-docs-reference.mjs --check-capabilities",
+    "verify:release": "node scripts/verify-release.mjs",
+    "size:sdks": "node scripts/report-sdk-sizes.mjs",
     "upgrade:all": "npm-upgrade && lerna exec --concurrency 1 npm-upgrade",
-    "preversion": "npm run clean && npm i && npm run lint && npm run build && npm run test",
+    "preversion": "npm run clean && npm i && npm run versions:check && npm run lint && npm run build && npm run test",
     "version": "lerna version && npm run build && npm run push:release",
     "push:release": "git push origin HEAD && for t in $(git tag --points-at HEAD); do git push origin \"refs/tags/$t\"; done"
   },
-  "dependencies": {
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.22.5"
+  },
+  "packageManager": "npm@10.8.2",
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
+  "devDependencies": {
     "@commitlint/cli": "^17.7.2",
     "@commitlint/config-conventional": "^17.7.0",
     "@tsconfig/svelte": "^5.0.2",
@@ -31,12 +51,5 @@
     "svelte-check": "^4.0.0",
     "svelte-preprocess": "^5.0.4",
     "typescript": "^5.2.2"
-  },
-  "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "4.22.5"
-  },
-  "packageManager": "npm@10.8.2",
-  "engines": {
-    "node": ">=20.0.0"
   }
 }

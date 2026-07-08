@@ -57,7 +57,7 @@ import 'package:plugin_screeb/plugin_screeb.dart';
 PluginScreeb.initSdk("<channel-id>");
 
 // Optional: identify visitor
-PluginScreeb.setIdentity("<user-id>", {
+PluginScreeb.setIdentity("<user-id>", properties: {
   "firstname": "<user-firstname>",
   "lastname": "<user-lastname>",
   "plan": "<user-plan>",
@@ -76,7 +76,7 @@ For further information, see [our developer documentation](https://developers.sc
 
 ## Support
 
-For any issues, please contact our support team at support@screeb.com.
+For any issues, please contact our support team at support@screeb.app.
 
 ## Contributing
 

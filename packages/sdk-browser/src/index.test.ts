@@ -4,7 +4,9 @@ declare const window: Window & { $screeb?: Screeb.ScreebObject };
 
 describe("Screeb", () => {
   describe("load", () => {
-    afterEach(() => {
+    beforeEach(() => {
+      // Reset the shared tag state between tests.
+      delete window.$screeb;
       document.getElementsByTagName("html")[0].innerHTML = "";
     });
 
@@ -33,16 +35,15 @@ describe("Screeb", () => {
     it("should enqueue commands", () => {
       Screeb.load({ screebEndpoint: "https://t.not-screeb.app/custom-tag.js" });
 
-      expect(window.$screeb?.q).toEqual(undefined);
-
-      Screeb.init("website-uuid", "user-uuid", { test: 123 });
-
+      // load() bootstraps the queue with the internal SDK-identity command.
       expect(window.$screeb?.q).toEqual([
         {
           args: [
-            "init",
-            "website-uuid",
-            { identity: { id: "user-uuid", properties: { test: 123 } } },
+            "client.internal.web",
+            {
+              secondary_sdk_name: "sdk-browser",
+              secondary_sdk_version: expect.any(String),
+            },
           ],
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
@@ -53,6 +54,23 @@ describe("Screeb", () => {
           v: 1,
         },
       ]);
+
+      Screeb.init("website-uuid", "user-uuid", { test: 123 });
+
+      expect(window.$screeb?.q).toContainEqual({
+        args: [
+          "init",
+          "website-uuid",
+          { identity: { id: "user-uuid", properties: { test: 123 } } },
+        ],
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        ko: expect.any(Function),
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        ok: expect.any(Function),
+        v: 1,
+      });
     });
   });
 });

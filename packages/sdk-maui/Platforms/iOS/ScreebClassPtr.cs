@@ -10,4 +10,9 @@ namespace Screeb.iOS.Binding
     {
         static readonly NativeHandle class_ptr = Class.GetHandle("Screeb");
     }
+
+    public static unsafe partial class ScreebView
+    {
+        static readonly NativeHandle class_ptr = Class.GetHandle("ScreebView");
+    }
 }

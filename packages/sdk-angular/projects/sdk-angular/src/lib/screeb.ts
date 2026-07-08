@@ -323,8 +323,8 @@ export class Screeb {
    */
   public async surveyStart(
     surveyId: string,
-    distributionId: string,
-    allowMultipleResponses: boolean,
+    distributionId?: string,
+    allowMultipleResponses = true,
     hiddenFields?: _Screeb.PropertyRecord,
     hooks?: _Screeb.HooksSurveyStart,
     language?: string,
@@ -421,6 +421,27 @@ export class Screeb {
     await this.ensureScreeb("sessionReplayStart");
 
     return _Screeb.sessionReplayStart();
+  }
+
+  /**
+   * Marks an element as sensitive in Screeb session replay.
+   */
+  public ScreebMaskText<T extends Element>(element: T): T {
+    return _Screeb.ScreebMaskText(element);
+  }
+
+  /**
+   * Excludes an element from Screeb session replay capture.
+   */
+  public ScreebNoCapture<T extends Element>(element: T): T {
+    return _Screeb.ScreebNoCapture(element);
+  }
+
+  /**
+   * Sets a stable Screeb element ID for IAM targeting and replay context.
+   */
+  public ScreebId<T extends Element>(element: T, id: string): T {
+    return _Screeb.ScreebId(element, id);
   }
 
   /**

@@ -54,13 +54,13 @@ cd ios && pod install
 Basic usage:
 
 ```ts
-import { Screeb } from '@screeb/react-native';
+import { initSdk, setIdentity } from '@screeb/react-native';
 
 // Initialize Screeb SDK
-Screeb.initSdk("<channel-id>");
+initSdk("<channel-id>");
 
 // Optional: identify visitor
-Screeb.setIdentity("<user-id>", {
+setIdentity("<user-id>", {
   firstname: "<user-firstname>",
   lastname: "<user-lastname>",
   plan: "<user-plan>",
@@ -112,7 +112,7 @@ Re-run `prebuild` whenever native configuration changes. Use `npm run prebuild -
 
 ## Support
 
-For any issues, please contact our support team at support@screeb.com.
+For any issues, please contact our support team at support@screeb.app.
 
 ## Contributing
 

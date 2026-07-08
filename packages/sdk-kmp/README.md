@@ -72,7 +72,7 @@ Screeb.initSdk(
     channelId = "YOUR_CHANNEL_ID",
     userId = "user_123",
     properties = mapOf("plan" to "pro"),
-    initOptions = ScreebInitOptions(isDebugMode = true),
+    initOptions = ScreebInitOptions(isDebugMode = false),
 )
 
 // Track events
@@ -158,7 +158,7 @@ All methods return `Boolean?` (or the appropriate type), and `null` on unexpecte
 
 ## Support
 
-For any issues, please contact our support team at support@screeb.com.
+For any issues, please contact our support team at support@screeb.app.
 
 ## Contributing
 

@@ -30,7 +30,6 @@
   "types": "dist/es/index.d.ts",
   "files": [
     "dist",
-    "docs",
     "README.md"
   ],
   "scripts": {
@@ -38,7 +37,7 @@
     "build:doc": "typedoc src/index.ts",
     "clean": "rm -Rf dist",
     "lint": "eslint .",
-    "test": "echo '@TODO'"
+    "test": "echo \"no unit tests yet\""
   },
   "dependencies": {
     "@screeb/sdk-browser": "^0.7.0"

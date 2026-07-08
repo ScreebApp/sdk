@@ -1,0 +1,22 @@
+name: Publish @screeb/sdk-svelte
+
+on:
+  push:
+    tags:
+      - '@screeb/sdk-svelte@*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci --ignore-scripts
+      - run: npm run build
+      - run: npm publish --workspace=packages/sdk-svelte --access public --provenance

@@ -6,24 +6,143 @@ import screebLogo from "./assets/screeb.png";
 
 import "./App.css";
 
+// Reuse the same website id configured in the ScreebProvider (ProvidedApp.tsx).
+const WEBSITE_ID = "0e2b609a-8dce-4695-a80f-966fbfa87a88";
+
+// Placeholder ids — replace with real ones from your Screeb workspace.
+const SURVEY_ID = "1b1fe0c4-d41d-4307-9ca0-b0b66cce8cff";
+const MESSAGE_ID = "642929b9-28f1-4cb5-b153-f482777e0003";
+
 function App() {
   const {
-    debug,
-    eventTrack,
+    init,
+    identity,
     identityProperties,
     identityGroupAssign,
+    identityGroupUnassign,
+    identityReset,
     identityGet,
+    eventTrack,
+    surveyStart,
+    messageStart,
+    sessionReplayStart,
+    sessionReplayStop,
+    debug,
+    targetingDebug,
+    close,
   } = useScreeb();
 
-  React.useEffect(() => {
-    debug();
-    eventTrack("screeb-sdk-react-example started", { test: 123 });
-    identityProperties({ hello: "I'm a dev." });
-    identityGroupAssign("cohort", "Screeb Developers");
+  const [result, setResult] = React.useState<string>("");
 
-    // eslint-disable-next-line no-console
-    setTimeout(() => identityGet().then(console.log), 500);
-  }, [debug, eventTrack, identityProperties, identityGroupAssign, identityGet]);
+  const show = (value: unknown) => setResult(String(value ?? ""));
+
+  const actions: { label: string; onClick: () => void | Promise<void> }[] = [
+    {
+      label: "Init SDK",
+      onClick: async () => {
+        await init(WEBSITE_ID, "dev+1@screeb.app", { hello: "I'm a dev." });
+        show("SDK initialized");
+      },
+    },
+    {
+      label: "Set identity",
+      onClick: async () => {
+        await identity("dev+1@screeb.app", { authenticated: true });
+        show("Identity set");
+      },
+    },
+    {
+      label: "Set visitor properties",
+      onClick: async () => {
+        await identityProperties({ hello: "I'm a dev." });
+        show("Visitor properties set");
+      },
+    },
+    {
+      label: "Assign group",
+      onClick: async () => {
+        await identityGroupAssign("cohort", "Screeb Developers");
+        show("Group assigned");
+      },
+    },
+    {
+      label: "Unassign group",
+      onClick: async () => {
+        await identityGroupUnassign("cohort", "Screeb Developers");
+        show("Group unassigned");
+      },
+    },
+    {
+      label: "Reset identity",
+      onClick: async () => {
+        await identityReset();
+        show("Identity reset");
+      },
+    },
+    {
+      label: "Get identity",
+      onClick: async () => {
+        const identityResult = await identityGet();
+        show(JSON.stringify(identityResult, null, 2));
+      },
+    },
+    {
+      label: "Track event",
+      onClick: async () => {
+        await eventTrack("screeb-sdk-react-example event", { test: 123 });
+        show("Event tracked");
+      },
+    },
+    {
+      label: "Start survey",
+      onClick: async () => {
+        await surveyStart(SURVEY_ID);
+        show("Survey started");
+      },
+    },
+    {
+      label: "Start message",
+      onClick: async () => {
+        await messageStart(MESSAGE_ID);
+        show("Message started");
+      },
+    },
+    {
+      label: "Session replay start",
+      onClick: async () => {
+        await sessionReplayStart();
+        show("Session replay started");
+      },
+    },
+    {
+      label: "Session replay stop",
+      onClick: async () => {
+        await sessionReplayStop();
+        show("Session replay stopped");
+      },
+    },
+    {
+      label: "Debug SDK",
+      onClick: async () => {
+        const debugResult = await debug();
+        show(JSON.stringify(debugResult, null, 2));
+      },
+    },
+    {
+      label: "Debug targeting",
+      onClick: async () => {
+        const targetingResult = await targetingDebug();
+        show(JSON.stringify(targetingResult, null, 2));
+      },
+    },
+    {
+      label: "Close SDK",
+      onClick: async () => {
+        await close();
+        show("SDK closed");
+      },
+    },
+  ];
 
   return (
     <main>
@@ -50,6 +169,18 @@ function App() {
         </a>
         .
       </p>
+
+      <ul className="actions">
+        {actions.map((action) => (
+          <li key={action.label}>
+            <button type="button" onClick={action.onClick}>
+              {action.label}
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      {result && <pre className="targeting">{result}</pre>}
     </main>
   );
 }

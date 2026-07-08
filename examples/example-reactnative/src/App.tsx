@@ -4,7 +4,7 @@ import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
 
 const initScreeb = async () => {
 	Screeb.initSdk(
-		"de55cf0e-1cb6-4e2c-8bf5-ef4d72e63922", // preview
+		"0e2b609a-8dce-4695-a80f-966fbfa87a88",
 		"react-native@screeb.app",
 		{
 			logged_at_2: new Date(),
@@ -56,8 +56,6 @@ export default function App() {
 				<View style={styles.space} />
 				<Button title="Init SDK" onPress={() => initScreeb()} />
 				<View style={styles.space} />
-				<Button title="Close SDK" onPress={() => Screeb.closeSdk()} />
-				<View style={styles.space} />
 				<Button
 					title="Set identity"
 					onPress={() =>
@@ -68,6 +66,44 @@ export default function App() {
 						})
 					}
 				/>
+				<View style={styles.space} />
+				<Button
+					title="Set visitor properties"
+					onPress={() =>
+						Screeb.setProperties({
+							isConnected: false,
+							age: 29,
+							product: "iPhone 13",
+						})
+					}
+				/>
+				<View style={styles.space} />
+				<Button
+					title="Assign group"
+					onPress={() =>
+						Screeb.assignGroup(null, "Apple", {
+							age: null,
+							product: "iPhone 13",
+						})
+					}
+				/>
+				<View style={styles.space} />
+				<Button
+					title="Unassign group"
+					onPress={() =>
+						Screeb.unassignGroup(null, "Apple", {
+							age: null,
+							product: "iPhone 13",
+						})
+					}
+				/>
+				<View style={styles.space} />
+				<Button
+					title="Reset identity"
+					onPress={() => Screeb.resetIdentity()}
+				/>
+				<View style={styles.space} />
+				<Button title="Get identity" onPress={runGetIdentity} />
 				<View style={styles.space} />
 				<Button
 					title="Track event"
@@ -92,21 +128,10 @@ export default function App() {
 				/>
 				<View style={styles.space} />
 				<Button
-					title="Set visitor properties"
-					onPress={() =>
-						Screeb.setProperties({
-							isConnected: false,
-							age: 29,
-							product: "iPhone 13",
-						})
-					}
-				/>
-				<View style={styles.space} />
-				<Button
 					title="Start survey"
 					onPress={() =>
 						Screeb.startSurvey(
-							"8dd42ae1-f716-429c-9843-fad62adf2ac4",
+							"1b1fe0c4-d41d-4307-9ca0-b0b66cce8cff",
 							true,
 							null,
 							true,
@@ -122,30 +147,39 @@ export default function App() {
 				/>
 				<View style={styles.space} />
 				<Button
-					title="Assign group"
+					title="Start message"
 					onPress={() =>
-						Screeb.assignGroup(null, "Apple", {
-							age: null,
-							product: "iPhone 13",
-						})
+						Screeb.startMessage(
+							"642929b9-28f1-4cb5-b153-f482777e0003",
+							true,
+							null,
+							true,
+							{
+								version: "1.0.0",
+								onSurveyShowed: (payload: string) => {
+									console.log("onSurveyShowed", payload);
+									return null;
+								},
+							},
+						)
 					}
 				/>
 				<View style={styles.space} />
 				<Button
-					title="Unassign group"
-					onPress={() =>
-						Screeb.unassignGroup(null, "Apple", {
-							age: null,
-							product: "iPhone 13",
-						})
-					}
+					title="Session replay start"
+					onPress={() => Screeb.sessionReplayStart()}
 				/>
 				<View style={styles.space} />
-				<Button title="debug" onPress={runDebug} />
+				<Button
+					title="Session replay stop"
+					onPress={() => Screeb.sessionReplayStop()}
+				/>
 				<View style={styles.space} />
-				<Button title="debug targeting" onPress={runDebugTargeting} />
+				<Button title="Debug SDK" onPress={runDebug} />
 				<View style={styles.space} />
-				<Button title="get identity" onPress={runGetIdentity} />
+				<Button title="Debug targeting" onPress={runDebugTargeting} />
+				<View style={styles.space} />
+				<Button title="Close SDK" onPress={() => Screeb.closeSdk()} />
 				<View style={styles.space} />
 				<Text style={styles.output}>{output}</Text>
 			</View>

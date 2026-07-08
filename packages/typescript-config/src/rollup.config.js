@@ -3,6 +3,7 @@ import path from 'path'
 import fs from 'fs'
 
 import typescript from '@rollup/plugin-typescript';
+import terser from '@rollup/plugin-terser';
 
 const watcher = (globs) => ({
   buildStart () {
@@ -18,18 +19,27 @@ const updateVersion = () => ({
   }
 })
 
+// Keep the `CONSTANTS` binding intact (the updateVersion footer reassigns
+// CONSTANTS.version at runtime) and avoid constant-folding its reads.
+const minify = () => terser({
+  mangle: { reserved: ['CONSTANTS'] },
+  compress: { evaluate: false, reduce_vars: false },
+})
+
 export default {
     input: "src/index.ts",
     output: [
         {
             plugins: [
-                updateVersion()
+                updateVersion(),
+                minify(),
             ],
             file: "dist/es/index.mjs",
             format: "esm"
         }, {
             plugins: [
-                updateVersion()
+                updateVersion(),
+                minify(),
             ],
             file: "dist/cjs/index.cjs",
             format: "cjs"
