@@ -39,6 +39,17 @@ target 'ScreebReactNativeExample' do
       # :ccache_enabled => true
     )
 
+    # Local perf/debug logging for the Screeb pod (compiled out of published
+    # pods). Enable with SCREEB_TELEMETRY=true alongside SCREEB_USE_LOCAL_SDK=true.
+    installer.pods_project.targets.each do |target|
+      next unless target.name == "Screeb" && ENV["SCREEB_TELEMETRY"] == "true"
+
+      target.build_configurations.each do |config|
+        conditions = config.build_settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"] || "$(inherited)"
+        config.build_settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"] = "#{conditions} SCREEB_TELEMETRY"
+      end
+    end
+
     # Xcode 26 can compile React Native's fmt 11 pod with consteval enabled,
     # then fail in fmt's own constant-expression checks. Keep C++20 for RN,
     # but disable fmt consteval only for that pod.

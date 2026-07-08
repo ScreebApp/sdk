@@ -21,6 +21,8 @@
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
     <Compile Include="Platforms/iOS/**/*.cs" />
+    <!-- Merged into the generated Info.plist (Screeb deep-link URL scheme). -->
+    <PartialAppManifest Include="Platforms/iOS/Info.plist" />
   </ItemGroup>
 
   <ItemGroup>

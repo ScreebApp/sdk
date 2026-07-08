@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Modern launch screen: without it iOS letterboxes the app in a
+	     320x480 compatibility window. -->
+	<key>UILaunchScreen</key>
+	<dict/>
+	<!-- Screeb deep links (editor / survey / message) — merged into the
+	     generated Info.plist via PartialAppManifest (see example-maui.csproj). -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>app.screeb.example.maui</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>screeb-0e2b609a-8dce-4695-a80f-966fbfa87a88</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>
