@@ -40,6 +40,7 @@ jobs:
       - run: npm run build
       - run: npm run lint
       - run: npm test
+      - run: npm run test:changelog
       - run: npm run typecheck --workspace=@screeb/react-native
 
   flutter:
