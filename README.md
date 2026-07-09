@@ -16,6 +16,7 @@ Public SDKs for [Screeb](https://screeb.app) — the Product Discovery platform.
 | React Native | [`@screeb/react-native`](packages/sdk-reactnative) | [npm](https://www.npmjs.com/package/@screeb/react-native) | [Install](https://developers.screeb.app/sdk-react-native/install) |
 | .NET MAUI | [`Screeb.Maui`](packages/sdk-maui) | [NuGet](https://www.nuget.org/packages/Screeb.Maui) | [Install](https://developers.screeb.app/sdk-maui/install) |
 | Flutter | [`plugin_screeb`](packages/sdk-flutter) | [pub.dev](https://pub.dev/packages/plugin_screeb) | [Install](https://developers.screeb.app/sdk-flutter/install) |
+| Kotlin Multiplatform | [`app.screeb.sdk.kmp:screeb-kmp`](packages/sdk-kmp) | [Maven Central](https://search.maven.org/artifact/app.screeb.sdk.kmp/screeb-kmp) | [Install](https://developers.screeb.app/sdk-kmp/install) |
 | iOS | Closed source ([`sdk-ios-public`](https://github.com/ScreebApp/sdk-ios-public) — SPM mirror) | [SPM](https://github.com/ScreebApp/sdk-ios-public) | [Install](https://developers.screeb.app/sdk-ios/install) |
 | Android | Closed source | [Maven](https://central.sonatype.com/artifact/app.screeb.sdk/survey) | [Install](https://developers.screeb.app/sdk-android/install) |
 
@@ -32,6 +33,7 @@ Public SDKs for [Screeb](https://screeb.app) — the Product Discovery platform.
 | React Native | React Native CLI | [`examples/example-reactnative`](examples/example-reactnative) |
 | .NET MAUI | .NET MAUI | [`examples/example-maui`](examples/example-maui) |
 | Flutter | Flutter | [`examples/example-flutter`](examples/example-flutter) |
+| Kotlin Multiplatform | KMP (Android &amp; iOS) | [`examples/example-kmp`](examples/example-kmp) |
 | Android | Android (Kotlin) | [`examples/example-android`](examples/example-android) |
 | iOS | iOS (Swift) | [`examples/example-ios`](examples/example-ios) |
 
