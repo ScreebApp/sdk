@@ -1,0 +1,67 @@
+name: "Changelog: draft"
+
+# When a tag matching one of this repo's publishable packages is pushed,
+# generate customer-facing release notes from the commit range (messages +
+# diffs, via `claude -p`) and open a DRAFT GitHub release. A human
+# reviews/edits the draft and publishes it; publishing triggers
+# changelog-publish.yml, which commits the notes into that package's
+# packages/<dir>/CHANGELOG.md.
+#
+# Mirrors screeb/.github/workflows/tag-changelog-draft.yml, generalized
+# across this repo's 9 publishable packages via scripts/changelog/.
+
+on:
+  push:
+    tags:
+      - '@screeb/sdk-browser@*'
+      - '@screeb/sdk-angular@*'
+      - '@screeb/sdk-react@*'
+      - '@screeb/sdk-vue@*'
+      - '@screeb/sdk-svelte@*'
+      - '@screeb/react-native@*'
+      - 'sdk-flutter/v*'
+      - 'sdk-kmp/v*'
+      - 'sdk-maui/v*'
+
+permissions:
+  contents: write # create the draft release
+
+jobs:
+  draft:
+    name: Draft release notes
+    runs-on: [self-hosted]
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0 # full history is needed to resolve the previous tag
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Generate release notes
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_MODEL: sonnet
+          # Optional extra terms to block (internal codenames/hosts), comma-separated.
+          CHANGELOG_SECRET_DENYLIST: ${{ vars.CHANGELOG_SECRET_DENYLIST }}
+        run: |
+          node scripts/changelog/generate.mjs \
+            --tag "${GITHUB_REF_NAME}" --format=release > /tmp/notes.md
+          echo "----- generated notes -----"
+          cat /tmp/notes.md
+
+      - name: Create or update draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release edit "$TAG" --draft --notes-file /tmp/notes.md
+          else
+            gh release create "$TAG" --draft --title "$TAG" --notes-file /tmp/notes.md
+          fi
