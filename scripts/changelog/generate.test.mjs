@@ -1,5 +1,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import path from "node:path";
 
 import {
   parseArgs,
@@ -225,4 +229,38 @@ test("generate throws for a tag that matches no known package", async () => {
     generate({ tag: "v1.0.0", format: "release" }),
     /no package matches/,
   );
+});
+
+test("generate uses the full history (not throw) for a tag with no prior same-package tag", async () => {
+  // Exercise the default `runGit` git resolution end-to-end (no injected
+  // `git` fake): `git describe` fails when there is no prior tag for this
+  // package, and that must resolve to "no previous tag" rather than
+  // propagating as a thrown error out of generate().
+  const dir = mkdtempSync(path.join(tmpdir(), "changelog-generate-test-"));
+  const run = (args) => execFileSync("git", args, { cwd: dir, encoding: "utf8" });
+  const prevCwd = process.cwd();
+  try {
+    run(["init", "-q"]);
+    run(["config", "user.email", "test@example.com"]);
+    run(["config", "user.name", "Test"]);
+    mkdirSync(path.join(dir, "packages", "sdk-kmp"), { recursive: true });
+    writeFileSync(path.join(dir, "packages", "sdk-kmp", "file.txt"), "hello\n");
+    run(["add", "."]);
+    run(["commit", "-q", "-m", "feat(sdk-kmp): first-ever release"]);
+    run(["tag", "sdk-kmp/v1.0.0"]);
+
+    process.chdir(dir);
+    const out = await generate({
+      tag: "sdk-kmp/v1.0.0",
+      format: "release",
+      claude: (prompt) => {
+        assert.match(prompt, /first-ever release/);
+        return "### 🚀 New features\n- Initial release";
+      },
+    });
+    assert.equal(out, "### 🚀 New features\n- Initial release");
+  } finally {
+    process.chdir(prevCwd);
+    rmSync(dir, { recursive: true, force: true });
+  }
 });

@@ -151,6 +151,14 @@ function todayIso() {
 function runGit(args) {
   const res = spawnSync("git", args, { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
   if (res.status !== 0) {
+    // `git describe` fails (exit 128, e.g. "No tags can describe ..." or
+    // "Not a valid object name" for a first-ever commit) when the package
+    // has no prior tag reachable from this one. That's an expected "first
+    // release" case, not an error — resolve it to no previous tag so
+    // generate()'s `prev ? \`${prev}..${tag}\` : tag` fallback kicks in and
+    // the full history up to `tag` is used. Any other git subcommand
+    // failing (log, show, ...) is a real error and still throws.
+    if (args[0] === "describe") return "";
     throw new Error(`git ${args.join(" ")} failed: ${res.stderr || res.stdout}`);
   }
   return res.stdout.replace(/\n$/, "");

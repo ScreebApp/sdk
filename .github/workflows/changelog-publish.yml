@@ -11,10 +11,18 @@ name: "Changelog: publish"
 
 on:
   release:
-    types: [released]
+    types: [released, prereleased]
 
 permissions:
   contents: write # commit the regenerated changelog back to master
+
+concurrency:
+  # Serialize all changelog-publish runs so two releases published close
+  # together can't race pushing to master (a second `git push` would fail
+  # non-fast-forward with no retry). Deliberately no cancel-in-progress: a
+  # queued run must still complete after the one ahead of it, since
+  # cancelling it would drop that package's changelog commit entirely.
+  group: changelog-publish-master
 
 jobs:
   publish:
