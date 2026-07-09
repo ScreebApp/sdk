@@ -1,0 +1,69 @@
+name: "Changelog: publish"
+
+# When a release for one of this repo's publishable packages is published
+# (after a human reviewed the draft from changelog-draft.yml), persist the
+# final, reviewed notes into that package's packages/<dir>/CHANGELOG.md and
+# commit them straight to master (this repo's master branch has no
+# protection rule, so the default GITHUB_TOKEN is sufficient — no bot PAT).
+#
+# Mirrors screeb/.github/workflows/tag-changelog-publish.yml, generalized
+# across this repo's 9 publishable packages via scripts/changelog/.
+
+on:
+  release:
+    types: [released]
+
+permissions:
+  contents: write # commit the regenerated changelog back to master
+
+jobs:
+  publish:
+    name: Sync CHANGELOG.md
+    if: |
+      startsWith(github.event.release.tag_name, '@screeb/sdk-browser@') ||
+      startsWith(github.event.release.tag_name, '@screeb/sdk-angular@') ||
+      startsWith(github.event.release.tag_name, '@screeb/sdk-react@') ||
+      startsWith(github.event.release.tag_name, '@screeb/sdk-vue@') ||
+      startsWith(github.event.release.tag_name, '@screeb/sdk-svelte@') ||
+      startsWith(github.event.release.tag_name, '@screeb/react-native@') ||
+      startsWith(github.event.release.tag_name, 'sdk-flutter/v') ||
+      startsWith(github.event.release.tag_name, 'sdk-kmp/v') ||
+      startsWith(github.event.release.tag_name, 'sdk-maui/v')
+    runs-on: [self-hosted]
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+          ref: master
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+
+      - name: Resolve package, version and publish date
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/changelog/resolve-package.mjs --tag "${GITHUB_REF_NAME}" >> "$GITHUB_ENV"
+          echo "PUB_DATE=$(gh release view "${GITHUB_REF_NAME}" --json publishedAt -q '.publishedAt' | cut -c1-10)" >> "$GITHUB_ENV"
+
+      - name: Sync CHANGELOG.md
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHANGELOG_SECRET_DENYLIST: ${{ vars.CHANGELOG_SECRET_DENYLIST }}
+        run: |
+          gh release view "${GITHUB_REF_NAME}" --json body -q '.body' \
+            | node scripts/changelog/sync.mjs --package "${PACKAGE_DIR}" --version "${VERSION}" --date "${PUB_DATE}"
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "packages/${PACKAGE_DIR}/CHANGELOG.md"
+          if git diff --cached --quiet; then
+            echo "No changelog changes to commit."
+          else
+            git commit -m "docs(${PACKAGE_DIR}): update changelog for ${GITHUB_REF_NAME} [skip ci]"
+            git push origin HEAD:master
+          fi
