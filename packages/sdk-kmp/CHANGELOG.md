@@ -10,5 +10,5 @@
 
 **Native SDK Versions 📱**
 
-- 🤖 Android SDK version 4.0.2: [Release Notes](https://www.notion.so/screeb/Android-SDK-4e588a60a5b94e40bfb44595c9defe60)
-- 🍎 iOS SDK version 4.0.2: [Release Notes](https://www.notion.so/screeb/iOS-SDK-4ad6756875a14f2eb60711b86150a29d)
+- 🤖 Android SDK version 4.0.2: [Release Notes](https://github.com/ScreebApp/sdk/blob/master/packages/sdk-android/CHANGELOG.md)
+- 🍎 iOS SDK version 4.0.2: [Release Notes](https://github.com/ScreebApp/sdk/blob/master/packages/sdk-ios/CHANGELOG.md)
