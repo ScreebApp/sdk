@@ -58,3 +58,7 @@ examples/example-reactnative/ios/Pods/
 
 # React Native local env (per-machine node path, written by pod install)
 .xcode.env.local
+
+# Local Claude Code planning artifacts (specs/plans) — never committed to this repo
+docs/superpowers/
+.superpowers/
