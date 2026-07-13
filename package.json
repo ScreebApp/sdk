@@ -17,7 +17,7 @@
     "prepare": "npm run build && husky install",
     "start": "lerna run start",
     "test": "lerna run --parallel test",
-    "test:changelog": "node --test 'scripts/changelog/*.test.mjs'",
+    "test:changelog": "node --test scripts/changelog/*.test.mjs",
     "versions:sync": "node scripts/sync-sdk-versions.mjs",
     "versions:check": "node scripts/sync-sdk-versions.mjs --check",
     "ci:js": "npm run versions:check && npm run build && npm run lint",
