@@ -1,5 +1,21 @@
 # CHANGELOGS
 
+## Version 4.0.3 [2026-08-07]
+
+**Bug fixes 🐛**
+
+- Fixed a rare crash that could close the app while session replay was recording.
+- Fixed a crash when the app was opened from a malformed Screeb link.
+- Fixed a crash that could happen on the first network error after startup.
+- Screeb no longer closes the app when memory runs low while recording: it skips a frame instead.
+- Fixed the order of screen and event tracking, so events are always attached to the screen they happened on.
+- Fixed occasional instability when Screeb methods are called from a background thread.
+
+**Improvements 🚀**
+
+- Session replay stays light for the whole session on apps where it could previously fall back to full-screen captures.
+- Command callbacks and survey hooks are called back on a background thread again, as they were before 4.0.2.
+
 ## Version 4.0.2 [2026-07-08]
 
 **Improvements 🚀**

@@ -1,5 +1,13 @@
 # CHANGELOGS
 
+## Version 4.0.3 [2026-08-07]
+
+**Bug fixes 🐛**
+
+- Fixed rare crashes while session replay was recording, including when a survey was closed mid-recording, and on some hybrid apps (MAUI/Xamarin).
+- Fixed anonymized session replay that could leave some text readable on low-resolution captures, for instance when the device was low on memory or overheating.
+- Fixed Screeb links whose token contained special characters being cut off.
+
 ## Version 4.0.2 [2026-07-08]
 
 **Improvements 🚀**

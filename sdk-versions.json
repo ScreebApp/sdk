@@ -1,7 +1,7 @@
 {
   "native": {
-    "android": "4.0.2",
-    "ios": "4.0.2"
+    "android": "4.0.3",
+    "ios": "4.0.3"
   },
   "wrappers": {
     "flutter": "4.0.2",
