@@ -23,5 +23,5 @@
 
 **Native SDK Versions 📱**
 
-- 🤖 Android SDK version 4.0.2: [Release Notes](https://github.com/ScreebApp/sdk/blob/master/packages/sdk-android/CHANGELOG.md)
-- 🍎 iOS SDK version 4.0.2: [Release Notes](https://github.com/ScreebApp/sdk/blob/master/packages/sdk-ios/CHANGELOG.md)
+- 🤖 Android SDK version 4.0.2: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
+- 🍎 iOS SDK version 4.0.2: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
