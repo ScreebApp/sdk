@@ -166,6 +166,12 @@ replaceInFile(
   /(Include="app\.screeb\.sdk:survey"\s*\n\s*Version=")[^"]+(")/,
   `$1${androidVersion}$2`,
 );
+// SCREEB_USE_LOCAL_SDK dev path: stale here means binding a previous aar.
+replaceInFile(
+  "packages/sdk-maui/ScreebMaui.csproj",
+  /survey\/[^/"]+\/survey-[^"]+\.aar/,
+  `survey/${androidVersion}/survey-${androidVersion}.aar`,
+);
 replaceInFile("examples/example-android/app/build.gradle", /implementation 'app\.screeb\.sdk:survey:[^']+'/, `implementation 'app.screeb.sdk:survey:${androidVersion}'`);
 
 if (check && changedFiles.length > 0) {

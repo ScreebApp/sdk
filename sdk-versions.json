@@ -4,10 +4,10 @@
     "ios": "4.0.3"
   },
   "wrappers": {
-    "flutter": "4.0.2",
-    "kmp": "4.0.2",
-    "maui": "4.0.2",
-    "reactNative": "4.0.2",
+    "flutter": "4.0.3",
+    "kmp": "4.0.3",
+    "maui": "4.0.3",
+    "reactNative": "4.0.3",
     "svelte": "0.1.0"
   }
 }

@@ -9,7 +9,7 @@
     <UseMaui>true</UseMaui>
     <!-- NuGet metadata -->
     <PackageId>Screeb.Maui</PackageId>
-    <Version>4.0.2</Version>
+    <Version>4.0.3</Version>
     <Authors>Screeb</Authors>
     <Company>Screeb</Company>
     <Description>Screeb Continuous Product Discovery SDK for .NET MAUI (Android + iOS)</Description>
@@ -60,14 +60,14 @@
     <AndroidMavenLibrary
       Condition="'$(SCREEB_USE_LOCAL_SDK)' != 'true'"
       Include="app.screeb.sdk:survey"
-      Version="4.0.2"
+      Version="4.0.3"
       Bind="true" />
     <!-- Local dev binding (SCREEB_USE_LOCAL_SDK=true): bind the aar published to ~/.m2 via
          `./gradlew :sdk:publishReleasePublicationToMavenLocal` in sdk-android. Binding the local
          aar directly (not AndroidMavenLibrary) skips the Maven Java-dependency verification. -->
     <AndroidLibrary
       Condition="'$(SCREEB_USE_LOCAL_SDK)' == 'true'"
-      Include="$(HOME)/.m2/repository/app/screeb/sdk/survey/4.0.2/survey-4.0.2.aar"
+      Include="$(HOME)/.m2/repository/app/screeb/sdk/survey/4.0.3/survey-4.0.3.aar"
       Bind="true" />
     <!-- Strips R8-obfuscated (a/b/c) + internal-only nodes from the generated survey binding -->
     <TransformFile Include="Transforms/AndroidMetadata.xml" />

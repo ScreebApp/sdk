@@ -2253,8 +2253,8 @@ PODS:
     - React-perflogger (= 0.81.1)
     - React-utils (= 0.81.1)
     - SocketRocket
-  - Screeb (3.1.1)
-  - ScreebReactNative (3.2.0):
+  - Screeb (4.0.3)
+  - ScreebReactNative (4.0.3):
     - boost
     - DoubleConversion
     - fast_float
@@ -2280,7 +2280,7 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - Screeb (~> 3.1.1)
+    - Screeb (~> 4.0.3)
     - SocketRocket
     - Yoga
   - SocketRocket (0.7.1)
@@ -2585,11 +2585,11 @@ SPEC CHECKSUMS:
   ReactAppDependencyProvider: 3eb9096cb139eb433965693bbe541d96eb3d3ec9
   ReactCodegen: 4d203eddf6f977caa324640a20f92e70408d648b
   ReactCommon: ce5d4226dfaf9d5dacbef57b4528819e39d3a120
-  Screeb: 5ba8a24da7c23c0ef24fe2c118d351ca4d35c5ad
-  ScreebReactNative: 7a955dccf5060c4723a6f786426ec9071286dd52
+  Screeb: ddb9f7cca468c375406d607d949ffea34809d009
+  ScreebReactNative: 2a19baa3a3b5d88081b2443739dd0ea5fd82bbd0
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 11c9686a21e2cd82a094a723649d9f4507200fb0
 
-PODFILE CHECKSUM: 39e8cdf141fa69a48b8b17f60dd1639cbadd5451
+PODFILE CHECKSUM: 1d60415a3fd0803aa4c3d7b01889c4ab5a9d1bb2
 
-COCOAPODS: 1.16.2
+COCOAPODS: 1.17.0
