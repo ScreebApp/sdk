@@ -1,6 +1,6 @@
 {
   "name": "@screeb/react-native",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "Continuous Product Discovery",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",

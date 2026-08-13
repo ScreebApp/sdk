@@ -1,5 +1,16 @@
 # CHANGELOGS
 
+## Version 4.0.4 [2026-08-13]
+
+**Bug fixes 🐛**
+
+- Respondents can attach a picture again: tapping the attach button in a survey now opens the system photo menu, where it previously did nothing at all.
+- The photo library no longer opens behind the survey, where its photos could be seen but not tapped.
+
+**Improvements 🚀**
+
+- The attach menu is the iOS one: photo library, camera and files, in the language of the device, filtered to the picture formats a survey accepts.
+
 ## Version 4.0.3 [2026-08-07]
 
 **Bug fixes 🐛**

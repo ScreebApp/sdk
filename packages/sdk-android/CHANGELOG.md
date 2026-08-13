@@ -1,5 +1,12 @@
 # CHANGELOGS
 
+## Version 4.0.4 [2026-08-13]
+
+**Bug fixes 🐛**
+
+- An audio answer no longer asks the respondent for the camera, and a video answer no longer asks for permissions the survey does not need. Refusing one of them used to take the whole answer down.
+- Recording works on the first attempt: Screeb told the survey the permission was granted before the respondent had even answered the system dialog.
+
 ## Version 4.0.3 [2026-08-07]
 
 **Bug fixes 🐛**
