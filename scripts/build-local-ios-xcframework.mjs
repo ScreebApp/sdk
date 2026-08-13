@@ -45,7 +45,11 @@ function removeFilesMatching(path, matcher) {
   }
 }
 
-const sdkIosPath = resolve(argValue("--sdk-ios") || process.env.SCREEB_IOS_SDK_PATH || resolve(root, "../sdk-ios"));
+const sdkIosPath = resolve(
+  argValue("--sdk-ios")
+    || process.env.SCREEB_IOS_SDK_PATH
+    || resolve(process.env.SCREEB_MONOREPO_PATH || resolve(root, "../screeb"), "sdk-ios"),
+);
 const output = resolve(argValue("--output") || process.env.SCREEB_IOS_XCFRAMEWORK_PATH || resolve(root, ".local/ios/Screeb.xcframework"));
 mkdirSync(dirname(output), { recursive: true }); // mkdtemp requires an existing parent
 const workDir = mkdtempSync(resolve(dirname(output), ".build-"));

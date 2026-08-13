@@ -7,8 +7,15 @@ import { dirname, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const androidRoot = resolve(root, "../sdk-android");
-const iosRoot = resolve(root, "../sdk-ios");
+// The native SDKs live in the screeb monorepo; the env vars keep any other
+// checkout usable (worktrees, agents, CI with a different layout).
+const monorepoRoot = process.env.SCREEB_MONOREPO_PATH || resolve(root, "../screeb");
+const androidRoot = process.env.SCREEB_ANDROID_SDK_PATH
+  ? resolve(process.env.SCREEB_ANDROID_SDK_PATH)
+  : resolve(monorepoRoot, "sdk-android");
+const iosRoot = process.env.SCREEB_IOS_SDK_PATH
+  ? resolve(process.env.SCREEB_IOS_SDK_PATH)
+  : resolve(monorepoRoot, "sdk-ios");
 const isMac = platform() === "darwin";
 
 function envWithTooling(extra = {}) {
@@ -61,7 +68,7 @@ const checks = [
     cwd: androidRoot,
     command: "./gradlew :sdk:testDebugUnitTest :sdk:lintRelease :sdk:assembleRelease --no-daemon",
     skip: () => !existsSync(resolve(androidRoot, "settings.gradle")) && !existsSync(resolve(androidRoot, "settings.gradle.kts")),
-    reason: "sdk-android checkout not found next to sdk",
+    reason: "sdk-android not found in the screeb monorepo",
   },
   {
     scope: "flutter",
@@ -107,7 +114,7 @@ const checks = [
     cwd: iosRoot,
     command: () => `xcodebuild test -scheme Screeb-Package -destination '${defaultIosTestDestination()}' -quiet`,
     skip: () => !isMac || !existsSync(resolve(iosRoot, "Package.swift")),
-    reason: "sdk-ios checkout or macOS/Xcode toolchain not available",
+    reason: "sdk-ios not found in the screeb monorepo, or no macOS/Xcode toolchain",
   },
 ];
 
