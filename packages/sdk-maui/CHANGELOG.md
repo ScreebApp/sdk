@@ -1,5 +1,18 @@
 # Changelog
 
+## Version 4.0.4 [2026-08-13]
+
+**Bug fixes 🐛**
+
+- Respondents can attach a picture to an answer again on iOS: the attach button opened nothing, and the photo library could end up behind the survey (iOS).
+- An audio answer no longer asks for the camera, and refusing one permission no longer takes the whole answer down (Android).
+- Recording works on the first attempt instead of failing until the respondent tried again (Android).
+
+**Native SDK Versions 📱**
+
+- 🤖 Android SDK version 4.0.4: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
+- 🍎 iOS SDK version 4.0.4: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
+
 ## Version 4.0.3 [2026-08-07]
 
 **Bug fixes 🐛**
