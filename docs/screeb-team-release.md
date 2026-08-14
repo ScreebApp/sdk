@@ -15,14 +15,19 @@ Edit `sdk-versions.json`, then run `versions:sync` to update generated version r
 
 ## Local native SDK testing
 
-Keep the repositories next to each other for the default local flow:
+The native SDKs live in the screeb monorepo. Keep it next to this repository for
+the default local flow:
 
 ```text
 Screeb/
   sdk/
-  sdk-android/
-  sdk-ios/
+  screeb/
+    sdk-android/
+    sdk-ios/
 ```
+
+Override with `SCREEB_MONOREPO_PATH`, or per platform with
+`SCREEB_ANDROID_SDK_PATH` / `SCREEB_IOS_SDK_PATH`.
 
 Then build the wrapper or example with:
 
@@ -33,6 +38,7 @@ SCREEB_USE_LOCAL_SDK=true <normal build command>
 Optional overrides:
 
 ```bash
+SCREEB_MONOREPO_PATH=/absolute/path/to/screeb
 SCREEB_ANDROID_SDK_PATH=/absolute/path/to/sdk-android
 SCREEB_IOS_SDK_PATH=/absolute/path/to/sdk-ios
 ```
@@ -147,16 +153,21 @@ npm run verify:release -- --scope=android
 npm run verify:release -- --scope=flutter,react-native
 ```
 
-The matrix uses `SCREEB_USE_LOCAL_SDK=true` by default and expects the `sdk`, `sdk-android`, and `sdk-ios` repositories to be siblings.
+The matrix uses `SCREEB_USE_LOCAL_SDK=true` by default and expects the screeb monorepo next to this repository, with the native SDKs under `screeb/sdk-android` and `screeb/sdk-ios`.
+
+The MAUI gate binds the Android AAR from the local Maven repository, so publish it first:
+
+```bash
+cd ../screeb/sdk-android && ./gradlew :sdk:publishReleasePublicationToMavenLocal
+```
 Set `SCREEB_IOS_TEST_DESTINATION` to override the simulator used by the iOS SDK test step.
 
 ## Release checklist
 
-1. Bump the native SDK versions in `../sdk-android` and/or `../sdk-ios`.
+1. Release the native SDKs from the monorepo: `../screeb/sdk-ios/release.sh <version>` and/or `../screeb/sdk-android/release.sh <version>`.
 2. Edit `sdk-versions.json`.
 3. Run `npm run versions:sync`.
 4. Run `npm run versions:check`.
 5. Run `npm run verify:release`.
 6. Run `npm run size:sdks`.
-7. Release the native SDKs.
-8. Release the public wrappers with the updated native dependency versions.
+7. Release the public wrappers with the updated native dependency versions.
