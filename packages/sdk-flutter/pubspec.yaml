@@ -4,9 +4,11 @@ version: 4.0.4
 homepage: https://screeb.app
 repository: https://github.com/ScreebApp/sdk
 
+# Semantics(identifier:) needs Flutter 3.19 / Dart 3.3: older toolchains must
+# resolve an earlier package version instead of failing to compile this one.
 environment:
-  sdk: ">=2.15.0 <4.0.0"
-  flutter: ">=2.5.0"
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.19.0"
 
 dependencies:
   flutter:
