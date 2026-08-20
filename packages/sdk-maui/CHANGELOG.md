@@ -1,5 +1,15 @@
 # Changelog
 
+## v4.1.0 — 2026-08-20
+
+### 🐛 Bug fixes
+- Fixed session replay backgrounding and screen-rotation race conditions that could disrupt recordings on Android and iOS.
+
+### ⚡ Improvements
+- Session replay now adapts to ProMotion display refresh rates, roughly halving replay CPU usage on supported iOS devices.
+- Recordings now start from the first mirrored frame instead of a blank lead-in.
+- Android surface content such as video, maps, and GPU-rendered views is now covered by session replay masking and anonymization.
+
 ## Version 4.0.4 [2026-08-13]
 
 **Bug fixes 🐛**
