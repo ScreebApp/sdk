@@ -1,5 +1,14 @@
 # CHANGELOGS
 
+## v4.1.0 — 2026-08-20
+
+### ⚡ Improvements
+- Now bundles the native Screeb iOS and Android SDK 4.1.0, bringing session replay improvements to React Native apps: replay capture is refresh-rate aware on ProMotion displays (roughly half the CPU cost during recording), and recordings start from the first real frame instead of a blank lead-in.
+- Android session replay masking and anonymization now also covers video, maps, and other GPU-rendered surface content.
+
+### 🐛 Bug fixes
+- Fixed race conditions in the underlying native SDK that could affect session replay when an app was backgrounded or the device was rotated.
+
 ## Version 4.0.4 [2026-08-13]
 
 **Bug fixes 🐛**
