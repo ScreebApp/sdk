@@ -1,3 +1,3 @@
 package app.screeb.sdk.kmp
 
-internal const val SDK_VERSION = "4.0.4"
+internal const val SDK_VERSION = "4.1.0"
