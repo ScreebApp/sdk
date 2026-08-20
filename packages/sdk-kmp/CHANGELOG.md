@@ -1,5 +1,18 @@
 # CHANGELOGS
 
+## v4.1.0 — 2026-08-20
+
+### ⚡ Improvements
+
+- Session replay now adapts to 120 Hz (ProMotion) displays, cutting replay CPU usage roughly in half on those devices while keeping the app fluid.
+- Replays no longer start with a blank lead-in — recording begins from the first captured frame.
+
+### 🐛 Bug fixes
+
+- Video, map, and GPU content on Android is now correctly covered by masking and anonymized replay settings.
+- Fixed a replay issue where a masked field hidden by a newer screen could leave a gray block on screen.
+- Fixed recordings freezing or showing stale content when the app was backgrounded or the device was rotated mid-recording.
+
 ## Version 4.0.4 [2026-08-13]
 
 **Bug fixes 🐛**
