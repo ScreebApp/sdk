@@ -1,5 +1,19 @@
 # CHANGELOGS
 
+## v4.1.0 — 2026-08-20
+
+### 🐛 Bug fixes
+
+- Fixed video, map, and GPU surfaces not respecting masking and anonymized replay settings on Android.
+- Fixed a masked field hidden under a newer screen leaving a gray block in the replay.
+- Fixed recordings freezing or showing stale content when the device is backgrounded or rotated mid-recording.
+- The package now correctly requires Flutter 3.19 / Dart 3.3 or newer, so older toolchains resolve an earlier compatible version instead of failing to compile.
+
+### ⚡ Improvements
+
+- Session replay now adapts to 120 Hz (ProMotion) displays on iOS, roughly halving replay CPU usage on those devices.
+- Replays no longer start with a blank lead-in — recording now begins with the first mirrored frame.
+
 ## Version 4.0.4 [2026-08-13]
 
 **Bug fixes 🐛**
