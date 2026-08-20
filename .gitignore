@@ -47,8 +47,13 @@ packages/sdk-maui/native/ios/sdk-ios-public-*/
 # .NET build artifacts
 packages/sdk-maui/bin/
 packages/sdk-maui/obj/
+packages/sdk-maui/tests/bin/
+packages/sdk-maui/tests/obj/
 examples/example-maui/bin/
 examples/example-maui/obj/
+
+# KMP SDK - native binaries (built locally by build-local-ios-xcframework.mjs)
+packages/sdk-kmp/native/
 
 # build-local-ios-xcframework.mjs temp workdirs (cleaned by the script; belt and braces)
 packages/*/native/ios/.build-*/
