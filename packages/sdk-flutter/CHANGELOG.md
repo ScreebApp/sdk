@@ -1,22 +1,18 @@
 # CHANGELOGS
 
-## Version 4.1.0 [2026-08-20]
+## v4.1.0 — 2026-08-20
 
-**Improvements ⚡**
+### 🐛 Bug fixes
 
-- Session replay adapts to 120 Hz (ProMotion) displays: capture work runs in the frame's idle time and is paced to the display, roughly halving replay CPU on those devices while keeping the app fluid (iOS).
-- Replays no longer open on a blank lead-in: recording starts with the first mirrored frame.
+- Fixed video, map, and GPU surfaces not respecting masking and anonymized replay settings on Android.
+- Fixed a masked field hidden under a newer screen leaving a gray block in the replay.
+- Fixed recordings freezing or showing stale content when the device is backgrounded or rotated mid-recording.
+- The package now correctly requires Flutter 3.19 / Dart 3.3 or newer, so older toolchains resolve an earlier compatible version instead of failing to compile.
 
-**Bug fixes 🐛**
+### ⚡ Improvements
 
-- Video, map and GPU surfaces now obey masking and anonymized replay (Android).
-- A masked field hidden under a newer screen no longer leaves a gray block on the replay (iOS & Android).
-- Backgrounding or rotating the device mid-recording no longer freezes the capture or shows stale content (iOS & Android).
-
-**Native SDK Versions 📱**
-
-- 🤖 Android SDK version 4.1.0: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
-- 🍎 iOS SDK version 4.1.0: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
+- Session replay now adapts to 120 Hz (ProMotion) displays on iOS, roughly halving replay CPU usage on those devices.
+- Replays no longer start with a blank lead-in — recording now begins with the first mirrored frame.
 
 ## Version 4.0.4 [2026-08-13]
 

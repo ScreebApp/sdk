@@ -1,22 +1,17 @@
 # CHANGELOGS
 
-## Version 4.1.0 [2026-08-20]
+## v4.1.0 — 2026-08-20
 
-**Improvements ⚡**
+### ⚡ Improvements
 
-- Session replay adapts to 120 Hz (ProMotion) displays: capture work runs in the frame's idle time and is paced to the display, roughly halving replay CPU on those devices while keeping the app fluid (iOS).
-- Replays no longer open on a blank lead-in: recording starts with the first mirrored frame.
+- Session replay now adapts to 120 Hz (ProMotion) displays, cutting replay CPU usage roughly in half on those devices while keeping the app fluid.
+- Replays no longer start with a blank lead-in — recording begins from the first captured frame.
 
-**Bug fixes 🐛**
+### 🐛 Bug fixes
 
-- Video, map and GPU surfaces now obey masking and anonymized replay (Android).
-- A masked field hidden under a newer screen no longer leaves a gray block on the replay (iOS & Android).
-- Backgrounding or rotating the device mid-recording no longer freezes the capture or shows stale content (iOS & Android).
-
-**Native SDK Versions 📱**
-
-- 🤖 Android SDK version 4.1.0: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
-- 🍎 iOS SDK version 4.1.0: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
+- Video, map, and GPU content on Android is now correctly covered by masking and anonymized replay settings.
+- Fixed a replay issue where a masked field hidden by a newer screen could leave a gray block on screen.
+- Fixed recordings freezing or showing stale content when the app was backgrounded or the device was rotated mid-recording.
 
 ## Version 4.0.4 [2026-08-13]
 
