@@ -1,5 +1,12 @@
 # CHANGELOGS
 
+## v4.2.0 — 2026-08-24
+
+### 🚀 New features
+
+- Exit-intent surveys now work in native apps: leaving a tracked screen can trigger a survey, as on web. Requires screen tracking (`trackScreen`) instrumentation.
+- New "inactivity" targeting rule: trigger a survey after the visitor has stopped interacting with the app for a configured time.
+
 ## v4.1.0 — 2026-08-20
 
 ### 🐛 Bug fixes
