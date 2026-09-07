@@ -2,14 +2,14 @@ import Flutter
 import Screeb
 import SwiftUI
 
-public class SwiftPluginScreebPlugin: NSObject, FlutterPlugin {
+public class PluginScreebPlugin: NSObject, FlutterPlugin {
   static var channel: FlutterMethodChannel? = nil
-  static let instance = SwiftPluginScreebPlugin()
+  static let instance = PluginScreebPlugin()
 
   public static func register(with registrar: FlutterPluginRegistrar) {
     Screeb.setSecondarySDK(name: "flutter", version: "4.2.0")
-    SwiftPluginScreebPlugin.channel = FlutterMethodChannel(name: "plugin_screeb", binaryMessenger: registrar.messenger())
-    registrar.addMethodCallDelegate(instance, channel: SwiftPluginScreebPlugin.channel!)
+    PluginScreebPlugin.channel = FlutterMethodChannel(name: "plugin_screeb", binaryMessenger: registrar.messenger())
+    registrar.addMethodCallDelegate(instance, channel: PluginScreebPlugin.channel!)
     registrar.addApplicationDelegate(instance)
   }
 
@@ -187,7 +187,7 @@ public class SwiftPluginScreebPlugin: NSObject, FlutterPlugin {
     guard !hookIds.isEmpty else { return nil }
 
     let mapHooks = Screeb.makeHooks(hookIds) { hookId, nativeHookId, payload in
-      SwiftPluginScreebPlugin.dispatchHook(hookId: hookId, nativeHookId: nativeHookId, payload: payload)
+      PluginScreebPlugin.dispatchHook(hookId: hookId, nativeHookId: nativeHookId, payload: payload)
     }
     return mapHooks.mapValues { $0 as Any? }
   }

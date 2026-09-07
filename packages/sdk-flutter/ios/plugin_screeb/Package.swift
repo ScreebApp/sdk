@@ -21,9 +21,6 @@ let package = Package(
             dependencies: [
                 .product(name: "FlutterFramework", package: "FlutterFramework"),
                 .product(name: "Screeb", package: "sdk-ios-public")
-            ],
-            cSettings: [
-                .headerSearchPath("include/plugin_screeb")
             ]
         )
     ]

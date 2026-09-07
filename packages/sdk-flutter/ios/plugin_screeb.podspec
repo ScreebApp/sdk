@@ -13,8 +13,7 @@ Pod::Spec.new do |s|
                          'Clement Chaban' => 'clement.chaban@screeb.app',
                          'Alexis Rouillard' => 'alexis@screeb.app'}
   s.source           = { :path => '.' }
-  s.source_files = 'plugin_screeb/Sources/plugin_screeb/**/*'
-  s.public_header_files = 'plugin_screeb/Sources/plugin_screeb/include/**/*.h'
+  s.source_files = 'plugin_screeb/Sources/plugin_screeb/**/*.swift'
   s.dependency 'Flutter'
   s.platform = :ios, '12.0'
 
