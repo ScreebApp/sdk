@@ -125,6 +125,11 @@ replaceInFile("packages/sdk-flutter/android/build.gradle", /^version '.+'$/m, `v
 replaceInFile("packages/sdk-flutter/android/build.gradle", /api "app\.screeb\.sdk:survey:[^"]+"/, `api "app.screeb.sdk:survey:${androidVersion}"`);
 replaceInFile("packages/sdk-flutter/ios/plugin_screeb.podspec", /s\.version\s+=\s+'[^']+'/, `s.version          = '${flutterVersion}'`);
 replaceInFile("packages/sdk-flutter/ios/plugin_screeb.podspec", /s\.dependency 'Screeb', '[^']+'/, `s.dependency 'Screeb', '${iosVersion}'`);
+replaceInFile(
+  "packages/sdk-flutter/ios/plugin_screeb/Package.swift",
+  /sdk-ios-public\.git", exact: "[^"]+"/,
+  `sdk-ios-public.git", exact: "${iosVersion}"`,
+);
 replaceInFile("packages/sdk-reactnative/android/build.gradle", /api "app\.screeb\.sdk:survey:[^"]+"/, `api "app.screeb.sdk:survey:${androidVersion}"`);
 replaceInFile("packages/sdk-reactnative/ScreebReactNative.podspec", /s\.dependency "Screeb", '~> [^']+'/, `s.dependency "Screeb", '~> ${iosVersion}'`);
 replaceInFile(
@@ -143,7 +148,7 @@ replaceInFile(
   `Screeb.setSecondarySDK("flutter", "${flutterVersion}")`,
 );
 replaceInFile(
-  "packages/sdk-flutter/ios/Classes/SwiftPluginScreebPlugin.swift",
+  "packages/sdk-flutter/ios/plugin_screeb/Sources/plugin_screeb/PluginScreebPlugin.swift",
   /Screeb\.setSecondarySDK\(name: "flutter", version: "[^"]+"\)/,
   `Screeb.setSecondarySDK(name: "flutter", version: "${flutterVersion}")`,
 );
