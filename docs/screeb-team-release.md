@@ -89,6 +89,13 @@ iOS:
 
 - Flutter, React Native and Expo use the local `../sdk-ios` pod when `SCREEB_USE_LOCAL_SDK=true`.
 - KMP and MAUI build a temporary `Screeb.xcframework` from `../sdk-ios` through `scripts/build-local-ios-xcframework.mjs`.
+- Flutter's SwiftPM manifest (`packages/sdk-flutter/ios/plugin_screeb/Package.swift`) honors the same `SCREEB_USE_LOCAL_SDK=true` switch, but a manifest can't invoke `xcodebuild` itself — build the xcframework once first:
+
+  ```bash
+  node scripts/build-local-ios-xcframework.mjs
+  ```
+
+  Override the output path with `SCREEB_IOS_XCFRAMEWORK_PATH`; the manifest reads the same variable, defaulting to `.local/ios/Screeb.xcframework`.
 - Generated local artifacts stay under ignored build folders.
 
 ## SDK size report
