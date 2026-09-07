@@ -1,4 +1,4 @@
-#import "PluginScreebPlugin.h"
+#import "./include/plugin_screeb/PluginScreebPlugin.h"
 #if __has_include(<plugin_screeb/plugin_screeb-Swift.h>)
 #import <plugin_screeb/plugin_screeb-Swift.h>
 #else
