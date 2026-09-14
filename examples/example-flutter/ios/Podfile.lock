@@ -1,9 +1,9 @@
 PODS:
   - Flutter (1.0.0)
-  - plugin_screeb (4.0.3):
+  - plugin_screeb (4.2.0):
     - Flutter
-    - Screeb (= 4.0.3)
-  - Screeb (4.0.3)
+    - Screeb (= 4.2.0)
+  - Screeb (4.2.0)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -21,8 +21,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
-  plugin_screeb: a9a6e9b2f789641aa98f9f01da35554856adb1da
-  Screeb: ddb9f7cca468c375406d607d949ffea34809d009
+  plugin_screeb: 27bafe690e22d67c99179e3b9f79f9ded12573d3
+  Screeb: 38aabbcb171c850e1d30d4037c2a5fe7547c20ea
 
 PODFILE CHECKSUM: bbd322ee5f411aa14fe452c398452145b6b1f936
 

@@ -46,6 +46,8 @@ Then run:
 flutter pub get
 ```
 
+On iOS, `plugin_screeb` supports both CocoaPods and Swift Package Manager — Flutter picks whichever your app project uses, no extra configuration needed.
+
 ## Usage
 
 Basic usage:
