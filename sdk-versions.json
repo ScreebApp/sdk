@@ -4,7 +4,7 @@
     "ios": "4.2.0"
   },
   "wrappers": {
-    "flutter": "4.2.0",
+    "flutter": "4.3.0",
     "kmp": "4.2.0",
     "maui": "4.2.0",
     "reactNative": "4.2.0",
