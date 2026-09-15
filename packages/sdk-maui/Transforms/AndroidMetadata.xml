@@ -1,7 +1,9 @@
 <metadata>
-  <remove-node path="/api/package[@name='a']" />
-  <remove-node path="/api/package[@name='b']" />
-  <remove-node path="/api/package[@name='c']" />
+  <!-- Obfuscated internals. Up to native SDK 4.2.x these were top-level
+       packages 'a'/'b'/'c'/'d'; 4.3.0 consolidated them under
+       app.screeb.sdk.internal. Binding them yields single-letter types whose
+       members collide with the enclosing type (CS0542). -->
+  <remove-node path="/api/package[@name='app.screeb.sdk.internal']" />
   <remove-node path="/api/package[@name='app.screeb.sdk.init.model']" />
   <remove-node path="/api/package[@name='app.screeb.sdk']/class[@name='InitOptions']/field[@name='Companion']" />
   <remove-node path="/api/package[@name='app.screeb.sdk']/class[@name='ScreebFilePickerActivity']" />
