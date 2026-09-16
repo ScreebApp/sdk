@@ -109,6 +109,14 @@ export const ScreebProvider: React.FC<
     [],
   );
 
+  const setAnonymousId = React.useCallback(
+    async (anonymousId: string) =>
+      await ensureScreeb("setAnonymousId", () =>
+        Screeb.setAnonymousId(anonymousId),
+      ),
+    [],
+  );
+
   const identityGroupAssign = React.useCallback(
     async (
       groupName: string,
@@ -321,6 +329,7 @@ export const ScreebProvider: React.FC<
       messageStart,
       sessionReplayStart,
       sessionReplayStop,
+      setAnonymousId,
       surveyClose,
       surveyStart,
       targetingDebug,
@@ -343,6 +352,7 @@ export const ScreebProvider: React.FC<
       messageStart,
       sessionReplayStop,
       sessionReplayStart,
+      setAnonymousId,
       targetingDebug,
     ],
   );

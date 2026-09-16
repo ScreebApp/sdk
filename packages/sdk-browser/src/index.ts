@@ -322,6 +322,21 @@ export const identityGet = (): Promise<ScreebIdentityGetReturn> =>
   callScreebCommand("identity.get") as Promise<ScreebIdentityGetReturn>;
 
 /**
+ * Tells Screeb which anonymous id your CDP already uses for the current visitor
+ * (Amplitude device id, Segment or RudderStack anonymous id). Screeb adopts it on the
+ * current respondent, or switches to the respondent the CDP webhook already created for
+ * it. The respondent stays anonymous. 5 to 128 characters. Call it right after `init`.
+ *
+ * @example
+ * ```ts
+ * Screeb.init("<your-website-id>");
+ * Screeb.setAnonymousId(amplitude.getDeviceId());
+ * ```
+ */
+export const setAnonymousId = (anonymousId: string) =>
+  callScreebCommand("identity.anonymous_id", anonymousId);
+
+/**
  * Assigns the current user to a group.
  *
  * @param groupName
