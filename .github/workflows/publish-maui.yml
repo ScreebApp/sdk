@@ -1,17 +1,22 @@
 name: Publish Screeb.Maui
 
+# Publishing a release is what ships: the notes are written and reviewed
+# before the tag exists, and publishing the draft creates it.
 on:
-  push:
-    tags:
-      - 'sdk-maui/v*'
+  release:
+    types: [released]
 
 jobs:
   publish:
+    if: startsWith(github.event.release.tag_name, 'sdk-maui/v')
     runs-on: macos-latest
     permissions:
       id-token: write # enable GitHub OIDC token issuance for NuGet Trusted Publishing
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          # A release event does not check out the tagged tree by default.
+          ref: ${{ github.event.release.tag_name }}
 
       - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:

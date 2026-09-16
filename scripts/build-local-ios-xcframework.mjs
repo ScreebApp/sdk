@@ -45,11 +45,13 @@ function removeFilesMatching(path, matcher) {
   }
 }
 
-const sdkIosPath = resolve(
-  argValue("--sdk-ios")
-    || process.env.SCREEB_IOS_SDK_PATH
-    || resolve(process.env.SCREEB_MONOREPO_PATH || resolve(root, "../screeb"), "sdk-ios"),
-);
+// No default: this repository does not assume where the native iOS SDK lives.
+const sdkIosPathInput = argValue("--sdk-ios") || process.env.SCREEB_IOS_SDK_PATH;
+if (!sdkIosPathInput) {
+  console.error("pass --sdk-ios or set SCREEB_IOS_SDK_PATH to an iOS SDK checkout");
+  process.exit(1);
+}
+const sdkIosPath = resolve(sdkIosPathInput);
 const output = resolve(argValue("--output") || process.env.SCREEB_IOS_XCFRAMEWORK_PATH || resolve(root, ".local/ios/Screeb.xcframework"));
 mkdirSync(dirname(output), { recursive: true }); // mkdtemp requires an existing parent
 const workDir = mkdtempSync(resolve(dirname(output), ".build-"));

@@ -10,6 +10,9 @@ name: "Changelog: draft"
 # Mirrors screeb/.github/workflows/tag-changelog-draft.yml, generalized
 # across this repo's 9 publishable packages via scripts/changelog/.
 
+# The four native wrappers are not listed: their notes are written straight
+# into a draft release before any tag exists, and their tag only appears when
+# that draft is published. Re-drafting then would unpublish the release.
 on:
   push:
     tags:
@@ -18,10 +21,6 @@ on:
       - '@screeb/sdk-react@*'
       - '@screeb/sdk-vue@*'
       - '@screeb/sdk-svelte@*'
-      - '@screeb/react-native@*'
-      - 'sdk-flutter/v*'
-      - 'sdk-kmp/v*'
-      - 'sdk-maui/v*'
 
 permissions:
   contents: write # create the draft release
