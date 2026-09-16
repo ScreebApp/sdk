@@ -17,12 +17,13 @@ permissions:
   contents: write # commit the regenerated changelog back to master
 
 concurrency:
-  # Serialize all changelog-publish runs so two releases published close
-  # together can't race pushing to master (a second `git push` would fail
-  # non-fast-forward with no retry). Deliberately no cancel-in-progress: a
-  # queued run must still complete after the one ahead of it, since
-  # cancelling it would drop that package's changelog commit entirely.
-  group: changelog-publish-master
+  # One group per release, so releases published close together never contend.
+  # A single shared group looks like it would serialize them, but GitHub only
+  # ever keeps one run pending per group and cancels that one as soon as a
+  # newer run arrives, whatever cancel-in-progress says. Four wrapper releases
+  # published in a row lost two of their changelog commits that way. The push
+  # below is what handles the race instead.
+  group: changelog-publish-${{ github.event.release.tag_name }}
 
 jobs:
   publish:
@@ -73,5 +74,22 @@ jobs:
             echo "No changelog changes to commit."
           else
             git commit -m "docs(${PACKAGE_DIR}): update changelog for ${GITHUB_REF_NAME} [skip ci]"
-            git push origin HEAD:master
+            # Runs for sibling packages push to master at the same time, so a
+            # rejection is expected rather than exceptional: rebase onto what
+            # landed and try again. The commits touch different files, so the
+            # rebase is clean.
+            pushed=false
+            for attempt in 1 2 3 4 5; do
+              if git push origin HEAD:master; then
+                pushed=true
+                break
+              fi
+              echo "push rejected, rebasing onto master (attempt ${attempt})"
+              git fetch origin master
+              git rebase origin/master
+            done
+            if [ "$pushed" = false ]; then
+              echo "::error::could not push the changelog for ${GITHUB_REF_NAME} after 5 attempts"
+              exit 1
+            fi
           fi

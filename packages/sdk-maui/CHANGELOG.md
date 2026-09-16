@@ -1,5 +1,20 @@
 # Changelog
 
+## v4.4.1 — 2026-09-16
+
+### 🐛 Bug fixes
+
+- Session replay recovers automatically from frames lost due to internal capture limits or delivery hiccups, instead of leaving the replay stuck until an unrelated event forced a resync (Android).
+
+### ⚡ Improvements
+
+- Reduced main-thread work during session replay capture on static screens, accessibility scans, and hidden views, lowering CPU overhead for apps with session replay enabled (Android).
+
+### 📱 Native SDK versions
+
+- 🤖 Android SDK version 4.3.1: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
+- 🍎 iOS SDK version 4.2.0: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
+
 ## v4.2.0 — 2026-08-24
 
 ### 🚀 New features
