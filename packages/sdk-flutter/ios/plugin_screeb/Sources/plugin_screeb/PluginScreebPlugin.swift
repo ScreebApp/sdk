@@ -7,7 +7,7 @@ public class PluginScreebPlugin: NSObject, FlutterPlugin {
   static let instance = PluginScreebPlugin()
 
   public static func register(with registrar: FlutterPluginRegistrar) {
-    Screeb.setSecondarySDK(name: "flutter", version: "4.4.0")
+    Screeb.setSecondarySDK(name: "flutter", version: "4.4.1")
     PluginScreebPlugin.channel = FlutterMethodChannel(name: "plugin_screeb", binaryMessenger: registrar.messenger())
     registrar.addMethodCallDelegate(instance, channel: PluginScreebPlugin.channel!)
     registrar.addApplicationDelegate(instance)
