@@ -177,6 +177,17 @@ export class Screeb {
   }
 
   /**
+   * Tells Screeb which anonymous id your CDP already uses (Amplitude device id, Segment or
+   * RudderStack anonymous id). The respondent adopts it and stays anonymous. Call it right
+   * after `init`.
+   */
+  public async setAnonymousId(anonymousId: string) {
+    await this.ensureScreeb("setAnonymousId");
+
+    return _Screeb.setAnonymousId(anonymousId);
+  }
+
+  /**
    * Assigns the current user to a group.
    *
    * @param groupName
