@@ -87,6 +87,9 @@ public static partial class Screeb
     public static partial Task<bool?> ResetIdentity()
         => OnMain(() => App.Screeb.Sdk.Screeb.Instance.ResetIdentity());
 
+    public static partial Task<bool?> SetAnonymousId(string anonymousId)
+        => OnMain(() => App.Screeb.Sdk.Screeb.Instance.SetAnonymousId(anonymousId));
+
     public static partial Task<Dictionary<string, object>?> GetIdentity()
         => OnMain<Dictionary<string, object>>(tcs =>
             App.Screeb.Sdk.Screeb.Instance.GetIdentity(new KotlinResultCallback((identity, error) =>

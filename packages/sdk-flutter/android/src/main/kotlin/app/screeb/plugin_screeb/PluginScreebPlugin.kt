@@ -143,6 +143,10 @@ class PluginScreebPlugin : FlutterPlugin, MethodCallHandler {
                 Screeb.resetIdentity()
                 result.success(true)
             }
+            CALL_SET_ANONYMOUS_ID -> {
+                Screeb.setAnonymousId(arguments[0] as String)
+                result.success(true)
+            }
             CALL_GET_IDENTITY -> {
                 Screeb.getIdentity { identity, error ->
                     if (error != null) {
@@ -232,6 +236,7 @@ class PluginScreebPlugin : FlutterPlugin, MethodCallHandler {
         const val CALL_SESSION_REPLAY_START = "sessionReplayStart"
         const val CALL_SESSION_REPLAY_STOP = "sessionReplayStop"
         const val CALL_RESET_IDENTITY = "resetIdentity"
+        const val CALL_SET_ANONYMOUS_ID = "setAnonymousId"
         const val CALL_GET_IDENTITY = "getIdentity"
         const val CALL_DEBUG = "debug"
         const val CALL_DEBUG_TARGETING = "debugTargeting"

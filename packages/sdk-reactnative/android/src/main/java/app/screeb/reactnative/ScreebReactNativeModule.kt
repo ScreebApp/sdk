@@ -175,6 +175,13 @@ class ScreebReactNativeModule(reactContext: ReactApplicationContext) :
     }
   }
 
+  override fun setAnonymousId(anonymousId: String, promise: Promise) {
+    Handler(Looper.getMainLooper()).post {
+      Screeb.setAnonymousId(anonymousId)
+      promise.resolve(null)
+    }
+  }
+
   override fun getIdentity(promise: Promise) {
     Handler(Looper.getMainLooper()).post {
       Screeb.getIdentity { identity, error ->

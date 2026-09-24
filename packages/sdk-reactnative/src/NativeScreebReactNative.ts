@@ -61,6 +61,7 @@ export interface Spec extends TurboModule {
   sessionReplayStart(): Promise<void>;
   sessionReplayStop(): Promise<void>;
   resetIdentity(): Promise<void>;
+  setAnonymousId(anonymousId: string): Promise<void>;
   getIdentity(): Promise<{ [key: string]: unknown } | null>;
   closeSdk(): Promise<void>;
   handleDeepLink(url: string): Promise<void>;

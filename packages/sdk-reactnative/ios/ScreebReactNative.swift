@@ -105,6 +105,13 @@ class ScreebReactNative: RCTEventEmitter {
     }
   }
 
+  @objc func setAnonymousId(_ anonymousId: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock){
+    DispatchQueue.main.async {
+      Screeb.setAnonymousId(anonymousId: anonymousId)
+      resolve(nil)
+    }
+  }
+
   @objc func closeSdk(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock){
     DispatchQueue.main.async {
       Screeb.closeSdk()
