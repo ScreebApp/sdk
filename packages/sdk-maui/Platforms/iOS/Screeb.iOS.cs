@@ -79,6 +79,9 @@ public static partial class Screeb
     public static partial Task<bool?> ResetIdentity()
         => OnMain(() => NativeScreeb.ResetIdentity());
 
+    public static partial Task<bool?> SetAnonymousId(string anonymousId)
+        => OnMain(() => NativeScreeb.SetAnonymousId(anonymousId));
+
     public static partial Task<Dictionary<string, object>?> GetIdentity()
         => OnMain<Dictionary<string, object>>(tcs =>
             NativeScreeb.GetIdentity((identity, error) =>
