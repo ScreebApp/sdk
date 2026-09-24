@@ -115,6 +115,7 @@ await InitSdk(channelId: "<YOUR_CHANNEL_ID>", hooks: hooks);
 | `SetIdentity(userId, properties)` | Identify the current user |
 | `SetProperties(properties)` | Update user properties |
 | `ResetIdentity()` | Reset user identity (e.g. on logout) |
+| `SetAnonymousId(anonymousId)` | Adopt the anonymous id your CDP already uses (Amplitude, Segment, RudderStack); the user stays anonymous. Call it right after `InitSdk` |
 | `GetIdentity()` | Get current visitor identity |
 | `AssignGroup(type, name, properties)` | Add user to a group |
 | `UnassignGroup(type, name, properties)` | Remove user from a group |

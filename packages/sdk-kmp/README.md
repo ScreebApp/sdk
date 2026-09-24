@@ -129,6 +129,7 @@ Screeb.startSurvey(
 | `setIdentity(userId, properties?)` | Identify the current user |
 | `setProperties(properties?)` | Update visitor properties |
 | `resetIdentity()` | Reset to anonymous visitor |
+| `setAnonymousId(anonymousId)` | Adopt the anonymous id your CDP already uses (Amplitude, Segment, RudderStack); the visitor stays anonymous. Call it right after `initSdk` |
 | `getIdentity()` | Fetch current identity as `Map<String, Any>` |
 | `assignGroup(groupType?, groupName, properties?)` | Assign visitor to a group |
 | `unassignGroup(groupType?, groupName, properties?)` | Remove visitor from a group |
