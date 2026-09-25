@@ -1,5 +1,23 @@
 # Changelog
 
+## v4.4.2 — 2026-09-25
+
+### 🐛 Bug fixes
+
+- Screenshot answers no longer capture the iOS screen-sharing "Stop Sharing" overlay — the SDK now waits for that system sheet to be dismissed before grabbing the frame (iOS).
+- Session replay recovers on its own if an update is ever lost in transit: a changing screen now gets a fresh keyframe at least every 30 seconds instead of staying wrong for the rest of the session (iOS).
+- Session replay no longer misses the last change made right as a screen settles (iOS).
+- A brief memory warning no longer keeps session replay (quality, resolution, capture rate) throttled for the rest of the time the app is in the foreground — the throttling now eases back automatically a few seconds after the warning stops recurring (iOS).
+
+### ⚡ Improvements
+
+- Session replay capture does less work for hidden looping animations, duplicate change regions, and paused capture passes, lowering CPU and battery impact with no change in replay fidelity (iOS).
+
+### 📱 Native SDK versions
+
+- 🤖 Android SDK version 4.3.1: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
+- 🍎 iOS SDK version 4.2.1: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
+
 ## v4.4.1 — 2026-09-16
 
 ### 🐛 Bug fixes
