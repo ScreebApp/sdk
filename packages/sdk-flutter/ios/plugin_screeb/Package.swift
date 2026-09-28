@@ -17,7 +17,7 @@ if useLocalSDK {
     screebTargetDependency = .target(name: "Screeb")
     pluginTargets.append(.binaryTarget(name: "Screeb", path: localScreebXCFrameworkPath))
 } else {
-    packageDependencies.append(.package(url: "https://github.com/ScreebApp/sdk-ios-public.git", exact: "4.2.1"))
+    packageDependencies.append(.package(url: "https://github.com/ScreebApp/sdk-ios-public.git", exact: "4.3.0"))
     screebTargetDependency = .product(name: "Screeb", package: "sdk-ios-public")
 }
 
