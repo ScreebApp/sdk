@@ -50,6 +50,8 @@ export type IdentityFunction = (
 
 export type IdentityGetFunction = () => Promise<ScreebIdentityGetReturn>;
 
+export type SetAnonymousIdFunction = (anonymousId: string) => Promise<unknown>;
+
 export type IdentityGroupAssignFunction = (
   groupName: string,
   groupType?: string,
@@ -117,6 +119,7 @@ export type ScreebClient = {
   identityGroupUnassign: IdentityGroupUnassignFunction;
   identityProperties: IdentityPropertiesFunction;
   identityReset: IdentityResetFunction;
+  setAnonymousId: SetAnonymousIdFunction;
   init: InitFunction;
   load: LoadFunction;
   messageClose: MessageCloseFunction;

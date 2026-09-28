@@ -138,6 +138,8 @@ export const createScreebClient = (config: ScreebConfig): ScreebClient => {
       ensureScreeb("sessionReplayStart", () => Screeb.sessionReplayStart()),
     sessionReplayStop: async () =>
       ensureScreeb("sessionReplayStop", () => Screeb.sessionReplayStop()),
+    setAnonymousId: async (anonymousId) =>
+      ensureScreeb("setAnonymousId", () => Screeb.setAnonymousId(anonymousId)),
     surveyClose: async () =>
       ensureScreeb("surveyClose", () => Screeb.surveyClose()),
     surveyStart: async (
