@@ -1,5 +1,29 @@
 # Changelog
 
+## v4.4.3 — 2026-09-28
+
+### 🚀 New features
+
+- Added `Screeb.setAnonymousId()` to adopt the anonymous id your CDP already uses (e.g. Amplitude device id, Segment/RudderStack anonymous id). Call it right after `initSdk`; the respondent stays anonymous, or is switched to an existing one tied to that id if it isn't already identified (Android).
+- Added `Screeb.setAnonymousId(anonymousId:)` to link the current respondent to the anonymous id your CDP already uses (e.g. Amplitude device id, Segment or RudderStack anonymous id). The respondent stays anonymous, and if that id already belongs to an existing respondent, Screeb switches to it (unless the current one is already identified). Call it right after `initSdk` (iOS).
+
+### 🐛 Bug fixes
+
+- Fixed a race where picking a file attachment could occasionally fail or drop the picked file, caused by cache cleanup running concurrently with the copy of a newly picked file (Android).
+- Session replay no longer gets stuck recording a stale screen after a burst of capture failures (e.g. under heavy GPU load); it now backs off and retries instead of disabling itself for the rest of the session, and recovers any changes made while capture was paused (Android).
+- SDK error reports are no longer sent over the network before the SDK is initialized (when consent may not yet be collected), and no longer include command arguments, message contents, or opened links that could carry personal data (Android).
+- SDK error reports are no longer sent over the network before `initSdk` runs, since the host app may not have collected consent yet, they now stay local until then. Error messages also no longer include command arguments or other data that could carry visitor identities or properties (iOS).
+
+### ⚡ Improvements
+
+- Session replay adapts more smoothly under sustained memory pressure: pressure now eases gradually rather than staying elevated (and capture quality/cadence reduced) until the next app resume (Android).
+- Slightly smoother session replay capture rate under normal conditions (Android).
+
+### 📱 Native SDK versions
+
+- 🤖 Android SDK version 4.4.0: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
+- 🍎 iOS SDK version 4.3.0: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
+
 ## v4.4.2 — 2026-09-25
 
 ### 🐛 Bug fixes
