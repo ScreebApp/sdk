@@ -53,6 +53,10 @@ interface Screeb
     void ResetIdentity();
 
     [Static]
+    [Export("setAnonymousId:")]
+    void SetAnonymousId(string anonymousId);
+
+    [Static]
     [Export("getIdentity:")]
     void GetIdentity(Action<NSDictionary?, NSError?> completion);
 

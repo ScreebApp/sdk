@@ -202,6 +202,13 @@ class PluginScreeb {
   static Future<bool?> resetIdentity() =>
       _channel.invokeMethod('resetIdentity', []);
 
+  /// Adopts the anonymous id your CDP already uses (Amplitude device id, Segment
+  /// or RudderStack anonymous id) on the current respondent, which stays
+  /// anonymous. Call it right after [initSdk]: the call is resolved during init.
+  /// [anonymousId] must be 5 to 128 characters.
+  static Future<bool?> setAnonymousId(String anonymousId) =>
+      _channel.invokeMethod('setAnonymousId', [anonymousId]);
+
   /// Provides a way to get the current visitor identity
   static Future<Map<String, dynamic>?> getIdentity() async {
     final result = await _channel.invokeMethod('getIdentity', []);
