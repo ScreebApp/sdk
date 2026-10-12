@@ -1,5 +1,21 @@
 # Changelog
 
+## v4.4.4 — 2026-10-12
+
+### ⚡ Improvements
+
+- Updated to the latest native Android SDK (4.4.1) and iOS SDK (4.3.0), bringing in their latest fixes and improvements.
+
+### 🐛 Bug fixes
+
+- Mobile sessions now report the operating system name and version. Previously the OS information was missing, so Android sessions never had an OS recorded. The SDK now sends the Android release alongside the API level (Android).
+- Survey widgets and the screenshot editor now respect the status bar, display cutout, and gesture bar. The SDK passes the system bar insets to the survey, so content no longer sits under the clock and the editor toolbar clears the gesture bar (Android).
+
+### 📱 Native SDK versions
+
+- 🤖 Android SDK version 4.4.1: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
+- 🍎 iOS SDK version 4.3.0: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
+
 ## v4.4.3 — 2026-09-28
 
 ### 🚀 New features
