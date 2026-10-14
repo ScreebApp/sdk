@@ -61,6 +61,15 @@ public static partial class Screeb
     /// <returns>true if reset succeeded, false if it failed or SDK not initialized, null if unsupported.</returns>
     public static partial Task<bool?> ResetIdentity();
 
+    /// <summary>
+    /// Adopts the anonymous id your CDP already uses (Amplitude device id, Segment or RudderStack
+    /// anonymous id) on the current respondent, which stays anonymous. Call it right after
+    /// <c>InitSdk</c>: the call is resolved during init.
+    /// </summary>
+    /// <param name="anonymousId">The CDP anonymous id, 5 to 128 characters.</param>
+    /// <returns>true if the call was forwarded, false if it failed or SDK not initialized, null if unsupported.</returns>
+    public static partial Task<bool?> SetAnonymousId(string anonymousId);
+
     /// <summary>Get current visitor identity and properties.</summary>
     /// <returns>Dictionary of current identity and properties, or null if identity is unavailable or SDK not initialized.</returns>
     public static partial Task<Dictionary<string, object>?> GetIdentity();

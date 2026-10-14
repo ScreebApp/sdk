@@ -78,6 +78,10 @@ RCT_EXTERN_METHOD(sessionReplayStop:(RCTPromiseResolveBlock)resolve
 RCT_EXTERN_METHOD(resetIdentity:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 
+RCT_EXTERN_METHOD(setAnonymousId:(NSString *)anonymousId
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
 RCT_EXTERN_METHOD(getIdentity:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 

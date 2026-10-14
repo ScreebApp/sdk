@@ -85,6 +85,10 @@ actual object Screeb {
         runCatching { NativeScreeb.resetIdentity(); true }.orNullRethrowingCancellation()
     }
 
+    actual suspend fun setAnonymousId(anonymousId: String): Boolean? = withContext(Dispatchers.Main) {
+        runCatching { NativeScreeb.setAnonymousId(anonymousId); true }.orNullRethrowingCancellation()
+    }
+
     actual suspend fun getIdentity(): Map<String, Any>? = withContext(Dispatchers.Main) {
         runCatching {
             suspendCancellableCoroutine { cont ->
