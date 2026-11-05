@@ -1,4 +1,6 @@
-# CHANGELOGS
+# Changelog
+
+All notable changes to Screeb React Native SDK (`sdk-reactnative`).
 
 ## v4.4.4 — 2026-10-12
 
@@ -76,106 +78,124 @@
 ## v4.2.0 — 2026-08-24
 
 ### 🚀 New features
+
 - Exit-intent surveys now work in native apps: leaving a tracked screen can trigger a survey, as on web. Requires screen tracking (`trackScreen`) instrumentation.
 - New "inactivity" targeting rule: trigger a survey after the visitor has stopped interacting with the app for a configured time.
+
+### 🐛 Bug fixes
+
+- Time-based triggers (delay, session duration, inactivity) now fire on time: the bundled native SDKs arm their own timer instead of relying on webview timers, which the OS throttles while the webview is hidden.
+- A device without a usable network connection (airplane mode, captive portal, blocked DNS) no longer reports device-side failures as errors; genuine problems are still reported and now identify the workspace they belong to.
+
+### 📱 Native SDK versions
+
+- 🤖 Android SDK version 4.2.0: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
+- 🍎 iOS SDK version 4.2.0: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
 ## v4.1.0 — 2026-08-20
 
 ### ⚡ Improvements
+
 - Now bundles the native Screeb iOS and Android SDK 4.1.0, bringing session replay improvements to React Native apps: replay capture is refresh-rate aware on ProMotion displays (roughly half the CPU cost during recording), and recordings start from the first real frame instead of a blank lead-in.
 - Android session replay masking and anonymization now also covers video, maps, and other GPU-rendered surface content.
 
 ### 🐛 Bug fixes
+
 - Fixed race conditions in the underlying native SDK that could affect session replay when an app was backgrounded or the device was rotated.
 
-## Version 4.0.4 [2026-08-13]
+### 📱 Native SDK versions
 
-**Bug fixes 🐛**
+- 🤖 Android SDK version 4.1.0: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
+- 🍎 iOS SDK version 4.1.0: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
+
+## v4.0.4 — 2026-08-13
+
+### 🐛 Bug fixes
 
 - Respondents can attach a picture to an answer again on iOS: the attach button opened nothing, and the photo library could end up behind the survey (iOS).
 - An audio answer no longer asks for the camera, and refusing one permission no longer takes the whole answer down (Android).
 - Recording works on the first attempt instead of failing until the respondent tried again (Android).
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 4.0.4: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 4.0.4: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 4.0.3 [2026-08-07]
+## v4.0.3 — 2026-08-07
 
-**Bug fixes 🐛**
+### 🐛 Bug fixes
 
 - Fixed rare crashes in the host app while session replay was recording.
 - Fixed Screeb links whose token contained special characters being cut off.
 - Anonymized session replay no longer leaves text readable on low-resolution captures (Android).
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 4.0.3: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 4.0.3: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 4.0.2 [2026-07-08]
+## v4.0.2 — 2026-07-08
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - More robust session replay, even under heavy memory pressure.
 - Lower CPU and memory usage while recording.
 - In-app surveys and messages stay reliably in the foreground.
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 4.0.2: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 4.0.2: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 3.1.0 [2026-02-12]
+## v3.1.0 — 2026-02-12
 
-**Improvements 🚀**
+### ⚡ Improvements
 
-- Added sessionReplay{start|stop} commands.
+- Added `sessionReplay{start|stop}` commands.
 - Added GetIdentity command.
 - Return debug/debug targeting results in the command result instead of logs.
 - Added file picker support for In-App Messages.
 - Improved Session Replay for complex apps. (Android)
 - Fixed unassignGroup that was calling assignGroup (iOS)
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 3.1.1: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 3.1.1: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 3.0.0 [2026-01-13]
+## v3.0.0 — 2026-01-13
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Session Replay in Beta.
 - Added disableMirror to InitOptions to force disable IAM mirroring and Session Replay.
 - Ensure webview is not in the accessible tree when it is hidden.
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 3.0.0: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 3.0.2: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.2.1 [2025-11-20]
+## v2.2.1 — 2025-11-20
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Fixed Closing IAM builder reopening it.
 - Enforce a non-zero size. (Android)
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 2.2.9: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.2.2: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.2.0 [2025-11-06]
+## v2.2.0 — 2025-11-06
 
-**Breaking changes ⚠️**
+### Breaking changes ⚠️
 
 - The `initSdk` method now requires a single `channelId` parameter instead of separate `androidChannelId` and `iosChannelId`.
 - Make sure to update your calls to `initSdk` accordingly.
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Now using new React Native architecture.
 - Enforce a non-zero size. (Android)
@@ -183,144 +203,144 @@
 - Added optional distribution_id param to startSurvey.
 - Added optional surveyId param to closeSurvey.
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 2.2.7: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.2.0: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.1.18 [2025-10-16]
+## v2.1.18 — 2025-10-16
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Support In-App Messages.
 - Bump min iOS version to 12.0.
 - Enforce Screeb to be displayed over sibling views. (Android)
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 2.1.17: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.1.14: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.1.17 [2025-10-08]
+## v2.1.17 — 2025-10-08
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Ensure sequential messages consume. (iOS)
 - Updated core version. (Android)
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 2.1.14: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.1.13: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.1.11→2.1.16 [2025-04-17]
+## v2.1.11→2.1.16 — 2025-04-17
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Fixed Android type.
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 2.1.13: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.1.11: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.1.10 [2025-02-24]
+## v2.1.10 — 2025-02-24
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Fixed "SDK is not ready".
 - Thread safety fixes.
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 2.1.12: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.1.11: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.1.9 [2025-01-31]
+## v2.1.9 — 2025-01-31
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Ensure commands execution orders.
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 2.1.10: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.1.10: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.1.8 [2024-12-19]
+## v2.1.8 — 2024-12-19
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Reduce memory usage caused by logging.
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 2.1.9: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.1.9: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.1.7 [2024-12-09]
+## v2.1.7 — 2024-12-09
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Fixed case where content is untouchable.
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 2.1.8: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.1.8: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.1.6 [2024-10-02]
+## v2.1.6 — 2024-10-02
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Add language parameter
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 2.1.8: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.1.7: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.1.5 [2024-08-21]
+## v2.1.5 — 2024-08-21
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Allow async callbacks for `onSurveyDisplayAllowed` and `onMessageDisplayAllowed` hooks.
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 2.1.2: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.1.6: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.1.1→2.1.4 [2024-07-30]
+## v2.1.1→2.1.4 — 2024-07-30
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Support new `onSurveyDisplayAllowed` and `onMessageDisplayAllowed` hooks.
 - Fixed destroy animation.
 - Improved surveys hit boxes. (Android)
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 2.1.2: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.1.6: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.1.0 [2024-06-18]
+## v2.1.0 — 2024-06-18
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Improved security
 - Improved handling of activities switching. (Android)
 - Fixed unwanted insets. (Android)
 - Improved surveys hitboxes. (iOS)
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 2.0.38: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.1.1: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.0.23 [2024-04-05]
+## v2.0.23 — 2024-04-05
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Multi-platform support.
 - Better handling of window switching. (iOS)
@@ -328,315 +348,315 @@
 - Fixed a possible crash when receiving events. (Android)
 - Don't waive webview when not visible. (Android)
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 2.0.35: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.11: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.0.22 [2024-02-05]
+## v2.0.22 — 2024-02-05
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Handle a rare case where a survey is not properly closed.
 - Improved commands encoding.
 - Switched from `play core` libs to `play review` libs. (Android)
 - Fixed a possible crash on old devices. (Android)
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 2.0.31: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.10: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.0.21 [2024-01-11]
+## v2.0.21 — 2024-01-11
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Fixed iOS properties Bool/Int incorrect values.
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 2.0.28: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.9: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.0.20 [2024-01-09]
+## v2.0.20 — 2024-01-09
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Improved context tracking.
 - Improved multi-process support. (Android)
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 2.0.28: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.9: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.0.19 [2024-01-03]
+## v2.0.19 — 2024-01-03
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Fixed Close/Init SDK lifecycle. (iOS)
 
-**Native SDK version 📱**
+### Native SDK version 📱
 
 - 🤖 Android SDK version 2.0.27: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.8: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.0.18 [2023-12-18]
+## v2.0.18 — 2023-12-18
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Avoid overriding input soft mode on start. (Android)
 
-**Native SDK version 📱**
+### Native SDK version 📱
 
 - 🤖 Android SDK version 2.0.27: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.7: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.0.17 [2023-12-11]
+## v2.0.17 — 2023-12-11
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Improve errors reporting.
 - Properly handle SSL errors. (iOS)
 
-**Native SDK version 📱**
+### Native SDK version 📱
 
 - 🤖 Android SDK version 2.0.26: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.7: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.0.12→2.0.16 [2023-12-08]
+## v2.0.12→2.0.16 — 2023-12-08
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Improve iOS errors reporting.
 - Added closeSurvey command.
 - Added new param "initOptions" with "isDebugMode" (**iOS only**)
     - ‼️ Should never be used on prod as surveys view will be forced to be on top of the app
 
-**Native SDK version 📱**
+### Native SDK version 📱
 
 - 🤖 Android SDK version 2.0.25: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.4: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.0.11 [2023-12-06]
+## v2.0.11 — 2023-12-06
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Let iOS properly detect view controller.
 
-**Native SDK version 📱**
+### Native SDK version 📱
 
 - 🤖 Android SDK version 2.0.25: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.3: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.0.10 [2023-12-05]
+## v2.0.10 — 2023-12-05
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Fixed iOS thread.
 
-**Native SDK version 📱**
+### Native SDK version 📱
 
 - 🤖 Android SDK version 2.0.25: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.3: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.0.9 [2023-12-01]
+## v2.0.9 — 2023-12-01
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Fixed iOS compilation.
 
-**Native SDK version 📱**
+### Native SDK version 📱
 
 - 🤖 Android SDK version 2.0.25: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.3: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.0.8 [2023-11-30]
+## v2.0.8 — 2023-11-30
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Improve compatibility with other webviews.
 - Remove few superfluous threads handling.
 
-**Breaking changes 🔨**
+### Breaking changes 🔨
 
 - Remove the need to call `setAppContext` in onCreate.
 
-**Native SDK version 📱**
+### Native SDK version 📱
 
 - 🤖 Android SDK version 2.0.25: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.3: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.0.7 [2023-10-27]
+## v2.0.7 — 2023-10-27
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Fixed an exception and lifecycle when calling closeSdk.
 
-**Native SDK version 📱**
+### Native SDK version 📱
 
 - 🤖 Android SDK version 2.0.24: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.3: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.0.6 [2023-10-25]
+## v2.0.6 — 2023-10-25
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Fixed a possible crash during the initialization of the SDK.
 
-**Native SDK version 📱**
+### Native SDK version 📱
 
 - 🤖 Android SDK version 2.0.22: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.3: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.0.5 [2023-09-01]
+## v2.0.5 — 2023-09-01
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Fixed a case where survey was not displayed.
 
-**Native SDK version 📱**
+### Native SDK version 📱
 
 - 🤖 Android SDK version 2.0.12: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.0: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.0.4 [2023-09-01]
+## v2.0.4 — 2023-09-01
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Force keyboard to not overlap survey.
 - Improve insets handling.
 - Improve thread safety.
 
-**Native SDK version 📱**
+### Native SDK version 📱
 
 - 🤖 Android SDK version 2.0.11: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.0: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.0.3 [2023-08-22]
+## v2.0.3 — 2023-08-22
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Avoid keyboard to overlap survey.
 
-**Native SDK version 📱**
+### Native SDK version 📱
 
 - 🤖 Android SDK version 2.0.7: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.0: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.0.2 [2023-08-18]
+## v2.0.2 — 2023-08-18
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Fixed surveys not showing in some cases.
 
-**Native SDK version 📱**
+### Native SDK version 📱
 
 - 🤖 Android SDK version 2.0.3: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.0: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.0.1 [2023-08-16]
+## v2.0.1 — 2023-08-16
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - Improved compatibility with other webviews plugins.
 
-**Native SDK version 📱**
+### Native SDK version 📱
 
 - 🤖 Android SDK version 2.0.2: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.0: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 2.0.0 [2023-08-04]
+## v2.0.0 — 2023-08-04
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - The SDK has been rewritten from scratch to provide greater stability, instant updates of Screeb features, and be even lighter.
 - Improved Android React native compatibility.
 - New feature called hooks.
 
-**Native SDK version 📱**
+### Native SDK version 📱
 
 - 🤖 Android SDK version 2.0.1: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.0: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 1.0.0-rc.2 [2023-07-31]
+## v1.0.0-rc.2 — 2023-07-31
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - The SDK has been rewritten from scratch to provide greater stability, instant updates of Screeb features, and be even lighter.
 - Improved Android React native compatibility.
 
-**Native SDK version 📱**
+### Native SDK version 📱
 
 - 🤖 Android SDK version 2.0.0-rc.2: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.0-rc.3: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 1.0.0-rc.1 [2023-07-05]
+## v1.0.0-rc.1 — 2023-07-05
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - The SDK has been rewritten from scratch to provide greater stability, instant updates of Screeb features, and be even lighter.
 
-**Native SDK version 📱**
+### Native SDK version 📱
 
 - 🤖 Android SDK version 2.0.0-rc.1: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 2.0.0-rc.3: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 0.8.21 [2023-06-12]
+## v0.8.21 — 2023-06-12
 
-**Improvement 🚀**
+### Improvement 🚀
 
 - Fixed unhandled exception in Android internal coroutine.
 
-**Native SDK version 📱**
+### Native SDK version 📱
 
 - 🤖 Android SDK version 1.13.7: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 1.13.2: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 0.8.20 [2023-06-07]
+## v0.8.20 — 2023-06-07
 
-**Improvement 🚀**
+### Improvement 🚀
 
 - Added new "Range rating" type of questions.
 - Fixed crash when host can't be resolved.
 
-**Native SDK version 📱**
+### Native SDK version 📱
 
 - 🤖 Android SDK version 1.13.5: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 1.13.2: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 0.8.19 [2023-05-11]
+## v0.8.19 — 2023-05-11
 
-**Improvement 🚀**
+### Improvement 🚀
 
 - Updated gradle to 7.6 and update dependencies.
 - Types declaration.
 
-## Version 0.8.16 [2023-04-28]
+## v0.8.16 — 2023-04-28
 
-**Improvement 🚀**
+### Improvement 🚀
 
 - `startSurvey` command now accepts the `ignoreSurveyStatus` argument (default: true).
 - Fixed multiple "End survey" buttons.
 
-## Version 0.8.15 [2023-03-31]
+## v0.8.15 — 2023-03-31
 
-**Improvement 🚀**
+### Improvement 🚀
 
 - Dependency update: vanniktech/Emoji.
 - Better log management.
 - Improved error handling.
 
-## Version 0.8.14 [2023-03-10]
+## v0.8.14 — 2023-03-10
 
-**Improvement 🚀**
+### Improvement 🚀
 
 - Fixed Validation event and group name
 - Fixed Disable Automatic screen detection
 
-## Version 0.8.13 [2022-02-24]
+## v0.8.13 — 2022-02-24
 
-**Improvement 🚀**
+### Improvement 🚀
 
 - Added debug and debugTargeting commands.
 - Added resetIdentity command.
@@ -645,23 +665,23 @@
 - Build IOS SDK with xcode 13.2.1 and Swift 5.5.2 (1300.0.47.5) to fix compilation issue and support swift version 5.5.2+.
 - Update example by upgrading react/react native version and gradle version.
 
-## Version 0.8.12 [2022-12-22]
+## v0.8.12 — 2022-12-22
 
-**Improvement 🚀**
+### Improvement 🚀
 
 - Fix crash on unexpected question/answer flow
 - Fix unexpected behavior on response closing
 - Dependencies update (Android)
 
-## Version 0.8.11 [2022-10-29]
+## v0.8.11 — 2022-10-29
 
-**Improvement 🚀**
+### Improvement 🚀
 
 - Make targeting more reliable in order to **not** trigger survey in corner-case.
 
-## Version 0.8.9 [2022-10-18]
+## v0.8.9 — 2022-10-18
 
-**Improvement 🚀**
+### Improvement 🚀
 
 - Replace numeric emojis by custom svg
 - Survey superposition on the app.
