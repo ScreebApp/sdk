@@ -1,5 +1,7 @@
 # Changelog
 
+All notable changes to Screeb .NET MAUI SDK (`sdk-maui`).
+
 ## v4.4.4 — 2026-10-12
 
 ### ⚡ Improvements
@@ -76,54 +78,72 @@
 ## v4.2.0 — 2026-08-24
 
 ### 🚀 New features
+
 - Exit-intent surveys now work in native apps: leaving a tracked screen can trigger a survey, as on web. Requires screen tracking (`TrackScreen`) instrumentation.
 - New "inactivity" targeting rule: trigger a survey after the visitor has stopped interacting with the app for a configured time.
+
+### 🐛 Bug fixes
+
+- Time-based triggers (delay, session duration, inactivity) now fire on time: the native SDKs arm their own timer instead of relying on webview timers, which the OS throttles while the webview is hidden.
+- A device without a usable network connection (airplane mode, captive portal, blocked DNS) no longer reports device-side failures as errors; genuine problems are still reported and now identify the workspace they belong to.
+
+### 📱 Native SDK versions
+
+- 🤖 Android SDK version 4.2.0: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
+- 🍎 iOS SDK version 4.2.0: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
 ## v4.1.0 — 2026-08-20
 
 ### 🐛 Bug fixes
+
 - Fixed session replay backgrounding and screen-rotation race conditions that could disrupt recordings on Android and iOS.
 
 ### ⚡ Improvements
+
 - Session replay now adapts to ProMotion display refresh rates, roughly halving replay CPU usage on supported iOS devices.
 - Recordings now start from the first mirrored frame instead of a blank lead-in.
 - Android surface content such as video, maps, and GPU-rendered views is now covered by session replay masking and anonymization.
 
-## Version 4.0.4 [2026-08-13]
+### 📱 Native SDK versions
 
-**Bug fixes 🐛**
+- 🤖 Android SDK version 4.1.0: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
+- 🍎 iOS SDK version 4.1.0: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
+
+## v4.0.4 — 2026-08-13
+
+### 🐛 Bug fixes
 
 - Respondents can attach a picture to an answer again on iOS: the attach button opened nothing, and the photo library could end up behind the survey (iOS).
 - An audio answer no longer asks for the camera, and refusing one permission no longer takes the whole answer down (Android).
 - Recording works on the first attempt instead of failing until the respondent tried again (Android).
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 4.0.4: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 4.0.4: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 4.0.3 [2026-08-07]
+## v4.0.3 — 2026-08-07
 
-**Bug fixes 🐛**
+### 🐛 Bug fixes
 
 - Fixed rare crashes in the host app while session replay was recording.
 - Fixed Screeb links whose token contained special characters being cut off.
 - Anonymized session replay no longer leaves text readable on low-resolution captures (Android).
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 4.0.3: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 4.0.3: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
 
-## Version 4.0.2 [2026-07-08]
+## v4.0.2 — 2026-07-08
 
-**Improvements 🚀**
+### ⚡ Improvements
 
 - More robust session replay, even under heavy memory pressure.
 - Lower CPU and memory usage while recording.
 - In-app surveys and messages stay reliably in the foreground.
 
-**Native SDK Versions 📱**
+### 📱 Native SDK versions
 
 - 🤖 Android SDK version 4.0.2: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
 - 🍎 iOS SDK version 4.0.2: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
