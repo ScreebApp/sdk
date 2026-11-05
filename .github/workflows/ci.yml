@@ -98,18 +98,28 @@ jobs:
       - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
         with:
           dotnet-version: '9.0.x'
+      # macos-latest also preinstalls .NET 10, whose workload set does not match the net9.0 targets.
+      - name: Pin the .NET 9 SDK
+        run: |
+          set -euo pipefail
+          DOTNET9=$(dotnet --list-sdks | awk '/^9\./{v=$1} END{print v}')
+          test -n "$DOTNET9"
+          printf '{"sdk":{"version":"%s","rollForward":"latestFeature"}}\n' "$DOTNET9" > global.json
+          dotnet --version
       - name: Install MAUI workloads
-        run: dotnet workload install ios
+        run: dotnet workload install maui-android maui-ios
       - name: Download Screeb iOS XCFramework
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          set -euo pipefail
+          SCREEB_IOS_SDK_VERSION=$(node -p "require('./sdk-versions.json').native.ios")
           mkdir -p packages/sdk-maui/native/ios
-          gh release download --repo ScreebApp/sdk-ios-public --pattern 'Screeb.zip' --output /tmp/Screeb.zip --clobber
+          gh release download "${SCREEB_IOS_SDK_VERSION}" --repo ScreebApp/sdk-ios-public --pattern 'Screeb.zip' --output /tmp/Screeb.zip --clobber
           unzip -q /tmp/Screeb.zip -d /tmp/screeb_ios
           cp -r /tmp/screeb_ios/Screeb.xcframework packages/sdk-maui/native/ios/
       - name: Restore
-        run: dotnet restore packages/sdk-maui/ScreebMaui.csproj -p:TargetFramework=net9.0-ios
+        run: dotnet restore packages/sdk-maui/ScreebMaui.csproj
       - name: Build iOS
         run: dotnet build packages/sdk-maui/ScreebMaui.csproj -f net9.0-ios --no-restore
 
