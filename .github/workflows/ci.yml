@@ -109,7 +109,7 @@ jobs:
           unzip -q /tmp/Screeb.zip -d /tmp/screeb_ios
           cp -r /tmp/screeb_ios/Screeb.xcframework packages/sdk-maui/native/ios/
       - name: Restore
-        run: dotnet restore packages/sdk-maui/ScreebMaui.csproj
+        run: dotnet restore packages/sdk-maui/ScreebMaui.csproj -p:TargetFramework=net9.0-ios
       - name: Build iOS
         run: dotnet build packages/sdk-maui/ScreebMaui.csproj -f net9.0-ios --no-restore
 
@@ -163,7 +163,7 @@ jobs:
           set -euo pipefail
           SCREEB_IOS_SDK_VERSION=$(grep '^SCREEB_IOS_SDK_VERSION=' packages/sdk-kmp/gradle.properties | cut -d= -f2)
           mkdir -p packages/sdk-kmp/native/ios
-          gh release download "v${SCREEB_IOS_SDK_VERSION}" --repo ScreebApp/sdk-ios-public --pattern 'Screeb.zip' --output /tmp/Screeb.zip --clobber
+          gh release download "${SCREEB_IOS_SDK_VERSION}" --repo ScreebApp/sdk-ios-public --pattern 'Screeb.zip' --output /tmp/Screeb.zip --clobber
           unzip -q /tmp/Screeb.zip -d /tmp/screeb_ios
           cp -r /tmp/screeb_ios/Screeb.xcframework packages/sdk-kmp/native/ios/
       - name: Make gradlew executable
