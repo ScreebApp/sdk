@@ -21,6 +21,7 @@ import {
   ScreebContextValues,
   SessionReplayStartFunction,
   SessionReplayStopFunction,
+  SetAnonymousIdFunction,
   SurveyCloseFunction,
   SurveyStartFunction,
   TargetingDebugFunction,
@@ -88,6 +89,13 @@ export const ScreebPlugin: Plugin = {
 
     const identityGet: IdentityGetFunction = async () =>
       await ensureScreeb("identityGet", () => Screeb.identityGet());
+
+    const setAnonymousId: SetAnonymousIdFunction = async (
+      anonymousId: string,
+    ) =>
+      await ensureScreeb("setAnonymousId", () =>
+        Screeb.setAnonymousId(anonymousId),
+      );
 
     const identityGroupAssign: IdentityGroupAssignFunction = async (
       groupName: string,
@@ -258,6 +266,7 @@ export const ScreebPlugin: Plugin = {
       messageStart,
       sessionReplayStart,
       sessionReplayStop,
+      setAnonymousId,
       surveyClose,
       surveyStart,
       targetingDebug,

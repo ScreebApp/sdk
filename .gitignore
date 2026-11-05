@@ -71,3 +71,4 @@ examples/example-reactnative/ios/Pods/
 # Local Claude Code planning artifacts (specs/plans) — never committed to this repo
 docs/superpowers/
 .superpowers/
+.claude/settings.local.json
