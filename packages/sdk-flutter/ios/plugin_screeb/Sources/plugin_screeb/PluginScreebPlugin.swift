@@ -144,6 +144,13 @@ public class PluginScreebPlugin: NSObject, FlutterPlugin {
         case "resetIdentity":
             Screeb.resetIdentity()
             result(true)
+        case "setAnonymousId":
+            if let anonymousId = args[0] as? String {
+                Screeb.setAnonymousId(anonymousId: anonymousId)
+                result(true)
+            } else {
+                result(FlutterError(code: "-1", message: "iOS could not extract flutter arguments in method: \(call.method)", details: nil))
+            }
         case "getIdentity":
             Screeb.getIdentity { identity, error in
                 if let error = error {

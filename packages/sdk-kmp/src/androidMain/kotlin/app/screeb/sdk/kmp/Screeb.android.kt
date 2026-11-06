@@ -69,6 +69,10 @@ actual object Screeb {
         runCatching { AndroidScreeb.resetIdentity(); true }.orNullRethrowingCancellation()
     }
 
+    actual suspend fun setAnonymousId(anonymousId: String): Boolean? = withContext(Dispatchers.Main) {
+        runCatching { AndroidScreeb.setAnonymousId(anonymousId); true }.orNullRethrowingCancellation()
+    }
+
     actual suspend fun getIdentity(): Map<String, Any>? = withContext(Dispatchers.Main) {
         runCatching {
             suspendCancellableCoroutine { cont ->

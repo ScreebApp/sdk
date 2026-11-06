@@ -180,6 +180,13 @@ export function resetIdentity() {
   return ScreebReactNative.resetIdentity();
 }
 
+// setAnonymousId: adopts the anonymous id your CDP already uses (Amplitude device id,
+// Segment or RudderStack anonymous id) on the current respondent, which stays anonymous.
+// Call it right after initSdk: the call is resolved during init. 5 to 128 characters.
+export function setAnonymousId(anonymousId: string) {
+  return ScreebReactNative.setAnonymousId(anonymousId);
+}
+
 // getIdentity
 export function getIdentity() {
   return ScreebReactNative.getIdentity();

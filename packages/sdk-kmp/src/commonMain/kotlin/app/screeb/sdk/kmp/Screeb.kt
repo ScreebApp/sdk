@@ -27,6 +27,13 @@ expect object Screeb {
 
     suspend fun resetIdentity(): Boolean?
 
+    /**
+     * Adopts the anonymous id your CDP already uses (Amplitude device id, Segment or
+     * RudderStack anonymous id) on the current respondent, which stays anonymous. Call it
+     * right after [initSdk]: the call is resolved during init. 5 to 128 characters.
+     */
+    suspend fun setAnonymousId(anonymousId: String): Boolean?
+
     suspend fun getIdentity(): Map<String, Any>?
 
     suspend fun assignGroup(

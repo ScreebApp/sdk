@@ -20,11 +20,6 @@ All notable changes to Screeb React Native SDK (`sdk-reactnative`).
 
 ## v4.4.3 — 2026-09-28
 
-### 🚀 New features
-
-- Added `Screeb.setAnonymousId()` to adopt the anonymous id your CDP already uses (e.g. Amplitude device id, Segment/RudderStack anonymous id). Call it right after `initSdk`; the respondent stays anonymous, or is switched to an existing one tied to that id if it isn't already identified (Android).
-- Added `Screeb.setAnonymousId(anonymousId:)` to link the current respondent to the anonymous id your CDP already uses (e.g. Amplitude device id, Segment or RudderStack anonymous id). The respondent stays anonymous, and if that id already belongs to an existing respondent, Screeb switches to it (unless the current one is already identified). Call it right after `initSdk` (iOS).
-
 ### 🐛 Bug fixes
 
 - Fixed a race where picking a file attachment could occasionally fail or drop the picked file, caused by cache cleanup running concurrently with the copy of a newly picked file (Android).
