@@ -34,6 +34,12 @@ expect object Screeb {
      */
     suspend fun setAnonymousId(anonymousId: String): Boolean?
 
+    /**
+     * Sets the color scheme of the surveys and messages: "light", "dark" or "auto"
+     * (follow the app's appearance). Overrides [ScreebInitOptions.colorScheme].
+     */
+    suspend fun setColorScheme(scheme: String): Boolean?
+
     suspend fun getIdentity(): Map<String, Any>?
 
     suspend fun assignGroup(

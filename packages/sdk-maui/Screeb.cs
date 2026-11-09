@@ -70,6 +70,13 @@ public static partial class Screeb
     /// <returns>true if the call was forwarded, false if it failed or SDK not initialized, null if unsupported.</returns>
     public static partial Task<bool?> SetAnonymousId(string anonymousId);
 
+    /// <summary>
+    /// Sets the color scheme of the surveys and messages, overriding <c>ScreebInitOptions.ColorScheme</c>.
+    /// </summary>
+    /// <param name="scheme">"light", "dark" or "auto" (follow the app's appearance).</param>
+    /// <returns>true if the call was forwarded, false if it failed or SDK not initialized, null if unsupported.</returns>
+    public static partial Task<bool?> SetColorScheme(string scheme);
+
     /// <summary>Get current visitor identity and properties.</summary>
     /// <returns>Dictionary of current identity and properties, or null if identity is unavailable or SDK not initialized.</returns>
     public static partial Task<Dictionary<string, object>?> GetIdentity();

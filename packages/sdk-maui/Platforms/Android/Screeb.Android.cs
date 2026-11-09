@@ -90,6 +90,9 @@ public static partial class Screeb
     public static partial Task<bool?> SetAnonymousId(string anonymousId)
         => OnMain(() => App.Screeb.Sdk.Screeb.Instance.SetAnonymousId(anonymousId));
 
+    public static partial Task<bool?> SetColorScheme(string scheme)
+        => OnMain(() => App.Screeb.Sdk.Screeb.Instance.SetColorScheme(scheme));
+
     public static partial Task<Dictionary<string, object>?> GetIdentity()
         => OnMain<Dictionary<string, object>>(tcs =>
             App.Screeb.Sdk.Screeb.Instance.GetIdentity(new KotlinResultCallback((identity, error) =>
@@ -198,11 +201,13 @@ public static partial class Screeb
     private static IDictionary<string, Java.Lang.Object>? ToInitOptionsMap(ScreebInitOptions? opts)
     {
         if (opts == null) return null;
-        return new Dictionary<string, Java.Lang.Object>
+        var map = new Dictionary<string, Java.Lang.Object>
         {
             ["isDebugMode"] = Java.Lang.Boolean.ValueOf(opts.IsDebugMode)!,
             ["disableMirror"] = Java.Lang.Boolean.ValueOf(opts.DisableMirror)!
         };
+        if (opts.ColorScheme != null) map["colorScheme"] = new Java.Lang.String(opts.ColorScheme);
+        return map;
     }
 
     private static Dictionary<string, object>? FromJavaObject(Java.Lang.Object? obj)

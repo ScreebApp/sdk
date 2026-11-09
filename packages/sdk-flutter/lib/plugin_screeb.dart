@@ -209,6 +209,12 @@ class PluginScreeb {
   static Future<bool?> setAnonymousId(String anonymousId) =>
       _channel.invokeMethod('setAnonymousId', [anonymousId]);
 
+  /// Sets the color scheme of the surveys and messages: `"light"`, `"dark"` or
+  /// `"auto"` (follow the app's appearance). Overrides the `colorScheme` key of
+  /// [initSdk]'s `initOptions`.
+  static Future<bool?> setColorScheme(String scheme) =>
+      _channel.invokeMethod('setColorScheme', [scheme]);
+
   /// Provides a way to get the current visitor identity
   static Future<Map<String, dynamic>?> getIdentity() async {
     final result = await _channel.invokeMethod('getIdentity', []);

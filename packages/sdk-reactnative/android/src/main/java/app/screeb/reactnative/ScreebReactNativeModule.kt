@@ -182,6 +182,13 @@ class ScreebReactNativeModule(reactContext: ReactApplicationContext) :
     }
   }
 
+  override fun setColorScheme(scheme: String, promise: Promise) {
+    Handler(Looper.getMainLooper()).post {
+      Screeb.setColorScheme(scheme)
+      promise.resolve(null)
+    }
+  }
+
   override fun getIdentity(promise: Promise) {
     Handler(Looper.getMainLooper()).post {
       Screeb.getIdentity { identity, error ->

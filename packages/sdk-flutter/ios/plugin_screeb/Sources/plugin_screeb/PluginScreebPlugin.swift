@@ -151,6 +151,13 @@ public class PluginScreebPlugin: NSObject, FlutterPlugin {
             } else {
                 result(FlutterError(code: "-1", message: "iOS could not extract flutter arguments in method: \(call.method)", details: nil))
             }
+        case "setColorScheme":
+            if let scheme = args[0] as? String {
+                Screeb.setColorScheme(scheme)
+                result(true)
+            } else {
+                result(FlutterError(code: "-1", message: "iOS could not extract flutter arguments in method: \(call.method)", details: nil))
+            }
         case "getIdentity":
             Screeb.getIdentity { identity, error in
                 if let error = error {

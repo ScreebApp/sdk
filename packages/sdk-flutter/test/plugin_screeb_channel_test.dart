@@ -30,4 +30,20 @@ void main() {
     expect(calls.single.method, 'setAnonymousId');
     expect(calls.single.arguments, ['amplitude-device-id']);
   });
+
+  test('setColorScheme relays the scheme to the native side', () async {
+    final result = await PluginScreeb.setColorScheme('dark');
+
+    expect(result, isTrue);
+    expect(calls.single.method, 'setColorScheme');
+    expect(calls.single.arguments, ['dark']);
+  });
+
+  test('initSdk relays the colorScheme init option', () async {
+    await PluginScreeb.initSdk('channel-id',
+        initOptions: {'colorScheme': 'light'});
+
+    expect(calls.single.method, 'initSdk');
+    expect((calls.single.arguments as List)[3], {'colorScheme': 'light'});
+  });
 }

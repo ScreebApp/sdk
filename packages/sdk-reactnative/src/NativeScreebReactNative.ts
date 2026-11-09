@@ -4,6 +4,8 @@ type HookIdsMap = { [key: string]: string };
 type InitOptions = {
   isDebugMode?: boolean;
   disableMirror?: boolean;
+  // "light" | "dark" | "auto"; typed as a string for codegen.
+  colorScheme?: string;
 };
 
 export interface Spec extends TurboModule {
@@ -62,6 +64,7 @@ export interface Spec extends TurboModule {
   sessionReplayStop(): Promise<void>;
   resetIdentity(): Promise<void>;
   setAnonymousId(anonymousId: string): Promise<void>;
+  setColorScheme(scheme: string): Promise<void>;
   getIdentity(): Promise<{ [key: string]: unknown } | null>;
   closeSdk(): Promise<void>;
   handleDeepLink(url: string): Promise<void>;
