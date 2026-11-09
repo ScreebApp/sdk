@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import {
   HooksInit,
   PropertyRecord,
+  ScreebColorScheme,
   ScreebOptions,
   SpaNavigationHandler,
 } from "@screeb/sdk-browser";
@@ -19,6 +20,8 @@ export class ScreebConfig {
   hooks?: HooksInit;
   /** Optional handler for the `in-page-spa` "Navigate to URL" target (custom SPA routers). */
   spaNavigationHandler?: SpaNavigationHandler;
+  /** Color scheme of the surveys and messages: "light", "dark" or "auto" (default). */
+  colorScheme?: ScreebColorScheme;
   /**
    * Indicates if Screeb should be automatically loaded.
    * This will ping to the Screeb servers.

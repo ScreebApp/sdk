@@ -103,6 +103,27 @@ Use `useScreeb()` in any child component:
 </script>
 ```
 
+## Dark mode
+
+Surveys and messages follow the page's color scheme by default (`"auto"`): a `dark`/`light` class
+or a `data-theme`-style attribute on `<html>`, then the device setting. Force it with the
+`colorScheme` config option (`"light"`, `"dark"` or `"auto"`), and change it at runtime with
+`setColorScheme`, e.g. from your app's theme toggle; `"auto"` returns to detection. A theme
+without dark values always renders light. Requires a Screeb tag release with dark mode support
+(`@screeb/tag` 0.84.0 or later).
+
+```svelte
+<script lang="ts">
+  import { setScreebContext, useScreeb } from "@screeb/sdk-svelte";
+
+  setScreebContext({ websiteId: "<YOUR-CHANNEL-ID>", autoInit: true, colorScheme: "dark" });
+
+  // Later, in any child component
+  const { setColorScheme } = useScreeb();
+  setColorScheme("light");
+</script>
+```
+
 For a working example, see our [Screeb Svelte SDK example app](https://github.com/ScreebApp/sdk/tree/master/examples/example-svelte).
 
 ## Documentation

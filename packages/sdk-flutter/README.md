@@ -68,6 +68,20 @@ PluginScreeb.setIdentity("<user-id>", properties: {
 });
 ```
 
+### Dark mode
+
+Surveys and messages follow the app's appearance by default (`"auto"`). Force a scheme with the
+`colorScheme` key of `initOptions` (`"light"`, `"dark"` or `"auto"`) and change it at runtime with
+`setColorScheme`; `"auto"` follows the app again. A theme without dark values always renders light.
+Requires the native Screeb SDK releases with dark mode support (iOS and Android, pending).
+
+```dart
+PluginScreeb.initSdk("<channel-id>", initOptions: {"colorScheme": "dark"});
+
+// Later, when the user switches theme
+PluginScreeb.setColorScheme("light");
+```
+
 For a working example, see our [Screeb Flutter SDK example app](https://github.com/ScreebApp/sdk/tree/master/examples/example-flutter).
 
 For further information, see [our developer documentation](https://developers.screeb.app/sdk-flutter/install).

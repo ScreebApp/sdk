@@ -25,7 +25,11 @@ actual object Screeb {
                 userId,
                 ScreebUtils.formatProperties(properties)?.let { HashMap(it) },
                 initOptions?.let {
-                    hashMapOf("isDebugMode" to it.isDebugMode, "disableMirror" to it.disableMirror)
+                    hashMapOf(
+                        "isDebugMode" to it.isDebugMode,
+                        "disableMirror" to it.disableMirror,
+                        "colorScheme" to it.colorScheme,
+                    )
                 },
                 HooksAndroid.toHooks(uuidMap),
                 language,
@@ -71,6 +75,10 @@ actual object Screeb {
 
     actual suspend fun setAnonymousId(anonymousId: String): Boolean? = withContext(Dispatchers.Main) {
         runCatching { AndroidScreeb.setAnonymousId(anonymousId); true }.orNullRethrowingCancellation()
+    }
+
+    actual suspend fun setColorScheme(scheme: String): Boolean? = withContext(Dispatchers.Main) {
+        runCatching { AndroidScreeb.setColorScheme(scheme); true }.orNullRethrowingCancellation()
     }
 
     actual suspend fun getIdentity(): Map<String, Any>? = withContext(Dispatchers.Main) {

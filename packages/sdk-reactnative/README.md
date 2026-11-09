@@ -69,6 +69,22 @@ setIdentity("<user-id>", {
 });
 ```
 
+### Dark mode
+
+Surveys and messages follow the app's appearance by default (`"auto"`). Force a scheme with the
+`colorScheme` init option (`"light"`, `"dark"` or `"auto"`) and change it at runtime with
+`setColorScheme`; `"auto"` follows the app again. A theme without dark values always renders light.
+Requires the native Screeb SDK releases with dark mode support (iOS and Android, pending).
+
+```ts
+import { initSdk, setColorScheme } from '@screeb/react-native';
+
+initSdk("<channel-id>", undefined, undefined, undefined, { colorScheme: "dark" });
+
+// Later, when the user switches theme
+setColorScheme("light");
+```
+
 For working examples, see:
 - [React Native CLI example](https://github.com/ScreebApp/sdk/tree/master/examples/example-reactnative)
 - [Expo example](https://github.com/ScreebApp/sdk/tree/master/examples/example-expo)
