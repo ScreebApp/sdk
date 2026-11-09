@@ -1,6 +1,7 @@
 import { HooksInit, HooksMessageStart, HooksSurveyStart } from "./hooks.types";
 import {
   PropertyRecord,
+  ScreebColorScheme,
   ScreebEndpoints,
   ScreebFunction,
   ScreebIdentityGetReturn,
@@ -114,6 +115,9 @@ export const load = (options: ScreebOptions = {}) =>
  * needed for custom routers that don't resync on `popstate` (React Router / Vue Router /
  * Angular Router work out of the box). May be async so `onButtonNavigateCompleted` awaits it.
  *
+ * @param colorScheme Color scheme of the surveys and messages: "light", "dark" or "auto".
+ * default: "auto" (follows the page markers, then the device setting).
+ *
  * @example
  * ```ts
  * import * as Screeb from "@screeb/sdk-browser";
@@ -145,6 +149,7 @@ export const init = (
   hooks?: HooksInit,
   language?: string,
   spaNavigationHandler?: SpaNavigationHandler,
+  colorScheme?: ScreebColorScheme,
 ) => {
   let identityObject:
     | {
@@ -152,6 +157,7 @@ export const init = (
         identity?: { id?: string; properties?: PropertyRecord };
         language?: string;
         spaNavigationHandler?: SpaNavigationHandler;
+        colorScheme?: ScreebColorScheme;
       }
     | undefined;
 
@@ -171,6 +177,10 @@ export const init = (
 
   if (spaNavigationHandler) {
     identityObject = { ...identityObject, spaNavigationHandler };
+  }
+
+  if (colorScheme) {
+    identityObject = { ...identityObject, colorScheme };
   }
 
   return callScreebCommand("init", websiteId, identityObject);
@@ -335,6 +345,21 @@ export const identityGet = (): Promise<ScreebIdentityGetReturn> =>
  */
 export const setAnonymousId = (anonymousId: string) =>
   callScreebCommand("identity.anonymous_id", anonymousId);
+
+/**
+ * Sets the color scheme of the surveys and messages, overriding the `colorScheme`
+ * init option. `"light"` and `"dark"` force it; `"auto"` returns to detection
+ * (page markers on `<html>`, then the device setting).
+ *
+ * @example
+ * ```ts
+ * import * as Screeb from "@screeb/sdk-browser";
+ *
+ * Screeb.setColorScheme("dark");
+ * ```
+ */
+export const setColorScheme = (scheme: ScreebColorScheme) =>
+  callScreebCommand("color-scheme.set", scheme);
 
 /**
  * Assigns the current user to a group.
