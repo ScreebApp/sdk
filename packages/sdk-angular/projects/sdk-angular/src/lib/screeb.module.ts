@@ -52,7 +52,8 @@ export class ScreebModule {
         config.userProperties,
         config.hooks,
         undefined,
-        config.spaNavigationHandler
+        config.spaNavigationHandler,
+        config.colorScheme
       );
     }
   }

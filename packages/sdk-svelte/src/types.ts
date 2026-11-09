@@ -4,6 +4,7 @@ import {
   HooksMessageStart,
   HooksSurveyStart,
   PropertyRecord,
+  ScreebColorScheme,
   ScreebIdentityGetReturn,
   ScreebOptions,
 } from "@screeb/sdk-browser";
@@ -20,6 +21,8 @@ export type ScreebConfig = {
   hooks?: HooksInit;
   /** Force a specific language (for example, "en"). Defaults to the browser language. */
   language?: string;
+  /** Color scheme of the surveys and messages: "light", "dark" or "auto" (default). */
+  colorScheme?: ScreebColorScheme;
   /**
    * Indicates if Screeb should be automatically loaded.
    * Set to false to prevent the SDK from loading, for example during SSR or tests.
@@ -52,6 +55,10 @@ export type IdentityGetFunction = () => Promise<ScreebIdentityGetReturn>;
 
 export type SetAnonymousIdFunction = (anonymousId: string) => Promise<unknown>;
 
+export type SetColorSchemeFunction = (
+  scheme: ScreebColorScheme,
+) => Promise<unknown>;
+
 export type IdentityGroupAssignFunction = (
   groupName: string,
   groupType?: string,
@@ -75,6 +82,7 @@ export type InitFunction = (
   userProperties?: PropertyRecord,
   hooks?: HooksInit,
   language?: string,
+  colorScheme?: ScreebColorScheme,
 ) => Promise<void>;
 
 export type LoadFunction = (options?: ScreebOptions) => Promise<void>;
@@ -120,6 +128,7 @@ export type ScreebClient = {
   identityProperties: IdentityPropertiesFunction;
   identityReset: IdentityResetFunction;
   setAnonymousId: SetAnonymousIdFunction;
+  setColorScheme: SetColorSchemeFunction;
   init: InitFunction;
   load: LoadFunction;
   messageClose: MessageCloseFunction;

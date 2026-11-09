@@ -115,6 +115,25 @@ All endpoints must use `https://` (or `wss://` for `centipede`) and the domains 
 in **Screeb Admin → Settings → Custom Domains**. See the
 [Custom Collector URL guide](https://developers.screeb.app/sdk-js/custom-collector-url).
 
+### Dark mode
+
+Surveys and messages follow the page's color scheme by default (`"auto"`): a `dark`/`light` class
+or a `data-theme`-style attribute on `<html>`, then the device setting. Force it with the
+`colorScheme` prop (`"light"`, `"dark"` or `"auto"`), and change it at runtime with
+`setColorScheme`, e.g. from your app's theme toggle; `"auto"` returns to detection. A theme
+without dark values always renders light. Requires a Screeb tag release with dark mode support
+(`@screeb/tag` 0.84.0 or later).
+
+```tsx
+<ScreebProvider autoInit websiteId={SCREEB_APP_ID} colorScheme="dark">
+  <HomePage />
+</ScreebProvider>
+
+// Anywhere in your app
+const { setColorScheme } = useScreeb();
+setColorScheme("light");
+```
+
 For a working example, see our [Screeb React SDK example app](https://github.com/ScreebApp/sdk/tree/master/examples/example-react).
 
 For a more advanced usage and a complete API documentation, see [documentation generated from source files](https://github.com/ScreebApp/sdk/tree/master/packages/sdk-react/docs).

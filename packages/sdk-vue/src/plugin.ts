@@ -22,6 +22,7 @@ import {
   SessionReplayStartFunction,
   SessionReplayStopFunction,
   SetAnonymousIdFunction,
+  SetColorSchemeFunction,
   SurveyCloseFunction,
   SurveyStartFunction,
   TargetingDebugFunction,
@@ -97,6 +98,11 @@ export const ScreebPlugin: Plugin = {
         Screeb.setAnonymousId(anonymousId),
       );
 
+    const setColorScheme: SetColorSchemeFunction = async (
+      scheme: Screeb.ScreebColorScheme,
+    ) =>
+      await ensureScreeb("setColorScheme", () => Screeb.setColorScheme(scheme));
+
     const identityGroupAssign: IdentityGroupAssignFunction = async (
       groupName: string,
       groupType?: string,
@@ -131,6 +137,7 @@ export const ScreebPlugin: Plugin = {
       hooks?: Screeb.HooksInit,
       language?: string,
       spaNavigationHandler?: Screeb.SpaNavigationHandler,
+      colorScheme?: Screeb.ScreebColorScheme,
     ) => {
       await ensureScreeb(
         "init",
@@ -143,6 +150,7 @@ export const ScreebPlugin: Plugin = {
               hooks,
               language,
               spaNavigationHandler,
+              colorScheme,
             );
             isInitialized = true;
           }
@@ -168,6 +176,7 @@ export const ScreebPlugin: Plugin = {
               reactiveConfig.hooks,
               reactiveConfig.language,
               reactiveConfig.spaNavigationHandler,
+              reactiveConfig.colorScheme,
             );
           } else {
             logger.log(
@@ -267,6 +276,7 @@ export const ScreebPlugin: Plugin = {
       sessionReplayStart,
       sessionReplayStop,
       setAnonymousId,
+      setColorScheme,
       surveyClose,
       surveyStart,
       targetingDebug,

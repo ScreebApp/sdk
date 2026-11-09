@@ -4,6 +4,7 @@ import {
   HooksMessageStart,
   HooksSurveyStart,
   PropertyRecord,
+  ScreebColorScheme,
   ScreebIdentityGetReturn,
   ScreebOptions,
   SpaNavigationHandler,
@@ -23,6 +24,8 @@ export type ScreebConfig = {
   language?: string;
   /** Optional handler for the `in-page-spa` "Navigate to URL" target (custom SPA routers). */
   spaNavigationHandler?: SpaNavigationHandler;
+  /** Color scheme of the surveys and messages: "light", "dark" or "auto" (default). */
+  colorScheme?: ScreebColorScheme;
   /**
    * Indicates if Screeb should be automatically loaded.
    * Set to false to prevent the SDK from loading (e.g. in CI).
@@ -56,6 +59,10 @@ export type IdentityGetFunction = () => Promise<ScreebIdentityGetReturn>;
 
 export type SetAnonymousIdFunction = (anonymousId: string) => Promise<unknown>;
 
+export type SetColorSchemeFunction = (
+  scheme: ScreebColorScheme,
+) => Promise<unknown>;
+
 export type IdentityGroupAssignFunction = (
   groupName: string,
   groupType?: string,
@@ -80,6 +87,7 @@ export type InitFunction = (
   hooks?: HooksInit,
   language?: string,
   spaNavigationHandler?: SpaNavigationHandler,
+  colorScheme?: ScreebColorScheme,
 ) => Promise<void>;
 
 export type LoadFunction = (options?: ScreebOptions) => Promise<void>;
@@ -125,6 +133,7 @@ export type ScreebContextValues = {
   identityProperties: IdentityPropertiesFunction;
   identityReset: IdentityResetFunction;
   setAnonymousId: SetAnonymousIdFunction;
+  setColorScheme: SetColorSchemeFunction;
   init: InitFunction;
   load: LoadFunction;
   surveyClose: SurveyCloseFunction;

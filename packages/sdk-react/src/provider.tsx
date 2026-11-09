@@ -19,6 +19,7 @@ export const ScreebProvider: React.FC<
   hooks,
   language,
   spaNavigationHandler,
+  colorScheme,
   children,
   shouldLoad = !isSSR,
   autoInit = false,
@@ -117,6 +118,12 @@ export const ScreebProvider: React.FC<
     [],
   );
 
+  const setColorScheme = React.useCallback(
+    async (scheme: Screeb.ScreebColorScheme) =>
+      await ensureScreeb("setColorScheme", () => Screeb.setColorScheme(scheme)),
+    [],
+  );
+
   const identityGroupAssign = React.useCallback(
     async (
       groupName: string,
@@ -159,6 +166,7 @@ export const ScreebProvider: React.FC<
       hooks?: Screeb.HooksInit,
       language?: string,
       spaNavigationHandler?: Screeb.SpaNavigationHandler,
+      colorScheme?: Screeb.ScreebColorScheme,
     ) => {
       await ensureScreeb(
         "init",
@@ -171,6 +179,7 @@ export const ScreebProvider: React.FC<
               hooks,
               language,
               spaNavigationHandler,
+              colorScheme,
             );
 
             isInitialized = true;
@@ -203,6 +212,7 @@ export const ScreebProvider: React.FC<
               hooks,
               language,
               spaNavigationHandler,
+              colorScheme,
             );
           } else {
             logger.log(
@@ -330,6 +340,7 @@ export const ScreebProvider: React.FC<
       sessionReplayStart,
       sessionReplayStop,
       setAnonymousId,
+      setColorScheme,
       surveyClose,
       surveyStart,
       targetingDebug,
@@ -353,6 +364,7 @@ export const ScreebProvider: React.FC<
       sessionReplayStop,
       sessionReplayStart,
       setAnonymousId,
+      setColorScheme,
       targetingDebug,
     ],
   );
