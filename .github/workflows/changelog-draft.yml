@@ -28,7 +28,7 @@ permissions:
 jobs:
   draft:
     name: Draft release notes
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4

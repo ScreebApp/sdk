@@ -2,6 +2,39 @@
 
 All notable changes to Screeb React Native SDK (`sdk-reactnative`).
 
+## v4.5.0 — 2026-11-24
+
+### 🚀 New features
+
+- Added `setAnonymousId()` to adopt the anonymous id your CDP already uses (e.g. Amplitude device id, Segment or RudderStack anonymous id). The current respondent stays anonymous and now uses that id. Call it right after `initSdk`. Works on both iOS and Android; the id must be 5 to 128 characters.
+
+### ⚡ Improvements
+
+- Now bundles the native Screeb iOS SDK 4.4.0 and Android SDK 4.5.0, picking up the latest native fixes and improvements.
+
+### 🚀 New features
+
+- Surveys and in-app messages can now follow your app's dark mode. The SDK reports the app's appearance, using the device setting or your `AppCompatDelegate` night mode, and updates it live when it changes (Android).
+- New `colorScheme` init option (`"light"`, `"dark"` or `"auto"`) and a runtime `Screeb.setColorScheme("dark")` method let you force a scheme or go back to following the app (Android).
+
+### 🐛 Bug fixes
+
+- Flutter apps no longer stall while a platform view such as a WebView is on screen. Screeb no longer reads inside platform views, which could block the UI thread for hundreds of milliseconds per frame. Wrap a platform view in `ScreebId` if you need to target it (Android).
+- The file picker now keeps copies of picked files inside its cache directory, even if the app providing the file returns an unusual file name (Android).
+
+### ⚡ Improvements
+
+- Lighter footprint in host apps: the SDK no longer pulls in an outdated coroutines library and old Kotlin standard library variants, and no longer bundles an unused prebuilt library file (Android).
+
+### ⚠️ Breaking changes
+
+- `InitOptions` has a new `colorScheme` constructor parameter, placed after `webViewHardwareLayer`. Kotlin callers are unaffected. Java callers using the positional constructor must add it (`null` keeps the default) (Android).
+
+### 📱 Native SDK versions
+
+- 🤖 Android SDK version 4.5.0: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
+- 🍎 iOS SDK version 4.4.0: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
+
 ## v4.4.4 — 2026-10-12
 
 ### ⚡ Improvements
