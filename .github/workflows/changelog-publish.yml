@@ -38,7 +38,7 @@ jobs:
       startsWith(github.event.release.tag_name, 'sdk-flutter/v') ||
       startsWith(github.event.release.tag_name, 'sdk-kmp/v') ||
       startsWith(github.event.release.tag_name, 'sdk-maui/v')
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
