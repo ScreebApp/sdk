@@ -38,6 +38,7 @@ actual object Screeb {
             val opts = InitOptions()
             opts.setIsDebugMode(initOptions?.isDebugMode ?: false)
             opts.setDisableMirror(initOptions?.disableMirror ?: false)
+            opts.setColorScheme(initOptions?.colorScheme)
             NativeScreeb.initSdk(
                 null,
                 channelId = channelId,
@@ -87,6 +88,10 @@ actual object Screeb {
 
     actual suspend fun setAnonymousId(anonymousId: String): Boolean? = withContext(Dispatchers.Main) {
         runCatching { NativeScreeb.setAnonymousId(anonymousId); true }.orNullRethrowingCancellation()
+    }
+
+    actual suspend fun setColorScheme(scheme: String): Boolean? = withContext(Dispatchers.Main) {
+        runCatching { NativeScreeb.setColorScheme(scheme); true }.orNullRethrowingCancellation()
     }
 
     actual suspend fun getIdentity(): Map<String, Any>? = withContext(Dispatchers.Main) {

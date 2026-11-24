@@ -120,6 +120,14 @@ Screeb.startSurvey(
 )
 ```
 
+### Dark mode
+
+Surveys and messages follow the app's appearance by default (`"auto"`). Force a scheme with
+`ScreebInitOptions(colorScheme = "dark")` (`"light"`, `"dark"` or `"auto"`) and change it at runtime
+with `Screeb.setColorScheme("light")`; `"auto"` follows the app again. A theme without dark values
+always renders light. Requires the native Screeb SDK releases with dark mode support (iOS and
+Android, pending).
+
 ## API Reference
 
 | Method | Description |
@@ -131,6 +139,7 @@ Screeb.startSurvey(
 | `resetIdentity()` | Reset to anonymous visitor |
 | `setAnonymousId(anonymousId)` | Adopt the anonymous id your CDP already uses (Amplitude, Segment, RudderStack); the visitor stays anonymous. Call it right after `initSdk` |
 | `getIdentity()` | Fetch current identity as `Map<String, Any>` |
+| `setColorScheme(scheme)` | Force the survey color scheme: `"light"`, `"dark"` or `"auto"` (follow the app). Overrides `ScreebInitOptions.colorScheme`. Requires the native SDK releases with dark mode (pending) |
 | `assignGroup(groupType?, groupName, properties?)` | Assign visitor to a group |
 | `unassignGroup(groupType?, groupName, properties?)` | Remove visitor from a group |
 | `trackEvent(name, properties?)` | Track a custom event |

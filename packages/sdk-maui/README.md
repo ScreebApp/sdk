@@ -88,6 +88,7 @@ public partial class App : Application
 |---|---|---|---|
 | `IsDebugMode` | `bool` | `false` | Enable verbose SDK logging |
 | `DisableMirror` | `bool` | `false` | Disable mirror/session replay |
+| `ColorScheme` | `string?` | `null` (auto) | Survey color scheme: `"light"`, `"dark"` or `"auto"` (follow the app). A theme without dark values always renders light. Requires the native SDK releases with dark mode (pending) |
 
 ### ScreebHooks
 
@@ -117,6 +118,7 @@ await InitSdk(channelId: "<YOUR_CHANNEL_ID>", hooks: hooks);
 | `ResetIdentity()` | Reset user identity (e.g. on logout) |
 | `SetAnonymousId(anonymousId)` | Adopt the anonymous id your CDP already uses (Amplitude, Segment, RudderStack); the user stays anonymous. Call it right after `InitSdk` |
 | `GetIdentity()` | Get current visitor identity |
+| `SetColorScheme(scheme)` | Force the survey color scheme: `"light"`, `"dark"` or `"auto"` (follow the app). Overrides `ScreebInitOptions.ColorScheme` |
 | `AssignGroup(type, name, properties)` | Add user to a group |
 | `UnassignGroup(type, name, properties)` | Remove user from a group |
 | `TrackEvent(name, properties)` | Track a custom event |

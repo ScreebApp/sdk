@@ -39,12 +39,21 @@ export const createScreebClient = (config: ScreebConfig): ScreebClient => {
     userProperties?: Screeb.PropertyRecord,
     hooks?: Screeb.HooksInit,
     language?: string,
+    colorScheme?: Screeb.ScreebColorScheme,
   ) => {
     await ensureScreeb(
       "init",
       () => {
         if (!isInitialized) {
-          Screeb.init(websiteId, userId, userProperties, hooks, language);
+          Screeb.init(
+            websiteId,
+            userId,
+            userProperties,
+            hooks,
+            language,
+            undefined,
+            colorScheme,
+          );
           isInitialized = true;
         }
       },
@@ -69,6 +78,7 @@ export const createScreebClient = (config: ScreebConfig): ScreebClient => {
           config.userProperties,
           config.hooks,
           config.language,
+          config.colorScheme,
         );
       } else {
         logger.log(
@@ -140,6 +150,8 @@ export const createScreebClient = (config: ScreebConfig): ScreebClient => {
       ensureScreeb("sessionReplayStop", () => Screeb.sessionReplayStop()),
     setAnonymousId: async (anonymousId) =>
       ensureScreeb("setAnonymousId", () => Screeb.setAnonymousId(anonymousId)),
+    setColorScheme: async (scheme) =>
+      ensureScreeb("setColorScheme", () => Screeb.setColorScheme(scheme)),
     surveyClose: async () =>
       ensureScreeb("surveyClose", () => Screeb.surveyClose()),
     surveyStart: async (

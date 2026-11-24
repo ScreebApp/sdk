@@ -55,12 +55,21 @@ public static partial class Screeb
             NativeScreeb.SetSecondarySDK("maui", SdkVersion);
             NativeScreeb.InitSdk(null, channelId, userId,
                 ToNSDictionary(ScreebUtils.FormatProperties(properties)) ?? new NSDictionary(),
-                new InitOptions(NSDictionary.FromObjectsAndKeys(
-                    new object[] { NSNumber.FromBoolean(initOptions?.IsDebugMode ?? false), NSNumber.FromBoolean(initOptions?.DisableMirror ?? false) },
-                    new object[] { "isDebugMode", "disableMirror" })),
+                new InitOptions(ToInitOptionsDict(initOptions)),
                 HooksIOS.ToNSDictionary(HooksRegistry.RegisterHooks(hooks)),
                 language);
         });
+
+    private static NSDictionary ToInitOptionsDict(ScreebInitOptions? opts)
+    {
+        var dict = new NSMutableDictionary
+        {
+            ["isDebugMode"] = NSNumber.FromBoolean(opts?.IsDebugMode ?? false),
+            ["disableMirror"] = NSNumber.FromBoolean(opts?.DisableMirror ?? false)
+        };
+        if (opts?.ColorScheme != null) dict["colorScheme"] = new NSString(opts.ColorScheme);
+        return dict;
+    }
 
     public static partial Task<bool?> CloseSdk()
         => OnMain(() => { HooksRegistry.UnregisterAll(); NativeScreeb.CloseSdk(); });
@@ -81,6 +90,9 @@ public static partial class Screeb
 
     public static partial Task<bool?> SetAnonymousId(string anonymousId)
         => OnMain(() => NativeScreeb.SetAnonymousId(anonymousId));
+
+    public static partial Task<bool?> SetColorScheme(string scheme)
+        => OnMain(() => NativeScreeb.SetColorScheme(scheme));
 
     public static partial Task<Dictionary<string, object>?> GetIdentity()
         => OnMain<Dictionary<string, object>>(tcs =>

@@ -57,6 +57,10 @@ interface Screeb
     void SetAnonymousId(string anonymousId);
 
     [Static]
+    [Export("setColorScheme:")]
+    void SetColorScheme(string scheme);
+
+    [Static]
     [Export("getIdentity:")]
     void GetIdentity(Action<NSDictionary?, NSError?> completion);
 

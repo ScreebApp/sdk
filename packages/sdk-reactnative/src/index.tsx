@@ -30,9 +30,12 @@ type HookMap = {
 };
 
 type HookIdsMap = { [key: string]: string };
+export type ColorScheme = 'light' | 'dark' | 'auto';
 type InitOptions = {
   isDebugMode?: boolean;
   disableMirror?: boolean;
+  // Color scheme of the surveys and messages; the native SDK default is "auto".
+  colorScheme?: ColorScheme;
 };
 export type ScreebPrivacyViewProps = ViewProps;
 export type ScreebIdProps = ViewProps & {
@@ -185,6 +188,12 @@ export function resetIdentity() {
 // Call it right after initSdk: the call is resolved during init. 5 to 128 characters.
 export function setAnonymousId(anonymousId: string) {
   return ScreebReactNative.setAnonymousId(anonymousId);
+}
+
+// setColorScheme: "light" and "dark" force the survey color scheme, overriding the
+// colorScheme init option; "auto" follows the app's appearance again.
+export function setColorScheme(scheme: ColorScheme) {
+  return ScreebReactNative.setColorScheme(scheme);
 }
 
 // getIdentity

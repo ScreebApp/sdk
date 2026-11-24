@@ -4,6 +4,7 @@ import {
   HooksMessageStart,
   HooksSurveyStart,
   PropertyRecord,
+  ScreebColorScheme,
   ScreebIdentityGetReturn,
   ScreebOptions,
   SpaNavigationHandler,
@@ -23,6 +24,8 @@ export type ScreebProps = {
   language?: string;
   /** Optional handler for the `in-page-spa` "Navigate to URL" target (custom SPA routers). */
   spaNavigationHandler?: SpaNavigationHandler;
+  /** Color scheme of the surveys and messages: "light", "dark" or "auto" (default). */
+  colorScheme?: ScreebColorScheme;
 };
 
 /**
@@ -172,6 +175,21 @@ export type IdentityGetFunction = () => Promise<ScreebIdentityGetReturn>;
 export type SetAnonymousIdFunction = (anonymousId: string) => Promise<unknown>;
 
 /**
+ * Sets the color scheme of the surveys and messages, overriding the `colorScheme`
+ * prop. `"light"` and `"dark"` force it; `"auto"` returns to detection.
+ *
+ * @example
+ * ```ts
+ * const { setColorScheme } = useScreeb();
+ *
+ * setColorScheme("dark");
+ * ```
+ */
+export type SetColorSchemeFunction = (
+  scheme: ScreebColorScheme,
+) => Promise<unknown>;
+
+/**
  * Assigns the current user to a group.
  *
  * @param groupName
@@ -315,6 +333,7 @@ export type InitFunction = (
   hooks?: HooksInit,
   language?: string,
   spaNavigationHandler?: SpaNavigationHandler,
+  colorScheme?: ScreebColorScheme,
 ) => Promise<void>;
 
 /**
@@ -481,6 +500,7 @@ export type ScreebContextValues = {
   identityProperties: IdentityPropertiesFunction;
   identityReset: IdentityResetFunction;
   setAnonymousId: SetAnonymousIdFunction;
+  setColorScheme: SetColorSchemeFunction;
   init: InitFunction;
   load: LoadFunction;
   surveyClose: SurveyCloseFunction;

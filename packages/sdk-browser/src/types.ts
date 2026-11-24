@@ -29,6 +29,14 @@ export type ScreebEndpoints = {
   centipede?: string;
 };
 
+/**
+ * Color scheme of the surveys and messages. `"auto"` (the default) follows the
+ * page's `<html>` (a `dark`/`light` class, a `data-theme`, `data-color-scheme`,
+ * `data-mode` or `data-bs-theme` attribute, or a single CSS `color-scheme`), then
+ * the device setting. A theme without dark values always renders light.
+ */
+export type ScreebColorScheme = "light" | "dark" | "auto";
+
 /** This is the Screeb tag options object. */
 export type ScreebOptions = {
   /** If you're running Screeb tag in an iframe, please set the inner window here. */

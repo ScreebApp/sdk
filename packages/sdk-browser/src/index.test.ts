@@ -73,4 +73,62 @@ describe("Screeb", () => {
       });
     });
   });
+
+  describe("colorScheme", () => {
+    const lastArgs = () =>
+      window.$screeb?.q?.[window.$screeb.q.length - 1].args;
+
+    beforeEach(() => {
+      delete window.$screeb;
+      document.getElementsByTagName("html")[0].innerHTML = "";
+      Screeb.load();
+    });
+
+    it("forwards the init option to the tag init options", () => {
+      Screeb.init(
+        "website-uuid",
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        "dark",
+      );
+
+      expect(lastArgs()).toEqual([
+        "init",
+        "website-uuid",
+        { colorScheme: "dark" },
+      ]);
+    });
+
+    it("keeps it next to the identity", () => {
+      Screeb.init(
+        "website-uuid",
+        "user-uuid",
+        undefined,
+        undefined,
+        "fr",
+        undefined,
+        "light",
+      );
+
+      expect(lastArgs()).toEqual([
+        "init",
+        "website-uuid",
+        {
+          colorScheme: "light",
+          hooks: undefined,
+          identity: { id: "user-uuid", properties: undefined },
+          language: "fr",
+        },
+      ]);
+    });
+
+    it("sends color-scheme.set", () => {
+      Screeb.setColorScheme("auto");
+
+      expect(lastArgs()).toEqual(["color-scheme.set", "auto"]);
+    });
+  });
 });

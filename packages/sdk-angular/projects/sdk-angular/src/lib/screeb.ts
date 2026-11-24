@@ -188,6 +188,21 @@ export class Screeb {
   }
 
   /**
+   * Sets the color scheme of the surveys and messages, overriding the `colorScheme`
+   * config. `"light"` and `"dark"` force it; `"auto"` returns to detection.
+   *
+   * @example
+   * ```ts
+   * this.screeb.setColorScheme("dark");
+   * ```
+   */
+  public async setColorScheme(scheme: _Screeb.ScreebColorScheme) {
+    await this.ensureScreeb("setColorScheme");
+
+    return _Screeb.setColorScheme(scheme);
+  }
+
+  /**
    * Assigns the current user to a group.
    *
    * @param groupName
@@ -495,6 +510,7 @@ export class Screeb {
    *   - Supported types for values: string, number, boolean and Date
    * ```
    * @param language Force a specific language for the tag. eg: 'en'. default: browser language.
+   * @param colorScheme Color scheme of the surveys and messages: "light", "dark" or "auto" (default).
    *
    * @example
    * ```ts
@@ -522,7 +538,8 @@ export class Screeb {
     userProperties?: _Screeb.PropertyRecord,
     hooks?: _Screeb.HooksInit,
     language?: string,
-    spaNavigationHandler?: _Screeb.SpaNavigationHandler
+    spaNavigationHandler?: _Screeb.SpaNavigationHandler,
+    colorScheme?: _Screeb.ScreebColorScheme
   ) {
     await this.ensureScreeb("init", true);
 
@@ -534,7 +551,8 @@ export class Screeb {
       userProperties,
       hooks,
       language,
-      spaNavigationHandler
+      spaNavigationHandler,
+      colorScheme
     );
   }
 

@@ -112,6 +112,13 @@ class ScreebReactNative: RCTEventEmitter {
     }
   }
 
+  @objc func setColorScheme(_ scheme: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock){
+    DispatchQueue.main.async {
+      Screeb.setColorScheme(scheme)
+      resolve(nil)
+    }
+  }
+
   @objc func closeSdk(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock){
     DispatchQueue.main.async {
       Screeb.closeSdk()
