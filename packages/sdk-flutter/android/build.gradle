@@ -1,61 +1,33 @@
-group 'app.screeb.plugin_screeb'
-version '4.5.0'
-
-buildscript {
-    ext.kotlin_version = '1.8.22'
-    repositories {
-        if (providers.gradleProperty("SCREEB_USE_LOCAL_SDK").orElse(providers.environmentVariable("SCREEB_USE_LOCAL_SDK")).orNull == "true") {
-            mavenLocal()
-        }
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-
-rootProject.allprojects {
-    repositories {
-        if (providers.gradleProperty("SCREEB_USE_LOCAL_SDK").orElse(providers.environmentVariable("SCREEB_USE_LOCAL_SDK")).orNull == "true") {
-            mavenLocal()
-        }
-        google()
-        mavenCentral()
-    }
-}
+group = 'app.screeb.plugin_screeb'
+version = '4.5.0'
 
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+
+// AGP 9 compiles Kotlin itself unless the app opts out with android.builtInKotlin=false;
+// applying the Kotlin plugin on top of built-in Kotlin fails the build.
+def agpMajor = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize('.')[0].toInteger()
+if (agpMajor < 9 || providers.gradleProperty('android.builtInKotlin').getOrElse('true') == 'false') {
+    apply plugin: 'kotlin-android'
+}
 
 android {
-    compileSdkVersion 31
+    namespace = 'app.screeb.plugin_screeb'
+    compileSdk = 35
 
-    if (project.android.hasProperty('namespace')) {
-        namespace 'app.screeb.plugin_screeb'
+    defaultConfig {
+        minSdk = 21
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
+}
 
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
-
-    defaultConfig {
-        minSdkVersion 17
-    }
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile).configureEach {
+    compilerOptions.jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
 }
 
 dependencies {
     api "app.screeb.sdk:survey:4.5.0"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }

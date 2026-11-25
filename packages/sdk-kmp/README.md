@@ -150,7 +150,7 @@ All methods return `Boolean?` (or the appropriate type), and `null` on unexpecte
 
 - Kotlin 2.1.0+
 - Android minSdk 21
-- iOS 14+
+- iOS 15+
 
 ## Documentation
 

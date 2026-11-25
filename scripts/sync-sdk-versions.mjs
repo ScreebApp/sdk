@@ -121,7 +121,7 @@ const svelteVersion = manifest.wrappers.svelte;
 replacePackageVersion("packages/sdk-reactnative/package.json", reactNativeVersion);
 replacePackageVersion("packages/sdk-svelte/package.json", svelteVersion);
 replaceInFile("packages/sdk-flutter/pubspec.yaml", /^version: .+$/m, `version: ${flutterVersion}`);
-replaceInFile("packages/sdk-flutter/android/build.gradle", /^version '.+'$/m, `version '${flutterVersion}'`);
+replaceInFile("packages/sdk-flutter/android/build.gradle", /^version = '.+'$/m, `version = '${flutterVersion}'`);
 replaceInFile("packages/sdk-flutter/android/build.gradle", /api "app\.screeb\.sdk:survey:[^"]+"/, `api "app.screeb.sdk:survey:${androidVersion}"`);
 replaceInFile("packages/sdk-flutter/ios/plugin_screeb.podspec", /s\.version\s+=\s+'[^']+'/, `s.version          = '${flutterVersion}'`);
 replaceInFile("packages/sdk-flutter/ios/plugin_screeb.podspec", /s\.dependency 'Screeb', '[^']+'/, `s.dependency 'Screeb', '${iosVersion}'`);

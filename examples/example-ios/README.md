@@ -10,7 +10,7 @@ replay, debug), mirroring [`example-android`](../example-android).
 ## Requirements
 
 - Xcode 15+
-- iOS 14.0+ (the SDK itself supports iOS 12.0+)
+- iOS 15.0+
 
 ## Run
 
