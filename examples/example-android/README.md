@@ -35,6 +35,9 @@ To verify the SDK consumer ProGuard rules in a minified app build:
 ./gradlew :app:assembleRelease
 ```
 
+Screeb team members can build against unreleased native SDKs, see
+[Mobile examples against the local native SDKs](../../CONTRIBUTING.md#mobile-examples-against-the-local-native-sdks).
+
 ## Deep Links
 
 The manifest registers:
