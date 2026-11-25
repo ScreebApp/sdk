@@ -32,10 +32,10 @@ const LOCAL_ANDROID_SDK_BOOTSTRAP = [
   '    def screebAndroidSdkPath = providers.environmentVariable("SCREEB_ANDROID_SDK_PATH")',
   '        .orElse(file("../../../../screeb/sdk-android").canonicalPath)',
   "        .get()",
-  "    exec {",
-  "        workingDir screebAndroidSdkPath",
-  '        commandLine "./gradlew", ":sdk:publishReleasePublicationToMavenLocal", "--no-daemon"',
-  "    }",
+  "    providers.exec {",
+  "        workingDir(screebAndroidSdkPath)",
+  '        commandLine("./gradlew", ":sdk:publishReleasePublicationToMavenLocal", "--no-daemon")',
+  "    }.result.get()",
   "}",
 ].join("\n");
 

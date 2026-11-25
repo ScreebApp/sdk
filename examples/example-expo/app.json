@@ -14,7 +14,6 @@
       "bundleIdentifier": "com.anonymous.example-expo"
     },
     "android": {
-      "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
       "package": "com.anonymous.exampleexpo"
     },
@@ -22,7 +21,6 @@
       "./plugins/withScreebLocalSdk",
       "./plugins/withScreebDeepLink",
       "expo-router",
-      "expo-web-browser",
       "expo-updates"
     ],
     "experiments": {

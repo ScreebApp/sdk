@@ -1,5 +1,3 @@
-ENV['RCT_NEW_ARCH_ENABLED'] = '1'
-
 # Resolve react_native_pods.rb with node to allow for hoisting
 require Pod::Executable.execute_command('node', ['-p',
   'require.resolve(
@@ -31,7 +29,6 @@ target 'ScreebReactNativeExample' do
   )
 
   post_install do |installer|
-    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
     react_native_post_install(
       installer,
       config[:reactNativePath],
@@ -47,31 +44,6 @@ target 'ScreebReactNativeExample' do
       target.build_configurations.each do |config|
         conditions = config.build_settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"] || "$(inherited)"
         config.build_settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"] = "#{conditions} SCREEB_TELEMETRY"
-      end
-    end
-
-    # Xcode 26 can compile React Native's fmt 11 pod with consteval enabled,
-    # then fail in fmt's own constant-expression checks. Keep C++20 for RN,
-    # but disable fmt consteval only for that pod.
-    installer.pods_project.targets.each do |target|
-      next unless target.name == 'fmt'
-
-      target.build_configurations.each do |config|
-        config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)']
-        config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] << 'FMT_USE_CONSTEVAL=0'
-      end
-    end
-
-    fmt_base_header = File.join(installer.sandbox.root, 'fmt/include/fmt/base.h')
-    if File.exist?(fmt_base_header)
-      base_h = File.read(fmt_base_header)
-      patched_base_h = base_h
-        .gsub("#elif defined(__cpp_consteval)\n#  define FMT_USE_CONSTEVAL 1", "#elif defined(__cpp_consteval)\n#  define FMT_USE_CONSTEVAL 0")
-        .gsub("#elif FMT_GCC_VERSION >= 1002 || FMT_CLANG_VERSION >= 1101\n#  define FMT_USE_CONSTEVAL 1", "#elif FMT_GCC_VERSION >= 1002 || FMT_CLANG_VERSION >= 1101\n#  define FMT_USE_CONSTEVAL 0")
-
-      if patched_base_h != base_h
-        File.chmod(0644, fmt_base_header)
-        File.write(fmt_base_header, patched_base_h)
       end
     end
   end

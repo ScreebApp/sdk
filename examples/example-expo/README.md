@@ -32,6 +32,9 @@ Start Metro from the React Native SDK workspace:
 npm run example:expo --workspace=@screeb/react-native
 ```
 
+Screeb team members can build against unreleased native SDKs, see
+[Mobile examples against the local native SDKs](../../CONTRIBUTING.md#mobile-examples-against-the-local-native-sdks).
+
 Expo Go cannot load the Screeb TurboModule. Use the app produced by `expo run:ios` or `expo run:android`.
 
 If native sources fall out of sync, regenerate them with:
