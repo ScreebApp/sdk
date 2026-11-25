@@ -1,5 +1,5 @@
 group = 'app.screeb.plugin_screeb'
-version = '4.5.0'
+version = '5.0.0'
 
 apply plugin: 'com.android.library'
 
@@ -29,5 +29,5 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile).configureEach
 }
 
 dependencies {
-    api "app.screeb.sdk:survey:4.5.0"
+    api "app.screeb.sdk:survey:5.0.0"
 }

@@ -1,13 +1,13 @@
 {
   "native": {
-    "android": "4.5.0",
-    "ios": "4.4.0"
+    "android": "5.0.0",
+    "ios": "5.0.0"
   },
   "wrappers": {
-    "flutter": "4.5.0",
-    "kmp": "4.5.0",
-    "maui": "4.5.0",
-    "reactNative": "4.5.0",
+    "flutter": "5.0.0",
+    "kmp": "5.0.0",
+    "maui": "5.0.0",
+    "reactNative": "5.0.0",
     "svelte": "0.1.0"
   }
 }

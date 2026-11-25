@@ -34,5 +34,5 @@ android {
 }
 
 dependencies {
-    implementation 'app.screeb.sdk:survey:4.5.0'
+    implementation 'app.screeb.sdk:survey:5.0.0'
 }
