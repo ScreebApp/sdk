@@ -2,6 +2,33 @@
 
 All notable changes to Screeb .NET MAUI SDK (`sdk-maui`).
 
+## v5.0.0 — 2026-11-25
+
+### ⚡ Improvements
+
+- Now built on the native Screeb SDKs for Android 5.0.0 and iOS 5.0.0.
+
+### 🐛 Bug fixes
+
+- Fixed the WebKit binary channel check used by session replay. Replay data was always falling back to the slower base64 string transport, and it can now use the binary channel when the device supports it (Android).
+
+### ⚡ Improvements
+
+- The SDK is now built with Android Gradle Plugin 9, Gradle 9.9 and the latest AndroidX libraries (`core-ktx` 1.16.0, `webkit` 1.14.0), while keeping Kotlin language and API version 2.1 so host apps on Kotlin 2.0 and later still compile (Android).
+- The SDK now requests App Store reviews through the app's active window scene, in line with current iOS APIs (iOS).
+- Builds are compatible with the latest Xcode toolchain (iOS).
+
+### ⚠️ Breaking changes
+
+- The Android SDK now requires `minSdk` 21 and `compileSdk` 35. Update your app's build configuration before upgrading (Android).
+- The iOS SDK now requires iOS 15 or later. Support for earlier iOS versions has been dropped, so update your app's deployment target before upgrading (iOS).
+- Swift Package Manager installs now need Swift 5.9 tools (Xcode 15 or later) (iOS).
+
+### 📱 Native SDK versions
+
+- 🤖 Android SDK version 5.0.0: [Release Notes](https://developers.screeb.app/sdk-android/changelog)
+- 🍎 iOS SDK version 5.0.0: [Release Notes](https://developers.screeb.app/sdk-ios/changelog)
+
 ## v4.5.0 — 2026-11-24
 
 ### 🚀 New features
