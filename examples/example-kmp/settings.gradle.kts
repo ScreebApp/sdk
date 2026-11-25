@@ -32,4 +32,4 @@ includeBuild("../../packages/sdk-kmp") {
 }
 
 rootProject.name = "example-kmp"
-include(":composeApp")
+include(":composeApp", ":androidApp")

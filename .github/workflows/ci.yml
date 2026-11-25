@@ -162,7 +162,7 @@ jobs:
         run: chmod +x packages/sdk-kmp/gradlew
       - name: Build Android target
         if: steps.native-android.outputs.available == 'true'
-        run: cd packages/sdk-kmp && ./gradlew assembleRelease testDebugUnitTest --no-daemon
+        run: cd packages/sdk-kmp && ./gradlew assembleAndroidMain testAndroidHostTest --no-daemon
 
   kmp-full:
     name: Kotlin Multiplatform full SDK
