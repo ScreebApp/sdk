@@ -20,7 +20,7 @@ target 'ScreebReactNativeExample' do
   config = use_native_modules!
 
   if ENV["SCREEB_USE_LOCAL_SDK"] == "true"
-    screeb_ios_sdk_path = ENV["SCREEB_IOS_SDK_PATH"] || File.expand_path("../../../../sdk-ios", __dir__)
+    screeb_ios_sdk_path = ENV["SCREEB_IOS_SDK_PATH"] || File.expand_path("../../../../screeb/sdk-ios", __dir__)
     pod "Screeb", :path => screeb_ios_sdk_path
   end
 

@@ -256,7 +256,7 @@
 			repositoryURL = "https://github.com/ScreebApp/sdk-ios-public";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.2.4;
+				minimumVersion = 4.4.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

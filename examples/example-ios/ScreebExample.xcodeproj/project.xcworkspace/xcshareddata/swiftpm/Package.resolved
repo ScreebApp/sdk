@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ScreebApp/sdk-ios-public",
       "state" : {
-        "revision" : "a38e760cdf703441b2f803d74c6f53d4b8ed8ac6",
-        "version" : "3.2.4"
+        "revision" : "b9a71c81f42ff892ee1b3a612cfb6e0cb131eba7",
+        "version" : "4.4.0"
       }
     }
   ],

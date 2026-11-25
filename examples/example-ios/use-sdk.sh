@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Switches the example between the published Swift package (default) and the
-# local ../../../sdk-ios checkout — same convention as example-android's
+# Switches the example between the published Swift package (default) and a
+# local sdk-ios checkout, same convention as example-android's
 # SCREEB_USE_LOCAL_SDK gradle property:
 #
-#   SCREEB_USE_LOCAL_SDK=true ./use-sdk.sh   # build against the local checkout
+#   SCREEB_USE_LOCAL_SDK=true ./use-sdk.sh   # local ../../../screeb/sdk-ios (or $SCREEB_IOS_SDK_PATH)
 #   ./use-sdk.sh                             # back to the published package
 #
 # Idempotent; rewrites only the package-reference block of the pbxproj (the
@@ -14,47 +14,37 @@ cd "$(dirname "$0")"
 MODE="remote"
 [[ "${SCREEB_USE_LOCAL_SDK:-}" == "true" ]] && MODE="local"
 
-python3 - "$MODE" <<'PYEOF'
-import sys
+python3 - "$MODE" "${SCREEB_IOS_SDK_PATH:-../../../screeb/sdk-ios}" <<'PYEOF'
+import os, re, sys
 
-mode = sys.argv[1]
+mode, sdk_path = sys.argv[1], sys.argv[2]
+local_path = os.path.relpath(sdk_path) if os.path.isabs(sdk_path) else sdk_path
 path = "ScreebExample.xcodeproj/project.pbxproj"
 content = open(path).read()
 
-remote_block = """\t\tB40000012E00000000000001 /* XCRemoteSwiftPackageReference "sdk-ios-public" */ = {
+ref_id = "B40000012E00000000000001"
+remote_comment = f'{ref_id} /* XCRemoteSwiftPackageReference "sdk-ios-public" */'
+remote_block = f"""\t\t{remote_comment} = {{
 \t\t\tisa = XCRemoteSwiftPackageReference;
 \t\t\trepositoryURL = "https://github.com/ScreebApp/sdk-ios-public";
-\t\t\trequirement = {
+\t\t\trequirement = {{
 \t\t\t\tkind = upToNextMajorVersion;
-\t\t\t\tminimumVersion = 3.2.4;
-\t\t\t};
-\t\t};"""
-local_block = """\t\tB40000012E00000000000001 /* XCLocalSwiftPackageReference "../../../sdk-ios" */ = {
+\t\t\t\tminimumVersion = 4.4.0;
+\t\t\t}};
+\t\t}};"""
+local_comment = f'{ref_id} /* XCLocalSwiftPackageReference "{local_path}" */'
+local_block = f"""\t\t{local_comment} = {{
 \t\t\tisa = XCLocalSwiftPackageReference;
-\t\t\trelativePath = "../../../sdk-ios";
-\t\t};"""
+\t\t\trelativePath = "{local_path}";
+\t\t}};"""
 
-remote_comment = 'B40000012E00000000000001 /* XCRemoteSwiftPackageReference "sdk-ios-public" */'
-local_comment = 'B40000012E00000000000001 /* XCLocalSwiftPackageReference "../../../sdk-ios" */'
+block_re = re.compile(rf"\t\t{ref_id} /\* XC(?:Remote|Local)SwiftPackageReference [^*]*\*/ = \{{.*?\n\t\t\}};", re.S)
+comment_re = re.compile(rf'{ref_id} /\* XC(?:Remote|Local)SwiftPackageReference "[^"]*" \*/')
+assert block_re.search(content), "package reference block not found: pbxproj drifted?"
 
-if mode == "local":
-    if local_block in content:
-        print("already using the LOCAL sdk-ios checkout")
-        sys.exit(0)
-    assert remote_block in content, "remote package block not found — pbxproj drifted?"
-    content = content.replace(remote_block, local_block)
-    # Keep every reference comment in sync (cosmetic for Xcode, but a lying
-    # comment defeats any human or grep audit of the current mode).
-    content = content.replace(remote_comment, local_comment)
-    print("now using the LOCAL ../../../sdk-ios checkout")
-else:
-    if remote_block in content:
-        print("already using the published package")
-        sys.exit(0)
-    assert local_block in content, "local package block not found — pbxproj drifted?"
-    content = content.replace(local_block, remote_block)
-    content = content.replace(local_comment, remote_comment)
-    print("now using the PUBLISHED sdk-ios-public package")
-
+block, comment = (local_block, local_comment) if mode == "local" else (remote_block, remote_comment)
+# Keep every reference comment in sync: a lying comment defeats any grep audit of the current mode.
+content = comment_re.sub(comment, block_re.sub(lambda _: block, content))
 open(path, "w").write(content)
+print(f"now using {'the LOCAL ' + local_path if mode == 'local' else 'the PUBLISHED sdk-ios-public package'}")
 PYEOF

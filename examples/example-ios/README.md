@@ -27,7 +27,7 @@ workspace → Settings → Channels) to see your own surveys and replays.
 
 Same convention as `example-android`'s `SCREEB_USE_LOCAL_SDK` property —
 switch the Swift package reference to a sibling `sdk-ios` checkout
-(`../../../sdk-ios`):
+(`../../../screeb/sdk-ios`):
 
 ```bash
 SCREEB_USE_LOCAL_SDK=true ./use-sdk.sh   # -> local checkout

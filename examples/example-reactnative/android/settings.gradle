@@ -12,7 +12,7 @@ dependencyResolutionManagement {
 }
 if (providers.gradleProperty("SCREEB_USE_LOCAL_SDK").orElse(providers.environmentVariable("SCREEB_USE_LOCAL_SDK")).orNull == "true") {
     def screebAndroidSdkPath = providers.environmentVariable("SCREEB_ANDROID_SDK_PATH")
-        .orElse(file("../../../../sdk-android").canonicalPath)
+        .orElse(file("../../../../screeb/sdk-android").canonicalPath)
         .get()
     exec {
         workingDir screebAndroidSdkPath

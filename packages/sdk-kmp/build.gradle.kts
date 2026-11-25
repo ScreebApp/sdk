@@ -16,7 +16,7 @@ val useLocalSdk = providers.gradleProperty("SCREEB_USE_LOCAL_SDK")
     .orElse(providers.environmentVariable("SCREEB_USE_LOCAL_SDK"))
     .map { it.equals("true", ignoreCase = true) }
     .orElse(false)
-val defaultLocalIosSdkPath = projectDir.resolve("../../../sdk-ios").canonicalFile.absolutePath
+val defaultLocalIosSdkPath = projectDir.resolve("../../../screeb/sdk-ios").canonicalFile.absolutePath
 val localIosSdkPath = providers.environmentVariable("SCREEB_IOS_SDK_PATH").orElse(defaultLocalIosSdkPath)
 val localIosXcframework = layout.buildDirectory.dir("local-ios/Screeb.xcframework")
 val packagedIosXcframework = projectDir.resolve("native/ios/Screeb.xcframework").absolutePath

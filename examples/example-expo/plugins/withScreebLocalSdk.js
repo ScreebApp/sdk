@@ -30,7 +30,7 @@ function addLocalRepository(buildGradle) {
 const LOCAL_ANDROID_SDK_BOOTSTRAP = [
   'if (providers.gradleProperty("SCREEB_USE_LOCAL_SDK").orElse(providers.environmentVariable("SCREEB_USE_LOCAL_SDK")).orNull == "true") {',
   '    def screebAndroidSdkPath = providers.environmentVariable("SCREEB_ANDROID_SDK_PATH")',
-  '        .orElse(file("../../../../sdk-android").canonicalPath)',
+  '        .orElse(file("../../../../screeb/sdk-android").canonicalPath)',
   "        .get()",
   "    exec {",
   "        workingDir screebAndroidSdkPath",
@@ -49,7 +49,7 @@ function addLocalAndroidSdkBootstrap(settingsGradle) {
 
 const LOCAL_IOS_POD = [
   '  if ENV["SCREEB_USE_LOCAL_SDK"] == "true"',
-  '    screeb_ios_sdk_path = ENV["SCREEB_IOS_SDK_PATH"] || File.expand_path("../../../../sdk-ios", __dir__)',
+  '    screeb_ios_sdk_path = ENV["SCREEB_IOS_SDK_PATH"] || File.expand_path("../../../../screeb/sdk-ios", __dir__)',
   '    pod "Screeb", :path => screeb_ios_sdk_path',
   "  end",
 ].join("\n");

@@ -6,8 +6,6 @@ import Screeb
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-  var window: UIWindow?
-
   var reactNativeDelegate: ReactNativeDelegate?
   var reactNativeFactory: RCTReactNativeFactory?
 
@@ -22,27 +20,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     reactNativeDelegate = delegate
     reactNativeFactory = factory
 
-    window = UIWindow(frame: UIScreen.main.bounds)
+    return true
+  }
+}
 
-    factory.startReactNative(
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+  var window: UIWindow?
+
+  func scene(
+    _ scene: UIScene,
+    willConnectTo session: UISceneSession,
+    options connectionOptions: UIScene.ConnectionOptions
+  ) {
+    guard let windowScene = scene as? UIWindowScene,
+          let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+
+    let window = UIWindow(windowScene: windowScene)
+    self.window = window
+    appDelegate.reactNativeFactory?.startReactNative(
       withModuleName: "ScreebReactNativeExample",
       in: window,
-      launchOptions: launchOptions
+      launchOptions: nil
     )
 
     // Cold start from a deep link (app not running when the URL was opened).
-    Screeb.handleDeepLink(url: launchOptions?[.url] as? URL)
-    return true
+    Screeb.handleDeepLink(url: connectionOptions.urlContexts.first?.url)
   }
 
-  func application(
-    _ app: UIApplication,
-    open url: URL,
-    options: [UIApplication.OpenURLOptionsKey: Any] = [:]
-  ) -> Bool {
-    // Screeb deep links (screeb-* scheme) — editor/survey/message links open in-app.
-    Screeb.handleDeepLink(url: url)
-    return true
+  func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+    // Screeb deep links (screeb-* scheme): editor/survey/message links open in-app.
+    URLContexts.forEach { Screeb.handleDeepLink(url: $0.url) }
   }
 }
 
