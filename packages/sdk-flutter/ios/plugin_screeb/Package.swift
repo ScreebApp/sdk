@@ -34,7 +34,7 @@ pluginTargets.append(
 let package = Package(
     name: "plugin_screeb",
     platforms: [
-        .iOS("12.0")
+        .iOS("15.0")
     ],
     products: [
         .library(name: "plugin-screeb", targets: ["plugin_screeb"])

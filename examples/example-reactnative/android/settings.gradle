@@ -1,4 +1,11 @@
-pluginManagement { includeBuild("../node_modules/@react-native/gradle-plugin") }
+pluginManagement {
+    // npm workspaces may hoist @react-native/gradle-plugin to the repository root.
+    gradle.ext.reactNativeGradlePlugin = new File(providers.exec {
+        workingDir(rootDir)
+        commandLine("node", "--print", "require.resolve('@react-native/gradle-plugin/package.json', { paths: [require.resolve('react-native/package.json')] })")
+    }.standardOutput.asText.get().trim()).parentFile.path
+    includeBuild(gradle.ext.reactNativeGradlePlugin)
+}
 plugins { id("com.facebook.react.settings") }
 extensions.configure(com.facebook.react.ReactSettingsExtension){ ex -> ex.autolinkLibrariesFromCommand() }
 dependencyResolutionManagement {
@@ -12,13 +19,13 @@ dependencyResolutionManagement {
 }
 if (providers.gradleProperty("SCREEB_USE_LOCAL_SDK").orElse(providers.environmentVariable("SCREEB_USE_LOCAL_SDK")).orNull == "true") {
     def screebAndroidSdkPath = providers.environmentVariable("SCREEB_ANDROID_SDK_PATH")
-        .orElse(file("../../../../sdk-android").canonicalPath)
+        .orElse(file("../../../../screeb/sdk-android").canonicalPath)
         .get()
-    exec {
-        workingDir screebAndroidSdkPath
-        commandLine "./gradlew", ":sdk:publishReleasePublicationToMavenLocal", "--no-daemon"
-    }
+    providers.exec {
+        workingDir(screebAndroidSdkPath)
+        commandLine("./gradlew", ":sdk:publishReleasePublicationToMavenLocal", "--no-daemon")
+    }.result.get()
 }
 rootProject.name = 'screebreactnative.example'
 include ':app'
-includeBuild('../node_modules/@react-native/gradle-plugin')
+includeBuild(gradle.ext.reactNativeGradlePlugin)

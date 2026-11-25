@@ -44,7 +44,7 @@ commonMain.dependencies {
 }
 ```
 
-> **Building from source:** Android uses `SCREEB_ANDROID_SDK_VERSION` and iOS uses `SCREEB_IOS_SDK_VERSION`, so both native SDKs can move independently. Screeb contributors can set `SCREEB_USE_LOCAL_SDK=true` to build against sibling `../sdk-android` and `../sdk-ios` checkouts without publishing native releases.
+> **Building from source:** Android uses `SCREEB_ANDROID_SDK_VERSION` and iOS uses `SCREEB_IOS_SDK_VERSION`, so both native SDKs can move independently. Screeb contributors can set `SCREEB_USE_LOCAL_SDK=true` to build against local native SDK checkouts without publishing native releases (see [CONTRIBUTING.md](../../CONTRIBUTING.md#mobile-examples-against-the-local-native-sdks)).
 
 ## Package Size
 
@@ -150,7 +150,7 @@ All methods return `Boolean?` (or the appropriate type), and `null` on unexpecte
 
 - Kotlin 2.1.0+
 - Android minSdk 21
-- iOS 14+
+- iOS 15+
 
 ## Documentation
 

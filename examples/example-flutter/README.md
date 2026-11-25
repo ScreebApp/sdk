@@ -11,5 +11,8 @@ flutter pub get
 flutter run
 ```
 
+Screeb team members can build against unreleased native SDKs, see
+[Mobile examples against the local native SDKs](../../CONTRIBUTING.md#mobile-examples-against-the-local-native-sdks).
+
 The example initializes Screeb on startup and exposes buttons for identity,
 properties, events, screens, groups, survey start, debug, and shutdown.

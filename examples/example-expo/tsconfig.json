@@ -5,7 +5,6 @@
 		"strict": true,
 		"typeRoots": ["./node_modules/@types"],
 		"paths": {
-			"@/*": ["./*"],
 			"@screeb/react-native": ["../../packages/sdk-reactnative/src/index"]
 		}
 	},

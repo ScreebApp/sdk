@@ -17,7 +17,7 @@ dependencyResolutionManagement {
 }
 
 if (providers.gradleProperty("SCREEB_USE_LOCAL_SDK").orElse(providers.environmentVariable("SCREEB_USE_LOCAL_SDK")).orNull == "true") {
-    includeBuild("../../../sdk-android") {
+    includeBuild(providers.environmentVariable("SCREEB_ANDROID_SDK_PATH").getOrElse("../../../screeb/sdk-android")) {
         dependencySubstitution {
             substitute(module("app.screeb.sdk:survey")).using(project(":sdk"))
         }

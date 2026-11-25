@@ -1,9 +1,9 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
-    kotlin("multiplatform") version "2.1.0"
-    id("com.android.library") version "8.7.3"
+    kotlin("multiplatform") version "2.4.21"
+    id("com.android.kotlin.multiplatform.library") version "9.5.2"
     id("maven-publish")
     id("signing")
     id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
@@ -16,7 +16,7 @@ val useLocalSdk = providers.gradleProperty("SCREEB_USE_LOCAL_SDK")
     .orElse(providers.environmentVariable("SCREEB_USE_LOCAL_SDK"))
     .map { it.equals("true", ignoreCase = true) }
     .orElse(false)
-val defaultLocalIosSdkPath = projectDir.resolve("../../../sdk-ios").canonicalFile.absolutePath
+val defaultLocalIosSdkPath = projectDir.resolve("../../../screeb/sdk-ios").canonicalFile.absolutePath
 val localIosSdkPath = providers.environmentVariable("SCREEB_IOS_SDK_PATH").orElse(defaultLocalIosSdkPath)
 val localIosXcframework = layout.buildDirectory.dir("local-ios/Screeb.xcframework")
 val packagedIosXcframework = projectDir.resolve("native/ios/Screeb.xcframework").absolutePath
@@ -27,7 +27,7 @@ val xcframeworkPath = if (useLocalSdk.get()) {
 }
 val screebAndroidSdkVersion = project.property("SCREEB_ANDROID_SDK_VERSION") as String
 
-val buildLocalScreebIosXcframework by tasks.registering(Exec::class) {
+val buildLocalScreebIosXcframework = tasks.register<Exec>("buildLocalScreebIosXcframework") {
     onlyIf { useLocalSdk.get() }
     commandLine(
         "node",
@@ -42,14 +42,19 @@ val buildLocalScreebIosXcframework by tasks.registering(Exec::class) {
 kotlin {
     compilerOptions {
         freeCompilerArgs.add("-Xexpect-actual-classes")
+        // Kotlin 2.1 metadata keeps the library readable by hosts on Kotlin 2.1+.
+        languageVersion.set(KotlinVersion.KOTLIN_2_1)
+        apiVersion.set(KotlinVersion.KOTLIN_2_1)
     }
 
-    @OptIn(ExperimentalKotlinGradlePluginApi::class)
-    androidTarget {
+    android {
+        namespace = "app.screeb.sdk.kmp"
+        compileSdk = 35
+        minSdk = 21
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
-        publishLibraryVariants("release")
+        withHostTest {}
     }
 
     iosArm64 {
@@ -96,18 +101,6 @@ kotlin {
     }
 }
 
-android {
-    namespace = "app.screeb.sdk.kmp"
-    compileSdk = 35
-    defaultConfig {
-        minSdk = 21
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-}
-
 tasks.matching { it.name in setOf("iosArm64Test", "iosSimulatorArm64Test", "iosX64Test") }.configureEach {
     // The native framework is linked for compilation, but Kotlin/Native test binaries do not embed it.
     // Common behavior is covered by Android unit tests; iOS release confidence comes from target compilation.
@@ -122,7 +115,7 @@ tasks.configureEach {
 
 // ---- Publishing ----
 
-val javadocJar by tasks.registering(Jar::class) {
+val javadocJar = tasks.register<Jar>("javadocJar") {
     archiveClassifier.set("javadoc")
 }
 

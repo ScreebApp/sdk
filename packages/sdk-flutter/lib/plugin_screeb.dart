@@ -299,7 +299,7 @@ class PluginScreeb {
 ///
 /// The underlying native SDK masks the view instead of recording its content.
 class ScreebMaskText extends StatelessWidget {
-  const ScreebMaskText({Key? key, required this.child}) : super(key: key);
+  const ScreebMaskText({super.key, required this.child});
 
   final Widget child;
 
@@ -318,7 +318,7 @@ class ScreebMaskText extends StatelessWidget {
 
 /// Excludes [child] from Screeb session replay capture.
 class ScreebNoCapture extends StatelessWidget {
-  const ScreebNoCapture({Key? key, required this.child}) : super(key: key);
+  const ScreebNoCapture({super.key, required this.child});
 
   final Widget child;
 
@@ -337,7 +337,7 @@ class ScreebNoCapture extends StatelessWidget {
 
 /// Sets a stable Screeb element ID on [child] for IAM targeting.
 class ScreebId extends StatelessWidget {
-  const ScreebId(this.id, {Key? key, required this.child}) : super(key: key);
+  const ScreebId(this.id, {super.key, required this.child});
 
   final String id;
   final Widget child;

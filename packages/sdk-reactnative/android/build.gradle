@@ -1,26 +1,11 @@
-buildscript {
-  ext.getExtOrDefault = {name ->
-    return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties['ScreebReactNative_' + name]
-  }
-
-  repositories {
-    if (providers.gradleProperty("SCREEB_USE_LOCAL_SDK").orElse(providers.environmentVariable("SCREEB_USE_LOCAL_SDK")).orNull == "true") {
-      mavenLocal()
-    }
-    google()
-    mavenCentral()
-  }
-
-  dependencies {
-    classpath "com.android.tools.build:gradle:8.7.2"
-    // noinspection DifferentKotlinGradleVersion
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${getExtOrDefault('kotlinVersion')}"
-  }
-}
-
-
 apply plugin: "com.android.library"
-apply plugin: "kotlin-android"
+
+// AGP 9 compiles Kotlin itself unless the app opts out with android.builtInKotlin=false;
+// applying the Kotlin plugin on top of built-in Kotlin fails the build.
+def agpMajor = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize('.')[0].toInteger()
+if (agpMajor < 9 || providers.gradleProperty('android.builtInKotlin').getOrElse('true') == 'false') {
+  apply plugin: "kotlin-android"
+}
 
 apply plugin: "com.facebook.react"
 
@@ -29,32 +14,31 @@ def getExtOrIntegerDefault(name) {
 }
 
 android {
-  namespace "app.screeb.reactnative"
+  namespace = "app.screeb.reactnative"
 
-  compileSdkVersion getExtOrIntegerDefault("compileSdkVersion")
+  compileSdk = getExtOrIntegerDefault("compileSdkVersion")
 
   defaultConfig {
-    minSdkVersion getExtOrIntegerDefault("minSdkVersion")
-    targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
+    minSdk = getExtOrIntegerDefault("minSdkVersion")
   }
 
   buildFeatures {
-    buildConfig true
+    buildConfig = true
   }
 
   buildTypes {
     release {
-      minifyEnabled false
+      minifyEnabled = false
     }
   }
 
-  lintOptions {
+  lint {
     disable "GradleCompatible"
   }
 
   compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
   }
 
   sourceSets {
@@ -67,18 +51,11 @@ android {
   }
 }
 
-repositories {
-  if (providers.gradleProperty("SCREEB_USE_LOCAL_SDK").orElse(providers.environmentVariable("SCREEB_USE_LOCAL_SDK")).orNull == "true") {
-    mavenLocal()
-  }
-  mavenCentral()
-  google()
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile).configureEach {
+  compilerOptions.jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
 }
-
-def kotlin_version = getExtOrDefault("kotlinVersion")
 
 dependencies {
   implementation "com.facebook.react:react-android"
-  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   api "app.screeb.sdk:survey:4.5.0"
 }
