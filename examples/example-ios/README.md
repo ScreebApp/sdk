@@ -25,9 +25,9 @@ workspace → Settings → Channels) to see your own surveys and replays.
 
 ## Developing against the local SDK checkout
 
-Same convention as `example-android`'s `SCREEB_USE_LOCAL_SDK` property —
-switch the Swift package reference to a sibling `sdk-ios` checkout
-(`../../../screeb/sdk-ios`):
+Same `SCREEB_USE_LOCAL_SDK` / `SCREEB_IOS_SDK_PATH` convention as the other examples (see
+[CONTRIBUTING.md](../../CONTRIBUTING.md#mobile-examples-against-the-local-native-sdks)):
+switch the Swift package reference to the local `sdk-ios` checkout:
 
 ```bash
 SCREEB_USE_LOCAL_SDK=true ./use-sdk.sh   # -> local checkout
