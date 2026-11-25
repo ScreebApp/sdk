@@ -40,6 +40,10 @@ val buildLocalScreebIosXcframework = tasks.register<Exec>("buildLocalScreebIosXc
 }
 
 kotlin {
+    // Without it the published module requires the compiler's own stdlib, which hosts on Kotlin 2.1
+    // cannot read despite the 2.1 metadata below.
+    coreLibrariesVersion = "2.1.21"
+
     compilerOptions {
         freeCompilerArgs.add("-Xexpect-actual-classes")
         // Kotlin 2.1 metadata keeps the library readable by hosts on Kotlin 2.1+.
